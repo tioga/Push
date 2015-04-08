@@ -1,0 +1,28 @@
+{
+   "entityType": "account",
+   "entity": {
+       "createdAt": "2014-09-05T19:26:26.207",
+       "password": "test",
+       "tempPassword": null,
+       "firstName": "Test",
+       "lastName": "User",
+       "emailAddress": "test@example.com",
+       "emailConfirmed": true,
+       "emailConfirmationCode": null,
+       "roleTypes": [
+       ],
+       "accountStatus": {
+           "enabled": true,
+           "credentialsNonExpired": true,
+           "accountNonLocked": true,
+           "accountNonExpired": true
+       },
+       "domains": [
+       ],
+       "permissions": {
+           "roleTypes": [
+           ]
+       },
+       "retentionDays": 7
+   }
+}

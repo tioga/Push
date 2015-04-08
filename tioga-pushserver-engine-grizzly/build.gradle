@@ -1,0 +1,26 @@
+/*
+ * Copyright (c) 2014 Jacob D. Parr
+ *
+ * This software may not be used without permission.
+ */
+project(":tioga-pushserver-engine-grizzly") {
+  version = "1.0.9"
+
+  apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle")
+
+  dependencies {
+
+    compile project(":tioga-pushserver-engine-core")
+
+    compile("org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.16")
+  }
+
+  apply plugin: 'eu.appsatori.fatjar'
+
+  fatJar {
+    baseName = project.name + '-uber'
+    manifest {
+        attributes 'Implementation-Title': 'Grizzly Push Server', 'Implementation-Version': version
+        attributes 'Main-Class': 'GrizzlyPushServer'
+    }
+  }}

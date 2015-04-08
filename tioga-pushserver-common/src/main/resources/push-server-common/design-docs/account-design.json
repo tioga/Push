@@ -1,0 +1,9 @@
+{
+   "_id": "_design/account",
+   "language": "javascript",
+   "views": {
+       "byEmailAddress": {
+           "map": "\nfunction(doc) {\n  if (doc.entityType == 'account' && doc.entity.emailAddress) {\n    emit(doc.entity.emailAddress, null);\n  }\n}"
+       }
+   }
+}

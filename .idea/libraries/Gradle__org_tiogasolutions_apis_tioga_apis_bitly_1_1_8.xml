@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.tiogasolutions.apis:tioga-apis-bitly:1.1.8">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/apis/tioga-apis-bitly/1.1.8/tioga-apis-bitly-1.1.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/apis/tioga-apis-bitly/1.1.8/tioga-apis-bitly-1.1.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

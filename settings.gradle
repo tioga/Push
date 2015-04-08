@@ -1,0 +1,8 @@
+/*
+ * Copyright (c) 2014 Jacob D. Parr
+ *
+ * This software may not be used without permission.
+ */
+
+include "tioga-pushserver-pub", "tioga-pushserver-jackson", "tioga-pushserver-common", "tioga-pushserver-engine-core", "tioga-pushserver-engine-grizzly", "tioga-pushserver-engine-servlet", "tioga-pushserver-gateway", "tioga-pushserver-plugin-smtp", "tioga-pushserver-plugin-ses", "tioga-pushserver-plugin-xmpp", "tioga-pushserver-v1-integration-tests", "tioga-pushserver-v2-integration-tests", "tioga-pushserver-plugin-notifier", "tioga-pushserver-plugin-twilio", /*"tioga-pushserver-plugin-ocs-message",*/ "tioga-pushserver-test"
+

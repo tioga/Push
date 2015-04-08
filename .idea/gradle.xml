@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="C:/tools/gradle-1.10" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-common" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-engine-core" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-engine-grizzly" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-engine-servlet" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-gateway" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-jackson" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-plugin-notifier" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-plugin-ses" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-plugin-smtp" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-plugin-twilio" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-plugin-xmpp" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-pub" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-test" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-v1-integration-tests" />
+            <option value="$PROJECT_DIR$/tioga-pushserver-v2-integration-tests" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

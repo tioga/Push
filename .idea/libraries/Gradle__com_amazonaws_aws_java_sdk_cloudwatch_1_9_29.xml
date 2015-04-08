@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.amazonaws:aws-java-sdk-cloudwatch:1.9.29">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-cloudwatch/1.9.29/f95d85820a4f2a811a3bf0d963fc013006da7d22/aws-java-sdk-cloudwatch-1.9.29.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-cloudwatch/1.9.29/11090a01e1f1347f6d7bab7d6e35ef2846104d2e/aws-java-sdk-cloudwatch-1.9.29-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
