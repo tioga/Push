@@ -30,7 +30,7 @@ public class IntegrationTestVersion1 {
   @BeforeClass
   public void beforeClass() throws Exception {
     try {
-      String url = "http://www.cosmicpush.com/api/v2";
+      String url = "http://www.cosmicpush.com/api";
 
       String username = EnvUtils.findProperty("TIOGA_TEST_DOMAIN_NAME");
       ExceptionUtils.assertNotNull(username, "TIOGA_TEST_DOMAIN_NAME");

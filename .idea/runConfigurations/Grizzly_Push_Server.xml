@@ -6,7 +6,7 @@
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <option name="MAIN_CLASS_NAME" value="com.cosmicpush.engine.grizzly.GrizzlyPushServer" />
+    <option name="MAIN_CLASS_NAME" value="org.tiogasolutions.push.engine.grizzly.GrizzlyPushServer" />
     <option name="VM_PARAMETERS" value="" />
     <option name="PROGRAM_PARAMETERS" value="serverName www.localhost port 9010 shutdown 9009 context push-server open true" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -15,7 +15,7 @@
     <option name="ENABLE_SWING_INSPECTOR" value="false" />
     <option name="ENV_VARIABLES" />
     <option name="PASS_PARENT_ENVS" value="true" />
-    <module name="push-server-engine-grizzly" />
+    <module name="tioga-push-engine-grizzly" />
     <envs />
     <RunnerSettings RunnerId="Debug">
       <option name="DEBUG_PORT" value="" />
