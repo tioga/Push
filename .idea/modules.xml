@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/push-server.iml" filepath="$PROJECT_DIR$/push-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Push.iml" filepath="$PROJECT_DIR$/Push.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-pushserver-common/tioga-pushserver-common.iml" filepath="$PROJECT_DIR$/tioga-pushserver-common/tioga-pushserver-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-pushserver-engine-core/tioga-pushserver-engine-core.iml" filepath="$PROJECT_DIR$/tioga-pushserver-engine-core/tioga-pushserver-engine-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-pushserver-engine-grizzly/tioga-pushserver-engine-grizzly.iml" filepath="$PROJECT_DIR$/tioga-pushserver-engine-grizzly/tioga-pushserver-engine-grizzly.iml" />
