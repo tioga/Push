@@ -1,5 +1,6 @@
 package org.tiogasolutions.push.v2.integration.tests;
 
+import org.testng.SkipException;
 import org.tiogasolutions.push.pub.*;
 import org.tiogasolutions.push.gateway.LiveCosmicPushGateway;
 import org.tiogasolutions.push.pub.common.PingPush;
@@ -25,16 +26,15 @@ public class IntegrationTestVersion2 {
   public void beforeClass() throws Exception {
     testFactory = TestFactory.get();
 
-//    String url = "http://www.localhost:9010/push-server/api/v2";
-    String url = "http://www.cosmicpush.com/api/v2";
+    try {
+      String url = "http://www.cosmicpush.com/api/v2";
+      String username = EnvUtils.requireProperty("TIOGA_TEST_DOMAIN_NAME");
+      String password = EnvUtils.requireProperty("TIOGA_TEST_DOMAIN_PASS");
+      gateway = new LiveCosmicPushGateway(url, username, password);
 
-    String username = EnvUtils.findProperty("TIOGA_TEST_DOMAIN_NAME");
-    ExceptionUtils.assertNotNull(username, "TIOGA_TEST_DOMAIN_NAME");
-
-    String password = EnvUtils.findProperty("TIOGA_TEST_DOMAIN_PASS");
-    ExceptionUtils.assertNotNull(password, "TIOGA_TEST_DOMAIN_PASS");
-
-    gateway = new LiveCosmicPushGateway(url, username, password);
+    } catch (Exception ex) {
+      throw new SkipException("Authentication required for test.", ex);
+    }
   }
 
   public void testNotificationPush() throws Exception {

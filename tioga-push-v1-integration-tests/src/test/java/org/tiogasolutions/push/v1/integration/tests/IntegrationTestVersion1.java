@@ -10,6 +10,7 @@ import org.crazyyak.dev.common.DateUtils;
 import org.crazyyak.dev.common.EnvUtils;
 import org.crazyyak.dev.common.exceptions.ExceptionUtils;
 import org.joda.time.LocalDateTime;
+import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -28,17 +29,20 @@ public class IntegrationTestVersion1 {
 
   @BeforeClass
   public void beforeClass() throws Exception {
+    try {
+      String url = "http://www.cosmicpush.com/api/v2";
 
-//    String url = "http://www.localhost:9010/push-server/api";
-    String url = "http://www.cosmicpush.com/api";
+      String username = EnvUtils.findProperty("TIOGA_TEST_DOMAIN_NAME");
+      ExceptionUtils.assertNotNull(username, "TIOGA_TEST_DOMAIN_NAME");
 
-    String username = EnvUtils.findProperty("TIOGA_TEST_DOMAIN_NAME");
-    ExceptionUtils.assertNotNull(username, "TIOGA_TEST_DOMAIN_NAME");
+      String password = EnvUtils.findProperty("TIOGA_TEST_DOMAIN_PASS");
+      ExceptionUtils.assertNotNull(password, "TIOGA_TEST_DOMAIN_PASS");
 
-    String password = EnvUtils.findProperty("TIOGA_TEST_DOMAIN_PASS");
-    ExceptionUtils.assertNotNull(password, "TIOGA_TEST_DOMAIN_PASS");
+      gateway = new LiveCosmicPushGateway(url, username, password);
 
-    gateway = new LiveCosmicPushGateway(url, username, password);
+    } catch (Exception ex) {
+      throw new SkipException("Authentication required for test.", ex);
+    }
   }
 
   public void testNotificationPush() throws Exception {
