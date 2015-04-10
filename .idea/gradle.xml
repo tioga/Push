@@ -9,21 +9,21 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-common" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-engine-core" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-engine-grizzly" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-engine-servlet" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-gateway" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-jackson" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-plugin-notifier" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-plugin-ses" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-plugin-smtp" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-plugin-twilio" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-plugin-xmpp" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-pub" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-test" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-v1-integration-tests" />
-            <option value="$PROJECT_DIR$/tioga-pushserver-v2-integration-tests" />
+            <option value="$PROJECT_DIR$/tioga-push-common" />
+            <option value="$PROJECT_DIR$/tioga-push-engine-core" />
+            <option value="$PROJECT_DIR$/tioga-push-engine-grizzly" />
+            <option value="$PROJECT_DIR$/tioga-push-engine-servlet" />
+            <option value="$PROJECT_DIR$/tioga-push-gateway" />
+            <option value="$PROJECT_DIR$/tioga-push-jackson" />
+            <option value="$PROJECT_DIR$/tioga-push-plugin-notifier" />
+            <option value="$PROJECT_DIR$/tioga-push-plugin-ses" />
+            <option value="$PROJECT_DIR$/tioga-push-plugin-smtp" />
+            <option value="$PROJECT_DIR$/tioga-push-plugin-twilio" />
+            <option value="$PROJECT_DIR$/tioga-push-plugin-xmpp" />
+            <option value="$PROJECT_DIR$/tioga-push-pub" />
+            <option value="$PROJECT_DIR$/tioga-push-test" />
+            <option value="$PROJECT_DIR$/tioga-push-v1-integration-tests" />
+            <option value="$PROJECT_DIR$/tioga-push-v2-integration-tests" />
           </set>
         </option>
       </GradleProjectSettings>

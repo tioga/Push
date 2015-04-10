@@ -9,7 +9,7 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="tioga-pushserver-engine-servlet" />
-          <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-engine-servlet/build/resources/main" />
+          <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine-servlet/build/resources/main" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet:2.16" />
@@ -32,17 +32,17 @@
           <element id="library" level="project" name="Gradle: javax.inject:javax.inject:1" />
           <element id="archive" name="org.tiogasolutions.pushserver-tioga-pushserver-engine-core-4.0.4.jar">
             <element id="module-output" name="tioga-pushserver-engine-core" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-engine-core/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine-core/build/resources/main" />
           </element>
           <element id="archive" name="org.tiogasolutions.pushserver-tioga-pushserver-pub-2.0.3.jar">
             <element id="module-output" name="tioga-pushserver-pub" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-pub/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-pub/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: org.tiogasolutions.dev:tioga-dev-common:4.1.4" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.5.1" />
           <element id="archive" name="org.tiogasolutions.pushserver-tioga-pushserver-jackson-4.0.4.jar">
             <element id="module-output" name="tioga-pushserver-jackson" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-jackson/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-jackson/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: org.tiogasolutions.dev:tioga-dev-jackson:4.1.7" />
           <element id="library" level="project" name="Gradle: org.tiogasolutions.dev:tioga-dev-domain:4.1.2" />
@@ -50,7 +50,7 @@
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.5.1" />
           <element id="archive" name="org.tiogasolutions.pushserver-tioga-pushserver-common-4.0.4.jar">
             <element id="module-output" name="tioga-pushserver-common" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-common/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-common/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: org.tiogasolutions.apis:tioga-apis-bitly:1.1.8" />
           <element id="library" level="project" name="Gradle: org.tiogasolutions.lib:tioga-lib-couchace:5.0.8" />
@@ -66,7 +66,7 @@
           <element id="library" level="project" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-annotations:1.4.2" />
           <element id="archive" name="org.tiogasolutions.pushserver-tioga-pushserver-plugin-ses-4.0.4.jar">
             <element id="module-output" name="tioga-pushserver-plugin-ses" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-plugin-ses/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-ses/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: com.amazonaws:aws-java-sdk:1.9.29" />
           <element id="library" level="project" name="Gradle: com.amazonaws:aws-java-sdk-support:1.9.29" />
@@ -120,23 +120,23 @@
           <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.6" />
           <element id="archive" name="org.tiogasolutions.pushserver-tioga-pushserver-plugin-smtp-4.0.4.jar">
             <element id="module-output" name="tioga-pushserver-plugin-smtp" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-plugin-smtp/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-smtp/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: javax.mail:mail:1.5.0-b01" />
           <element id="library" level="project" name="Gradle: javax.activation:activation:1.1" />
           <element id="archive" name="org.tiogasolutions.pushserver-tioga-pushserver-plugin-xmpp-4.0.4.jar">
             <element id="module-output" name="tioga-pushserver-plugin-xmpp" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-plugin-xmpp/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-xmpp/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: jivesoftware:smackx:3.1.0" />
           <element id="library" level="project" name="Gradle: jivesoftware:smack:3.1.0" />
           <element id="archive" name="org.tiogasolutions.pushserver-tioga-pushserver-plugin-notifier-4.0.4.jar">
             <element id="module-output" name="tioga-pushserver-plugin-notifier" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-plugin-notifier/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-notifier/build/resources/main" />
           </element>
           <element id="archive" name="org.tiogasolutions.pushserver-tioga-pushserver-plugin-twilio-1.0.4.jar">
             <element id="module-output" name="tioga-pushserver-plugin-twilio" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-plugin-twilio/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-twilio/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: com.twilio.sdk:twilio-java-sdk:3.8.0" />
           <element id="library" level="project" name="Gradle: log4j:log4j:1.2.17" />

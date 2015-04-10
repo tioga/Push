@@ -1,0 +1,20 @@
+/*
+ * Copyright (c) 2014 Jacob D. Parr
+ *
+ * This software may not be used without permission.
+ */
+project(":tioga-push-v2-integration-tests") {
+  version = "1.0.4"
+
+  apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle")
+
+  dependencies {
+
+    compile project(":tioga-push-gateway")
+
+    testCompile project(":tioga-push-test")
+    testCompile("org.glassfish.jersey.core:jersey-client:2.16")
+    testCompile("org.testng:testng:6.8.21")
+  }
+}
+

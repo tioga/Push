@@ -1,0 +1,40 @@
+/*
+ * Copyright (c) 2014 Jacob D. Parr
+ *
+ * This software may not be used without permission.
+ */
+project(":tioga-push-engine-core") {
+  version = "4.0.4"
+
+  apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle")
+
+  dependencies {
+
+    compile project(":tioga-push-pub")
+    compile project(":tioga-push-jackson")
+    compile project(":tioga-push-common");
+    compile project(":tioga-push-plugin-ses")
+    compile project(":tioga-push-plugin-smtp")
+    compile project(":tioga-push-plugin-xmpp")
+    compile project(":tioga-push-plugin-notifier")
+    compile project(":tioga-push-plugin-twilio")
+    // compile project(":tioga-push-plugin-ocs-message")
+
+    compile("org.tiogasolutions.dev:tioga-dev-common:4.1.4")
+    compile("org.tiogasolutions.dev:tioga-dev-domain:4.1.2")
+
+    compile("org.tiogasolutions.apis:tioga-apis-google:2.2.7")
+
+    compile("org.tiogasolutions.lib:tioga-lib-jaxrs:4.1.4")
+    compile("org.tiogasolutions.lib:tioga-lib-servlet:4.1.4")
+    compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.0.6")
+
+    compile("org.tiogasolutions.app:tioga-app-common:1.0.5")
+
+    compile("org.slf4j:slf4j-simple:1.7.12")
+    compile("org.thymeleaf.extras:thymeleaf-extras-java8time:2.1.0.RELEASE")
+
+    testCompile("org.testng:testng:6.8.21")
+    testCompile project(":tioga-push-test");
+  }
+}

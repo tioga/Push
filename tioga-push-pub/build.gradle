@@ -1,0 +1,18 @@
+/*
+ * Copyright (c) 2014 Jacob D. Parr
+ *
+ * This software may not be used without permission.
+ */
+project(":tioga-push-pub") {
+  version = "2.0.3"
+
+  apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle")
+
+  dependencies {
+  	compile ("org.tiogasolutions.dev:tioga-dev-common:4.1.4")
+    compile ("com.fasterxml.jackson.core:jackson-annotations:2.5.1")
+
+    testCompile ("org.testng:testng:6.8.21")
+  }
+}
+

@@ -9,16 +9,16 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="push-server-engine-servlet" />
-          <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-engine-servlet/build/resources/main" />
+          <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine-servlet/build/resources/main" />
         </element>
         <element id="directory" name="lib">
           <element id="archive" name="com.cosmicpush-push-server-engine-4.0.2.jar">
             <element id="module-output" name="push-server-engine" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-engine-core/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine-core/build/resources/main" />
           </element>
           <element id="archive" name="com.cosmicpush-push-server-pub-2.0.2.jar">
             <element id="module-output" name="push-server-pub" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-pub/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-pub/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: org.crazyyak.dev:yak-dev-common:4.1.3" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.5.1" />
@@ -26,12 +26,12 @@
           <element id="library" level="project" name="Gradle: javax.validation:validation-api:1.1.0.Final" />
           <element id="archive" name="com.cosmicpush-push-server-plugin-smtp-4.0.2.jar">
             <element id="module-output" name="push-server-plugin-smtp" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-plugin-smtp/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-smtp/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: javax.activation:activation:1.1" />
           <element id="archive" name="com.cosmicpush-push-server-common-4.0.2.jar">
             <element id="module-output" name="push-server-common" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-common/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-common/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: javax.annotation:javax.annotation-api:1.2" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:osgi-resource-locator:1.0.1" />
@@ -40,7 +40,7 @@
           <element id="library" level="project" name="Gradle: javax.inject:javax.inject:1" />
           <element id="archive" name="com.cosmicpush-push-server-jackson-4.0.2.jar">
             <element id="module-output" name="push-server-jackson" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-jackson/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-jackson/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: org.crazyyak.dev:yak-dev-domain:4.1.1" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.5.1" />
@@ -71,7 +71,7 @@
           <element id="library" level="project" name="Gradle: javax.mail:mail:1.5.0-b01" />
           <element id="archive" name="com.cosmicpush-push-server-plugin-ses-4.0.2.jar">
             <element id="module-output" name="push-server-plugin-ses" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-plugin-ses/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-ses/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpclient:4.3.4" />
           <element id="library" level="project" name="Gradle: joda-time:joda-time:2.7" />
@@ -125,7 +125,7 @@
           <element id="library" level="project" name="Gradle: com.amazonaws:aws-java-sdk-core:1.9.28.1" />
           <element id="archive" name="com.cosmicpush-push-server-plugin-xmpp-4.0.2.jar">
             <element id="module-output" name="push-server-plugin-xmpp" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-plugin-xmpp/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-xmpp/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: jivesoftware:smackx:3.1.0" />
           <element id="library" level="project" name="Gradle: jivesoftware:smack:3.1.0" />
@@ -137,7 +137,7 @@
           <element id="library" level="project" name="Gradle: org.unbescape:unbescape:1.1.0.RELEASE" />
           <element id="archive" name="com.cosmicpush-push-server-plugin-twilio-1.0.2.jar">
             <element id="module-output" name="push-server-plugin-twilio" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-plugin-twilio/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-twilio/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: com.googlecode.json-simple:json-simple:1.1" />
           <element id="library" level="project" name="Gradle: org.codehaus.jackson:jackson-mapper-asl:1.9.3" />
@@ -146,7 +146,7 @@
           <element id="library" level="project" name="Gradle: org.apache.commons:commons-lang3:3.3.2" />
           <element id="archive" name="com.cosmicpush-push-server-plugin-notifier-4.0.2.jar">
             <element id="module-output" name="push-server-plugin-notifier" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-pushserver-plugin-notifier/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-notifier/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: org.crazyyak.lib:yak-lib-servlet:4.1.3" />
           <element id="library" level="project" name="Gradle: org.crazyyak.apis:yak-apis-google:2.2.5" />
