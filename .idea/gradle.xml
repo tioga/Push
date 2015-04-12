@@ -9,11 +9,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/tioga-push-client" />
             <option value="$PROJECT_DIR$/tioga-push-common" />
             <option value="$PROJECT_DIR$/tioga-push-engine-core" />
             <option value="$PROJECT_DIR$/tioga-push-engine-grizzly" />
             <option value="$PROJECT_DIR$/tioga-push-engine-servlet" />
-            <option value="$PROJECT_DIR$/tioga-push-gateway" />
             <option value="$PROJECT_DIR$/tioga-push-jackson" />
             <option value="$PROJECT_DIR$/tioga-push-plugin-notifier" />
             <option value="$PROJECT_DIR$/tioga-push-plugin-ses" />

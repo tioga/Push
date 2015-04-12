@@ -4,7 +4,7 @@
  * This software may not be used without permission.
  */
 project(":tioga-push-engine-grizzly") {
-  version = "1.0.9"
+  version = "1.0.10"
 
   apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle")
 

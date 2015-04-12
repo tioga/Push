@@ -2,7 +2,7 @@ package org.tiogasolutions.push.v2.integration.tests;
 
 import org.testng.SkipException;
 import org.tiogasolutions.push.pub.*;
-import org.tiogasolutions.push.client.LiveCosmicPushClient;
+import org.tiogasolutions.push.client.LivePushServerClient;
 import org.tiogasolutions.push.pub.common.PingPush;
 import org.tiogasolutions.push.pub.common.PushResponse;
 import org.tiogasolutions.push.pub.common.RequestStatus;
@@ -19,7 +19,7 @@ import static org.testng.Assert.*;
 public class IntegrationTestVersion2 {
 
   private TestFactory testFactory;
-  private LiveCosmicPushClient gateway;
+  private LivePushServerClient gateway;
   private String callbackUrl = null;
 
   @BeforeClass
@@ -30,7 +30,7 @@ public class IntegrationTestVersion2 {
       String url = "http://www.cosmicpush.com/api/v2";
       String username = EnvUtils.requireProperty("TIOGA_TEST_DOMAIN_NAME");
       String password = EnvUtils.requireProperty("TIOGA_TEST_DOMAIN_PASS");
-      gateway = new LiveCosmicPushClient(url, username, password);
+      gateway = new LivePushServerClient(url, username, password);
 
     } catch (Exception ex) {
       throw new SkipException("Authentication required for test.", ex);

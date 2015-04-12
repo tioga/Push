@@ -29,7 +29,7 @@ import java.net.InetAddress;
 @Test
 public class EmailPushTranslationTest {
 
-  private LiveCosmicPushClient gateway = new LiveCosmicPushClient("some-name", "some-password");
+  private LivePushServerClient gateway = new LivePushServerClient("some-name", "some-password");
   private JsonTranslator translator = gateway.getClient().getTranslator();
 
   public void translateEmailPush() throws Exception {

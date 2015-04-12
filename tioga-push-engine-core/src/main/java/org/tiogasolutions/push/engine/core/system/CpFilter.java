@@ -23,6 +23,6 @@ public class CpFilter implements ContainerResponseFilter {
   public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
     responseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
     responseContext.getHeaders().add("X-UA-Compatible", "IE=Edge");
-    responseContext.getHeaders().add("p3p", "CP=\"Cosmic Push does not have a P3P policy. Learn why here: https://www.CosmicPush.com/static/p3p.html\"");
+    responseContext.getHeaders().add("p3p", "CP=\"Push server does not have a P3P policy. Learn why here: https://www.TiogaSolutions.com/push/static/p3p.html\"");
   }
 }

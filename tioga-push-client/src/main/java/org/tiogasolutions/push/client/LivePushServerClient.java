@@ -23,23 +23,23 @@ import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
 import org.tiogasolutions.lib.jaxrs.jackson.SimpleRestClient;
 
-public class LiveCosmicPushClient implements CosmicPushClient {
+public class LivePushServerClient implements PushServerClient {
 
   private final SimpleRestClient client;
 
-  public LiveCosmicPushClient(String userName, String password) {
+  public LivePushServerClient(String userName, String password) {
     CpObjectMapper objectMapper = new CpObjectMapper();
     TiogaJacksonTranslator translator = new TiogaJacksonTranslator(objectMapper);
     client = new SimpleRestClient(translator, "http://www.cosmicpush.com/api/v2", userName, password);
   }
 
-  public LiveCosmicPushClient(String url, String userName, String password) {
+  public LivePushServerClient(String url, String userName, String password) {
     CpObjectMapper objectMapper = new CpObjectMapper();
     TiogaJacksonTranslator translator = new TiogaJacksonTranslator(objectMapper);
     client = new SimpleRestClient(translator, url, userName, password);
   }
 
-  public LiveCosmicPushClient(SimpleRestClient client) {
+  public LivePushServerClient(SimpleRestClient client) {
     this.client = client;
   }
 

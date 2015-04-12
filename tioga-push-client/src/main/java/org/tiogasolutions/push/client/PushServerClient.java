@@ -18,7 +18,7 @@ package org.tiogasolutions.push.client;
 import org.tiogasolutions.push.pub.common.PushResponse;
 import org.tiogasolutions.push.pub.common.Push;
 
-public interface CosmicPushClient {
+public interface PushServerClient {
 
   /**
    * Sends a "PingPush" server which does not

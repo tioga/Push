@@ -23,9 +23,9 @@ import org.tiogasolutions.dev.common.id.uuid.TimeUuid;
 
 import java.util.Collections;
 
-public class MockCosmicPushClient implements CosmicPushClient {
+public class MockPushServerClient implements PushServerClient {
 
-  public MockCosmicPushClient() {
+  public MockPushServerClient() {
   }
 
   @Override

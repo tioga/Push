@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="Gradle : org.tiogasolutions.pushserver:tioga-push-engine-servlet : tioga-push-engine-servlet-1.0.4.war">
-    <output-path>$PROJECT_DIR$/build/artifacts/tioga-push-engine-servlet</output-path>
+  <artifact type="exploded-war" name="Gradle : org.tiogasolutions.push:tioga-push-engine-servlet : tioga-push-engine-servlet-1.0.4.war (exploded)">
+    <output-path>$PROJECT_DIR$/build/artifacts/tioga-push-engine-servlet/exploded/tioga-push-engine-servlet-1.0.4.war</output-path>
     <properties id="gradle-properties">
       <options external-project-path="$PROJECT_DIR$/tioga-push-engine-servlet" />
     </properties>
-    <root id="archive" name="tioga-push-engine-servlet-1.0.4.war">
+    <root id="root">
       <element id="javaee-facet-resources" facet="tioga-push-engine-servlet/web/Web Gradle : tioga-push-engine-servlet-1.0.4.war" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -12,17 +12,17 @@
           <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine-servlet/build/resources/main" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="org.tiogasolutions.pushserver-tioga-push-engine-core-4.0.4.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-engine-core-4.0.4.jar">
             <element id="module-output" name="tioga-push-engine-core" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine-core/build/resources/main" />
           </element>
-          <element id="archive" name="org.tiogasolutions.pushserver-tioga-push-pub-2.0.3.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-pub-2.0.3.jar">
             <element id="module-output" name="tioga-push-pub" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-pub/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: org.tiogasolutions.dev:tioga-dev-common:4.1.4" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.5.1" />
-          <element id="archive" name="org.tiogasolutions.pushserver-tioga-push-jackson-4.0.4.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-jackson-4.0.4.jar">
             <element id="module-output" name="tioga-push-jackson" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-jackson/build/resources/main" />
           </element>
@@ -31,7 +31,7 @@
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.5.1" />
           <element id="library" level="project" name="Gradle: javax.validation:validation-api:1.1.0.Final" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.5.1" />
-          <element id="archive" name="org.tiogasolutions.pushserver-tioga-push-common-4.0.4.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-common-4.0.4.jar">
             <element id="module-output" name="tioga-push-common" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-common/build/resources/main" />
           </element>
@@ -62,7 +62,7 @@
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:aopalliance-repackaged:2.4.0-b09" />
           <element id="library" level="project" name="Gradle: org.javassist:javassist:3.18.1-GA" />
           <element id="library" level="project" name="Gradle: javax.inject:javax.inject:1" />
-          <element id="archive" name="org.tiogasolutions.pushserver-tioga-push-plugin-ses-4.0.4.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-ses-4.0.4.jar">
             <element id="module-output" name="tioga-push-plugin-ses" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-ses/build/resources/main" />
           </element>
@@ -116,23 +116,23 @@
           <element id="library" level="project" name="Gradle: joda-time:joda-time:2.7" />
           <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpcore:4.3.2" />
           <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.6" />
-          <element id="archive" name="org.tiogasolutions.pushserver-tioga-push-plugin-smtp-4.0.4.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-smtp-4.0.4.jar">
             <element id="module-output" name="tioga-push-plugin-smtp" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-smtp/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: javax.mail:mail:1.5.0-b01" />
           <element id="library" level="project" name="Gradle: javax.activation:activation:1.1" />
-          <element id="archive" name="org.tiogasolutions.pushserver-tioga-push-plugin-xmpp-4.0.4.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-xmpp-4.0.4.jar">
             <element id="module-output" name="tioga-push-plugin-xmpp" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-xmpp/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: jivesoftware:smackx:3.1.0" />
           <element id="library" level="project" name="Gradle: jivesoftware:smack:3.1.0" />
-          <element id="archive" name="org.tiogasolutions.pushserver-tioga-push-plugin-notifier-4.0.4.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-notifier-4.0.4.jar">
             <element id="module-output" name="tioga-push-plugin-notifier" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-notifier/build/resources/main" />
           </element>
-          <element id="archive" name="org.tiogasolutions.pushserver-tioga-push-plugin-twilio-1.0.4.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-twilio-1.0.4.jar">
             <element id="module-output" name="tioga-push-plugin-twilio" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-twilio/build/resources/main" />
           </element>

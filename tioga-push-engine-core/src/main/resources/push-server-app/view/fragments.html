@@ -44,7 +44,7 @@
     </client_sub_menu>
 
     <push_traits>
-      <!--@thymesVar id="pushTraits" type="com.cosmicpush.pub.common.PushTraits"-->
+      <!--@thymesVar id="pushTraits" type="org.tiogasolutions.push.pub.common.PushTraits"-->
       <th:block th:if="${pushTraits.traits.isEmpty()}">Traits: -none-</th:block>
       <table class="traits-table" th:id="'traits-'+${pushTraits.pushRequestId}">
         <colgroup>

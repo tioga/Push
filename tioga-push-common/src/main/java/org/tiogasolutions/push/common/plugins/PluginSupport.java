@@ -36,13 +36,13 @@ public abstract class PluginSupport implements Plugin {
 
   @Override
   public final byte[] getEnabledIcon() throws IOException {
-      InputStream stream = getClass().getResourceAsStream("/com/cosmicpush/plugins/"+ pluginName +"/icon-enabled.png");
+      InputStream stream = getClass().getResourceAsStream("/org/tiogasolutions/push/plugins/"+ pluginName +"/icon-enabled.png");
       return IoUtils.toBytes(stream);
   }
 
   @Override
   public final byte[] getDisabledIcon() throws IOException {
-      InputStream stream = getClass().getResourceAsStream("/com/cosmicpush/plugins/"+ pluginName +"/icon-disabled.png");
+      InputStream stream = getClass().getResourceAsStream("/org/tiogasolutions/push/plugins/"+ pluginName +"/icon-disabled.png");
       return IoUtils.toBytes(stream);
   }
 }
