@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tiogasolutions.push.gateway;
+package org.tiogasolutions.push.client;
 
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushResponse;
@@ -23,9 +23,9 @@ import org.tiogasolutions.dev.common.id.uuid.TimeUuid;
 
 import java.util.Collections;
 
-public class MockCosmicPushGateway implements CosmicPushGateway {
+public class MockCosmicPushClient implements CosmicPushClient {
 
-  public MockCosmicPushGateway() {
+  public MockCosmicPushClient() {
   }
 
   @Override

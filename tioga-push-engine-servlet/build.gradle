@@ -28,32 +28,4 @@ project(":tioga-push-engine-servlet") {
     provided ("javax.servlet.jsp:jsp-api:2.2.1-b03")
     provided ("javax.servlet:javax.servlet-api:3.1.0")
   }
-
-  /********************************************
-   * Deploys the app to the production server *
-   ********************************************/
-
-  apply plugin: "org.hidetake.ssh"
-  remotes {
-    webServer {
-      host = "107.170.247.182"
-      user = "root"
-    }
-  }
-  task stageFiles(type: SshTask, dependsOn: war) {
-    ssh {
-      identity = file("${cosmicPushKey}") // Enable public key authentication
-      knownHosts = allowAnyHosts          // Disable host key verification
-      pty = true; // Enable PTY allocation for sudo
-    }
-    session(remotes.webServer) {
-      // Put a built WAR to the server
-      def copyOf = new File((File)war.archivePath.parentFile, "push-server-${project.version}.war");
-      if (copyOf.exists() == false) {
-        copyOf.bytes = war.archivePath.bytes
-      }
-      System.out.printf("Uploading " + copyOf);
-      put(copyOf.absolutePath, "/opt/staging/")
-    }
-  }
 }

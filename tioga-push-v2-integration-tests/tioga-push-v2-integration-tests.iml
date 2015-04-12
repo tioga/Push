@@ -14,7 +14,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="tioga-push-gateway" exported="" />
+    <orderEntry type="module" module-name="tioga-push-client" exported="" />
     <orderEntry type="module" module-name="tioga-push-test" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.glassfish.jersey.core:jersey-client:2.16" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.testng:testng:6.8.21" level="project" />

@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tiogasolutions.push.gateway;
+package org.tiogasolutions.push.client;
 
 import org.tiogasolutions.push.pub.common.PushResponse;
 import org.tiogasolutions.push.pub.common.Push;
 
-public interface CosmicPushGateway {
+public interface CosmicPushClient {
 
   /**
    * Sends a "PingPush" server which does not

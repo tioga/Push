@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.tiogasolutions.push.gateway;
+package org.tiogasolutions.push.client;
 
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.dev.common.*;
@@ -28,7 +28,7 @@ import java.net.InetAddress;
 @Test
 public class SesEmailPushTranslationTest {
 
-  private LiveCosmicPushGateway gateway = new LiveCosmicPushGateway("some-name", "some-password");
+  private LiveCosmicPushClient gateway = new LiveCosmicPushClient("some-name", "some-password");
   private JsonTranslator translator = gateway.getClient().getTranslator();
 
   public void translateEmailPush() throws Exception {

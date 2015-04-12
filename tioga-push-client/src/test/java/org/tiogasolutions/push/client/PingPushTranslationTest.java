@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.tiogasolutions.push.gateway;
+package org.tiogasolutions.push.client;
 
 import org.tiogasolutions.push.pub.common.PingPush;
 import org.tiogasolutions.push.pub.common.Push;
@@ -29,7 +29,7 @@ import java.net.InetAddress;
 @Test
 public class PingPushTranslationTest {
 
-  private LiveCosmicPushGateway gateway = new LiveCosmicPushGateway("some-name", "some-password");
+  private LiveCosmicPushClient gateway = new LiveCosmicPushClient("some-name", "some-password");
   private JsonTranslator translator = gateway.getClient().getTranslator();
 
   public void translatePingPush() throws Exception {

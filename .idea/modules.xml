@@ -3,11 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Push.iml" filepath="$PROJECT_DIR$/Push.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tioga-push-client/tioga-push-client.iml" filepath="$PROJECT_DIR$/tioga-push-client/tioga-push-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-common/tioga-push-common.iml" filepath="$PROJECT_DIR$/tioga-push-common/tioga-push-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-engine-core/tioga-push-engine-core.iml" filepath="$PROJECT_DIR$/tioga-push-engine-core/tioga-push-engine-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-engine-grizzly/tioga-push-engine-grizzly.iml" filepath="$PROJECT_DIR$/tioga-push-engine-grizzly/tioga-push-engine-grizzly.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-engine-servlet/tioga-push-engine-servlet.iml" filepath="$PROJECT_DIR$/tioga-push-engine-servlet/tioga-push-engine-servlet.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tioga-push-gateway/tioga-push-gateway.iml" filepath="$PROJECT_DIR$/tioga-push-gateway/tioga-push-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-jackson/tioga-push-jackson.iml" filepath="$PROJECT_DIR$/tioga-push-jackson/tioga-push-jackson.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-plugin-notifier/tioga-push-plugin-notifier.iml" filepath="$PROJECT_DIR$/tioga-push-plugin-notifier/tioga-push-plugin-notifier.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-plugin-ses/tioga-push-plugin-ses.iml" filepath="$PROJECT_DIR$/tioga-push-plugin-ses/tioga-push-plugin-ses.iml" />

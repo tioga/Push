@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.tiogasolutions.push.gateway;
+package org.tiogasolutions.push.client;
 
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.LqNotificationPush;

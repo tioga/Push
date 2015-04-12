@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tiogasolutions.push.gateway;
+package org.tiogasolutions.push.client;
 
 import org.tiogasolutions.push.jackson.CpObjectMapper;
 import org.tiogasolutions.push.pub.common.PingPush;
@@ -23,23 +23,23 @@ import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
 import org.tiogasolutions.lib.jaxrs.jackson.SimpleRestClient;
 
-public class LiveCosmicPushGateway implements CosmicPushGateway {
+public class LiveCosmicPushClient implements CosmicPushClient {
 
   private final SimpleRestClient client;
 
-  public LiveCosmicPushGateway(String userName, String password) {
+  public LiveCosmicPushClient(String userName, String password) {
     CpObjectMapper objectMapper = new CpObjectMapper();
     TiogaJacksonTranslator translator = new TiogaJacksonTranslator(objectMapper);
     client = new SimpleRestClient(translator, "http://www.cosmicpush.com/api/v2", userName, password);
   }
 
-  public LiveCosmicPushGateway(String url, String userName, String password) {
+  public LiveCosmicPushClient(String url, String userName, String password) {
     CpObjectMapper objectMapper = new CpObjectMapper();
     TiogaJacksonTranslator translator = new TiogaJacksonTranslator(objectMapper);
     client = new SimpleRestClient(translator, url, userName, password);
   }
 
-  public LiveCosmicPushGateway(SimpleRestClient client) {
+  public LiveCosmicPushClient(SimpleRestClient client) {
     this.client = client;
   }
 
