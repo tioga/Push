@@ -42,7 +42,7 @@ import java.util.TreeSet;
 public class TestFactory {
 
   static {
-    CpCouchServer.DATABASE_NAME = "cosmic-push-tests";
+    CpCouchServer.DATABASE_NAME = "push-tests";
   }
 
   private static TestFactory SINGLETON;

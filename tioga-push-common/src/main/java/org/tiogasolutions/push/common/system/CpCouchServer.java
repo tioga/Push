@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CpCouchServer extends DefaultCouchServer {
 
-  public static String DATABASE_NAME = "cosmic-push";
+  public static String DATABASE_NAME = "push";
 
   public static final List<String> designNames = Arrays.asList("account", "push-request", "domain");
   public static final String prefix = "/push-server-common/design-docs/";

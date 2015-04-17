@@ -23,11 +23,11 @@ project(":tioga-push-engine-core") {
     compile("org.tiogasolutions.dev:tioga-dev-common:4.1.4")
     compile("org.tiogasolutions.dev:tioga-dev-domain:4.1.2")
 
-    compile("org.tiogasolutions.apis:tioga-apis-google:2.2.7")
+    compile("org.tiogasolutions.apis:tioga-apis-google:2.2.8")
 
     compile("org.tiogasolutions.lib:tioga-lib-jaxrs:4.1.4")
     compile("org.tiogasolutions.lib:tioga-lib-servlet:4.1.4")
-    compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.0.6")
+    compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.1.0")
 
     compile("org.tiogasolutions.app:tioga-app-common:1.0.5")
 

@@ -12,7 +12,7 @@ project(":tioga-push-common") {
 
     compile project(":tioga-push-jackson")
 
-    compile("org.tiogasolutions.apis:tioga-apis-bitly:1.1.8")
+    compile("org.tiogasolutions.apis:tioga-apis-bitly:1.1.9")
     compile("org.tiogasolutions.lib:tioga-lib-couchace:5.0.8")
     compile("com.fasterxml.jackson.core:jackson-annotations:2.5.1") {force = test}
 

@@ -14,7 +14,7 @@ project(":tioga-push-client") {
 
     compile project(":tioga-push-jackson")
 
-    compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.0.6")
+    compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.1.0")
 
     testCompile project(":tioga-push-test")
     testCompile("org.testng:testng:6.8.21")
