@@ -18,13 +18,16 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.Arrays;
+import java.util.Collections;
+
+import static java.util.Collections.*;
 
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CpReaderWriterProvider extends JacksonReaderWriterProvider {
 
   public CpReaderWriterProvider(@Context Application application) {
-    super(AppContext.from(application).getObjectMapper(), Arrays.asList(MediaType.APPLICATION_JSON_TYPE));
+    super(AppContext.from(application).getObjectMapper(), singletonList(MediaType.APPLICATION_JSON_TYPE));
     addSupportedType(Push.class);
     addSupportedType(UserAgent.class);
     addSupportedType(PushResponse.class);

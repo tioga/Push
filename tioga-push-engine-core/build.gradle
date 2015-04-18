@@ -37,4 +37,17 @@ project(":tioga-push-engine-core") {
     testCompile("org.testng:testng:6.8.21")
     testCompile project(":tioga-push-test");
   }
+
+  configurations.all({
+    resolutionStrategy({
+      force(
+        "org.slf4j:slf4j-api:1.7.12",
+        "commons-logging:commons-logging:1.2",
+        "org.apache.httpcomponents:httpclient:4.3.4",
+        "org.apache.httpcomponents:httpcore:4.3.2",
+        "com.fasterxml.jackson.core:jackson-databind:2.5.1",
+        "org.javassist:javassist:3.18.1-GA",
+      )
+    })
+  })
 }

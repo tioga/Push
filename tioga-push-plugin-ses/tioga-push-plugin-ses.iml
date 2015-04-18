@@ -17,7 +17,6 @@
     <orderEntry type="module" module-name="tioga-push-common" exported="" />
     <orderEntry type="module" module-name="tioga-push-test" scope="TEST" />
     <orderEntry type="library" exported="" name="Gradle: com.amazonaws:aws-java-sdk:1.9.29" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.5.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.amazonaws:aws-java-sdk-support:1.9.29" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.amazonaws:aws-java-sdk-simpledb:1.9.29" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.amazonaws:aws-java-sdk-simpleworkflow:1.9.29" level="project" />
@@ -65,13 +64,14 @@
     <orderEntry type="library" exported="" name="Gradle: com.amazonaws:aws-java-sdk-core:1.9.29" level="project" />
     <orderEntry type="library" exported="" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.httpcomponents:httpclient:4.3.4" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.5.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: joda-time:joda-time:2.7" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.5.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.httpcomponents:httpcore:4.3.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: commons-codec:commons-codec:1.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.testng:testng:6.8.21" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.beanshell:bsh:2.0b4" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.beust:jcommander:1.27" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.5.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.5.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.5.0" level="project" />
   </component>
 </module>

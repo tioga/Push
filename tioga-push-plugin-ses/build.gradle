@@ -12,9 +12,18 @@ project(":tioga-push-plugin-ses") {
 
     compile project(":tioga-push-common")
 
-    compile("com.amazonaws:aws-java-sdk:1.9.29")
+    compile("com.amazonaws:aws-java-sdk:1.9.31")
 
     testCompile project(":tioga-push-test")
     testCompile("org.testng:testng:6.8.21")
   }
+
+  configurations.all({
+    resolutionStrategy({
+      force(
+        "commons-logging:commons-logging:1.2",
+        "com.fasterxml.jackson.core:jackson-databind:2.5.1",
+      )
+    })
+  })
 }

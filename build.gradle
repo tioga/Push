@@ -30,11 +30,11 @@ subprojects {
   }
 
   configurations.all({
-    resolutionStrategy({
+    resolutionStrategy {
       if (System.getProperty("no-fail-version-conflict") != "true") {
         failOnVersionConflict()
       }
-    })
+    }
   })
 
   ext {

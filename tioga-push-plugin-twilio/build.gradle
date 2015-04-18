@@ -17,4 +17,11 @@ project(":tioga-push-plugin-twilio") {
 
     testCompile("org.testng:testng:6.8.21")
   }
+  configurations.all({
+    resolutionStrategy({
+      force(
+        "commons-logging:commons-logging:1.2",
+      )
+    })
+  })
 }
