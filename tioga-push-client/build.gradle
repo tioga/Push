@@ -6,7 +6,7 @@
 project(":tioga-push-client") {
   version = "3.0.1"
 
-  apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle")
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 
   dependencies {
 
@@ -14,7 +14,7 @@ project(":tioga-push-client") {
 
     compile project(":tioga-push-jackson")
 
-    compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.1.0")
+    compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.+")
 
     testCompile project(":tioga-push-test")
     testCompile("org.testng:testng:6.8.21")

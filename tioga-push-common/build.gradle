@@ -6,15 +6,14 @@
 project(":tioga-push-common") {
   version = "4.0.5"
 
-  apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle")
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 
   dependencies {
 
     compile project(":tioga-push-jackson")
 
-    compile("org.tiogasolutions.apis:tioga-apis-bitly:1.1.9")
-    compile("org.tiogasolutions.lib:tioga-lib-couchace:5.0.8")
-    compile("com.fasterxml.jackson.core:jackson-annotations:2.5.1") {force = test}
+    compile("org.tiogasolutions.apis:tioga-apis-bitly:1.+")
+    compile("org.tiogasolutions.lib:tioga-lib-couchace:5.+")
 
     testCompile ("org.testng:testng:6.8.21")
   }

@@ -7,7 +7,7 @@ project(":tioga-push-engine-servlet") {
   version = "1.0.5"
 
   apply(plugin: "war")
-  apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle")
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 
   configurations {
     provided

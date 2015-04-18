@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.tiogasolutions.apis:tioga-apis-google:2.2.8">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.apis/tioga-apis-google/2.2.8/ded3ab2d1b1a98c322398bd9a910d5063b02ebd9/tioga-apis-google-2.2.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.apis/tioga-apis-google/2.2.8/bdd95e62675df1a3d6c90f2567fe735f08ed8ba9/tioga-apis-google-2.2.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

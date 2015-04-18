@@ -6,7 +6,7 @@
 project(":tioga-push-v2-integration-tests") {
   version = "1.0.6"
 
-  apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle")
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 
   dependencies {
 

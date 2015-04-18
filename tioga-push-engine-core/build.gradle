@@ -6,7 +6,7 @@
 project(":tioga-push-engine-core") {
   version = "4.0.5"
 
-  apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle")
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 
   dependencies {
 
@@ -20,16 +20,16 @@ project(":tioga-push-engine-core") {
     compile project(":tioga-push-plugin-twilio")
     // compile project(":tioga-push-plugin-ocs-message")
 
-    compile("org.tiogasolutions.dev:tioga-dev-common:4.1.4")
-    compile("org.tiogasolutions.dev:tioga-dev-domain:4.1.2")
+    compile("org.tiogasolutions.dev:tioga-dev-common:4.+")
+    compile("org.tiogasolutions.dev:tioga-dev-domain:4.+")
 
-    compile("org.tiogasolutions.apis:tioga-apis-google:2.2.8")
+    compile("org.tiogasolutions.apis:tioga-apis-google:2.+")
 
-    compile("org.tiogasolutions.lib:tioga-lib-jaxrs:4.1.4")
-    compile("org.tiogasolutions.lib:tioga-lib-servlet:4.1.4")
-    compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.1.0")
+    compile("org.tiogasolutions.lib:tioga-lib-jaxrs:4.+")
+    compile("org.tiogasolutions.lib:tioga-lib-servlet:4.+")
+    compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.+")
 
-    compile("org.tiogasolutions.app:tioga-app-common:1.0.5")
+    compile("org.tiogasolutions.app:tioga-app-common:1.+")
 
     compile("org.slf4j:slf4j-simple:1.7.12")
     compile("org.thymeleaf.extras:thymeleaf-extras-java8time:2.1.0.RELEASE")
