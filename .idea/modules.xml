@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/tioga-push-client/tioga-push-client.iml" filepath="$PROJECT_DIR$/tioga-push-client/tioga-push-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-common/tioga-push-common.iml" filepath="$PROJECT_DIR$/tioga-push-common/tioga-push-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-engine/tioga-push-engine.iml" filepath="$PROJECT_DIR$/tioga-push-engine/tioga-push-engine.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tioga-push-engine-core/tioga-push-engine.iml" filepath="$PROJECT_DIR$/tioga-push-engine-core/tioga-push-engine.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-jackson/tioga-push-jackson.iml" filepath="$PROJECT_DIR$/tioga-push-jackson/tioga-push-jackson.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-plugin-notifier/tioga-push-plugin-notifier.iml" filepath="$PROJECT_DIR$/tioga-push-plugin-notifier/tioga-push-plugin-notifier.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-plugin-ses/tioga-push-plugin-ses.iml" filepath="$PROJECT_DIR$/tioga-push-plugin-ses/tioga-push-plugin-ses.iml" />
@@ -15,9 +14,7 @@
       <module fileurl="file://$PROJECT_DIR$/tioga-push-plugin-xmpp/tioga-push-plugin-xmpp.iml" filepath="$PROJECT_DIR$/tioga-push-plugin-xmpp/tioga-push-plugin-xmpp.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-pub/tioga-push-pub.iml" filepath="$PROJECT_DIR$/tioga-push-pub/tioga-push-pub.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-server-grizzly/tioga-push-server-grizzly.iml" filepath="$PROJECT_DIR$/tioga-push-server-grizzly/tioga-push-server-grizzly.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tioga-push-engine-grizzly/tioga-push-server-grizzly.iml" filepath="$PROJECT_DIR$/tioga-push-engine-grizzly/tioga-push-server-grizzly.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-server-servlet/tioga-push-server-servlet.iml" filepath="$PROJECT_DIR$/tioga-push-server-servlet/tioga-push-server-servlet.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tioga-push-engine-servlet/tioga-push-server-servlet.iml" filepath="$PROJECT_DIR$/tioga-push-engine-servlet/tioga-push-server-servlet.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-test/tioga-push-test.iml" filepath="$PROJECT_DIR$/tioga-push-test/tioga-push-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-v1-integration-tests/tioga-push-v1-integration-tests.iml" filepath="$PROJECT_DIR$/tioga-push-v1-integration-tests/tioga-push-v1-integration-tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-v2-integration-tests/tioga-push-v2-integration-tests.iml" filepath="$PROJECT_DIR$/tioga-push-v2-integration-tests/tioga-push-v2-integration-tests.iml" />

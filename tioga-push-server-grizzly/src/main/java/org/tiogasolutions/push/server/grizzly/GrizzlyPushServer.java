@@ -16,7 +16,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class GrizzlyPushServer {
 
-  public String serverName = "www.localhost";
+  public String serverName = "localhost";
   private boolean shutDown = false;
   private int port = 8080;
   private int shutdownPort = 8005;
