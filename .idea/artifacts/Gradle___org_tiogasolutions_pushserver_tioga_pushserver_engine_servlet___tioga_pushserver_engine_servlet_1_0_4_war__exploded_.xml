@@ -9,7 +9,7 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="tioga-pushserver-engine-servlet" />
-          <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine-servlet/build/resources/main" />
+          <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-server-servlet/build/resources/main" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet:2.16" />
@@ -32,7 +32,7 @@
           <element id="library" level="project" name="Gradle: javax.inject:javax.inject:1" />
           <element id="archive" name="org.tiogasolutions.pushserver-tioga-pushserver-engine-core-4.0.4.jar">
             <element id="module-output" name="tioga-pushserver-engine-core" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine-core/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine/build/resources/main" />
           </element>
           <element id="archive" name="org.tiogasolutions.pushserver-tioga-pushserver-pub-2.0.3.jar">
             <element id="module-output" name="tioga-pushserver-pub" />

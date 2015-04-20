@@ -11,9 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/tioga-push-client" />
             <option value="$PROJECT_DIR$/tioga-push-common" />
-            <option value="$PROJECT_DIR$/tioga-push-engine-core" />
-            <option value="$PROJECT_DIR$/tioga-push-engine-grizzly" />
-            <option value="$PROJECT_DIR$/tioga-push-engine-servlet" />
+            <option value="$PROJECT_DIR$/tioga-push-engine" />
             <option value="$PROJECT_DIR$/tioga-push-jackson" />
             <option value="$PROJECT_DIR$/tioga-push-plugin-notifier" />
             <option value="$PROJECT_DIR$/tioga-push-plugin-ses" />
@@ -21,6 +19,8 @@
             <option value="$PROJECT_DIR$/tioga-push-plugin-twilio" />
             <option value="$PROJECT_DIR$/tioga-push-plugin-xmpp" />
             <option value="$PROJECT_DIR$/tioga-push-pub" />
+            <option value="$PROJECT_DIR$/tioga-push-server-grizzly" />
+            <option value="$PROJECT_DIR$/tioga-push-server-servlet" />
             <option value="$PROJECT_DIR$/tioga-push-test" />
             <option value="$PROJECT_DIR$/tioga-push-v1-integration-tests" />
             <option value="$PROJECT_DIR$/tioga-push-v2-integration-tests" />

@@ -9,12 +9,12 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="push-server-engine-servlet" />
-          <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine-servlet/build/resources/main" />
+          <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-server-servlet/build/resources/main" />
         </element>
         <element id="directory" name="lib">
           <element id="archive" name="com.cosmicpush-push-server-engine-4.0.2.jar">
             <element id="module-output" name="push-server-engine" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine-core/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine/build/resources/main" />
           </element>
           <element id="archive" name="com.cosmicpush-push-server-pub-2.0.2.jar">
             <element id="module-output" name="push-server-pub" />
