@@ -4,5 +4,5 @@
  * This software may not be used without permission.
  */
 
-include "tioga-push-pub", "tioga-push-jackson", "tioga-push-common", "tioga-push-engine-core", "tioga-push-engine-grizzly", "tioga-push-engine-servlet", "tioga-push-client", "tioga-push-plugin-smtp", "tioga-push-plugin-ses", "tioga-push-plugin-xmpp", "tioga-push-v1-integration-tests", "tioga-push-v2-integration-tests", "tioga-push-plugin-notifier", "tioga-push-plugin-twilio", /*"tioga-push-plugin-ocs-message",*/ "tioga-push-test"
+include "tioga-push-pub", "tioga-push-jackson", "tioga-push-common", "tioga-push-engine", "tioga-push-server-grizzly", "tioga-push-server-servlet", "tioga-push-client", "tioga-push-plugin-smtp", "tioga-push-plugin-ses", "tioga-push-plugin-xmpp", "tioga-push-v1-integration-tests", "tioga-push-v2-integration-tests", "tioga-push-plugin-notifier", "tioga-push-plugin-twilio", /*"tioga-push-plugin-ocs-message",*/ "tioga-push-test"
 

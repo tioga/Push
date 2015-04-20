@@ -1,0 +1,60 @@
+/*
+ * Copyright (c) 2014 Jacob D. Parr
+ *
+ * This software may not be used without permission.
+ */
+project(":tioga-push-server-grizzly") {
+  version = "1.0.10"
+
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
+
+  dependencies {
+    compile project(":tioga-push-engine")
+    compile("org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.17")
+  }
+
+  configurations.all({
+    resolutionStrategy({
+      force(
+        "org.slf4j:slf4j-api:1.7.12",
+        "org.javassist:javassist:3.18.1-GA",
+        "commons-logging:commons-logging:1.2",
+        "org.apache.httpcomponents:httpclient:4.3.4",
+        "org.apache.httpcomponents:httpcore:4.3.2",
+        "com.fasterxml.jackson.core:jackson-databind:2.5.1",
+      )
+    })
+  })
+
+  jar {
+    // Remove version from the jar name to help with deployment.
+    archiveName = "tioga-push-server-grizzly.jar"
+  }
+
+  apply plugin:'distribution'
+
+  artifacts {
+    archives distZip
+  }
+
+  distributions {
+    main {
+      contents {
+        into("lib") {
+          from(jar)
+          from(project.configurations.runtime)
+        }
+      }
+    }
+  }
+
+  jar {
+    manifest {
+      attributes(
+        "Implementation-Version" : project.version,
+        "Main-Class"             : "org.tiogasolutions.push.server.grizzly.GrizzlyPushServer",
+        "Class-Path"             : configurations.compile.collect { it.getName() }.join(' ')
+      )
+    }
+  }
+}

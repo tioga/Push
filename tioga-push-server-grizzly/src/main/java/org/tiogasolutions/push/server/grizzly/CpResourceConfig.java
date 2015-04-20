@@ -1,4 +1,4 @@
-package org.tiogasolutions.push.engine.grizzly;
+package org.tiogasolutions.push.server.grizzly;
 
 import org.tiogasolutions.push.engine.core.system.CpApplication;
 import org.glassfish.jersey.server.ResourceConfig;
