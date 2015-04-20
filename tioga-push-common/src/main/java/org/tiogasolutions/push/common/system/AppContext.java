@@ -15,19 +15,21 @@ public class AppContext {
   private final BitlyApis bitlyApis;
   private final SessionStore sessionStore;
   private final CpObjectMapper objectMapper;
-  private final CpCouchServer cpCouchServer;
+  private final DomainDatabaseConfig databaseConfig;
   private final AccountStore accountStore;
   private final PushRequestStore pushRequestStore;
   private final DomainStore domainStore;
 
-  public AppContext(SessionStore sessionStore, CpObjectMapper objectMapper, CpCouchServer cpCouchServer, BitlyApis bitlyApis) {
+  public AppContext(SessionStore sessionStore, CpObjectMapper objectMapper, String mainDbName, DomainDatabaseConfig databaseConfig, BitlyApis bitlyApis) {
     this.bitlyApis = bitlyApis;
     this.sessionStore = sessionStore;
     this.objectMapper = objectMapper;
-    this.cpCouchServer = cpCouchServer;
-    this.accountStore = new AccountStore(cpCouchServer);
-    this.domainStore = new DomainStore(cpCouchServer);
-    this.pushRequestStore = new PushRequestStore(cpCouchServer);
+    this.databaseConfig = databaseConfig;
+
+    this.accountStore = new AccountStore(databaseConfig.getCouchServer(), mainDbName);
+    this.domainStore = new DomainStore(databaseConfig.getCouchServer(), mainDbName);
+
+    this.pushRequestStore = new PushRequestStore(databaseConfig);
   }
 
   public BitlyApis getBitlyApi() {
@@ -50,8 +52,8 @@ public class AppContext {
     return pushRequestStore;
   }
 
-  public CpCouchServer getCouchServer() {
-    return cpCouchServer;
+  public DomainDatabaseConfig getDatabaseConfig() {
+    return databaseConfig;
   }
 
   public DomainStore getDomainStore() {

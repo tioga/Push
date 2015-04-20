@@ -59,6 +59,6 @@ public class PluginManager {
 
   public static PluginConfig getConfig(PluginContext context, Domain domain, PushType pushType) {
     Plugin plugin = getPlugin(pushType);
-    return plugin.getConfig(context.getCouchServer(), domain);
+    return plugin.getConfig(context.getDatabaseConfig(), domain);
   }
 }

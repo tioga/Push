@@ -7,20 +7,15 @@
 package org.tiogasolutions.push.plugins.twilio;
 
 import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.system.CpCouchServer;
-import org.tiogasolutions.lib.couchace.DefaultCouchStore;
+import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
+import org.tiogasolutions.push.common.system.PushDomainSpecificStore;
 
-public class TwilioConfigStore extends DefaultCouchStore<TwilioConfig> {
+public class TwilioConfigStore extends PushDomainSpecificStore<TwilioConfig> {
 
   public static final String TWILIO_CONFIG_DESIGN_NAME = "twilio-config";
 
-  public TwilioConfigStore(CpCouchServer couchServer) {
-    super(couchServer, TwilioConfig.class);
-  }
-
-  @Override
-  public String getDatabaseName() {
-    return CpCouchServer.DATABASE_NAME;
+  public TwilioConfigStore(DomainDatabaseConfig databaseConfig) {
+    super(databaseConfig, TwilioConfig.class);
   }
 
   @Override

@@ -30,7 +30,7 @@ public abstract class PluginSupport implements Plugin {
 
   @Override
   public final byte[] getIcon(PluginContext pluginContext, Domain domain) throws IOException {
-    PluginConfig config = getConfig(pluginContext.getCouchServer(), domain);
+    PluginConfig config = getConfig(pluginContext.getDatabaseConfig(), domain);
     return (config == null) ? getDisabledIcon() : getEnabledIcon();
   }
 

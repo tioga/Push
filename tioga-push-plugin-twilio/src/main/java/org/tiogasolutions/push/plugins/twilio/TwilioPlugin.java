@@ -11,6 +11,7 @@ import org.tiogasolutions.push.common.plugins.PluginContext;
 import org.tiogasolutions.push.common.plugins.PluginSupport;
 import org.tiogasolutions.push.common.requests.PushRequest;
 import org.tiogasolutions.push.common.system.CpCouchServer;
+import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.TwilioSmsPush;
 import com.twilio.sdk.TwilioRestClient;
@@ -35,32 +36,32 @@ public class TwilioPlugin extends PluginSupport {
         super(TwilioSmsPush.PUSH_TYPE);
     }
 
-    public TwilioConfigStore getConfigStore(CpCouchServer couchServer) {
+    public TwilioConfigStore getConfigStore(DomainDatabaseConfig databaseConfig) {
         if (_configStore == null) {
-            _configStore = new TwilioConfigStore(couchServer);
+            _configStore = new TwilioConfigStore(databaseConfig);
         }
         return _configStore;
     }
 
     @Override
-    public TwilioConfig getConfig(CpCouchServer couchServer, Domain apiClient) {
+    public TwilioConfig getConfig(DomainDatabaseConfig databaseConfig, Domain apiClient) {
         String docId = TwilioConfigStore.toDocumentId(apiClient);
-        return getConfigStore(couchServer).getByDocumentId(docId);
+        return getConfigStore(databaseConfig).getByDocumentId(docId);
     }
 
     @Override
     public TwilioDelegate newDelegate(PluginContext context, Domain domain, PushRequest pushRequest, Push push) {
-        TwilioConfig config = getConfig(context.getCouchServer(), domain);
+        TwilioConfig config = getConfig(context.getDatabaseConfig(), domain);
         return new TwilioDelegate(context, domain, pushRequest, (TwilioSmsPush)push, config);
     }
 
     @Override
     public void deleteConfig(PluginContext context, Domain domain) {
 
-        TwilioConfig config = getConfig(context.getCouchServer(), domain);
+        TwilioConfig config = getConfig(context.getDatabaseConfig(), domain);
 
         if (config != null) {
-            getConfigStore(context.getCouchServer()).delete(config);
+            getConfigStore(context.getDatabaseConfig()).delete(config);
             context.setLastMessage("Twilio SMS configuration deleted.");
         } else {
             context.setLastMessage("Twilio SMS configuration doesn't exist.");
@@ -71,13 +72,13 @@ public class TwilioPlugin extends PluginSupport {
     public void updateConfig(PluginContext context, Domain domain, MultivaluedMap<String, String> formParams) {
         UpdateTwilioConfigAction action = new UpdateTwilioConfigAction(domain, formParams);
 
-        TwilioConfig twilioConfig = getConfig(context.getCouchServer(), domain);
+        TwilioConfig twilioConfig = getConfig(context.getDatabaseConfig(), domain);
         if (twilioConfig == null) {
             twilioConfig = new TwilioConfig();
         }
 
         twilioConfig.apply(action);
-        getConfigStore(context.getCouchServer()).update(twilioConfig);
+        getConfigStore(context.getDatabaseConfig()).update(twilioConfig);
 
         context.setLastMessage("Twilio configuration updated.");
     }
@@ -85,7 +86,7 @@ public class TwilioPlugin extends PluginSupport {
     @Override
     public void test(PluginContext context, Domain domain) throws Exception {
 
-        TwilioConfig config = getConfig(context.getCouchServer(), domain);
+        TwilioConfig config = getConfig(context.getDatabaseConfig(), domain);
 
         if (config == null) {
             String msg = "The Twilio config has not been specified.";
@@ -110,7 +111,7 @@ public class TwilioPlugin extends PluginSupport {
     @Override
     public String getAdminUi(PluginContext context, Domain domain) throws IOException {
 
-        TwilioConfig config = getConfig(context.getCouchServer(), domain);
+        TwilioConfig config = getConfig(context.getDatabaseConfig(), domain);
 
         InputStream stream = getClass().getResourceAsStream("/org/tiogasolutions/push/plugins/twilio/admin.html");
         String content = IoUtils.toString(stream);

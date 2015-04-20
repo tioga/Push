@@ -32,7 +32,7 @@ public class ManageAccountModel {
       this.domains.add(domainModel);
 
       for (Plugin plugin : PluginManager.getPlugins()) {
-        PluginConfig config = plugin.getConfig(pluginContext.getCouchServer(), domain);
+        PluginConfig config = plugin.getConfig(pluginContext.getDatabaseConfig(), domain);
         if (config != null) {
           domainModel.enabledTypes.add(plugin.getPushType());
         } else {

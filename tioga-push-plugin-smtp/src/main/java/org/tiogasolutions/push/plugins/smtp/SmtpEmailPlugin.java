@@ -6,6 +6,7 @@ import org.tiogasolutions.push.common.plugins.PluginSupport;
 import org.tiogasolutions.push.common.requests.PushRequest;
 import org.tiogasolutions.push.common.system.AppContext;
 import org.tiogasolutions.push.common.system.CpCouchServer;
+import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.SmtpEmailPush;
 import org.tiogasolutions.dev.common.BeanUtils;
@@ -27,22 +28,22 @@ public class SmtpEmailPlugin extends PluginSupport {
     super(SmtpEmailPush.PUSH_TYPE);
   }
 
-  public SmtpEmailConfigStore getConfigStore(CpCouchServer couchServer) {
+  public SmtpEmailConfigStore getConfigStore(DomainDatabaseConfig databaseConfig) {
     if (_configStore == null) {
-      _configStore = new SmtpEmailConfigStore(couchServer);
+      _configStore = new SmtpEmailConfigStore(databaseConfig);
     }
     return _configStore;
   }
 
   @Override
-  public SmtpEmailConfig getConfig(CpCouchServer couchServer, Domain domain) {
+  public SmtpEmailConfig getConfig(DomainDatabaseConfig databaseConfig, Domain domain) {
     String docId = SmtpEmailConfigStore.toDocumentId(domain);
-    return getConfigStore(couchServer).getByDocumentId(docId);
+    return getConfigStore(databaseConfig).getByDocumentId(docId);
   }
 
   @Override
   public SmtpEmailDelegate newDelegate(PluginContext pluginContext, Domain domain, PushRequest pushRequest, Push push) {
-    SmtpEmailConfig config = getConfig(pluginContext.getCouchServer(), domain);
+    SmtpEmailConfig config = getConfig(pluginContext.getDatabaseConfig(), domain);
     return new SmtpEmailDelegate(pluginContext, domain, pushRequest, (SmtpEmailPush)push, config);
   }
 
@@ -51,13 +52,13 @@ public class SmtpEmailPlugin extends PluginSupport {
 
     UpdateSmtpEmailConfigAction action = new UpdateSmtpEmailConfigAction(domain, formParams);
 
-    SmtpEmailConfig smtpEmailConfig = getConfig(pluginContext.getCouchServer(), domain);
+    SmtpEmailConfig smtpEmailConfig = getConfig(pluginContext.getDatabaseConfig(), domain);
     if (smtpEmailConfig == null) {
       smtpEmailConfig = new SmtpEmailConfig();
     }
 
     smtpEmailConfig.apply(action);
-    getConfigStore(pluginContext.getCouchServer()).update(smtpEmailConfig);
+    getConfigStore(pluginContext.getDatabaseConfig()).update(smtpEmailConfig);
 
     pluginContext.setLastMessage("SMTP Email configuration updated.");
   }
@@ -65,10 +66,10 @@ public class SmtpEmailPlugin extends PluginSupport {
   @Override
   public void deleteConfig(PluginContext pluginContext, Domain domain) {
 
-    SmtpEmailConfig config = getConfig(pluginContext.getCouchServer(), domain);
+    SmtpEmailConfig config = getConfig(pluginContext.getDatabaseConfig(), domain);
 
     if (config != null) {
-      getConfigStore(pluginContext.getCouchServer()).delete(config);
+      getConfigStore(pluginContext.getDatabaseConfig()).delete(config);
       pluginContext.setLastMessage("SMTP email configuration deleted.");
     } else {
       pluginContext.setLastMessage("SMTP email configuration doesn't exist.");
@@ -78,7 +79,7 @@ public class SmtpEmailPlugin extends PluginSupport {
   @Override
   public void test(PluginContext pluginContext, Domain domain) throws Exception {
 
-    SmtpEmailConfig config = getConfig(pluginContext.getCouchServer(), domain);
+    SmtpEmailConfig config = getConfig(pluginContext.getDatabaseConfig(), domain);
 
     if (config == null) {
       String msg = "The SMTP email config has not been specified.";
@@ -126,7 +127,7 @@ public class SmtpEmailPlugin extends PluginSupport {
   @Override
   public String getAdminUi(PluginContext pluginContext, Domain domain) throws IOException {
 
-    SmtpEmailConfig config = getConfig(pluginContext.getCouchServer(), domain);
+    SmtpEmailConfig config = getConfig(pluginContext.getDatabaseConfig(), domain);
 
     InputStream stream = getClass().getResourceAsStream("/org/tiogasolutions/push/plugins/smtp/admin.html");
     String content = IoUtils.toString(stream);

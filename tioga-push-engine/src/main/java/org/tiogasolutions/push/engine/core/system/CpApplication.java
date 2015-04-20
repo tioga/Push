@@ -50,7 +50,14 @@ public class CpApplication extends Application {
   private final Set<Class<?>> classes;
   private final Map<String, Object> properties;
 
-  public CpApplication() throws Exception {
+  private final String mainDbName;
+  private final String domainDbName;
+
+  public CpApplication(String mainDbName, String domainDbName) throws Exception {
+
+    this.mainDbName = mainDbName;
+    this.domainDbName = domainDbName;
+
     // Make sure our logging is working before ANYTHING else.
     LogUtils logUtils = new LogUtils();
     logUtils.initConsoleAppender(Level.WARN, LogUtils.DEFAULT_PATTERN);
@@ -63,11 +70,15 @@ public class CpApplication extends Application {
     CpObjectMapper objectMapper = new CpObjectMapper();
     TiogaJacksonTranslator translator = new TiogaJacksonTranslator(objectMapper);
 
+    CpCouchServer couchServer = new CpCouchServer();
+
     AppContext appContext = new AppContext(
       new SessionStore(TimeUnit.MINUTES.toMillis(60)),
       objectMapper,
-      new CpCouchServer(),
+      mainDbName,
+      new DomainDatabaseConfig(couchServer, domainDbName),
       new BitlyApis(translator, bitlyAccessToken));
+
     properties.put(AppContext.class.getName(), appContext);
 
     classes.add(CpFilter.class);

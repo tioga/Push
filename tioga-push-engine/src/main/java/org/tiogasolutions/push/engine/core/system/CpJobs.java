@@ -1,17 +1,13 @@
 package org.tiogasolutions.push.engine.core.system;
 
-import org.tiogasolutions.push.common.accounts.Account;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.tiogasolutions.couchace.core.api.response.EntityDocument;
+import org.tiogasolutions.dev.common.DateUtils;
 import org.tiogasolutions.push.common.clients.Domain;
 import org.tiogasolutions.push.common.requests.PushRequest;
 import org.tiogasolutions.push.common.requests.QueryResult;
 import org.tiogasolutions.push.common.system.AppContext;
-import org.tiogasolutions.push.common.system.CpCouchServer;
-import org.tiogasolutions.couchace.core.api.CouchDatabase;
-import org.tiogasolutions.couchace.core.api.response.EntityDocument;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.tiogasolutions.dev.common.DateUtils;
-import org.tiogasolutions.lib.couchace.support.CouchUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,23 +29,22 @@ public class CpJobs {
   }
 
   public void cleanAndCompactDatabase() {
-    try {
-      if (runningCompact.compareAndSet(false, true)) {
-        CouchDatabase database = appContext.getCouchServer().database(CpCouchServer.DATABASE_NAME);
-        CouchUtils.compactAndCleanAll(database, CpCouchServer.designNames);
-      }
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    } finally {
-      runningCompact.set(false);
-    }
+//    try {
+//      if (runningCompact.compareAndSet(false, true)) {
+//        CouchDatabase database = appContext.getDatabaseConfig().getCouchServer().database(CpCouchServer.DATABASE_NAME);
+//        CouchUtils.compactAndCleanAll(database, CpCouchServer.designNames);
+//      }
+//    } catch (Exception ex) {
+//      ex.printStackTrace();
+//    } finally {
+//      runningCompact.set(false);
+//    }
   }
 
   public void pruneEvents() {
     try {
       if (runningPruner.compareAndSet(false, true)) {
         LocalDateTime now = DateUtils.currentLocalDateTime();
-        List<Account> accounts = appContext.getAccountStore().getAll();
 
         List<Domain> domains = appContext.getDomainStore().getAll();
         for (Domain domain : domains) {

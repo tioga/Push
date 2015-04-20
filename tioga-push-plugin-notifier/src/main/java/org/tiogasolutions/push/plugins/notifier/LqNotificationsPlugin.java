@@ -5,6 +5,7 @@ import org.tiogasolutions.push.common.plugins.PluginContext;
 import org.tiogasolutions.push.common.plugins.PluginSupport;
 import org.tiogasolutions.push.common.requests.PushRequest;
 import org.tiogasolutions.push.common.system.CpCouchServer;
+import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.LqNotificationPush;
 import org.tiogasolutions.dev.common.IoUtils;
@@ -23,32 +24,32 @@ public class LqNotificationsPlugin extends PluginSupport {
     super(LqNotificationPush.PUSH_TYPE);
   }
 
-  public LqNotificationsConfigStore getConfigStore(CpCouchServer couchServer) {
+  public LqNotificationsConfigStore getConfigStore(DomainDatabaseConfig databaseConfig) {
     if (_configStore == null) {
-      _configStore = new LqNotificationsConfigStore(couchServer);
+      _configStore = new LqNotificationsConfigStore(databaseConfig);
     }
     return _configStore;
   }
 
   @Override
-  public LqNotificationsConfig getConfig(CpCouchServer couchServer, Domain domain) {
+  public LqNotificationsConfig getConfig(DomainDatabaseConfig databaseConfig, Domain domain) {
     String docId = LqNotificationsConfigStore.toDocumentId(domain);
-    return getConfigStore(couchServer).getByDocumentId(docId);
+    return getConfigStore(databaseConfig).getByDocumentId(docId);
   }
 
   @Override
   public LqNotificationsDelegate newDelegate(PluginContext context, Domain domain, PushRequest pushRequest, Push push) {
-    LqNotificationsConfig config = getConfig(context.getCouchServer(), domain);
+    LqNotificationsConfig config = getConfig(context.getDatabaseConfig(), domain);
     return new LqNotificationsDelegate(context, domain, pushRequest, (LqNotificationPush)push, config);
   }
 
   @Override
   public void deleteConfig(PluginContext pluginContext, Domain domain) {
 
-    LqNotificationsConfig config = getConfig(pluginContext.getCouchServer(), domain);
+    LqNotificationsConfig config = getConfig(pluginContext.getDatabaseConfig(), domain);
 
     if (config != null) {
-      getConfigStore(pluginContext.getCouchServer()).delete(config);
+      getConfigStore(pluginContext.getDatabaseConfig()).delete(config);
       pluginContext.setLastMessage("Notification configuration deleted.");
     } else {
       pluginContext.setLastMessage("Notification configuration doesn't exist.");
@@ -60,13 +61,13 @@ public class LqNotificationsPlugin extends PluginSupport {
 
     UpdateLqNotificationsConfigAction action = new UpdateLqNotificationsConfigAction(domain, formParams);
 
-    LqNotificationsConfig config = getConfig(pluginContext.getCouchServer(), domain);
+    LqNotificationsConfig config = getConfig(pluginContext.getDatabaseConfig(), domain);
     if (config == null) {
       config = new LqNotificationsConfig();
     }
 
     config.apply(action);
-    getConfigStore(pluginContext.getCouchServer()).update(config);
+    getConfigStore(pluginContext.getDatabaseConfig()).update(config);
 
     pluginContext.setLastMessage("Notification configuration updated.");
   }
@@ -78,7 +79,7 @@ public class LqNotificationsPlugin extends PluginSupport {
   @Override
   public String getAdminUi(PluginContext context, Domain domain) throws IOException {
 
-    LqNotificationsConfig config = getConfig(context.getCouchServer(), domain);
+    LqNotificationsConfig config = getConfig(context.getDatabaseConfig(), domain);
 
     InputStream stream = getClass().getResourceAsStream("/org/tiogasolutions/push/plugins/notifier/admin.html");
     String content = IoUtils.toString(stream);

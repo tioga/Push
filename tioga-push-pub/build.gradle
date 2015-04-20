@@ -4,7 +4,7 @@
  * This software may not be used without permission.
  */
 project(":tioga-push-pub") {
-  version = "2.0.4"
+  version = "2.0.5"
 
   apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 

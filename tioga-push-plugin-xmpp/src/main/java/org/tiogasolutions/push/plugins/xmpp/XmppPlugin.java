@@ -6,6 +6,7 @@ import org.tiogasolutions.push.common.plugins.PluginSupport;
 import org.tiogasolutions.push.common.requests.PushRequest;
 import org.tiogasolutions.push.common.system.AppContext;
 import org.tiogasolutions.push.common.system.CpCouchServer;
+import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.XmppPush;
 import org.tiogasolutions.dev.common.Formats;
@@ -25,32 +26,32 @@ public class XmppPlugin extends PluginSupport {
     super(XmppPush.PUSH_TYPE);
   }
 
-  public XmppConfigStore getConfigStore(CpCouchServer couchServer) {
+  public XmppConfigStore getConfigStore(DomainDatabaseConfig databaseConfig) {
     if (_configStore == null) {
-      _configStore = new XmppConfigStore(couchServer);
+      _configStore = new XmppConfigStore(databaseConfig);
     }
     return _configStore;
   }
 
   @Override
-  public XmppConfig getConfig(CpCouchServer couchServer, Domain domain) {
+  public XmppConfig getConfig(DomainDatabaseConfig databaseConfig, Domain domain) {
     String docId = XmppConfigStore.toDocumentId(domain);
-    return getConfigStore(couchServer).getByDocumentId(docId);
+    return getConfigStore(databaseConfig).getByDocumentId(docId);
   }
 
   @Override
   public XmppDelegate newDelegate(PluginContext context, Domain domain, PushRequest pushRequest, Push push) {
-    XmppConfig config = getConfig(context.getCouchServer(), domain);
+    XmppConfig config = getConfig(context.getDatabaseConfig(), domain);
     return new XmppDelegate(context, domain, pushRequest, (XmppPush)push, config);
   }
 
   @Override
   public void deleteConfig(PluginContext pluginContext, Domain domain) {
 
-    XmppConfig config = getConfig(pluginContext.getCouchServer(), domain);
+    XmppConfig config = getConfig(pluginContext.getDatabaseConfig(), domain);
 
     if (config != null) {
-      getConfigStore(pluginContext.getCouchServer()).delete(config);
+      getConfigStore(pluginContext.getDatabaseConfig()).delete(config);
       pluginContext.setLastMessage("XMPP configuration deleted.");
     } else {
       pluginContext.setLastMessage("XMPP configuration doesn't exist.");
@@ -62,13 +63,13 @@ public class XmppPlugin extends PluginSupport {
 
     UpdateXmppConfigAction action = new UpdateXmppConfigAction(domain, formParams);
 
-    XmppConfig xmppConfig = getConfig(pluginContext.getCouchServer(), domain);
+    XmppConfig xmppConfig = getConfig(pluginContext.getDatabaseConfig(), domain);
     if (xmppConfig == null) {
       xmppConfig = new XmppConfig();
     }
 
     xmppConfig.apply(action);
-    getConfigStore(pluginContext.getCouchServer()).update(xmppConfig);
+    getConfigStore(pluginContext.getDatabaseConfig()).update(xmppConfig);
 
     pluginContext.setLastMessage("XMPP configuration updated.");
   }
@@ -76,7 +77,7 @@ public class XmppPlugin extends PluginSupport {
   @Override
   public void test(PluginContext pluginContext, Domain domain) throws Exception {
 
-    XmppConfig config = getConfig(pluginContext.getCouchServer(), domain);
+    XmppConfig config = getConfig(pluginContext.getDatabaseConfig(), domain);
 
     if (config == null) {
       String msg = "The XMPP config has not been specified.";
@@ -113,7 +114,7 @@ public class XmppPlugin extends PluginSupport {
   @Override
   public String getAdminUi(PluginContext context, Domain domain) throws IOException {
 
-    XmppConfig config = getConfig(context.getCouchServer(), domain);
+    XmppConfig config = getConfig(context.getDatabaseConfig(), domain);
 
     InputStream stream = getClass().getResourceAsStream("/org/tiogasolutions/push/plugins/xmpp/admin.html");
     String content = IoUtils.toString(stream);

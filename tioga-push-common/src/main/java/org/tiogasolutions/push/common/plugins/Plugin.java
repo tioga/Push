@@ -4,6 +4,7 @@ import org.tiogasolutions.push.common.AbstractDelegate;
 import org.tiogasolutions.push.common.system.CpCouchServer;
 import org.tiogasolutions.push.common.clients.Domain;
 import org.tiogasolutions.push.common.requests.PushRequest;
+import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushType;
 
@@ -13,7 +14,7 @@ import java.io.IOException;
 public interface Plugin {
 
   PushType getPushType();
-  PluginConfig getConfig(CpCouchServer couchServer, Domain domain);
+  PluginConfig getConfig(DomainDatabaseConfig databaseConfig, Domain domain);
 
   byte[] getIcon(PluginContext context, Domain domain) throws IOException;
   byte[] getEnabledIcon() throws IOException;

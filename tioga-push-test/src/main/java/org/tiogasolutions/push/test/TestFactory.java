@@ -18,6 +18,7 @@ import org.tiogasolutions.push.common.requests.PushRequest;
 import org.tiogasolutions.push.common.requests.PushRequestStore;
 import org.tiogasolutions.push.common.system.AppContext;
 import org.tiogasolutions.push.common.system.CpCouchServer;
+import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
 import org.tiogasolutions.push.common.system.Session;
 import org.tiogasolutions.push.jackson.CpObjectMapper;
 import org.tiogasolutions.push.pub.common.Push;
@@ -34,20 +35,14 @@ import org.tiogasolutions.lib.couchace.support.CouchUtils;
 
 import java.net.URI;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class TestFactory {
-
-  static {
-    CpCouchServer.DATABASE_NAME = "push-tests";
-  }
 
   private static TestFactory SINGLETON;
   public static final ZoneId westCoastTimeZone = DateUtils.PDT;
 
+  private final DomainDatabaseConfig databaseConfig;
   private final CpCouchServer couchServer;
   private final CpObjectMapper objectMapper;
   private final AccountStore accountStore;
@@ -66,26 +61,31 @@ public class TestFactory {
     objectMapper = new CpObjectMapper();
 
     CouchServer server = new DefaultCouchServer();
-    CouchDatabase database = server.database(CpCouchServer.DATABASE_NAME, CouchFeatureSet.builder().add(CouchFeature.ALLOW_DB_DELETE, true).build());
-    if (database.exists()) {
-      database.deleteDatabase();
+
+
+    String sysDatabase = "test-push";
+    String usrDatabase = "test-push-domain";
+
+    for (String dbName : Arrays.asList(sysDatabase, usrDatabase)) {
+      CouchDatabase database = server.database(dbName, CouchFeatureSet.builder()
+        .add(CouchFeature.ALLOW_DB_DELETE, true)
+        .build());
+
+      if (database.exists()) {
+        database.deleteDatabase();
+      }
     }
 
     couchServer = new CpCouchServer();
-    CouchUtils.createDatabase(database);
-    CouchUtils.validateDesign(
-      database,
-      CpCouchServer.designNames,
-      CpCouchServer.prefix,
-      CpCouchServer.suffix);
+    databaseConfig = new DomainDatabaseConfig(couchServer, usrDatabase);
 
-    accountStore = new AccountStore(couchServer);
-    domainStore = new DomainStore(couchServer);
-    pushRequestStore = new PushRequestStore(couchServer);
+    accountStore = new AccountStore(couchServer, sysDatabase);
+    domainStore = new DomainStore(couchServer, sysDatabase);
+    pushRequestStore = new PushRequestStore(databaseConfig);
   }
 
-  public CpCouchServer getCouchServer() {
-    return couchServer;
+  public DomainDatabaseConfig getDatabaseConfig() {
+    return databaseConfig;
   }
 
   public CpObjectMapper getObjectMapper() {
@@ -170,8 +170,8 @@ public class TestFactory {
       @Override public CpObjectMapper getObjectMapper() {
         return testFactory.getObjectMapper();
       }
-      @Override public CpCouchServer getCouchServer() {
-        return testFactory.getCouchServer();
+      @Override public DomainDatabaseConfig getDatabaseConfig() {
+        return testFactory.getDatabaseConfig();
       }
       @Override public URI getBaseURI() {
         return URI.create("http://localhost:8080/push-server");

@@ -73,7 +73,10 @@ public class GrizzlyPushServer {
       return null;
     }
 
-    CpApplication application = new CpApplication();
+    String mainDbName = "tioga-push";
+    String domainDbName = "tioga-push-domain";
+
+    CpApplication application = new CpApplication(mainDbName, domainDbName);
     CpResourceConfig rc = new CpResourceConfig(application);
     httpServer = GrizzlyHttpServerFactory.createHttpServer(baseUri, rc);
 

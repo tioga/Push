@@ -4,7 +4,7 @@
  * This software may not be used without permission.
  */
 project(":tioga-push-server-servlet") {
-  version = "1.0.5"
+  version = "1.1.0"
 
   apply(plugin: "war")
   apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))

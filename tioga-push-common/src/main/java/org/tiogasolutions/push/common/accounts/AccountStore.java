@@ -6,12 +6,15 @@
 
 package org.tiogasolutions.push.common.accounts;
 
+import org.tiogasolutions.couchace.core.api.CouchDatabase;
+import org.tiogasolutions.lib.couchace.DefaultCouchStore;
 import org.tiogasolutions.push.common.accounts.queries.AccountEmailQuery;
 import org.tiogasolutions.push.common.accounts.queries.AccountEntityQuery;
-import org.tiogasolutions.push.common.system.CpCouchServer;
 import org.tiogasolutions.push.common.accounts.queries.AccountQuery;
+import org.tiogasolutions.push.common.system.CpCouchServer;
+import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
+import org.tiogasolutions.push.common.system.PushDomainSpecificStore;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
-import org.tiogasolutions.lib.couchace.DefaultCouchStore;
 import org.tiogasolutions.push.common.accounts.queries.AccountIdQuery;
 
 import java.util.List;
@@ -20,18 +23,21 @@ public class AccountStore extends DefaultCouchStore<Account> {
 
   public static final String ACCOUNT_DESIGN_NAME = "account";
 
-  public AccountStore(CpCouchServer couchServer) {
+  private final String databaseName;
+
+  public AccountStore(CpCouchServer couchServer, String databaseName) {
     super(couchServer, Account.class);
+    this.databaseName = databaseName;
+  }
+
+  @Override
+  public String getDatabaseName() {
+    return databaseName;
   }
 
   @Override
   public String getDesignName() {
     return ACCOUNT_DESIGN_NAME;
-  }
-
-  @Override
-  public String getDatabaseName() {
-    return CpCouchServer.DATABASE_NAME;
   }
 
   public Account get(AccountQuery accountQuery) {
@@ -70,5 +76,10 @@ public class AccountStore extends DefaultCouchStore<Account> {
     if (emailAddress == null) return null;
     List<Account> response = super.getEntities("byEmailAddress", emailAddress);
     return response.isEmpty() ? null : response.get(0);
+  }
+
+  @Override
+  public void createDatabase(CouchDatabase database) {
+    CpCouchServer.createMainDatabase(database);
   }
 }

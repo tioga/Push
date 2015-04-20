@@ -1,21 +1,16 @@
 package org.tiogasolutions.push.plugins.ses;
 
 import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.system.CpCouchServer;
-import org.tiogasolutions.lib.couchace.DefaultCouchStore;
+import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
+import org.tiogasolutions.push.common.system.PushDomainSpecificStore;
 
-public class SesEmailConfigStore extends DefaultCouchStore<SesEmailConfig> {
+public class SesEmailConfigStore extends PushDomainSpecificStore<SesEmailConfig> {
 
   public static final String SES_EMAIL_CONFIG_DESIGN_NAME = "ses-email-config";
 
 
-  public SesEmailConfigStore(CpCouchServer couchServer) {
-    super(couchServer, SesEmailConfig.class);
-  }
-
-  @Override
-  public String getDatabaseName() {
-    return CpCouchServer.DATABASE_NAME;
+  public SesEmailConfigStore(DomainDatabaseConfig databaseConfig) {
+    super(databaseConfig, SesEmailConfig.class);
   }
 
   @Override

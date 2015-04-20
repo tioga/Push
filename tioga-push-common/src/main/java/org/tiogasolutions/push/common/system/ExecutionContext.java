@@ -123,8 +123,8 @@ public class ExecutionContext implements PluginContext {
   }
 
   @Override
-  public CpCouchServer getCouchServer() {
-    return getAppContext().getCouchServer();
+  public DomainDatabaseConfig getDatabaseConfig() {
+    return getAppContext().getDatabaseConfig();
   }
 
   @Override

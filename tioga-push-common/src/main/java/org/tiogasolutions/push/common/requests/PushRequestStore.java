@@ -5,25 +5,20 @@
  */
 package org.tiogasolutions.push.common.requests;
 
-import org.tiogasolutions.push.common.system.CpCouchServer;
 import org.tiogasolutions.push.common.clients.Domain;
+import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
+import org.tiogasolutions.push.common.system.PushDomainSpecificStore;
 import org.tiogasolutions.push.pub.common.PushType;
 import org.tiogasolutions.couchace.core.api.query.CouchViewQuery;
-import org.tiogasolutions.lib.couchace.DefaultCouchStore;
 
 import java.util.List;
 
-public class PushRequestStore extends DefaultCouchStore<PushRequest> {
+public class PushRequestStore extends PushDomainSpecificStore<PushRequest> {
 
   public static final String PUSH_REQUEST_DESIGN_NAME = "push-request";
 
-  public PushRequestStore(CpCouchServer couchServer) {
-    super(couchServer, PushRequest.class);
-  }
-
-  @Override
-  public String getDatabaseName() {
-    return CpCouchServer.DATABASE_NAME;
+  public PushRequestStore(DomainDatabaseConfig databaseConfig) {
+    super(databaseConfig, PushRequest.class);
   }
 
   public PushRequest getByPushRequestId(String pushRequestId) {
@@ -56,5 +51,4 @@ public class PushRequestStore extends DefaultCouchStore<PushRequest> {
   public String getDesignName() {
     return PUSH_REQUEST_DESIGN_NAME;
   }
-
 }

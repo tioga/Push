@@ -1,17 +1,17 @@
 package org.tiogasolutions.push.common.plugins;
 
-import org.tiogasolutions.push.common.system.CpCouchServer;
-import org.tiogasolutions.push.common.system.PluginManager;
 import org.tiogasolutions.push.common.AbstractDelegate;
 import org.tiogasolutions.push.common.clients.Domain;
 import org.tiogasolutions.push.common.requests.PushRequest;
+import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
+import org.tiogasolutions.push.common.system.PluginManager;
+import org.tiogasolutions.push.pub.EmailPush;
+import org.tiogasolutions.push.pub.SesEmailPush;
+import org.tiogasolutions.push.pub.SmtpEmailPush;
 import org.tiogasolutions.push.pub.common.PingPush;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushResponse;
 import org.tiogasolutions.push.pub.common.RequestStatus;
-import org.tiogasolutions.push.pub.EmailPush;
-import org.tiogasolutions.push.pub.SesEmailPush;
-import org.tiogasolutions.push.pub.SmtpEmailPush;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -45,14 +45,14 @@ public class PushProcessor {
       // which we have to open and close the SMTP connections.
 
       EmailPush emailPush = (EmailPush)push;
-      CpCouchServer server = context.getCouchServer();
+      DomainDatabaseConfig databaseConfig = context.getDatabaseConfig();
 
-      if (PluginManager.getPlugin(SesEmailPush.PUSH_TYPE).getConfig(server, domain) != null) {
+      if (PluginManager.getPlugin(SesEmailPush.PUSH_TYPE).getConfig(databaseConfig, domain) != null) {
         // We have an SES config, use it.
         converted = true;
         push = SesEmailPush.newPush(emailPush);
 
-      } else if (PluginManager.getPlugin(SmtpEmailPush.PUSH_TYPE).getConfig(server, domain) != null) {
+      } else if (PluginManager.getPlugin(SmtpEmailPush.PUSH_TYPE).getConfig(databaseConfig, domain) != null) {
         // We have an SMTP config, use it.
         converted = true;
         push = SmtpEmailPush.newPush(emailPush);
