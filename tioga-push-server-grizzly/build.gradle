@@ -32,7 +32,7 @@ project(":tioga-push-server-grizzly") {
     doLast {
       scripts.mkdirs()
       String contents = "@echo off\r\ncls\r\n";
-      contents += "echo Starting Tioga Solution's Job Agent\r\n";
+      contents += "echo Starting Tioga Solution's Push Server\r\n";
       contents += "%JAVA_HOME%\\bin\\java.exe -jar ./lib/tioga-push-server-${project.version}.jar";
       new File(scripts, "server-start.bat").write(contents)
     }
