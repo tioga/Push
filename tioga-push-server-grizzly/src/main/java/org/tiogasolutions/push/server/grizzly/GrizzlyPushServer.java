@@ -90,7 +90,7 @@ public class GrizzlyPushServer {
         socket = new ServerSocket(shutdownPort);
         socket.setSoTimeout(socketAcceptTimeoutMilli);
 
-        String msg = String.format("%s is accepting connections on port %s from %s.", getClass().getSimpleName(), shutdownPort, socket.getInetAddress().getHostAddress());
+        String msg = String.format("%s is accepting connections on port %s from %s.", getClass().getSimpleName(), port, socket.getInetAddress().getHostAddress());
         System.out.println(msg);
 
       } catch(IOException ex) {
