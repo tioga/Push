@@ -18,8 +18,8 @@ public class GrizzlyPushServer {
 
   public String serverName = "localhost";
   private boolean shutDown = false;
-  private int port = 8080;
-  private int shutdownPort = 8005;
+  private int port = 39009;
+  private int shutdownPort = 39010;
   private String context = "push-server";
   private boolean openBrowser;
 
