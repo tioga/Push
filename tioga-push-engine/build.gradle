@@ -4,9 +4,7 @@
  * This software may not be used without permission.
  */
 project(":tioga-push-engine") {
-  version = "4.1.0"
-
-  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
+  version = tiogaAppVersion
 
   dependencies {
 
@@ -35,7 +33,7 @@ project(":tioga-push-engine") {
     compile("org.thymeleaf.extras:thymeleaf-extras-java8time:2.1.0.RELEASE")
 
     testCompile("org.testng:testng:6.8.21")
-    testCompile project(":tioga-push-test");
+    testCompile(project(":tioga-push-test"))
   }
 
   configurations.all({
@@ -50,4 +48,6 @@ project(":tioga-push-engine") {
       )
     })
   })
+
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 }

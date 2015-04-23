@@ -6,13 +6,12 @@
 project(":tioga-push-pub") {
   version = "2.0.5"
 
-  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
-
   dependencies {
   	compile ("org.tiogasolutions.dev:tioga-dev-common:+")
     compile ("com.fasterxml.jackson.core:jackson-annotations:2.5.0")
 
     testCompile ("org.testng:testng:6.8.21")
   }
-}
 
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
+}

@@ -4,9 +4,7 @@
  * This software may not be used without permission.
  */
 project(":tioga-push-plugin-twilio") {
-  version = "1.1.0"
-
-  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
+  version = tiogaAppVersion
 
   dependencies {
 
@@ -17,6 +15,7 @@ project(":tioga-push-plugin-twilio") {
 
     testCompile("org.testng:testng:6.8.21")
   }
+
   configurations.all({
     resolutionStrategy({
       force(
@@ -24,4 +23,6 @@ project(":tioga-push-plugin-twilio") {
       )
     })
   })
+
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 }

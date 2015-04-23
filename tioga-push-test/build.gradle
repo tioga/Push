@@ -4,15 +4,14 @@
  * This software may not be used without permission.
  */
 project(":tioga-push-test") {
-  version = "1.1.0"
-
-  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
+  version = "1.1.1"
 
   dependencies {
-
-    compile project(":tioga-push-common")
+    compile(project(":tioga-push-common"))
 
     testCompile("org.testng:testng:6.8.21")
   }
+
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 }
 

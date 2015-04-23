@@ -4,9 +4,7 @@
  * This software may not be used without permission.
  */
 project(":tioga-push-server-grizzly") {
-  version = "1.1.0"
-
-  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
+  version = tiogaAppVersion
 
   dependencies {
     compile project(":tioga-push-engine")
@@ -26,16 +24,15 @@ project(":tioga-push-server-grizzly") {
     })
   })
 
-  task createStartScript {
-    File scripts = file("$buildDir/scripts")
-    outputs.dir scripts
-    doLast {
-      scripts.mkdirs()
-      String contents = "@echo off\r\ncls\r\n";
-      contents += "echo Starting Tioga Solution's Push Server\r\n";
-      contents += "%JAVA_HOME%\\bin\\java.exe -jar ./lib/tioga-push-server-${project.version}.jar";
-      new File(scripts, "server-start.bat").write(contents)
-    }
+  File serverStartFile = file("$buildDir/scripts/server-start.bat");
+
+  task createStartScript << {
+    serverStartFile.parentFile.mkdirs()
+    FileWriter writer = new FileWriter(serverStartFile);
+    writer.write("@echo off\r\ncls\r\n");
+    writer.write("echo Starting application\r\n");
+    writer.write("%JAVA_HOME%\\bin\\javaw.exe -jar ./lib/${project.name}-${project.version}.jar");
+    writer.close()
   }
 
   apply plugin:'distribution'
@@ -51,7 +48,7 @@ project(":tioga-push-server-grizzly") {
           from(jar)
           from(project.configurations.runtime)
         }
-        from(createStartScript)
+        from(serverStartFile, createStartScript)
       }
     }
   }
@@ -65,4 +62,6 @@ project(":tioga-push-server-grizzly") {
       )
     }
   }
+
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 }

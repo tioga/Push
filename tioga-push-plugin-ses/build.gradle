@@ -4,13 +4,11 @@
  * This software may not be used without permission.
  */
 project(":tioga-push-plugin-ses") {
-  version = "4.1.0"
-
-  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
+  version = tiogaAppVersion
 
   dependencies {
 
-    compile project(":tioga-push-common")
+    compile(project(":tioga-push-common"))
 
     compile("com.amazonaws:aws-java-sdk:1.9.31")
 
@@ -26,4 +24,6 @@ project(":tioga-push-plugin-ses") {
       )
     })
   })
+
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 }

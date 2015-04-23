@@ -6,8 +6,6 @@
 project(":tioga-push-v1-integration-tests") {
   version = "1.0.3"
 
-  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle?"))
-
   dependencies {
     testCompile("com.cosmicpush:push-server-gateway:1.5.6"){force=true}
     testCompile("com.cosmicpush:push-server-pub:1.5.6"){force=true}
@@ -18,5 +16,7 @@ project(":tioga-push-v1-integration-tests") {
 
     testCompile("org.testng:testng:6.8.21")
   }
+
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle?"))
 }
 
