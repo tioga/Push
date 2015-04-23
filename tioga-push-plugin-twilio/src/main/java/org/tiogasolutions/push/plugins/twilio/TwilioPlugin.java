@@ -6,6 +6,7 @@
 
 package org.tiogasolutions.push.plugins.twilio;
 
+import org.tiogasolutions.push.common.PushEnvUtils;
 import org.tiogasolutions.push.common.clients.Domain;
 import org.tiogasolutions.push.common.plugins.PluginContext;
 import org.tiogasolutions.push.common.plugins.PluginSupport;
@@ -116,15 +117,15 @@ public class TwilioPlugin extends PluginSupport {
         InputStream stream = getClass().getResourceAsStream("/org/tiogasolutions/push/plugins/twilio/admin.html");
         String content = IoUtils.toString(stream);
 
-        content = content.replace("${legend-class}",              nullToString(config == null ? "no-config" : ""));
-        content = content.replace("${push-type}",                 nullToString(getPushType().getCode()));
-        content = content.replace("${domain-key}",   nullToString(domain.getDomainKey()));
-        content = content.replace("${push-server-base}",  nullToString(context.getBaseURI()));
+        content = content.replace("${legend-class}",        nullToString(config == null ? "no-config" : ""));
+        content = content.replace("${push-type}",           nullToString(getPushType().getCode()));
+        content = content.replace("${domain-key}",          nullToString(domain.getDomainKey()));
+        content = content.replace("${context-root}",        PushEnvUtils.findContextRoot());
 
         content = content.replace("${config-account-sid}",  nullToString(config == null ? null : config.getAccountSid()));
-        content = content.replace("${config-auth-token}",  nullToString(config == null ? null : config.getAuthToken()));
+        content = content.replace("${config-auth-token}",   nullToString(config == null ? null : config.getAuthToken()));
         content = content.replace("${config-from-number}",  nullToString(config == null ? null : config.getFromPhoneNumber()));
-        content = content.replace("${config-recipient}",  nullToString(config == null ? null : config.getRecipient()));
+        content = content.replace("${config-recipient}",    nullToString(config == null ? null : config.getRecipient()));
 
         if (content.contains("${")) {
             String msg = String.format("The Twilio admin UI still contains un-parsed elements.");

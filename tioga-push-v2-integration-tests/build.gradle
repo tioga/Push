@@ -4,7 +4,7 @@
  * This software may not be used without permission.
  */
 project(":tioga-push-v2-integration-tests") {
-  version = "1.1.1"
+  version = "1.1.2"
 
   dependencies {
 

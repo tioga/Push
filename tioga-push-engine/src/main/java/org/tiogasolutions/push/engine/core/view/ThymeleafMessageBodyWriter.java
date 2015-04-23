@@ -1,8 +1,10 @@
 package org.tiogasolutions.push.engine.core.view;
 
+import org.tiogasolutions.dev.common.EnvUtils;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
+import org.tiogasolutions.push.common.PushEnvUtils;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
@@ -78,8 +80,8 @@ public class ThymeleafMessageBodyWriter implements MessageBodyWriter<Thymeleaf> 
     org.thymeleaf.context.Context context = new org.thymeleaf.context.Context();
     context.setVariables(thymeleaf.getVariables());
 
-    String baseUri = StringUtils.substring(getBaseUri(), 0, -1);
-    context.setVariable("contextRoot", baseUri);
+    String contextRoot = PushEnvUtils.findContextRoot();
+    context.setVariable("contextRoot", contextRoot);
 
     StringWriter writer = new StringWriter();
     engine.process(view, context, writer);

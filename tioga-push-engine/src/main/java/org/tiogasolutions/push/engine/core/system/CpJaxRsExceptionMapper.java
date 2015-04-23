@@ -16,6 +16,6 @@ public class CpJaxRsExceptionMapper extends TiogaJaxRsExceptionMapper {
 
   @Override
   protected void logError(String msg, Throwable ex) {
-    Logger.getLogger(CpJaxRsExceptionMapper.class).fatal(msg, ex);
+    Logger.getLogger(CpJaxRsExceptionMapper.class).error(msg, ex);
   }
 }

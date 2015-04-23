@@ -1,7 +1,7 @@
 <form style="margin-top: 1em" method="post">
   <fieldset>
     <legend class="${legend-class}">
-      <img src="${push-server-base}/manage/domain/${domain-key}/icon/${push-type}" class="icon"/>
+      <img src="${context-root}/manage/domain/${domain-key}/icon/${push-type}" class="icon"/>
       <span>XMPP (Google-Talk &amp; Jabber)</span>
     </legend>
 
@@ -55,9 +55,9 @@
         </tr>
         <tr>
           <td colspan="2" style="text-align: right">
-            <button type="submit" formaction="${push-server-base}/manage/domain/${domain-key}/${push-type}" style="float:right">Update</button>
-            <button type="submit" formaction="${push-server-base}/manage/domain/${domain-key}/${push-type}/test" style="float:right; margin-right:5px">Test</button>
-            <button type="submit" formaction="${push-server-base}/manage/domain/${domain-key}/${push-type}/delete" style="float:left">Delete</button>
+            <button type="submit" formaction="${context-root}/manage/domain/${domain-key}/${push-type}" style="float:right">Update</button>
+            <button type="submit" formaction="${context-root}/manage/domain/${domain-key}/${push-type}/test" style="float:right; margin-right:5px">Test</button>
+            <button type="submit" formaction="${context-root}/manage/domain/${domain-key}/${push-type}/delete" style="float:left">Delete</button>
           </td>
         </tr>
       </tbody>
