@@ -6,6 +6,9 @@
 
 package org.tiogasolutions.push.engine.core.system;
 
+import ch.qos.logback.classic.Level;
+import org.tiogasolutions.apis.bitly.BitlyApis;
+import org.tiogasolutions.app.common.LogUtils;
 import org.tiogasolutions.push.common.system.*;
 import org.tiogasolutions.push.engine.core.jaxrs.security.SessionFilter;
 import org.tiogasolutions.push.engine.core.view.LocalResourceMessageBodyWriter;
@@ -20,9 +23,6 @@ import org.tiogasolutions.push.pub.common.PingPush;
 import org.tiogasolutions.push.pub.common.PushType;
 import org.tiogasolutions.push.pub.LqNotificationPush;
 import org.tiogasolutions.push.pub.XmppPush;
-import org.apache.log4j.Level;
-import org.tiogasolutions.apis.bitly.BitlyApis;
-import org.tiogasolutions.app.logging.LogUtils;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
 
 import javax.ws.rs.core.Application;
@@ -59,8 +59,7 @@ public class CpApplication extends Application {
     this.domainDbName = domainDbName;
 
     // Make sure our logging is working before ANYTHING else.
-    LogUtils logUtils = new LogUtils();
-    logUtils.initConsoleAppender(Level.WARN, LogUtils.DEFAULT_PATTERN);
+    LogUtils.initLogback(Level.WARN);
 
     Map<String, Object> properties = new HashMap<>();
     Set<Class<?>> classes = new HashSet<>();

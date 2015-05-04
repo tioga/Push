@@ -45,13 +45,13 @@
     <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.lib:tioga-lib-couchace:5.0.12" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.dev:tioga-dev-jackson:4.1.10" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.1.5" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-core:1.4.4" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jackson:1.4.4" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-annotations:1.4.4" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jersey:1.4.4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.dev:tioga-dev-domain:4.1.6" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.dev:tioga-dev-common:5.0.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:4.1.7" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.slf4j:slf4j-api:1.7.7" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-core:1.4.3" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jackson:1.4.3" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-annotations:1.4.3" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jersey:1.4.3" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.slf4j:slf4j-api:1.7.12" level="project" />
   </component>
 </module>
