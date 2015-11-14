@@ -2,7 +2,7 @@
   <artifact type="exploded-war" name="Gradle : org.tiogasolutions.push:tioga-push-server-servlet : tioga-push-server-servlet-4.2.2.war (exploded)">
     <output-path>$PROJECT_DIR$/build/artifacts/tioga-push-server-servlet/exploded/tioga-push-server-servlet-4.2.2.war</output-path>
     <properties id="gradle-properties">
-      <options external-project-path="$PROJECT_DIR$/tioga-push-server-servlet" />
+      <options external-project-path="$PROJECT_DIR$" />
     </properties>
     <root id="root">
       <element id="javaee-facet-resources" facet="tioga-push-server-servlet/web/Web Gradle : tioga-push-server-servlet-4.2.2.war" />
@@ -58,17 +58,11 @@
           <element id="library" level="project" name="Gradle: org.tiogasolutions.lib:tioga-lib-couchace:5.0.12" />
           <element id="library" level="project" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.1.5" />
           <element id="library" level="project" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:4.1.7" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-core:1.4.3" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jackson:1.4.3" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-annotations:1.4.3" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jersey:1.4.3" />
-          <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.12" />
           <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-ses-4.2.2.jar">
             <element id="module-output" name="tioga-push-plugin-ses" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-ses/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpclient:4.3.4" />
-          <element id="library" level="project" name="Gradle: joda-time:joda-time:2.7" />
           <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpcore:4.3.2" />
           <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.6" />
           <element id="library" level="project" name="Gradle: com.amazonaws:aws-java-sdk:1.9.31" />
@@ -151,6 +145,7 @@
           <element id="library" level="project" name="Gradle: org.thymeleaf.extras:thymeleaf-extras-java8time:2.1.0.RELEASE" />
           <element id="library" level="project" name="Gradle: javax.servlet.jsp:jsp-api:2.2.1-b03" />
           <element id="library" level="project" name="Gradle: javax.servlet:javax.servlet-api:3.1.0" />
+          <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.12" />
           <element id="library" level="project" name="Gradle: org.thymeleaf:thymeleaf:2.1.3.RELEASE" />
           <element id="library" level="project" name="Gradle: ognl:ognl:3.0.6" />
           <element id="library" level="project" name="Gradle: org.unbescape:unbescape:1.0" />
@@ -161,6 +156,11 @@
           <element id="library" level="project" name="Gradle: org.tiogasolutions.app:tioga-app-common:2.0.2" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet:2.17" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet-core:2.17" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-core/1.5.0/6b09356ea88eb2261ee1a433fafc694f2b5fe615/tioga-couchace-core-1.5.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-jackson/1.5.0/1c397ac7ab53805b85e4c08e98206c99b0ee3b13/tioga-couchace-jackson-1.5.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-annotations/1.5.0/c747deeb1902f5db678ed824558120273fd63aa7/tioga-couchace-annotations-1.5.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-jersey/1.5.0/4e5895cb8af0f5011a48eb7661d52c7ce0dcc542/tioga-couchace-jersey-1.5.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.9.1/c261495d1e01df849cdb3cbc941564018f0d3539/joda-time-2.9.1.jar" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -6,7 +6,7 @@
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <option name="MAIN_CLASS_NAME" value="org.tiogasolutions.push.server.grizzly.GrizzlyPushServer" />
+    <option name="MAIN_CLASS_NAME" value="org.tiogasolutions.push.server.grizzly.PushServer" />
     <option name="VM_PARAMETERS" value="-Dpush.server.context.root=&quot;/push-server&quot;" />
     <option name="PROGRAM_PARAMETERS" value="" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
