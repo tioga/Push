@@ -1,16 +1,10 @@
 package org.tiogasolutions.push.common.accounts;
 
 import org.tiogasolutions.couchace.core.api.CouchDatabase;
-import org.tiogasolutions.dev.common.id.TimeUuidIdGenerator;
 import org.tiogasolutions.lib.couchace.DefaultCouchStore;
-import org.tiogasolutions.lib.couchace.support.CouchUtils;
 import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.requests.PushRequestStore;
 import org.tiogasolutions.push.common.system.CpCouchServer;
-import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
-import org.tiogasolutions.push.common.system.PushDomainSpecificStore;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class DomainStore extends DefaultCouchStore<Domain> {
