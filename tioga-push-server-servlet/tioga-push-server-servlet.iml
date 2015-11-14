@@ -7,8 +7,8 @@
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
         <sourceRoots>
-          <root url="file://$MODULE_DIR$/src/main/resources" />
           <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -27,7 +27,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="tioga-push-engine" exported="" />
+    <orderEntry type="module" module-name="tioga-push-engine" />
     <orderEntry type="library" exported="" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet:2.17" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet-core:2.17" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.glassfish.jersey.core:jersey-common:2.17" level="project" />
@@ -46,5 +46,158 @@
     <orderEntry type="library" exported="" name="Gradle: org.glassfish.hk2:hk2-utils:2.4.0-b10" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.glassfish.hk2.external:aopalliance-repackaged:2.4.0-b10" level="project" />
     <orderEntry type="library" exported="" name="Gradle: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="module" module-name="tioga-push-pub" />
+    <orderEntry type="module" module-name="tioga-push-jackson" />
+    <orderEntry type="module" module-name="tioga-push-common" />
+    <orderEntry type="module" module-name="tioga-push-plugin-ses" />
+    <orderEntry type="module" module-name="tioga-push-plugin-smtp" />
+    <orderEntry type="module" module-name="tioga-push-plugin-xmpp" />
+    <orderEntry type="module" module-name="tioga-push-plugin-notifier" />
+    <orderEntry type="module" module-name="tioga-push-plugin-twilio" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.dev:tioga-dev-common:5.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.dev:tioga-dev-domain:4.1.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.apis:tioga-apis-google:2.2.9" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:4.1.7" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-servlet:4.1.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.1.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.app:tioga-app-common:2.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-simple:1.7.12" level="project" />
+    <orderEntry type="library" name="Gradle: org.thymeleaf.extras:thymeleaf-extras-java8time:2.1.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.dev:tioga-dev-jackson:4.1.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.apis:tioga-apis-bitly:1.1.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-couchace:5.0.12" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: javax.mail:mail:1.5.0-b01" level="project" />
+    <orderEntry type="library" name="Gradle: jivesoftware:smackx:3.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.twilio.sdk:twilio-java-sdk:3.8.0" level="project" />
+    <orderEntry type="library" name="Gradle: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" name="Gradle: javax.servlet.jsp:jsp-api:2.2.1-b03" level="project" />
+    <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Gradle: javax.servlet:javax.servlet-api:3.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:log4j-over-slf4j:1.7.7" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:jul-to-slf4j:1.7.7" level="project" />
+    <orderEntry type="library" name="Gradle: ch.qos.logback:logback-classic:1.1.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.12" level="project" />
+    <orderEntry type="library" name="Gradle: org.thymeleaf:thymeleaf:2.1.3.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.5.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-support:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-simpledb:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-simpleworkflow:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-storagegateway:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-route53:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-s3:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-importexport:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-sts:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-sqs:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-rds:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-redshift:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-elasticbeanstalk:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-glacier:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-iam:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-datapipeline:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-elasticloadbalancing:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-emr:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-elasticache:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-elastictranscoder:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-ec2:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-dynamodb:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-sns:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-cloudtrail:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-cloudwatch:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-logs:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-cognitoidentity:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-cognitosync:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-directconnect:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-cloudformation:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-cloudfront:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-kinesis:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-opsworks:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-ses:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-autoscaling:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-cloudsearch:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-cloudwatchmetrics:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-swf-libraries:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-codedeploy:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-kms:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-config:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-lambda:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-ecs:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-cloudhsm:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-ssm:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-workspaces:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-machinelearning:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-core:1.9.31" level="project" />
+    <orderEntry type="library" name="Gradle: javax.activation:activation:1.1" level="project" />
+    <orderEntry type="library" name="Gradle: jivesoftware:smack:3.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpclient:4.3.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpcore:4.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.googlecode.json-simple:json-simple:1.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.codehaus.jackson:jackson-core-asl:1.9.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.codehaus.jackson:jackson-mapper-asl:1.9.3" level="project" />
+    <orderEntry type="library" name="Gradle: ch.qos.logback:logback-core:1.1.3" level="project" />
+    <orderEntry type="library" name="Gradle: ognl:ognl:3.0.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.unbescape:unbescape:1.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.5.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.glassfish.jersey.media:jersey-media-multipart:2.17" level="project" />
+    <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.jvnet.mimepull:mimepull:1.9.3" level="project" />
+    <orderEntry type="module-library">
+      <library name="Gradle: org.tiogasolutions.couchace:tioga-couchace-core:1.5.0">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-core/1.5.0/6b09356ea88eb2261ee1a433fafc694f2b5fe615/tioga-couchace-core-1.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-core/1.5.0/c7cf1e91fee282acd5a12defc9fc5b93c48f1bc8/tioga-couchace-core-1.5.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jackson:1.5.0">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-jackson/1.5.0/1c397ac7ab53805b85e4c08e98206c99b0ee3b13/tioga-couchace-jackson-1.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-jackson/1.5.0/87eed5c00379cb5fd5c18ed52b5fcf7ce2392208/tioga-couchace-jackson-1.5.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: org.tiogasolutions.couchace:tioga-couchace-annotations:1.5.0">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-annotations/1.5.0/c747deeb1902f5db678ed824558120273fd63aa7/tioga-couchace-annotations-1.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-annotations/1.5.0/7405999b9086e78db4969dfe5f7f98e9a9788a9f/tioga-couchace-annotations-1.5.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jersey:1.5.0">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-jersey/1.5.0/4e5895cb8af0f5011a48eb7661d52c7ce0dcc542/tioga-couchace-jersey-1.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-jersey/1.5.0/d3c30a4bbe71c98d73dde74f97d08193d3efad3/tioga-couchace-jersey-1.5.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: joda-time:joda-time:2.9.1">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.9.1/c261495d1e01df849cdb3cbc941564018f0d3539/joda-time-2.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.9.1/5c411f8667d0064a7fb780c0948ee2b829bb2ebe/joda-time-2.9.1-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
