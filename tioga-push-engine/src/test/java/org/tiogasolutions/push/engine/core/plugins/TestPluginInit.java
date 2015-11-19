@@ -1,6 +1,6 @@
 package org.tiogasolutions.push.engine.core.plugins;
 
-import org.tiogasolutions.push.common.plugins.Plugin;
+import org.tiogasolutions.push.kernel.plugins.Plugin;
 import java.util.ServiceLoader;
 import org.testng.annotations.Test;
 

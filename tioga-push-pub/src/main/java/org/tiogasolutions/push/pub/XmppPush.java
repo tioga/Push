@@ -16,21 +16,19 @@
 
 package org.tiogasolutions.push.pub;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.tiogasolutions.dev.common.BeanUtils;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushType;
 import org.tiogasolutions.push.pub.internal.PushUtils;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.push.pub.internal.ValidationUtils;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.tiogasolutions.dev.common.BeanUtils;
 
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@JsonIgnoreProperties({"imType"}) // For V1 compatibility
 public class XmppPush implements Push, Serializable {
 
   public static PushType PUSH_TYPE = new PushType(XmppPush.class, "xmpp", "XMPP");

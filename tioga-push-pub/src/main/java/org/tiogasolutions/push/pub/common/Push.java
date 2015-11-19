@@ -23,6 +23,8 @@ import java.util.Map;
 
 public interface Push extends ValidatableAction {
 
+  int CURRENT_API_VERSION = 2;
+
   String getCallbackUrl();
 
   @JsonIgnore

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--suppress SpringFacetInspection -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-2.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+  <task:annotation-driven/>
+
+  <context:property-placeholder properties-ref="envProperties"/>
+  <util:properties id="envProperties">
+    <prop key="push.runtime.dir">../runtime</prop>
+    <prop key="system.config.accessControlAllowOrigin">*</prop>
+  </util:properties>
+
+  <bean id="objectMapper" class="org.tiogasolutions.push.jackson.CpObjectMapper"/>
+
+  <bean id="tiogaJacksonTranslator" class="org.tiogasolutions.dev.jackson.TiogaJacksonTranslator">
+    <constructor-arg ref="objectMapper"/>
+  </bean>
+
+  <bean id="bitlyApis" class="org.tiogasolutions.apis.bitly.BitlyApis">
+    <constructor-arg ref="tiogaJacksonTranslator"/>
+    <constructor-arg value="9f5ed9c08c695b4a017bfb432eea58876a5d40cb"/>
+  </bean>
+
+  <bean id="sessionStore" class="org.tiogasolutions.push.kernel.system.SessionStore">
+    <constructor-arg value="3600000"/>
+  </bean>
+
+  <bean class="org.tiogasolutions.runners.grizzly.GrizzlyServerConfig"
+        p:hostName="localhost"
+        p:port="39009"
+        p:shutdownPort="39010"
+        p:context="push-server"
+        p:toOpenBrowser="true"/>
+
+  <bean class="org.tiogasolutions.push.kernel.config.CouchServersConfig"
+    p:masterUrl="http://localhost:5984"
+    p:masterUserName="app-user"
+    p:masterPassword="app-user"
+    p:masterDatabaseName="push"
+
+    p:domainUrl="http://localhost:5984"
+    p:domainUserName="app-user"
+    p:domainPassword="app-user"
+    p:domainDatabasePrefix="push-"
+  />
+
+  <!--<bean class="org.tiogasolutions.notify.kernel.config.SystemConfiguration">-->
+    <!--<property name="accessControlAllowOrigin" value="${system.config.accessControlAllowOrigin}"/>-->
+  <!--</bean>-->
+
+  <context:component-scan base-package="org.tiogasolutions.push"/>
+
+</beans>

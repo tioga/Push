@@ -1,8 +1,14 @@
 package org.tiogasolutions.push.jackson;
 
-import com.fasterxml.jackson.databind.*;
-import java.util.*;
-import org.tiogasolutions.dev.jackson.*;
+import com.fasterxml.jackson.databind.Module;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.tiogasolutions.dev.jackson.TiogaJacksonInjectable;
+import org.tiogasolutions.dev.jackson.TiogaJacksonModule;
+import org.tiogasolutions.dev.jackson.TiogaJacksonObjectMapper;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 public class CpObjectMapper extends TiogaJacksonObjectMapper {
 

@@ -6,11 +6,11 @@
 
 package org.tiogasolutions.push.engine.core.accounts;
 
-import org.tiogasolutions.push.common.accounts.Account;
-import org.tiogasolutions.push.common.accounts.AccountStore;
+import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.accounts.AccountStore;
 import org.tiogasolutions.dev.common.IoUtils;
 import org.tiogasolutions.dev.common.exceptions.ApiException;
-import org.tiogasolutions.push.common.accounts.actions.*;
+import org.tiogasolutions.push.kernel.accounts.actions.*;
 
 import java.net.URL;
 

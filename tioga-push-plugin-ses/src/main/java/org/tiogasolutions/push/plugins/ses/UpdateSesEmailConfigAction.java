@@ -6,7 +6,7 @@
 
 package org.tiogasolutions.push.plugins.ses;
 
-import org.tiogasolutions.push.common.clients.Domain;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.push.pub.internal.ValidatableAction;
 import org.tiogasolutions.push.pub.internal.ValidationUtils;
@@ -15,7 +15,7 @@ import javax.ws.rs.core.MultivaluedMap;
 
 public class UpdateSesEmailConfigAction implements ValidatableAction {
 
-  private final Domain domain;
+  private final DomainProfileEntity domain;
 
   private String accessKeyId;
   private String secretKey;
@@ -24,7 +24,7 @@ public class UpdateSesEmailConfigAction implements ValidatableAction {
   private String testToAddress;
   private String testFromAddress;
 
-  public UpdateSesEmailConfigAction(Domain domain, MultivaluedMap<String, String> formParams) {
+  public UpdateSesEmailConfigAction(DomainProfileEntity domain, MultivaluedMap<String, String> formParams) {
 
     this.domain = domain;
 
@@ -37,7 +37,7 @@ public class UpdateSesEmailConfigAction implements ValidatableAction {
     this.recipientOverride = formParams.getFirst("recipientOverride");
   }
 
-  public UpdateSesEmailConfigAction(Domain domain, String accessKeyId, String secretKey, String endpoint, String testToAddress, String testFromAddress, String recipientOverride) {
+  public UpdateSesEmailConfigAction(DomainProfileEntity domain, String accessKeyId, String secretKey, String endpoint, String testToAddress, String testFromAddress, String recipientOverride) {
 
     this.domain = domain;
 
@@ -60,7 +60,7 @@ public class UpdateSesEmailConfigAction implements ValidatableAction {
     return errors;
   }
 
-  public Domain getDomain() {
+  public DomainProfileEntity getDomain() {
     return domain;
   }
 

@@ -1,6 +1,6 @@
 package org.tiogasolutions.push.plugins.twilio;
 
-import org.tiogasolutions.push.common.clients.Domain;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.push.pub.internal.ValidatableAction;
 import org.tiogasolutions.push.pub.internal.ValidationUtils;
@@ -9,13 +9,13 @@ import javax.ws.rs.core.MultivaluedMap;
 
 public class UpdateTwilioConfigAction implements ValidatableAction {
 
-    private final Domain domain;
+    private final DomainProfileEntity domain;
     private final String accountSid;
     private final String authToken;
     private final String fromPhoneNumber;
     private final String recipient;
 
-    public UpdateTwilioConfigAction(Domain domain, MultivaluedMap<String, String> formParams) {
+    public UpdateTwilioConfigAction(DomainProfileEntity domain, MultivaluedMap<String, String> formParams) {
 
         this.domain = domain;
 
@@ -26,7 +26,7 @@ public class UpdateTwilioConfigAction implements ValidatableAction {
         this.recipient = formParams.getFirst("recipient");
     }
 
-    public UpdateTwilioConfigAction(Domain domain, String accountSid, String authToken, String fromPhoneNumber, String recipient) {
+    public UpdateTwilioConfigAction(DomainProfileEntity domain, String accountSid, String authToken, String fromPhoneNumber, String recipient) {
         this.domain = domain;
         this.accountSid = accountSid;
         this.authToken = authToken;
@@ -46,7 +46,7 @@ public class UpdateTwilioConfigAction implements ValidatableAction {
     }
 
 
-    public Domain getDomain() {
+    public DomainProfileEntity getDomain() {
         return domain;
     }
 

@@ -1,10 +1,8 @@
 package org.tiogasolutions.push.engine.core.view;
 
-import org.tiogasolutions.dev.common.EnvUtils;
-import org.tiogasolutions.dev.common.StringUtils;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
-import org.tiogasolutions.push.common.PushEnvUtils;
+import org.tiogasolutions.push.kernel.KernelUtils;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
@@ -12,18 +10,21 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.MessageBodyWriter;
+import javax.ws.rs.ext.Provider;
 import java.io.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 
+@Provider
 public class ThymeleafMessageBodyWriter implements MessageBodyWriter<Thymeleaf> {
 
-  UriInfo uriInfo;
+  @Context
+  private UriInfo uriInfo;
+
   private final TemplateEngine engine;
 
-  public ThymeleafMessageBodyWriter(@Context UriInfo uriInfo) {
-    this.uriInfo = uriInfo;
+  public ThymeleafMessageBodyWriter() {
 
     ClassPathTemplateResolver templateResolver = new ClassPathTemplateResolver();
     templateResolver.setTemplateMode("HTML5");
@@ -80,7 +81,7 @@ public class ThymeleafMessageBodyWriter implements MessageBodyWriter<Thymeleaf> 
     org.thymeleaf.context.Context context = new org.thymeleaf.context.Context();
     context.setVariables(thymeleaf.getVariables());
 
-    String contextRoot = PushEnvUtils.findContextRoot();
+    String contextRoot = KernelUtils.getContextRoot(uriInfo);
     context.setVariable("contextRoot", contextRoot);
 
     StringWriter writer = new StringWriter();

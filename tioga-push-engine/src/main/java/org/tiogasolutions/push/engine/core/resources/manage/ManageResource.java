@@ -6,29 +6,38 @@
 
 package org.tiogasolutions.push.engine.core.resources.manage;
 
-import org.tiogasolutions.push.common.system.ExecutionContext;
-import org.tiogasolutions.push.engine.core.jaxrs.security.MngtAuthentication;
-import org.tiogasolutions.push.engine.core.resources.manage.client.ManageDomainResource;
-import org.tiogasolutions.push.engine.core.system.CpApplication;
-import org.tiogasolutions.push.engine.core.resources.manage.account.ManageAccountResource;
-import org.tiogasolutions.push.common.actions.CreateDomainAction;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.plugins.Plugin;
-import org.tiogasolutions.push.common.system.PluginManager;
-import org.tiogasolutions.push.pub.common.PushType;
 import org.tiogasolutions.dev.common.exceptions.ApiException;
+import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
 import org.tiogasolutions.dev.common.net.InetMediaType;
+import org.tiogasolutions.push.engine.core.jaxrs.security.MngtAuthentication;
+import org.tiogasolutions.push.engine.core.resources.manage.account.ManageAccountResource;
+import org.tiogasolutions.push.engine.core.resources.manage.client.ManageDomainResource;
+import org.tiogasolutions.push.kernel.actions.CreateDomainAction;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.execution.ExecutionManager;
+import org.tiogasolutions.push.kernel.plugins.Plugin;
+import org.tiogasolutions.push.kernel.system.PluginManager;
+import org.tiogasolutions.push.kernel.system.SessionStore;
+import org.tiogasolutions.push.pub.common.PushType;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 
 @MngtAuthentication
 public class ManageResource {
 
-  private final ExecutionContext execContext = CpApplication.getExecutionContext();
+  private final UriInfo uriInfo;
+  private final SessionStore sessionStore;
+  private final PluginManager pluginManager;
+  private final ExecutionManager executionManager;
 
-  public ManageResource() {
+  public ManageResource(ExecutionManager executionManager, SessionStore sessionStore, PluginManager pluginManager, UriInfo uriInfo) {
+    this.uriInfo = uriInfo;
+    this.sessionStore = sessionStore;
+    this.pluginManager = pluginManager;
+    this.executionManager = executionManager;
   }
 
   @GET
@@ -41,7 +50,7 @@ public class ManageResource {
   @Path("/{pushType}/icon-enabled")
   public Response getEnabledIcon(@PathParam("pushType") PushType pushType) throws Exception {
 
-    Plugin plugin = PluginManager.getPlugin(pushType);
+    Plugin plugin = pluginManager.getPlugin(pushType);
     byte[] bytes = plugin.getEnabledIcon();
 
     return Response.ok(bytes, InetMediaType.IMAGE_PNG_VALUE).build();
@@ -52,7 +61,7 @@ public class ManageResource {
   @Path("/{pushType}/icon-disabled")
   public Response getDisabledIcon(@PathParam("pushType") PushType pushType) throws Exception {
 
-    Plugin plugin = PluginManager.getPlugin(pushType);
+    Plugin plugin = pluginManager.getPlugin(pushType);
     byte[] bytes = plugin.getDisabledIcon();
 
     return Response.ok(bytes, InetMediaType.IMAGE_PNG_VALUE).build();
@@ -60,28 +69,35 @@ public class ManageResource {
 
   @Path("/account")
   public ManageAccountResource getManageAccountResource() {
-    return new ManageAccountResource(execContext.getAccount());
+    return new ManageAccountResource(executionManager, pluginManager, sessionStore);
   }
 
   @Path("/domain/{domainKey}")
   public ManageDomainResource getManageDomainResource(@PathParam("domainKey") String domainKey) throws Exception {
-    return new ManageDomainResource(domainKey);
+    return new ManageDomainResource(executionManager, pluginManager, domainKey);
   }
 
   @POST
   @Path("/domain")
   public Response createDomain(@FormParam("domainKey") String domainKey, @FormParam("domainPassword") String domainPassword) throws Exception {
+    domainKey = ExceptionUtils.assertNotNull(domainKey, "domainKey").toLowerCase();
 
-    if (execContext.getDomainStore().getByDomainKey(domainKey) != null) {
+    if (executionManager.context().getDomainStore().getByDomainKey(domainKey) != null) {
       throw ApiException.badRequest(String.format("The domain \"%s\" already exists.", domainKey));
     }
 
-    CreateDomainAction action = new CreateDomainAction(execContext.getAccount(), domainKey, domainPassword);
+    CreateDomainAction action = new CreateDomainAction(executionManager.context().getAccount(), domainKey, domainPassword);
 
-    Domain domain = execContext.getAccount().add(action);
-    execContext.getDomainStore().create(domain);
-    execContext.getAccountStore().update(execContext.getAccount());
+    DomainProfileEntity domain = executionManager.context().getAccount().add(action);
+    executionManager.context().getDomainStore().create(domain);
+    executionManager.context().getAccountStore().update(executionManager.context().getAccount());
 
-    return Response.seeOther(new URI("manage/domain/"+domain.getDomainKey())).build();
+    // Create a context for our new domain.
+    executionManager.newContext(uriInfo).setDomain(domain);
+    // Forces creation of domain-specific database.
+    executionManager.context().getPushRequestStore().getDatabase();
+
+    URI uri = uriInfo.getBaseUriBuilder().path("manage").path("domain").path(domainKey).build();
+    return Response.seeOther(uri).build();
   }
 }

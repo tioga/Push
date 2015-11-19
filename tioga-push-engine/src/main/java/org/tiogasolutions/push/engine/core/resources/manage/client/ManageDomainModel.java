@@ -6,32 +6,34 @@
 
 package org.tiogasolutions.push.engine.core.resources.manage.client;
 
-import org.tiogasolutions.push.common.accounts.Account;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.plugins.Plugin;
-import org.tiogasolutions.push.common.plugins.PluginContext;
-import org.tiogasolutions.push.common.system.PluginManager;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.execution.ExecutionContext;
+import org.tiogasolutions.push.kernel.execution.ExecutionManager;
+import org.tiogasolutions.push.kernel.plugins.Plugin;
+import org.tiogasolutions.push.kernel.system.PluginManager;
+
 import java.io.IOException;
-import java.util.*;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class ManageDomainModel {
 
-  private final Domain domain;
   private final String message;
+  private final ExecutionContext executionContext;
 
   private final Set<PluginModel> plugins = new TreeSet<>();
 
-  public ManageDomainModel(PluginContext pluginContext, Account account, Domain domain, String message) throws IOException {
+  public ManageDomainModel(ExecutionManager executionManager, DomainProfileEntity domainProfile, PluginManager pluginManager, String message) throws IOException {
     this.message = message;
-    this.domain = domain;
+    this.executionContext = executionManager.context();
 
-    for (Plugin plugin : PluginManager.getPlugins()) {
-      plugins.add(new PluginModel(pluginContext, plugin, account, domain));
+    for (Plugin plugin : pluginManager.getPlugins()) {
+      plugins.add(new PluginModel(domainProfile, plugin));
     }
   }
 
-  public Domain getDomain() {
-    return domain;
+  public DomainProfileEntity getDomain() {
+    return executionContext.getDomain();
   }
 
   public String getMessage() {

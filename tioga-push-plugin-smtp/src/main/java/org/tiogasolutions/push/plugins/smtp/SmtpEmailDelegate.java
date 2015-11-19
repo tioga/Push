@@ -6,31 +6,25 @@
 
 package org.tiogasolutions.push.plugins.smtp;
 
-import org.tiogasolutions.push.common.AbstractDelegate;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.plugins.PluginContext;
-import org.tiogasolutions.push.common.requests.PushRequest;
-import org.tiogasolutions.push.common.system.AppContext;
-import org.tiogasolutions.push.pub.common.RequestStatus;
-import org.tiogasolutions.push.pub.SmtpEmailPush;
+import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
 import org.tiogasolutions.dev.domain.comm.AuthenticationMethod;
+import org.tiogasolutions.push.kernel.AbstractDelegate;
+import org.tiogasolutions.push.kernel.execution.ExecutionContext;
+import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.pub.SmtpEmailPush;
+import org.tiogasolutions.push.pub.common.RequestStatus;
 
 public class SmtpEmailDelegate extends AbstractDelegate {
 
-  private final Domain domain;
-
   private final SmtpEmailPush push;
   private final SmtpEmailConfig config;
-  private final AppContext appContext;
 
-  public SmtpEmailDelegate(PluginContext pluginContext, Domain domain, PushRequest pushRequest, SmtpEmailPush push, SmtpEmailConfig config) {
-    super(pluginContext, pushRequest);
+  public SmtpEmailDelegate(ExecutionContext executionContext, PushRequest pushRequest, SmtpEmailPush push, SmtpEmailConfig config) {
+    super(executionContext, pushRequest);
     this.push = ExceptionUtils.assertNotNull(push, "push");
     this.config = ExceptionUtils.assertNotNull(config, "config");
-    this.domain = ExceptionUtils.assertNotNull(domain, "domain");
-    this.appContext = pluginContext.getAppContext();
   }
 
   @Override
@@ -71,7 +65,8 @@ public class SmtpEmailDelegate extends AbstractDelegate {
     message.setFrom(push.getFromAddress());
 
     String subject = push.getEmailSubject();
-    subject = appContext.getBitlyApi().parseAndShorten(subject);
+    BitlyApis bitlyApis = executionContext.getBean(BitlyApis.class);
+    subject = bitlyApis.parseAndShorten(subject);
 
     message.send(subject, null, push.getHtmlContent());
 

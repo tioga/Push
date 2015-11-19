@@ -1,15 +1,15 @@
 package org.tiogasolutions.push.pub;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.tiogasolutions.dev.common.BeanUtils;
+import org.tiogasolutions.dev.common.ReflectUtils;
+import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.push.pub.common.CommonEmail;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushType;
 import org.tiogasolutions.push.pub.internal.PushUtils;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.push.pub.internal.ValidationUtils;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.tiogasolutions.dev.common.BeanUtils;
-import org.tiogasolutions.dev.common.ReflectUtils;
-import org.tiogasolutions.dev.common.StringUtils;
 
 import java.io.Serializable;
 import java.net.InetAddress;
@@ -136,18 +136,5 @@ public class SesEmailPush implements CommonEmail, Push, Serializable {
 
     InetAddress remoteAddress = PushUtils.getLocalHost();
     return new SesEmailPush(toAddress, fromAddress, emailSubject, htmlContent, callbackUrl, remoteAddress.getCanonicalHostName(), remoteAddress.getHostAddress(), traits);
-  }
-
-  public static SesEmailPush newPush(EmailPush emailPush) {
-    return new SesEmailPush(
-      emailPush.getToAddress(),
-      emailPush.getFromAddress(),
-      emailPush.getEmailSubject(),
-      emailPush.getHtmlContent(),
-      emailPush.getCallbackUrl(),
-      emailPush.getRemoteHost(),
-      emailPush.getRemoteAddress(),
-      emailPush.getTraits()
-    );
   }
 }

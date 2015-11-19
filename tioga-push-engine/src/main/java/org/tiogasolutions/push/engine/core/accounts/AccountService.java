@@ -6,8 +6,8 @@
 
 package org.tiogasolutions.push.engine.core.accounts;
 
-import org.tiogasolutions.push.common.accounts.queries.AccountQuery;
-import org.tiogasolutions.push.common.accounts.Account;
+import org.tiogasolutions.push.kernel.accounts.queries.AccountQuery;
+import org.tiogasolutions.push.kernel.accounts.Account;
 
 public interface AccountService {
   Account execute(AccountQuery query);

@@ -1,0 +1,22 @@
+/*
+ * Copyright (c) 2014 Jacob D. Parr
+ *
+ * This software may not be used without permission.
+ */
+project(":tioga-push-kernel") {
+  version = tiogaAppVersion
+
+  dependencies {
+
+    compile project(":tioga-push-jackson")
+
+    compile("org.tiogasolutions.apis:tioga-apis-bitly:+")
+    compile("org.tiogasolutions.lib:tioga-lib-couchace:+")
+
+    compile("org.springframework:spring-context:4.1.6.RELEASE")
+
+    testCompile ("org.testng:testng:6.8.21")
+  }
+
+  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
+}

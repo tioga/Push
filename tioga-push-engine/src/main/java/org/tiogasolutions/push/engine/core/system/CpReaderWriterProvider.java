@@ -5,17 +5,15 @@
  */
 package org.tiogasolutions.push.engine.core.system;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.tiogasolutions.lib.jaxrs.jackson.JacksonReaderWriterProvider;
-import org.tiogasolutions.push.common.system.AppContext;
-import org.tiogasolutions.push.engine.core.resources.api.ApiResourceV1;
+import org.tiogasolutions.push.jackson.CpObjectMapper;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushResponse;
 import org.tiogasolutions.push.pub.common.UserAgent;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import static java.util.Collections.singletonList;
@@ -24,11 +22,11 @@ import static java.util.Collections.singletonList;
 @Produces(MediaType.APPLICATION_JSON)
 public class CpReaderWriterProvider extends JacksonReaderWriterProvider {
 
-  public CpReaderWriterProvider(@Context Application application) {
-    super(AppContext.from(application).getObjectMapper(), singletonList(MediaType.APPLICATION_JSON_TYPE));
+  @Autowired
+  public CpReaderWriterProvider(CpObjectMapper objectMapper) {
+    super(objectMapper, singletonList(MediaType.APPLICATION_JSON_TYPE));
     addSupportedType(Push.class);
     addSupportedType(UserAgent.class);
     addSupportedType(PushResponse.class);
-    addSupportedType(ApiResourceV1.PushResponseV1.class);
   }
 }

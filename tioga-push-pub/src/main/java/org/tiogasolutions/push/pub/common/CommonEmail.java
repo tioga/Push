@@ -17,4 +17,5 @@ public interface CommonEmail {
 
   public String getCallbackUrl();
   public Map<String, String> getTraits();
+
 }

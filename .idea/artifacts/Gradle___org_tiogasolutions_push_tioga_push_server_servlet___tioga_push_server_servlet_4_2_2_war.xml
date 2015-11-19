@@ -21,7 +21,10 @@
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-pub/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.5.0" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.dev:tioga-dev-common:5.0.1" />
+          <element id="library" level="project" name="Gradle: org.slf4j:log4j-over-slf4j:1.7.7" />
+          <element id="library" level="project" name="Gradle: org.slf4j:jul-to-slf4j:1.7.7" />
+          <element id="library" level="project" name="Gradle: ch.qos.logback:logback-classic:1.1.3" />
+          <element id="library" level="project" name="Gradle: ch.qos.logback:logback-core:1.1.3" />
           <element id="archive" name="org.tiogasolutions.push-tioga-push-jackson-4.0.6.jar">
             <element id="module-output" name="tioga-push-jackson" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-jackson/build/resources/main" />
@@ -29,35 +32,29 @@
           <element id="library" level="project" name="Gradle: javax.validation:validation-api:1.1.0.Final" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.5.1" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.5.1" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.dev:tioga-dev-jackson:4.1.10" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.dev:tioga-dev-domain:4.1.6" />
-          <element id="archive" name="org.tiogasolutions.push-tioga-push-common-4.2.2.jar">
-            <element id="module-output" name="tioga-push-common" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-common/build/resources/main" />
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-kernel-4.2.2.jar">
+            <element id="module-output" name="tioga-push-kernel" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-kernel/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
-          <element id="library" level="project" name="Gradle: javax.ws.rs:javax.ws.rs-api:2.0.1" />
-          <element id="library" level="project" name="Gradle: javax.annotation:javax.annotation-api:1.2" />
-          <element id="library" level="project" name="Gradle: org.glassfish.hk2:osgi-resource-locator:1.0.1" />
-          <element id="library" level="project" name="Gradle: org.jvnet.mimepull:mimepull:1.9.3" />
-          <element id="library" level="project" name="Gradle: org.javassist:javassist:3.18.1-GA" />
-          <element id="library" level="project" name="Gradle: javax.inject:javax.inject:1" />
+          <element id="library" level="project" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.2" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.core:jersey-common:2.17" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.core:jersey-server:2.17" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.media:jersey-media-multipart:2.17" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.core:jersey-client:2.17" />
+          <element id="library" level="project" name="Gradle: javax.ws.rs:javax.ws.rs-api:2.0.1" />
+          <element id="library" level="project" name="Gradle: javax.annotation:javax.annotation-api:1.2" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.bundles.repackaged:jersey-guava:2.17" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-api:2.4.0-b10" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:javax.inject:2.4.0-b10" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-locator:2.4.0-b10" />
+          <element id="library" level="project" name="Gradle: org.glassfish.hk2:osgi-resource-locator:1.0.1" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.media:jersey-media-jaxb:2.17" />
+          <element id="library" level="project" name="Gradle: org.jvnet.mimepull:mimepull:1.9.3" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-utils:2.4.0-b10" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:aopalliance-repackaged:2.4.0-b10" />
-          <element id="library" level="project" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.2" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.apis:tioga-apis-bitly:1.1.11" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.lib:tioga-lib-couchace:5.0.12" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.1.5" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:4.1.7" />
+          <element id="library" level="project" name="Gradle: org.javassist:javassist:3.18.1-GA" />
+          <element id="library" level="project" name="Gradle: javax.inject:javax.inject:1" />
           <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-ses-4.2.2.jar">
             <element id="module-output" name="tioga-push-plugin-ses" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-ses/build/resources/main" />
@@ -125,10 +122,6 @@
           </element>
           <element id="library" level="project" name="Gradle: jivesoftware:smackx:3.1.0" />
           <element id="library" level="project" name="Gradle: jivesoftware:smack:3.1.0" />
-          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-notifier-4.2.2.jar">
-            <element id="module-output" name="tioga-push-plugin-notifier" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-notifier/build/resources/main" />
-          </element>
           <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-twilio-4.2.2.jar">
             <element id="module-output" name="tioga-push-plugin-twilio" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-twilio/build/resources/main" />
@@ -139,8 +132,6 @@
           <element id="library" level="project" name="Gradle: com.googlecode.json-simple:json-simple:1.1" />
           <element id="library" level="project" name="Gradle: org.codehaus.jackson:jackson-core-asl:1.9.3" />
           <element id="library" level="project" name="Gradle: org.codehaus.jackson:jackson-mapper-asl:1.9.3" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.apis:tioga-apis-google:2.2.9" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.lib:tioga-lib-servlet:4.1.5" />
           <element id="library" level="project" name="Gradle: org.slf4j:slf4j-simple:1.7.12" />
           <element id="library" level="project" name="Gradle: org.thymeleaf.extras:thymeleaf-extras-java8time:2.1.0.RELEASE" />
           <element id="library" level="project" name="Gradle: javax.servlet.jsp:jsp-api:2.2.1-b03" />
@@ -149,17 +140,28 @@
           <element id="library" level="project" name="Gradle: org.thymeleaf:thymeleaf:2.1.3.RELEASE" />
           <element id="library" level="project" name="Gradle: ognl:ognl:3.0.6" />
           <element id="library" level="project" name="Gradle: org.unbescape:unbescape:1.0" />
-          <element id="library" level="project" name="Gradle: org.slf4j:log4j-over-slf4j:1.7.7" />
-          <element id="library" level="project" name="Gradle: org.slf4j:jul-to-slf4j:1.7.7" />
-          <element id="library" level="project" name="Gradle: ch.qos.logback:logback-classic:1.1.3" />
-          <element id="library" level="project" name="Gradle: ch.qos.logback:logback-core:1.1.3" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.app:tioga-app-common:2.0.2" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet:2.17" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet-core:2.17" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-common/5.0.2/tioga-dev-common-5.0.2.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-domain/4.1.7/tioga-dev-domain-4.1.7.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/apis/tioga-apis-google/2.2.10/tioga-apis-google-2.2.10.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs/4.1.8/tioga-lib-jaxrs-4.1.8.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-servlet/4.1.6/tioga-lib-servlet-4.1.6.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs-jackson/5.1.6/tioga-lib-jaxrs-jackson-5.1.6.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/app/tioga-app-common/2.0.3/tioga-app-common-2.0.3.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-jackson/4.1.11/tioga-dev-jackson-4.1.11.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/apis/tioga-apis-bitly/1.1.12/tioga-apis-bitly-1.1.12.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-couchace/5.0.13/tioga-lib-couchace-5.0.13.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.1.6.RELEASE/15f0b22bf89ed468badbc4eec759af2b916d33e4/spring-context-4.1.6.RELEASE.jar" />
           <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-core/1.5.0/6b09356ea88eb2261ee1a433fafc694f2b5fe615/tioga-couchace-core-1.5.0.jar" />
           <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-jackson/1.5.0/1c397ac7ab53805b85e4c08e98206c99b0ee3b13/tioga-couchace-jackson-1.5.0.jar" />
           <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-annotations/1.5.0/c747deeb1902f5db678ed824558120273fd63aa7/tioga-couchace-annotations-1.5.0.jar" />
           <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-jersey/1.5.0/4e5895cb8af0f5011a48eb7661d52c7ce0dcc542/tioga-couchace-jersey-1.5.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.1.6.RELEASE/686c13ba57d9423dede9c5d580dcadc5c67a2761/spring-aop-4.1.6.RELEASE.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.1.6.RELEASE/ce2d409d470948f11fad41ffdf37dcff4d28cd7c/spring-beans-4.1.6.RELEASE.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.1.6.RELEASE/e2f486124d5dea2d91a9c2ea7d4456bc343ca2cc/spring-core-4.1.6.RELEASE.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.1.6.RELEASE/8bf70887c2c883a6f6e552dbe46eec35c07adf6a/spring-expression-4.1.6.RELEASE.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/aopalliance/aopalliance/1.0/235ba8b489512805ac13a8f9ea77a1ca5ebe3e8/aopalliance-1.0.jar" />
           <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.9.1/c261495d1e01df849cdb3cbc941564018f0d3539/joda-time-2.9.1.jar" />
         </element>
       </element>

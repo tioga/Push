@@ -1,16 +1,16 @@
 package org.tiogasolutions.push.plugins.ses;
 
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
-import org.tiogasolutions.push.common.system.PushDomainSpecificStore;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.execution.ExecutionManager;
+import org.tiogasolutions.push.kernel.system.DomainSpecificStore;
 
-public class SesEmailConfigStore extends PushDomainSpecificStore<SesEmailConfig> {
+public class SesEmailConfigStore extends DomainSpecificStore<SesEmailConfig> {
 
   public static final String SES_EMAIL_CONFIG_DESIGN_NAME = "ses-email-config";
 
 
-  public SesEmailConfigStore(DomainDatabaseConfig databaseConfig) {
-    super(databaseConfig, SesEmailConfig.class);
+  public SesEmailConfigStore(ExecutionManager executionManager) {
+    super(executionManager, SesEmailConfig.class);
   }
 
   @Override
@@ -18,7 +18,7 @@ public class SesEmailConfigStore extends PushDomainSpecificStore<SesEmailConfig>
     return SES_EMAIL_CONFIG_DESIGN_NAME;
   }
 
-  public static String toDocumentId(Domain domain) {
+  public static String toDocumentId(DomainProfileEntity domain) {
     return String.format("%s:ses-email-config", domain.getDomainId());
   }
 }

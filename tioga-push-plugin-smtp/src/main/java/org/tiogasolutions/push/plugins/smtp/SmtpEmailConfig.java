@@ -6,8 +6,8 @@
 
 package org.tiogasolutions.push.plugins.smtp;
 
-import org.tiogasolutions.push.common.config.SmtpAuthType;
-import org.tiogasolutions.push.common.plugins.PluginConfig;
+import org.tiogasolutions.push.kernel.config.SmtpAuthType;
+import org.tiogasolutions.push.kernel.plugins.PluginConfig;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.couchace.annotations.CouchEntity;
 import org.tiogasolutions.couchace.annotations.CouchId;

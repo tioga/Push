@@ -6,8 +6,8 @@
 
 package org.tiogasolutions.push.engine.core.accounts;
 
-import org.tiogasolutions.push.common.accounts.actions.AccountAction;
-import org.tiogasolutions.push.common.accounts.queries.AccountQuery;
+import org.tiogasolutions.push.kernel.accounts.actions.AccountAction;
+import org.tiogasolutions.push.kernel.accounts.queries.AccountQuery;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
 
 public class AccountRequest {

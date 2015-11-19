@@ -8,7 +8,7 @@ project(":tioga-push-plugin-smtp") {
 
   dependencies {
 
-    compile(project(":tioga-push-common"))
+    compile(project(":tioga-push-kernel"))
 
     compile("javax.mail:mail:1.5.0-b01")
 

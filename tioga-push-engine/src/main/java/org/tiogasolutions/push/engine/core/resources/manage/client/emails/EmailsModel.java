@@ -1,17 +1,17 @@
 package org.tiogasolutions.push.engine.core.resources.manage.client.emails;
 
-import org.tiogasolutions.push.common.accounts.Account;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.requests.PushRequest;
+import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.requests.PushRequest;
 
 import java.util.*;
 
 public class EmailsModel {
   private final Account account;
-  private final Domain domain;
+  private final DomainProfileEntity domain;
   private final List<PushRequest> requests = new ArrayList<>();
 
-  public EmailsModel(Account account, Domain domain, Collection<PushRequest> requests) {
+  public EmailsModel(Account account, DomainProfileEntity domain, Collection<PushRequest> requests) {
 
     this.account = account;
     this.domain = domain;
@@ -26,7 +26,7 @@ public class EmailsModel {
     return account;
   }
 
-  public Domain getDomain() {
+  public DomainProfileEntity getDomain() {
     return domain;
   }
 

@@ -1,28 +1,25 @@
 package org.tiogasolutions.push.engine.core;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.tiogasolutions.push.engine.core.resources.RootResource;
+import org.tiogasolutions.push.engine.core.resources.manage.account.ManageAccountModel;
 import org.tiogasolutions.push.engine.core.resources.manage.client.DomainRequestsModel;
 import org.tiogasolutions.push.engine.core.resources.manage.client.ManageDomainModel;
+import org.tiogasolutions.push.engine.core.resources.manage.client.emails.EmailModel;
 import org.tiogasolutions.push.engine.core.resources.manage.client.emails.EmailsModel;
 import org.tiogasolutions.push.engine.core.view.Thymeleaf;
 import org.tiogasolutions.push.engine.core.view.ThymeleafMessageBodyWriter;
-import org.tiogasolutions.push.engine.core.resources.RootResource;
-import org.tiogasolutions.push.engine.core.resources.manage.account.ManageAccountModel;
-import org.tiogasolutions.push.engine.core.resources.manage.client.emails.EmailModel;
-import org.tiogasolutions.push.engine.core.resources.manage.client.notifications.DomainNotificationModel;
 import org.tiogasolutions.push.engine.core.view.ThymeleafViewFactory;
-import org.tiogasolutions.push.common.accounts.Account;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.plugins.PluginContext;
-import org.tiogasolutions.push.common.requests.PushRequest;
-import org.tiogasolutions.push.pub.EmailPush;
-import org.tiogasolutions.push.pub.LqNotificationPush;
+import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.execution.ExecutionContext;
+import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.pub.common.CommonEmail;
 import org.tiogasolutions.push.test.TestFactory;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 import java.io.StringWriter;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.testng.Assert.assertNotNull;
@@ -30,21 +27,26 @@ import static org.testng.Assert.assertNotNull;
 @Test
 public class ThymeleafTests {
 
-  private TestFactory testFactory;
+  private TestFactory testFactory = new TestFactory(4);
   private StringWriter writer;
   private ThymeleafMessageBodyWriter msgBodyWriter;
 
-  @BeforeClass
-  public void beforeClass() throws Exception {
-    testFactory = new TestFactory();
-    msgBodyWriter = new ThymeleafMessageBodyWriter(null) {
+  @BeforeMethod
+  public void beforeMethod() throws Exception {
+    msgBodyWriter = new ThymeleafMessageBodyWriter() {
       @Override public String getBaseUri() { return "http://example.com/unit-tests/"; }
     };
+
+    ExecutionContext executionContext = testFactory.getExecutionManager().newContext(null);
+    DomainProfileEntity domain = testFactory.createDomain(testFactory.createAccount());
+    executionContext.setDomain(domain);
+
+    writer = new StringWriter();
   }
 
-  @BeforeMethod
-  public void beforeMethod() {
-    writer = new StringWriter();
+  @AfterMethod
+  public void afterMethod() {
+    testFactory.getExecutionManager().removeExecutionContext();
   }
 
   public void testWelcome() throws Exception {
@@ -58,7 +60,7 @@ public class ThymeleafTests {
   public void testManagePushRequests() throws Exception {
 
     Account account = testFactory.createAccount();
-    Domain domain = testFactory.createDomain(account);
+    DomainProfileEntity domain = testFactory.createDomain(account);
     List<PushRequest> requests = testFactory.createPushRequests(domain);
     DomainRequestsModel model = new DomainRequestsModel(account, domain, requests);
 
@@ -69,12 +71,8 @@ public class ThymeleafTests {
   }
 
   public void testManageDomain() throws Exception {
-
-    Account account = testFactory.createAccount();
-    Domain domain = testFactory.createDomain(account);
-    PluginContext pluginContext = testFactory.pluginContext(testFactory);
-    ManageDomainModel model = new ManageDomainModel(pluginContext, account, domain, "This was the last message.");
-
+    DomainProfileEntity domainProfile = testFactory.getExecutionManager().context().getDomain();
+    ManageDomainModel model = new ManageDomainModel(testFactory.getExecutionManager(), domainProfile, testFactory.getPluginManager(), "This was the last message.");
     Thymeleaf leaf = new Thymeleaf(testFactory.createSession(), ThymeleafViewFactory.MANAGE_API_CLIENT, model);
     msgBodyWriter.writeTo(leaf, writer);
     String content = writer.toString();
@@ -84,9 +82,8 @@ public class ThymeleafTests {
   public void testManageAccount() throws Exception {
 
     Account account = testFactory.createAccount();
-    Domain domain = testFactory.createDomain(account);
-    PluginContext pluginContext = testFactory.pluginContext(testFactory);
-    ManageAccountModel model = new ManageAccountModel(pluginContext, account, Arrays.asList(domain));
+    DomainProfileEntity domainProfile = testFactory.createDomain(account);
+    ManageAccountModel model = new ManageAccountModel(testFactory.getPluginManager(), account, domainProfile);
 
     Thymeleaf leaf = new Thymeleaf(testFactory.createSession(), ThymeleafViewFactory.MANAGE_ACCOUNT, model);
     msgBodyWriter.writeTo(leaf, writer);
@@ -97,7 +94,7 @@ public class ThymeleafTests {
   public void testManageApiEmails() throws Exception {
 
     Account account = testFactory.createAccount();
-    Domain domain = testFactory.createDomain(account);
+    DomainProfileEntity domain = testFactory.createDomain(account);
     List<PushRequest> requests = testFactory.createPushRequests_Emails(domain);
     EmailsModel model = new EmailsModel(account, domain, requests);
 
@@ -110,39 +107,12 @@ public class ThymeleafTests {
   public void testManageApiEmail() throws Exception {
 
     Account account = testFactory.createAccount();
-    Domain domain = testFactory.createDomain(account);
+    DomainProfileEntity domain = testFactory.createDomain(account);
     PushRequest request = testFactory.createPushRequests_Emails(domain).get(0);
-    EmailPush email = request.getEmailPush();
+    CommonEmail email = request.getCommonEmail();
     EmailModel model = new EmailModel(account, domain, request, email);
 
     Thymeleaf leaf = new Thymeleaf(testFactory.createSession(), ThymeleafViewFactory.MANAGE_API_EMAIL, model);
-    msgBodyWriter.writeTo(leaf, writer);
-    String content = writer.toString();
-    assertNotNull(content);
-  }
-
-  public void testManageApiNotification() throws Exception {
-
-    Account account = testFactory.createAccount();
-    Domain domain = testFactory.createDomain(account);
-    PushRequest request = testFactory.createPushRequests_Notifications(domain).get(0);
-    LqNotificationPush notification = request.getNotificationPush();
-    DomainNotificationModel model = new DomainNotificationModel(account, domain, request, notification);
-
-    Thymeleaf leaf = new Thymeleaf(testFactory.createSession(), ThymeleafViewFactory.MANAGE_API_NOTIFICATION, model);
-    msgBodyWriter.writeTo(leaf, writer);
-    String content = writer.toString();
-    assertNotNull(content);
-  }
-
-  public void testManageApiNotifications() throws Exception {
-
-    Account account = testFactory.createAccount();
-    Domain domain = testFactory.createDomain(account);
-    List<PushRequest> requests = testFactory.createPushRequests_Notifications(domain);
-    DomainRequestsModel model = new DomainRequestsModel(account, domain, requests);
-
-    Thymeleaf leaf = new Thymeleaf(testFactory.createSession(), ThymeleafViewFactory.MANAGE_API_NOTIFICATIONS, model);
     msgBodyWriter.writeTo(leaf, writer);
     String content = writer.toString();
     assertNotNull(content);

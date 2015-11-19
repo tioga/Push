@@ -1,15 +1,15 @@
 package org.tiogasolutions.push.pub;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.tiogasolutions.dev.common.BeanUtils;
+import org.tiogasolutions.dev.common.ReflectUtils;
+import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.push.pub.common.CommonEmail;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushType;
 import org.tiogasolutions.push.pub.internal.PushUtils;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.push.pub.internal.ValidationUtils;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.tiogasolutions.dev.common.BeanUtils;
-import org.tiogasolutions.dev.common.ReflectUtils;
-import org.tiogasolutions.dev.common.StringUtils;
 
 import java.io.Serializable;
 import java.net.InetAddress;
@@ -34,13 +34,13 @@ public class SmtpEmailPush implements CommonEmail, Push, Serializable {
   private final String callbackUrl;
 
   private SmtpEmailPush(@JsonProperty("toAddress") String toAddress,
-                         @JsonProperty("fromAddress") String fromAddress,
-                         @JsonProperty("emailSubject") String emailSubject,
-                         @JsonProperty("htmlContent") String htmlContent,
-                         @JsonProperty("callbackUrl") String callbackUrl,
-                         @JsonProperty("remoteHost") String remoteHost,
-                         @JsonProperty("remoteAddress") String remoteAddress,
-                         @JsonProperty("traits") Map<String, String> traits) {
+                        @JsonProperty("fromAddress") String fromAddress,
+                        @JsonProperty("emailSubject") String emailSubject,
+                        @JsonProperty("htmlContent") String htmlContent,
+                        @JsonProperty("callbackUrl") String callbackUrl,
+                        @JsonProperty("remoteHost") String remoteHost,
+                        @JsonProperty("remoteAddress") String remoteAddress,
+                        @JsonProperty("traits") Map<String, String> traits) {
 
     this.toAddress =   toAddress;
     this.fromAddress = fromAddress;
@@ -136,18 +136,5 @@ public class SmtpEmailPush implements CommonEmail, Push, Serializable {
 
     InetAddress remoteAddress = PushUtils.getLocalHost();
     return new SmtpEmailPush(toAddress, fromAddress, emailSubject, htmlContent, callbackUrl, remoteAddress.getCanonicalHostName(), remoteAddress.getHostAddress(), traits);
-  }
-
-  public static SmtpEmailPush newPush(EmailPush emailPush) {
-    return new SmtpEmailPush(
-      emailPush.getToAddress(),
-      emailPush.getFromAddress(),
-      emailPush.getEmailSubject(),
-      emailPush.getHtmlContent(),
-      emailPush.getCallbackUrl(),
-      emailPush.getRemoteHost(),
-      emailPush.getRemoteAddress(),
-      emailPush.getTraits()
-    );
   }
 }

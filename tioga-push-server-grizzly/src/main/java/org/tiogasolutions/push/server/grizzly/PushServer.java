@@ -1,228 +1,75 @@
 package org.tiogasolutions.push.server.grizzly;
 
-import org.tiogasolutions.push.engine.core.system.CpApplication;
-import org.tiogasolutions.dev.common.StringUtils;
-import org.glassfish.grizzly.http.server.HttpServer;
-import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import ch.qos.logback.classic.Level;
+import org.slf4j.Logger;
+import org.tiogasolutions.app.common.AppPathResolver;
+import org.tiogasolutions.app.common.LogUtils;
+import org.tiogasolutions.push.engine.core.system.PushApplication;
+import org.tiogasolutions.runners.grizzly.GrizzlyServer;
+import org.tiogasolutions.runners.grizzly.GrizzlyServerConfig;
+import org.tiogasolutions.runners.grizzlyspring.ApplicationResolver;
+import org.tiogasolutions.runners.grizzlyspring.GrizzlySpringServer;
+import org.tiogasolutions.runners.grizzlyspring.ServerConfigResolver;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.*;
+import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.List;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 public class PushServer {
 
-  public String serverName = "localhost";
-  private boolean shutDown = false;
-  private int port = 39009;
-  private int shutdownPort = 39010;
-  private String context = "push-server";
-  private boolean openBrowser;
+  private static final Logger log = getLogger(PushServer.class);
 
-  public URI baseUri;
+  public static void main(String...args) throws Exception {
 
-  private HttpServer httpServer;
-  private ServerSocket socket;
-  private Thread acceptThread;
-  /** handlerLock is used to synchronize access to socket, acceptThread and callExecutor. */
-  private final ReentrantLock handlerLock = new ReentrantLock();
-  private static final int socketAcceptTimeoutMilli = 5000;
+    List<String> arguments = Arrays.asList(args);
 
-  public PushServer() {
-  }
+    // Priority #1, configure default logging levels. This will be overridden later
+    // when/if the logback.xml is found and loaded.
+    LogUtils.initLogback(Level.WARN);
+    // Assume we want by default INFO on when & how the grizzly server is started
+    ((ch.qos.logback.classic.Logger) getLogger(PushServer.class)).setLevel(Level.INFO);
+    ((ch.qos.logback.classic.Logger) getLogger(GrizzlyServer.class)).setLevel(Level.INFO);
 
-  /**
-   * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
-   * @param args varius command line arguments for the server.
-   * @return Grizzly HTTP server.
-   * @throws Exception for any reason
-   */
-  public HttpServer startServer(String...args) throws Exception {
-    if (args.length % 2 != 0) {
-      throw new IllegalArgumentException("Expected an even number of arguments: " + Arrays.asList(args));
-    }
+    // Load the resolver which gives us common tools for identifying the
+    // runtime & config directories, logback.xml, etc.
+    AppPathResolver resolver = new AppPathResolver(getLogger(AppPathResolver.class)::info, "push.");
 
-    for (int i = 0; i < args.length; i += 2) {
-      String key = args[i];
-      String value = args[i+1];
-      if ("serverName".equals(key)) {
-        serverName = value;
-      } else if ("port".equals(key)) {
-        port = Integer.valueOf(value);
-      } else if ("shutdown".equals(key)) {
-        shutdownPort = Integer.valueOf(value);
-      } else if ("context".equals(key)) {
-        context = value;
-      } else if ("open".equals(key)) {
-        openBrowser = Boolean.valueOf(value);
-      } else if ("action".equals(key) && "stop".equals(value)) {
-        shutDown = true;
-      }
-    }
+    Path runtimeDir = resolver.resolveRuntimePath();
+    Path configDir = resolver.resolveConfigDir(runtimeDir);
 
-    this.baseUri = URI.create("http://"+serverName+":"+ port+"/"+context+"/");
+    // Re-init logback if we can find the logback.xml
+    Path logbackFile = LogUtils.initLogback(configDir, "notify.log.config", "logback.xml");
 
-    shutdownExisting();
+    // Locate the spring file for this app or use DEFAULT_SPRING_FILE from the classpath if one is not found.
+    String springConfigPath = resolver.resolveSpringPath(configDir, null);
+    String activeProfiles = resolver.resolveSpringProfiles(); // defaults to "hosted"
 
-    if (shutDown) {
+    log.info("Starting Notify Server:\n" +
+      "  *  Runtime Dir:  {}\n" +
+      "  *  Config Dir:   {}\n" +
+      "  *  Logback File: {}\n" +
+      "  *  Spring Path:  {}", runtimeDir, configDir, logbackFile, springConfigPath);
+
+    // Create an instance of the grizzly server.
+    GrizzlySpringServer grizzlyServer = new GrizzlySpringServer(
+      ServerConfigResolver.fromClass(GrizzlyServerConfig.class),
+      ApplicationResolver.fromClass(PushApplication.class),
+      activeProfiles,
+      springConfigPath
+    );
+
+    grizzlyServer.packages("org.tiogasolutions.push");
+
+    if (arguments.contains("-shutdown")) {
+      GrizzlyServer.shutdownRemote(grizzlyServer.getConfig());
+      log.warn("Shutting down Push Server at {}:{}", grizzlyServer.getConfig().getHostName(), grizzlyServer.getConfig().getShutdownPort());
       System.exit(0);
-      return null;
+      return;
     }
 
-    String mainDbName = "push-master";
-    String domainDbName = "push-domain";
-
-    CpApplication application = new CpApplication(mainDbName, domainDbName);
-    CpResourceConfig rc = new CpResourceConfig(application);
-    httpServer = GrizzlyHttpServerFactory.createHttpServer(baseUri, rc);
-
-
-    // Lock the handler, IllegalStateException thrown if we fail.
-    lockHandler();
-    try {
-      if (acceptThread != null) {
-        throw new IllegalStateException("Socket handler thread is already running.");
-      }
-
-      try {
-        // Set the accept timeout so we won't block indefinitely.
-        socket = new ServerSocket(shutdownPort);
-        socket.setSoTimeout(socketAcceptTimeoutMilli);
-
-        String msg = String.format("%s is accepting connections on port %s from %s.", getClass().getSimpleName(), port, socket.getInetAddress().getHostAddress());
-        System.out.println(msg);
-
-      } catch(IOException ex) {
-        String msg = String.format("IOException starting server socket, maybe port %s was not available.", shutdownPort);
-        System.err.println(msg);
-        ex.printStackTrace();
-      }
-
-      Thread shutdownThread = new Thread(httpServer::shutdown, "shutdownHook");
-      Runtime.getRuntime().addShutdownHook(shutdownThread);
-
-      Runnable acceptRun = PushServer.this::socketAcceptLoop;
-      acceptThread = new Thread(acceptRun);
-      acceptThread.start();
-
-    } finally {
-      // Be sure to always give up the lock.
-      unlockHandler();
-    }
-
-    return httpServer;
-  }
-
-  private void shutdownExisting() throws IOException {
-    try(Socket localSocket = new Socket(serverName, shutdownPort)) {
-      try(OutputStream outStream = localSocket.getOutputStream()) {
-        outStream.write("SHUTDOWN".getBytes());
-        outStream.flush();
-      }
-    } catch (ConnectException ignored) {
-    }
-  }
-
-  private void lockHandler() throws TimeoutException, InterruptedException {
-    int timeout = 5;
-    TimeUnit timeUnit = TimeUnit.SECONDS;
-
-    if (!handlerLock.tryLock(timeout, timeUnit)) {
-      String msg = String.format("Failed to obtain lock within %s %s", timeout, timeUnit);
-      throw new TimeoutException(msg);
-    }
-  }
-
-  /**
-   * Really just used to improve readability and so we limit when we directly access handlerLock.
-   */
-  private void unlockHandler() {
-    handlerLock.unlock();
-  }
-
-  public URI getBaseUri() {
-    return baseUri;
-  }
-
-  private void socketAcceptLoop() {
-
-    // Socket accept loop.
-    while (!Thread.interrupted()) {
-      try {
-
-        // REVIEW - Sleep to allow another thread to lock the handler (never seems to happen without this). Could allow acceptThread to be interrupted in stop without the lock.
-        Thread.sleep(5);
-
-        // Lock the handler so we don't accept a new connection while stopping.
-        lockHandler();
-        Socket client;
-
-        // Ensure we have not stopped or been interrupted.
-        if (acceptThread == null || Thread.interrupted()) {
-          System.out.println("Looks like ServordSocketHandler has been stopped, terminate our acceptLoop.");
-          return;
-        }
-
-        // We have are not stopped, so accept another connection.
-        client = socket.accept();
-
-        int val;
-        StringBuilder builder = new StringBuilder();
-        InputStream is = client.getInputStream();
-
-        while ((val = is.read()) != -1) {
-          builder.append((char)val);
-          if ("SHUTDOWN".equals(builder.toString())) {
-            System.out.println("Shutdown command received.");
-            httpServer.shutdownNow();
-            System.exit(0);
-          }
-        }
-
-      } catch (SocketTimeoutException | TimeoutException ex) {
-        // Accept timed out, which is excepted, try again.
-
-      } catch (Throwable ex) {
-        System.out.println("Unexpected exception");
-        ex.printStackTrace();
-        return;
-
-      } finally {
-        unlockHandler();
-      }
-    }
-  }
-
-  /**
-   * Main method.
-   * @param args command line arguments
-   */
-  public static void main(String[] args) {
-    try {
-      PushServer pushServer = new PushServer();
-      HttpServer server = pushServer.startServer(args);
-
-      if (server == null) {
-        System.out.println("Application stopped.");
-
-      } else {
-        System.out.printf("Application started with WADL available at %sapplication.wadl%n", pushServer.getBaseUri());
-
-        if (pushServer.openBrowser) {
-          String path = String.format("%s?username=%s&password=%s", pushServer.getBaseUri(), StringUtils.encodeUrl("test@example.com"), "test");
-          URI uri = URI.create(path);
-          java.awt.Desktop.getDesktop().browse(uri);
-        }
-
-        Thread.currentThread().join();
-      }
-
-    } catch (Throwable e) {
-      e.printStackTrace();
-    }
+    // Lastly, start the server.
+    grizzlyServer.start();
   }
 }

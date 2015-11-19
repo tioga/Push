@@ -1,45 +1,52 @@
 package org.tiogasolutions.push.engine.core.jaxrs.security;
 
-import org.tiogasolutions.push.engine.core.system.CpApplication;
-import org.tiogasolutions.push.engine.core.resources.RootResource;
-import org.tiogasolutions.push.common.accounts.Account;
-import org.tiogasolutions.push.common.system.AppContext;
-import org.tiogasolutions.push.common.system.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.tiogasolutions.dev.common.exceptions.ApiException;
+import org.tiogasolutions.push.engine.core.resources.RootResource;
+import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.accounts.AccountStore;
+import org.tiogasolutions.push.kernel.execution.ExecutionManager;
+import org.tiogasolutions.push.kernel.system.Session;
+import org.tiogasolutions.push.kernel.system.SessionStore;
 
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.net.URI;
 import java.security.Principal;
 
+@Provider
 @MngtAuthentication
 @Priority(Priorities.AUTHENTICATION + 1)
 public class MngtAuthenticationFilter implements ContainerRequestFilter {
 
-  private final AppContext appContext;
+  private final SessionStore sessionStore;
+  private final AccountStore accountStore;
+  private final ExecutionManager executionManager;
 
-  public MngtAuthenticationFilter(@Context Application application) {
-    this.appContext = AppContext.from(application);
+  @Autowired
+  public MngtAuthenticationFilter(ExecutionManager executionManager, SessionStore sessionStore, AccountStore accountStore) {
+    this.sessionStore = sessionStore;
+    this.accountStore = accountStore;
+    this.executionManager = executionManager;
   }
 
   @Override
   public void filter(ContainerRequestContext requestContext) throws IOException {
 
     try {
-      Session session = appContext.getSessionStore().getSession(requestContext);
+      Session session = sessionStore.getSession(requestContext);
       if (session == null) {
         throw ApiException.unauthorized();
       }
 
       String emailAddress = session.getEmailAddress();
-      Account account = appContext.getAccountStore().getByEmail(emailAddress);
+      Account account = accountStore.getByEmail(emailAddress);
 
       if (account == null) {
         throw ApiException.unauthorized();
@@ -47,7 +54,7 @@ public class MngtAuthenticationFilter implements ContainerRequestFilter {
 
       final SecurityContext securityContext = requestContext.getSecurityContext();
       requestContext.setSecurityContext(new MngtSecurityContext(securityContext, account));
-      CpApplication.getExecutionContext().setAccount(account);
+      executionManager.context().setAccount(account);
 
     } catch (ApiException e) {
       URI uri = requestContext.getUriInfo().getBaseUriBuilder().queryParam("r", RootResource.REASON_CODE_UNAUTHORIZED).build();
@@ -75,9 +82,5 @@ public class MngtAuthenticationFilter implements ContainerRequestFilter {
     @Override public Principal getUserPrincipal() {
       return account::getEmailAddress;
     }
-  }
-
-  public static class MngtThreadLocal extends ThreadLocal {
-
   }
 }

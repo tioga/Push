@@ -1,6 +1,6 @@
 package org.tiogasolutions.push.plugins.twilio;
 
-import org.tiogasolutions.push.common.clients.Domain;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class TwilioConfigTest {
         String fromPhoneNumber = "+15552221111";
         String recipient = "+12225551111";
 
-        Domain domain = new Domain(domainId, revision, "domainKey", "domainPass", 3, new ArrayList<String>());
+        DomainProfileEntity domain = new DomainProfileEntity(domainId, revision, "domainKey", "domainPass", 3, new ArrayList<String>());
         UpdateTwilioConfigAction updateTwilioConfigAction = new UpdateTwilioConfigAction(domain, accountSid, authToken, fromPhoneNumber, recipient);
         TwilioConfig configClone = new TwilioConfig().apply(updateTwilioConfigAction);
 

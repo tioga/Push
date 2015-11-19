@@ -10,10 +10,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/tioga-push-client" />
-            <option value="$PROJECT_DIR$/tioga-push-common" />
             <option value="$PROJECT_DIR$/tioga-push-engine" />
             <option value="$PROJECT_DIR$/tioga-push-jackson" />
-            <option value="$PROJECT_DIR$/tioga-push-plugin-notifier" />
+            <option value="$PROJECT_DIR$/tioga-push-kernel" />
             <option value="$PROJECT_DIR$/tioga-push-plugin-ses" />
             <option value="$PROJECT_DIR$/tioga-push-plugin-smtp" />
             <option value="$PROJECT_DIR$/tioga-push-plugin-twilio" />
@@ -22,7 +21,6 @@
             <option value="$PROJECT_DIR$/tioga-push-server-grizzly" />
             <option value="$PROJECT_DIR$/tioga-push-server-servlet" />
             <option value="$PROJECT_DIR$/tioga-push-test" />
-            <option value="$PROJECT_DIR$/tioga-push-v1-integration-tests" />
             <option value="$PROJECT_DIR$/tioga-push-v2-integration-tests" />
           </set>
         </option>
@@ -30,10 +28,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/tioga-push-client" />
-            <option value="$PROJECT_DIR$/tioga-push-common" />
             <option value="$PROJECT_DIR$/tioga-push-engine" />
             <option value="$PROJECT_DIR$/tioga-push-jackson" />
-            <option value="$PROJECT_DIR$/tioga-push-plugin-notifier" />
+            <option value="$PROJECT_DIR$/tioga-push-kernel" />
             <option value="$PROJECT_DIR$/tioga-push-plugin-ses" />
             <option value="$PROJECT_DIR$/tioga-push-plugin-smtp" />
             <option value="$PROJECT_DIR$/tioga-push-plugin-twilio" />
@@ -42,7 +39,6 @@
             <option value="$PROJECT_DIR$/tioga-push-server-grizzly" />
             <option value="$PROJECT_DIR$/tioga-push-server-servlet" />
             <option value="$PROJECT_DIR$/tioga-push-test" />
-            <option value="$PROJECT_DIR$/tioga-push-v1-integration-tests" />
             <option value="$PROJECT_DIR$/tioga-push-v2-integration-tests" />
           </set>
         </option>

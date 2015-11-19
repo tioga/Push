@@ -10,11 +10,10 @@ project(":tioga-push-engine") {
 
     compile project(":tioga-push-pub")
     compile project(":tioga-push-jackson")
-    compile project(":tioga-push-common");
+    compile project(":tioga-push-kernel");
     compile project(":tioga-push-plugin-ses")
     compile project(":tioga-push-plugin-smtp")
     compile project(":tioga-push-plugin-xmpp")
-    compile project(":tioga-push-plugin-notifier")
     compile project(":tioga-push-plugin-twilio")
     // compile project(":tioga-push-plugin-ocs-message")
 

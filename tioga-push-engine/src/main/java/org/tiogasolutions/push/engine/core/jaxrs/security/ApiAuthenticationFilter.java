@@ -1,31 +1,35 @@
 package org.tiogasolutions.push.engine.core.jaxrs.security;
 
-import org.tiogasolutions.push.engine.core.system.CpApplication;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.system.AppContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.tiogasolutions.dev.common.EqualsUtils;
+import org.tiogasolutions.push.kernel.accounts.DomainStore;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.execution.ExecutionManager;
 
 import javax.annotation.Priority;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.ext.Provider;
 import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 
+@Provider
 @ApiAuthentication
 @Priority(Priorities.AUTHENTICATION + 1)
 public class ApiAuthenticationFilter implements ContainerRequestFilter {
 
-  private final AppContext appContext;
+  private final DomainStore domainStore;
+  private final ExecutionManager executionManager;
 
-  public ApiAuthenticationFilter(@Context Application application) {
-    this.appContext = AppContext.from(application);
+  @Autowired
+  public ApiAuthenticationFilter(ExecutionManager executionManager, DomainStore domainStore) {
+    this.domainStore = domainStore;
+    this.executionManager = executionManager;
   }
 
   @Override
@@ -57,25 +61,25 @@ public class ApiAuthenticationFilter implements ContainerRequestFilter {
       password = basicAuth.substring(pos+1);
     }
 
-    Domain domain = appContext.getDomainStore().getByDomainKey(domainKey);
-    if (domain == null) {
+    DomainProfileEntity domainProfile = domainStore.getByDomainKey(domainKey);
+    if (domainProfile == null) {
       throw new NotAuthorizedException("API");
     }
 
-    if (EqualsUtils.objectsNotEqual(password, domain.getDomainPassword())) {
+    if (EqualsUtils.objectsNotEqual(password, domainProfile.getDomainPassword())) {
       throw new NotAuthorizedException("API");
     }
 
     final SecurityContext securityContext = requestContext.getSecurityContext();
-    requestContext.setSecurityContext(new ApiSecurityContext(securityContext, domain));
+    requestContext.setSecurityContext(new ApiSecurityContext(securityContext, domainProfile));
 
-    CpApplication.getExecutionContext().setDomain(domain);
+    executionManager.context().setDomain(domainProfile);
   }
 
   private class ApiSecurityContext implements SecurityContext {
     private final boolean secure;
-    private final Domain domain;
-    public ApiSecurityContext(SecurityContext securityContext, Domain domain) {
+    private final DomainProfileEntity domain;
+    public ApiSecurityContext(SecurityContext securityContext, DomainProfileEntity domain) {
       this.domain = domain;
       this.secure = securityContext.isSecure();
     }

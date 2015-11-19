@@ -5,20 +5,20 @@
  */
 package org.tiogasolutions.push.engine.core.resources.manage.client.emails;
 
-import org.tiogasolutions.push.common.accounts.Account;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.requests.PushRequest;
-import org.tiogasolutions.push.pub.EmailPush;
+import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.pub.common.CommonEmail;
 
 public class EmailModel {
 
   private final Account account;
-  private final Domain domain;
+  private final DomainProfileEntity domain;
 
   private final PushRequest request;
-  private final EmailPush email;
+  private final CommonEmail email;
 
-  public EmailModel(Account account, Domain domain, PushRequest request, EmailPush email) {
+  public EmailModel(Account account, DomainProfileEntity domain, PushRequest request, CommonEmail email) {
     this.account = account;
     this.domain = domain;
     this.request = request;
@@ -29,7 +29,7 @@ public class EmailModel {
     return account;
   }
 
-  public Domain getDomain() {
+  public DomainProfileEntity getDomain() {
     return domain;
   }
 
@@ -37,7 +37,7 @@ public class EmailModel {
     return request;
   }
 
-  public EmailPush getEmail() {
+  public CommonEmail getEmail() {
     return email;
   }
 

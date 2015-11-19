@@ -6,9 +6,9 @@
 
 package org.tiogasolutions.push.plugins.smtp;
 
-import org.tiogasolutions.push.common.accounts.Account;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.config.SmtpAuthType;
+import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.config.SmtpAuthType;
 import org.tiogasolutions.push.test.TestFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -22,13 +22,13 @@ public class UpdateSmtpEmailConfigActionTest {
 
   @BeforeClass
   public void beforeClass() throws Exception {
-    testFactory = TestFactory.get();
+    testFactory = new TestFactory(1);
   }
 
   public void testUpdate() throws Exception {
 
     Account account = testFactory.createAccount();
-    Domain domain = testFactory.createDomain(account);
+    DomainProfileEntity domain = testFactory.createDomain(account);
 
     UpdateSmtpEmailConfigAction updateAction = new UpdateSmtpEmailConfigAction(
       domain,

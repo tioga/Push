@@ -6,33 +6,29 @@
 
 package org.tiogasolutions.push.plugins.twilio;
 
-import org.tiogasolutions.push.common.AbstractDelegate;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.plugins.PluginContext;
-import org.tiogasolutions.push.common.requests.PushRequest;
-import org.tiogasolutions.push.pub.common.RequestStatus;
-import org.tiogasolutions.push.pub.TwilioSmsPush;
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.resource.factory.MessageFactory;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
+import org.tiogasolutions.push.kernel.AbstractDelegate;
+import org.tiogasolutions.push.kernel.execution.ExecutionContext;
+import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.pub.TwilioSmsPush;
+import org.tiogasolutions.push.pub.common.RequestStatus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TwilioDelegate extends AbstractDelegate {
 
-  private final Domain domain;
-
   private final TwilioSmsPush push;
   private final TwilioConfig config;
 
-  public TwilioDelegate(PluginContext pluginContext, Domain domain, PushRequest pushRequest, TwilioSmsPush push, TwilioConfig config) {
-    super(pluginContext, pushRequest);
+  public TwilioDelegate(ExecutionContext executionContext, PushRequest pushRequest, TwilioSmsPush push, TwilioConfig config) {
+    super(executionContext, pushRequest);
     this.config = ExceptionUtils.assertNotNull(config, "config");
     this.push = ExceptionUtils.assertNotNull(push, "push");
-    this.domain = ExceptionUtils.assertNotNull(domain, "domain");
   }
 
   @Override

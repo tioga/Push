@@ -5,19 +5,18 @@
  */
 package org.tiogasolutions.push.engine.core.resources.manage.client.emails;
 
-import org.tiogasolutions.push.common.system.ExecutionContext;
 import org.tiogasolutions.push.engine.core.jaxrs.security.MngtAuthentication;
-import org.tiogasolutions.push.engine.core.system.CpApplication;
 import org.tiogasolutions.push.engine.core.view.Thymeleaf;
 import org.tiogasolutions.push.engine.core.view.ThymeleafViewFactory;
-import org.tiogasolutions.push.common.accounts.Account;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.plugins.Plugin;
-import org.tiogasolutions.push.common.requests.PushRequest;
-import org.tiogasolutions.push.common.system.PluginManager;
-import org.tiogasolutions.push.pub.EmailPush;
+import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.execution.ExecutionManager;
+import org.tiogasolutions.push.kernel.plugins.Plugin;
+import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.kernel.system.PluginManager;
 import org.tiogasolutions.push.pub.SesEmailPush;
 import org.tiogasolutions.push.pub.SmtpEmailPush;
+import org.tiogasolutions.push.pub.common.CommonEmail;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.*;
@@ -32,24 +31,26 @@ import java.util.List;
 public class ManageEmailsResource {
 
   private final Account account;
-  private final Domain domain;
-  private final ExecutionContext execContext = CpApplication.getExecutionContext();
+  private final DomainProfileEntity domainProfile;
+  private final PluginManager pluginManager;
+  private final ExecutionManager executionManager;
 
-  public ManageEmailsResource(Account account, Domain domain) {
+  public ManageEmailsResource(ExecutionManager executionManager, PluginManager pluginManager, Account account, DomainProfileEntity domainProfile) {
+    this.pluginManager = pluginManager;
+    this.executionManager = executionManager;
     this.account = account;
-    this.domain = domain;
+    this.domainProfile = domainProfile;
   }
 
   @GET
   @Produces(MediaType.TEXT_HTML)
   public Thymeleaf viewEmailEvents() throws Exception {
     List<PushRequest> requests = new ArrayList<>();
-    requests.addAll(execContext.getPushRequestStore().getByClientAndType(domain, EmailPush.PUSH_TYPE));
-    requests.addAll(execContext.getPushRequestStore().getByClientAndType(domain, SesEmailPush.PUSH_TYPE));
-    requests.addAll(execContext.getPushRequestStore().getByClientAndType(domain, SmtpEmailPush.PUSH_TYPE));
+    requests.addAll(executionManager.context().getPushRequestStore().getByClientAndType(domainProfile, SesEmailPush.PUSH_TYPE));
+    requests.addAll(executionManager.context().getPushRequestStore().getByClientAndType(domainProfile, SmtpEmailPush.PUSH_TYPE));
 
-    EmailsModel model = new EmailsModel(account, domain, requests);
-    return new Thymeleaf(execContext.getSession(), ThymeleafViewFactory.MANAGE_API_EMAILS, model);
+    EmailsModel model = new EmailsModel(account, domainProfile, requests);
+    return new Thymeleaf(executionManager.context().getSession(), ThymeleafViewFactory.MANAGE_API_EMAILS, model);
   }
 
   @GET
@@ -57,34 +58,34 @@ public class ManageEmailsResource {
   @Produces(MediaType.TEXT_HTML)
   public Thymeleaf viewEmailEvent(@PathParam("pushRequestId") String pushRequestId) throws Exception {
 
-    PushRequest pushRequest = execContext.getPushRequestStore().getByPushRequestId(pushRequestId);
-    EmailPush email = pushRequest.getEmailPush();
+    PushRequest pushRequest = executionManager.context().getPushRequestStore().getByPushRequestId(pushRequestId);
+    CommonEmail email = pushRequest.getCommonEmail();
 
-    EmailModel model = new EmailModel(account, domain, pushRequest, email);
-    return new Thymeleaf(execContext.getSession(), ThymeleafViewFactory.MANAGE_API_EMAIL, model);
+    EmailModel model = new EmailModel(account, domainProfile, pushRequest, email);
+    return new Thymeleaf(executionManager.context().getSession(), ThymeleafViewFactory.MANAGE_API_EMAIL, model);
   }
 
   @POST
   @Path("/{pushRequestId}/retry")
   public Response retryEmailMessage(@Context ServletContext servletContext, @PathParam("pushRequestId") String pushRequestId) throws Exception {
 
-    PushRequest pushRequest = execContext.getPushRequestStore().getByPushRequestId(pushRequestId);
-    EmailPush push = (EmailPush)pushRequest.getPush();
+    PushRequest pushRequest = executionManager.context().getPushRequestStore().getByPushRequestId(pushRequestId);
+    CommonEmail push = (CommonEmail)pushRequest.getPush();
 
     if (SesEmailPush.PUSH_TYPE.equals(push.getPushType())) {
-      Plugin plugin = PluginManager.getPlugin(push.getPushType());
-      plugin.newDelegate(execContext, domain, pushRequest, push).retry();
+      Plugin plugin = pluginManager.getPlugin(push.getPushType());
+      plugin.newDelegate(domainProfile, pushRequest, (SesEmailPush)push).retry();
 
     } else if (SmtpEmailPush.PUSH_TYPE.equals(push.getPushType())) {
-      Plugin plugin = PluginManager.getPlugin(push.getPushType());
-      plugin.newDelegate(execContext, domain, pushRequest, push).retry();
+      Plugin plugin = pluginManager.getPlugin(push.getPushType());
+      plugin.newDelegate(domainProfile, pushRequest, (SmtpEmailPush)push).retry();
 
     } else {
       String msg = String.format("The retry operation is not supported for the push type \"%s\".", push.getPushType().getCode());
       throw new UnsupportedOperationException(msg);
     }
 
-    String path = String.format("%s/manage/domain/%s/emails/%s", servletContext.getContextPath(), domain.getDomainKey(), pushRequest.getPushRequestId());
+    String path = String.format("%s/manage/domain/%s/emails/%s", servletContext.getContextPath(), domainProfile.getDomainKey(), pushRequest.getPushRequestId());
     return Response.seeOther(new URI(path)).build();
   }
 }

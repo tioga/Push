@@ -5,34 +5,34 @@
  */
 package org.tiogasolutions.push.engine.core.resources.manage.account;
 
-import org.tiogasolutions.push.common.accounts.Account;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.plugins.Plugin;
-import org.tiogasolutions.push.common.plugins.PluginConfig;
-import org.tiogasolutions.push.common.plugins.PluginContext;
-import org.tiogasolutions.push.common.system.PluginManager;
+import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.plugins.Plugin;
+import org.tiogasolutions.push.kernel.plugins.PluginConfig;
+import org.tiogasolutions.push.kernel.system.PluginManager;
 import org.tiogasolutions.push.pub.common.PushType;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class ManageAccountModel {
 
   private final Account account;
   private final List<DomainModel> domains = new ArrayList<>();
 
-  public ManageAccountModel(PluginContext pluginContext, Account account, List<Domain> domains) throws IOException {
+  public ManageAccountModel(PluginManager pluginManager, Account account, DomainProfileEntity...domainProfiles) throws IOException {
+    this(pluginManager, account, Arrays.asList(domainProfiles));
+  }
+
+  public ManageAccountModel(PluginManager pluginManager, Account account, List<DomainProfileEntity> domainProfiles) throws IOException {
     this.account = account;
 
-    for (Domain domain : domains) {
-      DomainModel domainModel = new DomainModel(domain.getDomainKey());
+    for (DomainProfileEntity domainProfile : domainProfiles) {
+      DomainModel domainModel = new DomainModel(domainProfile.getDomainKey());
       this.domains.add(domainModel);
 
-      for (Plugin plugin : PluginManager.getPlugins()) {
-        PluginConfig config = plugin.getConfig(pluginContext.getDatabaseConfig(), domain);
+      for (Plugin plugin : pluginManager.getPlugins()) {
+        PluginConfig config = plugin.getConfig(domainProfile);
         if (config != null) {
           domainModel.enabledTypes.add(plugin.getPushType());
         } else {

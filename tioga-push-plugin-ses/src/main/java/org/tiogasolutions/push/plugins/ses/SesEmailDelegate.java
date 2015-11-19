@@ -10,30 +10,24 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient;
 import com.amazonaws.services.simpleemail.model.*;
-import org.tiogasolutions.push.common.AbstractDelegate;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.plugins.PluginContext;
-import org.tiogasolutions.push.common.requests.PushRequest;
-import org.tiogasolutions.push.common.system.AppContext;
-import org.tiogasolutions.push.pub.common.RequestStatus;
-import org.tiogasolutions.push.pub.SesEmailPush;
+import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
+import org.tiogasolutions.push.kernel.AbstractDelegate;
+import org.tiogasolutions.push.kernel.execution.ExecutionContext;
+import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.pub.SesEmailPush;
+import org.tiogasolutions.push.pub.common.RequestStatus;
 
 public class SesEmailDelegate extends AbstractDelegate {
 
-  private final Domain domain;
-
   private final SesEmailPush push;
   private final SesEmailConfig config;
-  private final AppContext appContext;
 
-  public SesEmailDelegate(PluginContext pluginContext, Domain domain, PushRequest pushRequest, SesEmailPush push, SesEmailConfig config) {
-    super(pluginContext, pushRequest);
+  public SesEmailDelegate(ExecutionContext executionContext, PushRequest pushRequest, SesEmailPush push, SesEmailConfig config) {
+    super(executionContext, pushRequest);
     this.push = ExceptionUtils.assertNotNull(push, "push");
     this.config = ExceptionUtils.assertNotNull(config, "config");
-    this.domain = ExceptionUtils.assertNotNull(domain, "domain");
-    this.appContext = pluginContext.getAppContext();
   }
 
   @Override
@@ -73,7 +67,8 @@ public class SesEmailDelegate extends AbstractDelegate {
     }
 
     String subject = push.getEmailSubject();
-    subject = appContext.getBitlyApi().parseAndShorten(subject);
+    BitlyApis bitlyApis = executionContext.getBean(BitlyApis.class);
+    subject = bitlyApis.parseAndShorten(subject);
     Content subjectContent = new Content().withCharset("UTF-8").withData(subject);
 
     sendEmailRequest.setMessage(new Message(subjectContent, body));

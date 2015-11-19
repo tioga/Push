@@ -6,31 +6,25 @@
 
 package org.tiogasolutions.push.plugins.xmpp;
 
-import org.tiogasolutions.push.common.AbstractDelegate;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.plugins.PluginContext;
-import org.tiogasolutions.push.common.requests.PushRequest;
-import org.tiogasolutions.push.common.system.AppContext;
-import org.tiogasolutions.push.pub.common.RequestStatus;
-import org.tiogasolutions.push.pub.XmppPush;
+import org.jivesoftware.smack.XMPPException;
+import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
-import org.jivesoftware.smack.XMPPException;
+import org.tiogasolutions.push.kernel.AbstractDelegate;
+import org.tiogasolutions.push.kernel.execution.ExecutionContext;
+import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.pub.XmppPush;
+import org.tiogasolutions.push.pub.common.RequestStatus;
 
 public class XmppDelegate extends AbstractDelegate {
 
-  private final Domain domain;
-
   private final XmppPush push;
   private final XmppConfig config;
-  private final AppContext appContext;
 
-  public XmppDelegate(PluginContext pluginContext, Domain domain, PushRequest pushRequest, XmppPush push, XmppConfig config) {
-    super(pluginContext, pushRequest);
+  public XmppDelegate(ExecutionContext executionContext, PushRequest pushRequest, XmppPush push, XmppConfig config) {
+    super(executionContext, pushRequest);
     this.config = ExceptionUtils.assertNotNull(config, "config");
     this.push = ExceptionUtils.assertNotNull(push, "push");
-    this.domain = ExceptionUtils.assertNotNull(domain, "domain");
-    this.appContext = pluginContext.getAppContext();
   }
 
   @Override
@@ -46,7 +40,8 @@ public class XmppDelegate extends AbstractDelegate {
     XmppFactory factory = new XmppFactory(config);
 
     String message = push.getMessage();
-    message = appContext.getBitlyApi().parseAndShorten(message);
+    BitlyApis bitlyApis = executionContext.getBean(BitlyApis.class);
+    message = bitlyApis.parseAndShorten(message);
 
     if (StringUtils.isNotBlank(config.getRecipientOverride())) {
       // This is NOT a "production" request.

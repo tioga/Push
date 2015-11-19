@@ -1,6 +1,6 @@
 package org.tiogasolutions.push.engine.core.api;
 
-import org.tiogasolutions.push.common.AbstractDelegate;
+import org.tiogasolutions.push.kernel.AbstractDelegate;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;

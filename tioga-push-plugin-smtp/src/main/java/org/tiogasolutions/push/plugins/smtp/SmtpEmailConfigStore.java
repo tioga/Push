@@ -1,16 +1,16 @@
 package org.tiogasolutions.push.plugins.smtp;
 
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
-import org.tiogasolutions.push.common.system.PushDomainSpecificStore;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.execution.ExecutionManager;
+import org.tiogasolutions.push.kernel.system.DomainSpecificStore;
 
-public class SmtpEmailConfigStore extends PushDomainSpecificStore<SmtpEmailConfig> {
+public class SmtpEmailConfigStore extends DomainSpecificStore<SmtpEmailConfig> {
 
   public static final String SMTP_EMAIL_CONFIG_DESIGN_NAME = "smtp-email-config";
 
 
-  public SmtpEmailConfigStore(DomainDatabaseConfig databaseConfig) {
-    super(databaseConfig, SmtpEmailConfig.class);
+  public SmtpEmailConfigStore(ExecutionManager executionManager) {
+    super(executionManager, SmtpEmailConfig.class);
   }
 
   @Override
@@ -18,7 +18,7 @@ public class SmtpEmailConfigStore extends PushDomainSpecificStore<SmtpEmailConfi
     return SMTP_EMAIL_CONFIG_DESIGN_NAME;
   }
 
-  public static String toDocumentId(Domain domain) {
+  public static String toDocumentId(DomainProfileEntity domain) {
     return String.format("%s:smtp-email-config", domain.getDomainId());
   }
 }

@@ -8,7 +8,7 @@ project(":tioga-push-plugin-xmpp") {
 
   dependencies {
 
-    compile(project(":tioga-push-common"))
+    compile(project(":tioga-push-kernel"))
 
     compile("jivesoftware:smackx:3.1.0")
 

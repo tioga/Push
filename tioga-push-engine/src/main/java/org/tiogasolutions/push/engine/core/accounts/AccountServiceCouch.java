@@ -6,10 +6,10 @@
 
 package org.tiogasolutions.push.engine.core.accounts;
 
-import org.tiogasolutions.push.common.accounts.Account;
-import org.tiogasolutions.push.common.accounts.AccountStore;
-import org.tiogasolutions.push.common.accounts.actions.*;
-import org.tiogasolutions.push.common.accounts.queries.AccountQuery;
+import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.accounts.AccountStore;
+import org.tiogasolutions.push.kernel.accounts.actions.*;
+import org.tiogasolutions.push.kernel.accounts.queries.AccountQuery;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.dev.common.exceptions.*;

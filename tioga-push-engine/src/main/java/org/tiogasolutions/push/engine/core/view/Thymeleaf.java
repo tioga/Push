@@ -1,6 +1,6 @@
 package org.tiogasolutions.push.engine.core.view;
 
-import org.tiogasolutions.push.common.system.Session;
+import org.tiogasolutions.push.kernel.system.Session;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -2,12 +2,14 @@ package org.tiogasolutions.push.engine.core.system;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.tiogasolutions.couchace.core.api.response.EntityDocument;
 import org.tiogasolutions.dev.common.DateUtils;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.requests.PushRequest;
-import org.tiogasolutions.push.common.requests.QueryResult;
-import org.tiogasolutions.push.common.system.AppContext;
+import org.tiogasolutions.push.kernel.accounts.DomainStore;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.kernel.requests.QueryResult;
+import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,10 +24,13 @@ public class CpJobs {
   private static final AtomicBoolean runningCompact = new AtomicBoolean(false);
   private static final AtomicBoolean runningPruner = new AtomicBoolean(false);
 
-  private final AppContext appContext;
+  private final DomainStore domainStore;
+  private final PushRequestStore pushRequestStore;
 
-  public CpJobs(AppContext appContext) {
-    this.appContext = appContext;
+  @Autowired
+  public CpJobs(DomainStore domainStore, PushRequestStore pushRequestStore) {
+    this.domainStore = domainStore;
+    this.pushRequestStore = pushRequestStore;
   }
 
   public void cleanAndCompactDatabase() {
@@ -46,8 +51,8 @@ public class CpJobs {
       if (runningPruner.compareAndSet(false, true)) {
         LocalDateTime now = DateUtils.currentLocalDateTime();
 
-        List<Domain> domains = appContext.getDomainStore().getAll();
-        for (Domain domain : domains) {
+        List<DomainProfileEntity> domains = domainStore.getAll();
+        for (DomainProfileEntity domain : domains) {
           pruneEvents(now, domain);
         }
       }
@@ -58,13 +63,13 @@ public class CpJobs {
     }
   }
 
-  private void pruneEvents(LocalDateTime now, Domain domain) {
+  private void pruneEvents(LocalDateTime now, DomainProfileEntity domain) {
     if (domain.getRetentionDays() <= 0) {
       return;
     }
 
     int count = 0;
-    QueryResult<PushRequest> queryResult = appContext.getPushRequestStore().getByClient(domain, 100);
+    QueryResult<PushRequest> queryResult = pushRequestStore.getByClient(domain, 100);
 
     do {
       List<EntityDocument<PushRequest>> list = queryResult.getDocumentList();
@@ -78,12 +83,12 @@ public class CpJobs {
     } while (queryResult.nextPage());
   }
 
-  private void pruneEvents(LocalDateTime now, Domain domain, EntityDocument<PushRequest> document) {
+  private void pruneEvents(LocalDateTime now, DomainProfileEntity domain, EntityDocument<PushRequest> document) {
     int days = domain.getRetentionDays();
     PushRequest pushRequest = document.getEntity();
     LocalDateTime later = pushRequest.getCreatedAt().plusWeeks(days);
     if (now.isAfter(later)) {
-      appContext.getPushRequestStore().deleteByDocumentId(
+      pushRequestStore.deleteByDocumentId(
         document.getDocumentId(),
         document.getDocumentRevision()
       );

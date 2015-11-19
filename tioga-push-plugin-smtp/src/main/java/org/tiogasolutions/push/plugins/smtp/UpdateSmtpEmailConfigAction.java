@@ -6,8 +6,8 @@
 
 package org.tiogasolutions.push.plugins.smtp;
 
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.config.SmtpAuthType;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.config.SmtpAuthType;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.push.pub.internal.ValidatableAction;
@@ -17,7 +17,7 @@ import javax.ws.rs.core.MultivaluedMap;
 
 public class UpdateSmtpEmailConfigAction implements ValidatableAction {
 
-  private final Domain domain;
+  private final DomainProfileEntity domain;
 
   private final String userName;
   private final String password;
@@ -30,7 +30,7 @@ public class UpdateSmtpEmailConfigAction implements ValidatableAction {
   private String testToAddress;
   private String testFromAddress;
 
-  public UpdateSmtpEmailConfigAction(Domain domain, MultivaluedMap<String, String> formParams) {
+  public UpdateSmtpEmailConfigAction(DomainProfileEntity domain, MultivaluedMap<String, String> formParams) {
 
     this.domain = domain;
 
@@ -52,7 +52,7 @@ public class UpdateSmtpEmailConfigAction implements ValidatableAction {
     this.recipientOverride = formParams.getFirst("recipientOverride");
   }
 
-  public UpdateSmtpEmailConfigAction(Domain domain, String userName, String password, SmtpAuthType authType, String serverName, String portNumber, String testToAddress, String testFromAddress, String recipientOverride) {
+  public UpdateSmtpEmailConfigAction(DomainProfileEntity domain, String userName, String password, SmtpAuthType authType, String serverName, String portNumber, String testToAddress, String testFromAddress, String recipientOverride) {
 
     this.domain = domain;
 
@@ -89,7 +89,7 @@ public class UpdateSmtpEmailConfigAction implements ValidatableAction {
     return errors;
   }
 
-  public Domain getDomain() {
+  public DomainProfileEntity getDomain() {
     return domain;
   }
 

@@ -1,17 +1,19 @@
 package org.tiogasolutions.push.v2.integration.tests;
 
 import org.testng.SkipException;
-import org.tiogasolutions.push.pub.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import org.tiogasolutions.dev.common.BeanUtils;
+import org.tiogasolutions.dev.common.EnvUtils;
 import org.tiogasolutions.push.client.LivePushServerClient;
+import org.tiogasolutions.push.pub.SesEmailPush;
+import org.tiogasolutions.push.pub.SmtpEmailPush;
+import org.tiogasolutions.push.pub.TwilioSmsPush;
+import org.tiogasolutions.push.pub.XmppPush;
 import org.tiogasolutions.push.pub.common.PingPush;
 import org.tiogasolutions.push.pub.common.PushResponse;
 import org.tiogasolutions.push.pub.common.RequestStatus;
 import org.tiogasolutions.push.test.TestFactory;
-import org.tiogasolutions.dev.common.BeanUtils;
-import org.tiogasolutions.dev.common.EnvUtils;
-import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
@@ -24,10 +26,10 @@ public class IntegrationTestVersion2 {
 
   @BeforeClass
   public void beforeClass() throws Exception {
-    testFactory = TestFactory.get();
+    testFactory = new TestFactory(0);
 
     try {
-      String url = "http://www.cosmicpush.com/api/v2";
+      String url = "http://localhost:39009/push-server/client/api/v2";
       String username = EnvUtils.requireProperty("TIOGA_TEST_DOMAIN_NAME");
       String password = EnvUtils.requireProperty("TIOGA_TEST_DOMAIN_PASS");
       gateway = new LivePushServerClient(url, username, password);
@@ -35,21 +37,6 @@ public class IntegrationTestVersion2 {
     } catch (Exception ex) {
       throw new SkipException("Authentication required for test.", ex);
     }
-  }
-
-  public void testNotificationPush() throws Exception {
-    LqNotificationPush push = LqNotificationPush.newPush("integration-test", "Notice what I'm doing?", "tracking-id", callbackUrl, BeanUtils.toMap("unit-test:true"));
-    PushResponse response = gateway.send(push);
-    assertEquals(response.getRequestStatus(), RequestStatus.pending);
-
-    push = LqNotificationPush.newPush("integration-test", "Now I want to share some info", "tracking-id", callbackUrl, BeanUtils.toMap("day:Sunday", "size:Large"));
-    response = gateway.send(push);
-    assertEquals(response.getRequestStatus(), RequestStatus.pending);
-
-    String msg = ExceptionUtils.toString(new IllegalArgumentException("I think I might have broken it!"));
-    push = LqNotificationPush.newPush("integration-test", "Something really bad happened here!", "tracking-id", callbackUrl, BeanUtils.toMap("priority:Urgent", "exception:" + msg));
-    response = gateway.send(push);
-    assertEquals(response.getRequestStatus(), RequestStatus.pending);
   }
 
   public void testXmppPush() throws Exception {
@@ -78,19 +65,6 @@ public class IntegrationTestVersion2 {
 
   public void testSmtpEmailPush() throws Exception {
     SmtpEmailPush push = SmtpEmailPush.newPush(
-        "Test Parr <test@jacobparr.com>",
-        "Bot Parr <bot@jacobparr.com>",
-        "This is a test",
-        "Are you there?",
-        callbackUrl, BeanUtils.toMap("unit-test:true"));
-
-    PushResponse response = gateway.send(push);
-    assertNotNull(response);
-    assertEquals(response.getRequestStatus(), RequestStatus.pending);
-  }
-
-  public void testEmailPush() throws Exception {
-    EmailPush push = EmailPush.newPush(
         "Test Parr <test@jacobparr.com>",
         "Bot Parr <bot@jacobparr.com>",
         "This is a test",

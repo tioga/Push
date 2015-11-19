@@ -6,57 +6,47 @@
 
 package org.tiogasolutions.push.test;
 
-import org.tiogasolutions.push.common.accounts.Account;
-import org.tiogasolutions.push.common.accounts.AccountStore;
-import org.tiogasolutions.push.common.accounts.DomainStore;
-import org.tiogasolutions.push.common.accounts.actions.CreateAccountAction;
-import org.tiogasolutions.push.common.actions.CreateDomainAction;
-import org.tiogasolutions.push.common.clients.Domain;
-import org.tiogasolutions.push.common.plugins.PluginContext;
-import org.tiogasolutions.push.common.plugins.PushProcessor;
-import org.tiogasolutions.push.common.requests.PushRequest;
-import org.tiogasolutions.push.common.requests.PushRequestStore;
-import org.tiogasolutions.push.common.system.AppContext;
-import org.tiogasolutions.push.common.system.CpCouchServer;
-import org.tiogasolutions.push.common.system.DomainDatabaseConfig;
-import org.tiogasolutions.push.common.system.Session;
-import org.tiogasolutions.push.jackson.CpObjectMapper;
-import org.tiogasolutions.push.pub.common.Push;
-import org.tiogasolutions.push.pub.common.UserAgent;
-import org.tiogasolutions.push.pub.LqNotificationPush;
-import org.tiogasolutions.push.pub.SmtpEmailPush;
 import org.tiogasolutions.couchace.core.api.CouchDatabase;
 import org.tiogasolutions.couchace.core.api.CouchServer;
 import org.tiogasolutions.couchace.core.api.request.CouchFeature;
 import org.tiogasolutions.couchace.core.api.request.CouchFeatureSet;
 import org.tiogasolutions.dev.common.DateUtils;
 import org.tiogasolutions.lib.couchace.DefaultCouchServer;
-import org.tiogasolutions.lib.couchace.support.CouchUtils;
+import org.tiogasolutions.push.jackson.CpObjectMapper;
+import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.accounts.AccountStore;
+import org.tiogasolutions.push.kernel.accounts.DomainStore;
+import org.tiogasolutions.push.kernel.accounts.actions.CreateAccountAction;
+import org.tiogasolutions.push.kernel.actions.CreateDomainAction;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.config.CouchServersConfig;
+import org.tiogasolutions.push.kernel.execution.ExecutionManager;
+import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.kernel.requests.PushRequestStore;
+import org.tiogasolutions.push.kernel.system.PluginManager;
+import org.tiogasolutions.push.kernel.system.PushCouchServer;
+import org.tiogasolutions.push.kernel.system.Session;
+import org.tiogasolutions.push.pub.SmtpEmailPush;
+import org.tiogasolutions.push.pub.common.Push;
+import org.tiogasolutions.push.pub.common.UserAgent;
 
-import java.net.URI;
 import java.time.ZoneId;
 import java.util.*;
 
 public class TestFactory {
 
-  private static TestFactory SINGLETON;
   public static final ZoneId westCoastTimeZone = DateUtils.PDT;
 
-  private final DomainDatabaseConfig databaseConfig;
-  private final CpCouchServer couchServer;
+  private final CouchServersConfig couchServersConfig;
+  private final PushCouchServer couchServer;
   private final CpObjectMapper objectMapper;
   private final AccountStore accountStore;
   private final DomainStore domainStore;
-  private final PushRequestStore pushRequestStore;
+  private final PluginManager pluginManager;
 
-  public static TestFactory get() throws Exception {
-    if (SINGLETON == null) {
-      SINGLETON = new TestFactory();
-    }
-    return SINGLETON;
-  }
+  private final ExecutionManager executionManager;
 
-  public TestFactory() throws Exception {
+  public TestFactory(int expectedPluginCount) {
 
     objectMapper = new CpObjectMapper();
 
@@ -76,16 +66,36 @@ public class TestFactory {
       }
     }
 
-    couchServer = new CpCouchServer();
-    databaseConfig = new DomainDatabaseConfig(couchServer, usrDatabase);
+    couchServer = new PushCouchServer();
 
-    accountStore = new AccountStore(couchServer, sysDatabase);
-    domainStore = new DomainStore(couchServer, sysDatabase);
-    pushRequestStore = new PushRequestStore(databaseConfig);
+    couchServersConfig = new CouchServersConfig();
+    couchServersConfig.setMasterUrl("http://localhost:5984");
+    couchServersConfig.setMasterUserName("test-user");
+    couchServersConfig.setMasterPassword("test-user");
+    couchServersConfig.setMasterDatabaseName("test-push");
+
+    couchServersConfig.setDomainUrl("http://localhost:5984");
+    couchServersConfig.setDomainUserName("app-user");
+    couchServersConfig.setDomainPassword("app-user");
+    couchServersConfig.setDomainDatabasePrefix("test-push-");
+
+    accountStore = new AccountStore(couchServer, couchServersConfig);
+    domainStore = new DomainStore(couchServer, couchServersConfig);
+
+    executionManager = new MockExecutionManager(this);
+    pluginManager = new PluginManager(executionManager, expectedPluginCount);
   }
 
-  public DomainDatabaseConfig getDatabaseConfig() {
-    return databaseConfig;
+  public ExecutionManager getExecutionManager() {
+    return executionManager;
+  }
+
+  public PushCouchServer getCouchServer() {
+    return couchServer;
+  }
+
+  public CouchServersConfig getCouchServersConfig() {
+    return couchServersConfig;
   }
 
   public CpObjectMapper getObjectMapper() {
@@ -97,7 +107,7 @@ public class TestFactory {
   }
 
   public PushRequestStore getPushRequestStore() {
-    return pushRequestStore;
+    return new PushRequestStore(executionManager);
   }
 
   public DomainStore getDomainStore() {
@@ -123,68 +133,37 @@ public class TestFactory {
     return new Account(createAccount);
   }
 
-  public Domain createDomain(Account account) {
+  public DomainProfileEntity createDomain(Account account) {
     CreateDomainAction createClient = new CreateDomainAction(account, "some-key", "some-password");
-    Domain domain = account.add(createClient);
+    DomainProfileEntity domain = account.add(createClient);
     domainStore.create(domain);
     return domain;
   }
 
-  public List<PushRequest> createPushRequests_Notifications(Domain domain) throws Exception {
-    List<PushRequest> requests = new ArrayList<>();
-
-    Push push = LqNotificationPush.newPush("Something bad happened", null, "test:true", "boy:girl", "color:red");
-    PushRequest pushRequest = new PushRequest(AppContext.CURRENT_API_VERSION, domain, push);
-    pushRequestStore.create(pushRequest);
-    requests.add(pushRequest);
-
-    return requests;
-  }
-
-  public List<PushRequest> createPushRequests_Emails(Domain domain) throws Exception {
+  public List<PushRequest> createPushRequests_Emails(DomainProfileEntity domain) throws Exception {
     List<PushRequest> requests = new ArrayList<>();
 
     Push push = SmtpEmailPush.newPush("to@example.com", "from@example.com", "This is the subject", "<html><body><h1>Hello World</h1></body></html>", null);
-    PushRequest pushRequest = new PushRequest(AppContext.CURRENT_API_VERSION, domain, push);
-    pushRequestStore.create(pushRequest);
+    PushRequest pushRequest = new PushRequest(Push.CURRENT_API_VERSION, domain, push);
+    getPushRequestStore().create(pushRequest);
     requests.add(pushRequest);
 
     return requests;
   }
 
-  public List<PushRequest> createPushRequests(Domain domain) throws Exception {
+  public List<PushRequest> createPushRequests(DomainProfileEntity domain) throws Exception {
     Set<PushRequest> requests = new TreeSet<>();
 
     requests.addAll(createPushRequests_Emails(domain));
-    requests.addAll(createPushRequests_Notifications(domain));
 
     return new ArrayList<>(requests);
   }
 
-  public PluginContext pluginContext(TestFactory testFactory) {
-    return new PluginContext() {
-      @Override public PushRequestStore getPushRequestStore() {
-        return testFactory.getPushRequestStore();
-      }
-      @Override public DomainStore getDomainStore() { return testFactory.getDomainStore(); }
-      @Override public CpObjectMapper getObjectMapper() {
-        return testFactory.getObjectMapper();
-      }
-      @Override public DomainDatabaseConfig getDatabaseConfig() {
-        return testFactory.getDatabaseConfig();
-      }
-      @Override public URI getBaseURI() {
-        return URI.create("http://localhost:8080/push-server");
-      }
-      @Override public PushProcessor getPushProcessor() {
-        return null;
-      }
-      @Override public AppContext getAppContext() { return null; }
-      @Override public void setLastMessage(String message) {}
-    };
-  }
-
   public Session createSession() {
     return new Session(0, "test@example.com");
+  }
+
+  public PluginManager getPluginManager() {
+    return pluginManager;
   }
 }

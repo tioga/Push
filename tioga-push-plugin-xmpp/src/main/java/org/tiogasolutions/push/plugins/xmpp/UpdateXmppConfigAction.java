@@ -6,7 +6,7 @@
 
 package org.tiogasolutions.push.plugins.xmpp;
 
-import org.tiogasolutions.push.common.clients.Domain;
+import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.push.pub.internal.ValidatableAction;
 import org.tiogasolutions.push.pub.internal.ValidationUtils;
@@ -15,7 +15,7 @@ import javax.ws.rs.core.MultivaluedMap;
 
 public class UpdateXmppConfigAction implements ValidatableAction {
 
-  private final Domain domain;
+  private final DomainProfileEntity domain;
 
   private final String username;
   private final String password;
@@ -25,7 +25,7 @@ public class UpdateXmppConfigAction implements ValidatableAction {
   private String port;
   private String serviceName;
 
-  public UpdateXmppConfigAction(Domain domain, MultivaluedMap<String, String> formParams) {
+  public UpdateXmppConfigAction(DomainProfileEntity domain, MultivaluedMap<String, String> formParams) {
 
     this.domain = domain;
 
@@ -40,7 +40,7 @@ public class UpdateXmppConfigAction implements ValidatableAction {
     this.recipientOverride = formParams.getFirst("recipientOverride");
   }
 
-  public UpdateXmppConfigAction(Domain domain, String username, String password, String host, String port, String serviceName, String testAddress, String recipientOverride) {
+  public UpdateXmppConfigAction(DomainProfileEntity domain, String username, String password, String host, String port, String serviceName, String testAddress, String recipientOverride) {
 
     this.domain = domain;
 
@@ -66,7 +66,7 @@ public class UpdateXmppConfigAction implements ValidatableAction {
     return errors;
   }
 
-  public Domain getDomain() {
+  public DomainProfileEntity getDomain() {
     return domain;
   }
 

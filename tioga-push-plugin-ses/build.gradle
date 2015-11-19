@@ -8,7 +8,7 @@ project(":tioga-push-plugin-ses") {
 
   dependencies {
 
-    compile(project(":tioga-push-common"))
+    compile(project(":tioga-push-kernel"))
 
     compile("com.amazonaws:aws-java-sdk:1.9.31")
 

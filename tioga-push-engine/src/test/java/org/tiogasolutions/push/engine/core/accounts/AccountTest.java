@@ -6,9 +6,9 @@
 
 package org.tiogasolutions.push.engine.core.accounts;
 
-import org.tiogasolutions.push.common.accounts.Account;
-import org.tiogasolutions.push.common.accounts.AccountStore;
-import org.tiogasolutions.push.common.accounts.actions.CreateAccountAction;
+import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.accounts.AccountStore;
+import org.tiogasolutions.push.kernel.accounts.actions.CreateAccountAction;
 import org.tiogasolutions.push.test.TestFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -23,7 +23,7 @@ public class AccountTest {
 
   @BeforeClass
   public void beforeClass() throws Exception {
-    testFactory = TestFactory.get();
+    testFactory = new TestFactory(4);
     accountStore = testFactory.getAccountStore();
   }
 
