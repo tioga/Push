@@ -148,7 +148,7 @@
           <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs/4.1.8/tioga-lib-jaxrs-4.1.8.jar" />
           <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-servlet/4.1.6/tioga-lib-servlet-4.1.6.jar" />
           <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs-jackson/5.1.6/tioga-lib-jaxrs-jackson-5.1.6.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/app/tioga-app-common/2.0.3/tioga-app-common-2.0.3.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.app/tioga-app-common/2.0.2/b8bc5d03a54eaab86c380f5b22e1cecebb833767/tioga-app-common-2.0.2.jar" />
           <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-jackson/4.1.11/tioga-dev-jackson-4.1.11.jar" />
           <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/apis/tioga-apis-bitly/1.1.12/tioga-apis-bitly-1.1.12.jar" />
           <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-couchace/5.0.13/tioga-lib-couchace-5.0.13.jar" />
