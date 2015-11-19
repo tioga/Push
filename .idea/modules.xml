@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Push.iml" filepath="$PROJECT_DIR$/Push.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-client/tioga-push-client.iml" filepath="$PROJECT_DIR$/tioga-push-client/tioga-push-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tioga-push-kernel/tioga-push-common.iml" filepath="$PROJECT_DIR$/tioga-push-kernel/tioga-push-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-engine/tioga-push-engine.iml" filepath="$PROJECT_DIR$/tioga-push-engine/tioga-push-engine.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-jackson/tioga-push-jackson.iml" filepath="$PROJECT_DIR$/tioga-push-jackson/tioga-push-jackson.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-push-kernel/tioga-push-kernel.iml" filepath="$PROJECT_DIR$/tioga-push-kernel/tioga-push-kernel.iml" />
