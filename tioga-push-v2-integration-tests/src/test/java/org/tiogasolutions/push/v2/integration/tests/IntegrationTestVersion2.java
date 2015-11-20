@@ -19,7 +19,7 @@ import static org.testng.Assert.*;
 public class IntegrationTestVersion2 {
 
   public static void main(String...args) throws Exception {
-    
+
     String url = "http://localhost:39009/push-server/client/api/v2";
     IntegrationTestVersion2 tests = new IntegrationTestVersion2(url);
 
