@@ -17,6 +17,8 @@ project(":tioga-push-server-grizzly") {
 
     // required by Jersey-Spring's stupid attempt to check for a ServletContext
 	  runtime("javax.servlet:javax.servlet-api:3.1.0")
+
+    testCompile("org.testng:testng:6.8.21")
   }
 
   configurations.all({

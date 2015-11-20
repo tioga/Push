@@ -10,20 +10,17 @@ import java.io.InputStream;
 
 public abstract class PluginSupport implements Plugin {
 
-  private final String pluginName;
-  private final PushType pushType;
+  protected final String pluginName;
+  protected final PushType pushType;
 
-  protected ExecutionManager executionManager;
+  protected final ExecutionManager executionManager;
 
-  public PluginSupport(PushType pushType) {
+  public PluginSupport(PushType pushType, ExecutionManager executionManager) {
     this.pushType = pushType;
+    this.executionManager = executionManager;
 
     String name = getClass().getPackage().getName();
     this.pluginName = name.substring(name.lastIndexOf(".")+1);
-  }
-
-  public final void init(ExecutionManager executionManager) {
-    this.executionManager = executionManager;
   }
 
   public final String getPluginName() {

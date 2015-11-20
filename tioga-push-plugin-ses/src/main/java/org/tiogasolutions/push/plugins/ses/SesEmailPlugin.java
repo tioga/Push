@@ -7,6 +7,7 @@ import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.push.kernel.KernelUtils;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.kernel.execution.ExecutionContext;
+import org.tiogasolutions.push.kernel.execution.ExecutionManager;
 import org.tiogasolutions.push.kernel.plugins.PluginSupport;
 import org.tiogasolutions.push.kernel.requests.PushRequest;
 import org.tiogasolutions.push.pub.SesEmailPush;
@@ -20,8 +21,8 @@ import static org.tiogasolutions.dev.common.StringUtils.nullToString;
 
 public class SesEmailPlugin extends PluginSupport {
 
-  public SesEmailPlugin() {
-    super(SesEmailPush.PUSH_TYPE);
+  public SesEmailPlugin(ExecutionManager executionManager) {
+    super(SesEmailPush.PUSH_TYPE, executionManager);
   }
 
   public SesEmailConfigStore getConfigStore() {

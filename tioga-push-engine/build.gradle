@@ -15,7 +15,6 @@ project(":tioga-push-engine") {
     compile project(":tioga-push-plugin-smtp")
     compile project(":tioga-push-plugin-xmpp")
     compile project(":tioga-push-plugin-twilio")
-    // compile project(":tioga-push-plugin-ocs-message")
 
     compile("org.tiogasolutions.dev:tioga-dev-common:+")
     compile("org.tiogasolutions.dev:tioga-dev-domain:+")
@@ -23,16 +22,22 @@ project(":tioga-push-engine") {
     compile("org.tiogasolutions.apis:tioga-apis-google:+")
 
     compile("org.tiogasolutions.lib:tioga-lib-jaxrs:+")
-    compile("org.tiogasolutions.lib:tioga-lib-servlet:+")
     compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:+")
 
     compile("org.tiogasolutions.app:tioga-app-common:+")
 
-    compile("org.slf4j:slf4j-simple:1.7.12")
     compile("org.thymeleaf.extras:thymeleaf-extras-java8time:2.1.0.RELEASE")
 
+    testCompile project(":tioga-push-test")
+    testCompile("org.glassfish.jersey.ext:jersey-spring3:2.17")
+    testCompile("org.springframework:spring-aop:4.1.6.RELEASE") {force = true}
+    testCompile("org.springframework:spring-core:4.1.6.RELEASE") {force = true}
+    testCompile("org.springframework:spring-beans:4.1.6.RELEASE") {force = true}
+    testCompile("org.springframework:spring-context:4.1.6.RELEASE") {force = true}
+
     testCompile("org.testng:testng:6.8.21")
-    testCompile(project(":tioga-push-test"))
+    testCompile("org.glassfish.jersey.test-framework:jersey-test-framework-core:2.17")
+    testCompile("org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-grizzly2:2.17")
   }
 
   configurations.all({

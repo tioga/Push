@@ -13,23 +13,32 @@ import org.tiogasolutions.push.pub.XmppPush;
 import org.tiogasolutions.push.pub.common.PingPush;
 import org.tiogasolutions.push.pub.common.PushResponse;
 import org.tiogasolutions.push.pub.common.RequestStatus;
-import org.tiogasolutions.push.test.TestFactory;
 
 import static org.testng.Assert.*;
 
-@Test
 public class IntegrationTestVersion2 {
 
-  private TestFactory testFactory;
+  public static void main(String...args) throws Exception {
+    
+    String url = "http://localhost:39009/push-server/client/api/v2";
+    IntegrationTestVersion2 tests = new IntegrationTestVersion2(url);
+
+    tests.testXmppPush();
+
+    tests.testTwilioSmsPush();
+
+    tests.testSesEmailPush();
+
+    tests.testSmtpEmailPush();
+
+    tests.testPingPush();
+  }
+
   private LivePushServerClient gateway;
   private String callbackUrl = null;
 
-  @BeforeClass
-  public void beforeClass() throws Exception {
-    testFactory = new TestFactory(0);
-
+  public IntegrationTestVersion2(String url) {
     try {
-      String url = "http://localhost:39009/push-server/client/api/v2";
       String username = EnvUtils.requireProperty("TIOGA_TEST_DOMAIN_NAME");
       String password = EnvUtils.requireProperty("TIOGA_TEST_DOMAIN_PASS");
       gateway = new LivePushServerClient(url, username, password);

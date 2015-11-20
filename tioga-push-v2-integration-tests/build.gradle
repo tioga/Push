@@ -10,7 +10,6 @@ project(":tioga-push-v2-integration-tests") {
 
     compile(project(":tioga-push-client"))
 
-    testCompile(project(":tioga-push-test"))
     testCompile("org.glassfish.jersey.core:jersey-client:2.17")
     testCompile("org.testng:testng:6.8.21")
   }

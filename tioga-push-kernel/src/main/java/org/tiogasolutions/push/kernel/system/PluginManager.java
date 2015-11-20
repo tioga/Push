@@ -8,24 +8,13 @@ import org.tiogasolutions.push.pub.common.PushType;
 
 import java.util.*;
 
-@Component
 public class PluginManager {
 
   private final Map<PushType,Plugin> map = new HashMap<>();
 
-  @Autowired
-  public PluginManager(ExecutionManager executionManager) {
-    this(executionManager, 4);
-  }
+  public PluginManager(List<Plugin> plugins) {
 
-  public PluginManager(ExecutionManager executionManager, int expectedCount) {
-
-    ServiceLoader<Plugin> loader = ServiceLoader.load(Plugin.class);
-    loader.reload();
-
-    for (Plugin plugin : loader) {
-      plugin.init(executionManager);
-
+    for (Plugin plugin : plugins) {
       PushType pushType = plugin.getPushType();
 
       if (map.containsKey(pushType)) {
@@ -33,11 +22,6 @@ public class PluginManager {
         throw new IllegalArgumentException(msg);
       }
       map.put(pushType, plugin);
-    }
-
-    if (map.size() < expectedCount) {
-      String msg = String.format("Expected at least %s plugins but only found %s %s", expectedCount, map.size(), map.keySet());
-      throw new IllegalStateException(msg);
     }
   }
 

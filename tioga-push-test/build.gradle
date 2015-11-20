@@ -9,7 +9,7 @@ project(":tioga-push-test") {
   dependencies {
     compile(project(":tioga-push-kernel"))
 
-    testCompile("org.testng:testng:6.8.21")
+    compile("org.testng:testng:6.8.21")
   }
 
   apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))

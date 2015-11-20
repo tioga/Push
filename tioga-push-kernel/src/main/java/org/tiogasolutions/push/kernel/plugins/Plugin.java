@@ -12,8 +12,6 @@ import java.io.IOException;
 
 public interface Plugin {
 
-  public void init(ExecutionManager executionManager);
-
   PushType getPushType();
   PluginConfig getConfig(DomainProfileEntity domainProfile);
 

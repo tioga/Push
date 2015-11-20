@@ -12,7 +12,6 @@ project(":tioga-push-client") {
 
     compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:+")
 
-    testCompile(project(":tioga-push-test"))
     testCompile("org.testng:testng:6.8.21")
   }
 

@@ -4,7 +4,7 @@ import ch.qos.logback.classic.Level;
 import org.slf4j.Logger;
 import org.tiogasolutions.app.common.AppPathResolver;
 import org.tiogasolutions.app.common.LogUtils;
-import org.tiogasolutions.push.engine.core.system.PushApplication;
+import org.tiogasolutions.push.engine.system.PushApplication;
 import org.tiogasolutions.runners.grizzly.GrizzlyServer;
 import org.tiogasolutions.runners.grizzly.GrizzlyServerConfig;
 import org.tiogasolutions.runners.grizzlyspring.ApplicationResolver;

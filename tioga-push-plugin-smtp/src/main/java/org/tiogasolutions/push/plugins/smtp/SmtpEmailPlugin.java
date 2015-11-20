@@ -23,8 +23,8 @@ public class SmtpEmailPlugin extends PluginSupport {
 
   private SmtpEmailConfigStore _configStore;
 
-  public SmtpEmailPlugin() {
-    super(SmtpEmailPush.PUSH_TYPE);
+  public SmtpEmailPlugin(ExecutionManager executionManager) {
+    super(SmtpEmailPush.PUSH_TYPE, executionManager);
   }
 
   public SmtpEmailConfigStore getConfigStore(ExecutionManager executionManager) {

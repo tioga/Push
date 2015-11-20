@@ -1,5 +1,7 @@
 package org.tiogasolutions.push.plugins.xmpp;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.tiogasolutions.dev.common.Formats;
 import org.tiogasolutions.dev.common.IoUtils;
 import org.tiogasolutions.push.kernel.KernelUtils;
@@ -17,10 +19,12 @@ import java.io.InputStream;
 
 import static org.tiogasolutions.dev.common.StringUtils.*;
 
+@Component
 public class XmppPlugin extends PluginSupport {
 
-  public XmppPlugin() {
-    super(XmppPush.PUSH_TYPE);
+  @Autowired
+  public XmppPlugin(ExecutionManager executionManager) {
+    super(XmppPush.PUSH_TYPE, executionManager);
   }
 
   public XmppConfigStore getConfigStore(ExecutionManager executionManager) {

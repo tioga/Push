@@ -6,29 +6,30 @@
 
 package org.tiogasolutions.push.plugins.smtp;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.tiogasolutions.push.kernel.accounts.Account;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.kernel.config.SmtpAuthType;
-import org.tiogasolutions.push.test.TestFactory;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.tiogasolutions.push.test.AbstractSpringTest;
+import org.tiogasolutions.push.test.TestFixture;
 
 import static org.testng.Assert.assertEquals;
 
 @Test
-public class UpdateSmtpEmailConfigActionTest {
+public class UpdateSmtpEmailConfigActionTest extends AbstractSpringTest {
 
-  private TestFactory testFactory;
+  @Autowired
+  TestFixture testFixture;
 
-  @BeforeClass
-  public void beforeClass() throws Exception {
-    testFactory = new TestFactory(1);
+  public UpdateSmtpEmailConfigActionTest() {
+    super(SmtpSpringTestConfig.class);
   }
 
   public void testUpdate() throws Exception {
 
-    Account account = testFactory.createAccount();
-    DomainProfileEntity domain = testFactory.createDomain(account);
+    Account account = testFixture.createAccount();
+    DomainProfileEntity domain = testFixture.createDomain(account);
 
     UpdateSmtpEmailConfigAction updateAction = new UpdateSmtpEmailConfigAction(
       domain,

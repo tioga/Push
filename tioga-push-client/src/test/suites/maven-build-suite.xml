@@ -15,13 +15,8 @@
   -->
 
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Cosmic Push Gateway Build Suite">
+<suite name="Build Suite">
   <test verbose="2" name="Test Suite" annotations="JDK">
-    <groups>
-      <run>
-        <exclude name="integration"  />
-      </run>
-    </groups>
     <packages>
       <package name="org.tiogasolutions.push.client.*"/>
     </packages>

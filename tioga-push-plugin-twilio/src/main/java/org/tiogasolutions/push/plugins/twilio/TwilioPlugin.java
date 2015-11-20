@@ -32,8 +32,8 @@ public class TwilioPlugin extends PluginSupport {
 
   private TwilioConfigStore _configStore;
 
-  public TwilioPlugin() {
-      super(TwilioSmsPush.PUSH_TYPE);
+  public TwilioPlugin(ExecutionManager executionManager) {
+      super(TwilioSmsPush.PUSH_TYPE, executionManager);
   }
 
   public TwilioConfigStore getConfigStore(ExecutionManager executionManager) {

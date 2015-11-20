@@ -49,12 +49,12 @@
     p:masterUrl="http://localhost:5984"
     p:masterUserName="app-user"
     p:masterPassword="app-user"
-    p:masterDatabaseName="push"
+    p:masterDatabaseName="tioga-push"
 
     p:domainUrl="http://localhost:5984"
     p:domainUserName="app-user"
     p:domainPassword="app-user"
-    p:domainDatabasePrefix="push-"
+    p:domainDatabasePrefix="tioga-push-"
   />
 
   <!--<bean class="org.tiogasolutions.notify.kernel.config.SystemConfiguration">-->

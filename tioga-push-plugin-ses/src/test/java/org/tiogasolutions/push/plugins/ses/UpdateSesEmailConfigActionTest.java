@@ -6,28 +6,29 @@
 
 package org.tiogasolutions.push.plugins.ses;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.tiogasolutions.push.kernel.accounts.Account;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
-import org.tiogasolutions.push.test.TestFactory;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.tiogasolutions.push.test.AbstractSpringTest;
+import org.tiogasolutions.push.test.TestFixture;
 
 import static org.testng.Assert.assertEquals;
 
 @Test
-public class UpdateSesEmailConfigActionTest {
+public class UpdateSesEmailConfigActionTest extends AbstractSpringTest {
 
-  private TestFactory testFactory;
+  @Autowired
+  private TestFixture testFixture;
 
-  @BeforeClass
-  public void beforeClass() throws Exception {
-    testFactory = new TestFactory(1);
+  public UpdateSesEmailConfigActionTest() {
+    super(SesSpringTestConfig.class);
   }
 
   public void testUpdate() throws Exception {
 
-    Account account = testFactory.createAccount();
-    DomainProfileEntity domain = testFactory.createDomain(account);
+    Account account = testFixture.createAccount();
+    DomainProfileEntity domain = testFixture.createDomain(account);
 
     UpdateSesEmailConfigAction updateAction = new UpdateSesEmailConfigAction(domain,
       "some-access-key-id", "some-secret-key", "email.us-west-2.amazonaws.com",
