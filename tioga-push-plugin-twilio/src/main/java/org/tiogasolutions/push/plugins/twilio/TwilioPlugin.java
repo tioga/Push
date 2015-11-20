@@ -6,10 +6,10 @@
 
 package org.tiogasolutions.push.plugins.twilio;
 
-import com.twilio.sdk.TwilioRestClient;
-import com.twilio.sdk.resource.factory.MessageFactory;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.tiogasolutions.dev.common.BeanUtils;
+import org.tiogasolutions.dev.common.Formats;
 import org.tiogasolutions.dev.common.IoUtils;
 import org.tiogasolutions.push.kernel.KernelUtils;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
@@ -23,15 +23,15 @@ import org.tiogasolutions.push.pub.common.Push;
 import javax.ws.rs.core.MultivaluedMap;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.tiogasolutions.dev.common.StringUtils.nullToString;
 
+@Component
 public class TwilioPlugin extends PluginSupport {
 
   private TwilioConfigStore _configStore;
 
+  @Autowired
   public TwilioPlugin(ExecutionManager executionManager) {
       super(TwilioSmsPush.PUSH_TYPE, executionManager);
   }
@@ -93,18 +93,19 @@ public class TwilioPlugin extends PluginSupport {
         return;
     }
 
-    String ACCOUNT_SID = config.getAccountSid();
-    String AUTH_TOKEN = config.getAuthToken();
+    String when = Formats.defaultStamp(new java.util.Date());
+    TwilioSmsPush push = TwilioSmsPush.newPush(
+      config.getFromPhoneNumber(), config.getRecipient(),
+      String.format("Twilio test message from Cosmic Push sent at %s.", when),
+      null, BeanUtils.toMap("smtp-test:true"));
 
-    TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
+    PushRequest pushRequest = new PushRequest(Push.CURRENT_API_VERSION, domainProfile, push);
+    executionManager.context().getPushRequestStore().create(pushRequest);
 
-    // Build a filter for the MessageList
-    List<NameValuePair> params = new ArrayList<NameValuePair>();
-    params.add(new BasicNameValuePair("Body", "Twilio test message from Cosmic Push"));
-    params.add(new BasicNameValuePair("To", config.getRecipient()));
-    params.add(new BasicNameValuePair("From", config.getFromPhoneNumber()));
-    MessageFactory messageFactory = client.getAccount().getMessageFactory();
-    messageFactory.create(params);
+    if (new TwilioDelegate(executionManager.context(), pushRequest, push, config).execute(false)) {
+      String msg = String.format("Test message sent from %s to %s:\n%s", config.getFromPhoneNumber(), config.getRecipient(), push.getMessage());
+      executionManager.context().setLastMessage(msg);
+    };
   }
 
   @Override

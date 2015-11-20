@@ -1,8 +1,6 @@
 package org.tiogasolutions.push.v2.integration.tests;
 
 import org.testng.SkipException;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 import org.tiogasolutions.dev.common.BeanUtils;
 import org.tiogasolutions.dev.common.EnvUtils;
 import org.tiogasolutions.push.client.LivePushServerClient;
@@ -23,6 +21,8 @@ public class IntegrationTestVersion2 {
     String url = "http://localhost:39009/push-server/client/api/v2";
     IntegrationTestVersion2 tests = new IntegrationTestVersion2(url);
 
+    tests.testPingPush();
+
     tests.testXmppPush();
 
     tests.testTwilioSmsPush();
@@ -30,8 +30,6 @@ public class IntegrationTestVersion2 {
     tests.testSesEmailPush();
 
     tests.testSmtpEmailPush();
-
-    tests.testPingPush();
   }
 
   private LivePushServerClient gateway;
@@ -49,13 +47,13 @@ public class IntegrationTestVersion2 {
   }
 
   public void testXmppPush() throws Exception {
-    XmppPush push = XmppPush.newPush("jacob.parr@gmail.com", "Are you there?", callbackUrl, BeanUtils.toMap("color:red", "test:yes"));
+    XmppPush push = XmppPush.newPush("me@jacobparr.com", "Are you there?", callbackUrl, BeanUtils.toMap("color:red", "test:yes"));
     PushResponse response = gateway.send(push);
     assertEquals(response.getRequestStatus(), RequestStatus.pending);
   }
 
   public void testTwilioSmsPush() throws Exception {
-    TwilioSmsPush push = TwilioSmsPush.newPush("7745677277", "5596407277", "test message", "http://example.com/callback");
+    TwilioSmsPush push = TwilioSmsPush.newPush("5593404897", "5596407277", "test message", "http://example.com/callback");
     PushResponse response = gateway.send(push);
     assertEquals(response.getRequestStatus(), RequestStatus.pending);
   }

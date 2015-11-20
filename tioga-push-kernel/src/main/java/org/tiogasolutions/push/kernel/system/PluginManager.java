@@ -1,8 +1,5 @@
 package org.tiogasolutions.push.kernel.system;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.tiogasolutions.push.kernel.execution.ExecutionManager;
 import org.tiogasolutions.push.kernel.plugins.Plugin;
 import org.tiogasolutions.push.pub.common.PushType;
 

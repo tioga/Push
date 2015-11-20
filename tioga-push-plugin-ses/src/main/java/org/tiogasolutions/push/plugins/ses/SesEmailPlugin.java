@@ -1,5 +1,7 @@
 package org.tiogasolutions.push.plugins.ses;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.tiogasolutions.dev.common.BeanUtils;
 import org.tiogasolutions.dev.common.Formats;
 import org.tiogasolutions.dev.common.IoUtils;
@@ -19,8 +21,10 @@ import java.io.InputStream;
 
 import static org.tiogasolutions.dev.common.StringUtils.nullToString;
 
+@Component
 public class SesEmailPlugin extends PluginSupport {
 
+  @Autowired
   public SesEmailPlugin(ExecutionManager executionManager) {
     super(SesEmailPush.PUSH_TYPE, executionManager);
   }
@@ -99,17 +103,18 @@ public class SesEmailPlugin extends PluginSupport {
     }
 
     String when = Formats.defaultStamp(new java.util.Date());
-    String msg = String.format("<html><head><title>Some Email</title></head><body style='background-color:red'><div style='background-color:#c0c0ff'><h1>Testing 123</h1>This is a test message from Cosmic Push sent at %s.</div></body>", when);
-    String subject = "ASES test message from Cosmic Push";
-    SesEmailPush push = SesEmailPush.newPush(toAddress, fromAddress, subject, msg, null, BeanUtils.toMap("ases-test:true"));
+    SesEmailPush push = SesEmailPush.newPush(toAddress, fromAddress,
+      "ASES test message from Cosmic Push",
+      String.format("<html><head><title>Some Email</title></head><body style='background-color:red'><div style='background-color:#c0c0ff'><h1>Testing 123</h1>This is a test message from Cosmic Push sent at %s.</div></body>", when),
+      null, BeanUtils.toMap("ases-test:true"));
 
     PushRequest pushRequest = new PushRequest(Push.CURRENT_API_VERSION, domainProfile, push);
     executionManager.context().getPushRequestStore().create(pushRequest);
 
-    new SesEmailDelegate(executionManager.context(), pushRequest, push, config).run();
-
-    msg = String.format("Test message sent from %s to %s", fromAddress, toAddress);
-    executionManager.context().setLastMessage(msg);
+    if (new SesEmailDelegate(executionManager.context(), pushRequest, push, config).execute(false)) {
+      String msg = String.format("Test message sent from %s to %s\n%s", fromAddress, toAddress, push.getEmailSubject());
+      executionManager.context().setLastMessage(msg);
+    }
   }
 
   @Override

@@ -95,16 +95,17 @@ public class XmppPlugin extends PluginSupport {
     }
 
     String when = Formats.defaultStamp(new java.util.Date());
-    String msg = String.format("This is a test message from Cosmic Push sent at %s.", when);
-    XmppPush push = XmppPush.newPush(recipient, msg, null, "xmpp-test:true");
+    XmppPush push = XmppPush.newPush(recipient,
+      String.format("XMPP test message from Cosmic Push sent at %s.", when),
+      null, "xmpp-test:true");
 
     PushRequest pushRequest = new PushRequest(Push.CURRENT_API_VERSION, domainProfile, push);
     executionManager.context().getPushRequestStore().create(pushRequest);
 
-    new XmppDelegate(executionManager.context(), pushRequest, push, config).run();
-
-    msg = String.format("Test message sent to %s:\n%s", recipient, msg);
-    executionManager.context().setLastMessage(msg);
+    if (new XmppDelegate(executionManager.context(), pushRequest, push, config).execute(false)) {
+      String msg = String.format("Test message sent from %s to %s:\n%s", config.getUsername(), recipient, push.getMessage());
+      executionManager.context().setLastMessage(msg);
+    }
   }
 
   @Override

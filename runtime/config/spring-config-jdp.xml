@@ -16,6 +16,7 @@
        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
   <task:annotation-driven/>
+  <context:component-scan base-package="org.tiogasolutions.push"/>
 
   <context:property-placeholder properties-ref="envProperties"/>
   <util:properties id="envProperties">
@@ -61,6 +62,15 @@
     <!--<property name="accessControlAllowOrigin" value="${system.config.accessControlAllowOrigin}"/>-->
   <!--</bean>-->
 
-  <context:component-scan base-package="org.tiogasolutions.push"/>
+  <bean class="org.tiogasolutions.push.kernel.system.PluginManager">
+    <constructor-arg>
+      <list>
+        <ref bean="xmppPlugin"/>
+        <ref bean="sesEmailPlugin"/>
+        <ref bean="smtpEmailPlugin"/>
+        <ref bean="twilioPlugin"/>
+      </list>
+    </constructor-arg>
+  </bean>
 
 </beans>

@@ -6,7 +6,13 @@
 
 package org.tiogasolutions.push.plugins.xmpp;
 
-import org.jivesoftware.smack.XMPPException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jivesoftware.smack.SmackException;
+import org.jivesoftware.smack.packet.Message;
+import org.jivesoftware.smack.packet.Presence;
+import org.jivesoftware.smack.tcp.XMPPTCPConnection;
+import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
@@ -17,6 +23,8 @@ import org.tiogasolutions.push.pub.XmppPush;
 import org.tiogasolutions.push.pub.common.RequestStatus;
 
 public class XmppDelegate extends AbstractDelegate {
+
+  private static final Log log = LogFactory.getLog(XmppDelegate.class);
 
   private final XmppPush push;
   private final XmppConfig config;
@@ -35,9 +43,7 @@ public class XmppDelegate extends AbstractDelegate {
     return pushRequest.processed(apiMessage);
   }
 
-  public String sendMessage() throws XMPPException {
-
-    XmppFactory factory = new XmppFactory(config);
+  public String sendMessage() throws Exception {
 
     String message = push.getMessage();
     BitlyApis bitlyApis = executionContext.getBean(BitlyApis.class);
@@ -45,13 +51,52 @@ public class XmppDelegate extends AbstractDelegate {
 
     if (StringUtils.isNotBlank(config.getRecipientOverride())) {
       // This is NOT a "production" request.
-      factory.sendTo(config.getRecipientOverride(), message);
+      sendTo(config.getRecipientOverride(), message);
       return String.format("Request sent to recipient override, %s.", config.getRecipientOverride());
 
     } else {
       // This IS a "production" request.
-      factory.sendTo(push.getRecipient(), message);
+      sendTo(push.getRecipient(), message);
       return null;
+    }
+  }
+
+  public synchronized void sendTo(final String recipient, final String message) throws Exception {
+
+    log.info(String.format("%s: %s", recipient, message));
+    XMPPTCPConnection connection = null;
+
+    try {
+      XMPPTCPConnectionConfiguration.Builder builder = XMPPTCPConnectionConfiguration.builder();
+      builder.setUsernameAndPassword(config.getUsername(), config.getPassword());
+      builder.setHost(config.getHost());
+      builder.setPort(config.getPortInt());
+      builder.setServiceName(config.getServiceName());
+
+      connection = new XMPPTCPConnection(builder.build());
+      connection.setPacketReplyTimeout(30 * 1000);
+
+      connection.connect();
+      connection.login();
+      connection.sendStanza(new Presence(Presence.Type.available));
+
+      Message jabberMessage = new Message(recipient, Message.Type.chat);
+      jabberMessage.setBody(message);
+
+      connection.sendStanza(jabberMessage);
+
+    } finally {
+      disconnect(connection);
+    }
+  }
+
+  private void disconnect(XMPPTCPConnection connection) {
+    try {
+      if (connection != null && connection.isConnected()) {
+        connection.disconnect(new Presence(Presence.Type.unavailable));
+      }
+    } catch (SmackException.NotConnectedException ignored) {
+      /* ignored */
     }
   }
 }

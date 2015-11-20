@@ -15,10 +15,10 @@ public class ExecutionManager implements BeanFactoryAware {
 
   private BeanFactory beanFactory;
 
-  private final ThreadLocal<ExecutionContext> threadLocal;
+  private final InheritableThreadLocal<ExecutionContext> threadLocal;
 
   public ExecutionManager() {
-    threadLocal = new ThreadLocal<>();
+    threadLocal = new InheritableThreadLocal<>();
   }
 
   public void removeExecutionContext() {

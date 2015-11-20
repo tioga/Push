@@ -7,6 +7,7 @@ package org.tiogasolutions.push.engine.resources.manage.account;
 
 import org.tiogasolutions.push.kernel.accounts.Account;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
+import org.tiogasolutions.push.kernel.execution.ExecutionManager;
 import org.tiogasolutions.push.kernel.plugins.Plugin;
 import org.tiogasolutions.push.kernel.plugins.PluginConfig;
 import org.tiogasolutions.push.kernel.system.PluginManager;
@@ -20,11 +21,11 @@ public class ManageAccountModel {
   private final Account account;
   private final List<DomainModel> domains = new ArrayList<>();
 
-  public ManageAccountModel(PluginManager pluginManager, Account account, DomainProfileEntity...domainProfiles) throws IOException {
-    this(pluginManager, account, Arrays.asList(domainProfiles));
+  public ManageAccountModel(ExecutionManager executionManager, PluginManager pluginManager, Account account, DomainProfileEntity...domainProfiles) throws IOException {
+    this(executionManager, pluginManager, account, Arrays.asList(domainProfiles));
   }
 
-  public ManageAccountModel(PluginManager pluginManager, Account account, List<DomainProfileEntity> domainProfiles) throws IOException {
+  public ManageAccountModel(ExecutionManager executionManager, PluginManager pluginManager, Account account, List<DomainProfileEntity> domainProfiles) throws IOException {
     this.account = account;
 
     for (DomainProfileEntity domainProfile : domainProfiles) {
@@ -32,11 +33,17 @@ public class ManageAccountModel {
       this.domains.add(domainModel);
 
       for (Plugin plugin : pluginManager.getPlugins()) {
-        PluginConfig config = plugin.getConfig(domainProfile);
-        if (config != null) {
-          domainModel.enabledTypes.add(plugin.getPushType());
-        } else {
-          domainModel.disabledTypes.add(plugin.getPushType());
+        DomainProfileEntity oldProfile = executionManager.context().getDomain();
+        executionManager.context().setDomain(domainProfile);
+        try {
+          PluginConfig config = plugin.getConfig(domainProfile);
+          if (config != null) {
+            domainModel.enabledTypes.add(plugin.getPushType());
+          } else {
+            domainModel.disabledTypes.add(plugin.getPushType());
+          }
+        } finally {
+          executionManager.context().setDomain(oldProfile);
         }
       }
     }

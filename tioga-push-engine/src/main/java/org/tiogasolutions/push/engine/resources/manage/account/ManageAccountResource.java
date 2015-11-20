@@ -48,7 +48,7 @@ public class ManageAccountResource {
     Account account = execContext.getAccount();
     List<DomainProfileEntity> domains = execContext.getDomainStore().getDomains(account);
 
-    ManageAccountModel model = new ManageAccountModel(pluginManager, account, domains);
+    ManageAccountModel model = new ManageAccountModel(executionManager, pluginManager, account, domains);
     return new Thymeleaf(execContext.getSession(), ThymeleafViewFactory.MANAGE_ACCOUNT, model);
   }
 

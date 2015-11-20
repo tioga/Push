@@ -99,7 +99,7 @@ public class ThymeleafTests extends AbstractSpringTest {
 
     Account account = testFactory.createAccount();
     DomainProfileEntity domainProfile = testFactory.createDomain(account);
-    ManageAccountModel model = new ManageAccountModel(pluginManager, account, domainProfile);
+    ManageAccountModel model = new ManageAccountModel(executionManager, pluginManager, account, domainProfile);
 
     Thymeleaf leaf = new Thymeleaf(testFactory.createSession(), ThymeleafViewFactory.MANAGE_ACCOUNT, model);
     msgBodyWriter.writeTo(leaf, writer);

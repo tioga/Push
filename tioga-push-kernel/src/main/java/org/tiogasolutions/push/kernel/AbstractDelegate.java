@@ -50,7 +50,8 @@ public abstract class AbstractDelegate implements Runnable {
     execute(true);
   }
 
-  private void execute(boolean retry) {
+  public boolean execute(boolean retry) {
+    boolean success = true;
 
     if (retry) {
       pushRequest.addNote("** WARNING ** the API Request is being reprocessed.");
@@ -58,19 +59,33 @@ public abstract class AbstractDelegate implements Runnable {
 
     try {
       processRequest();
+
     } catch (Exception ex) {
-      ex.printStackTrace();
-      pushRequest.failed(ex);
+      success = failed(ex, false);
     }
 
     try {
-      processCallback();
+      if (success) {
+        processCallback();
+      }
     } catch (Exception ex) {
-      ex.printStackTrace();
-      pushRequest.warn(ex);
+      success = failed(ex, true);
     }
 
     pushRequestStore.update(pushRequest);
+
+    return success;
+  }
+
+  private boolean failed(Exception ex, boolean warning) {
+    executionContext.setLastMessage("Execution failed: " + ExceptionUtils.getMessage(ex));
+
+    ex.printStackTrace();
+
+    if (warning)  pushRequest.warn(ex);
+    else pushRequest.failed(ex);
+
+    return false;
   }
 
   private void processCallback() throws Exception {

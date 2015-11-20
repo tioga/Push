@@ -1,5 +1,7 @@
 package org.tiogasolutions.push.plugins.smtp;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.tiogasolutions.dev.common.BeanUtils;
 import org.tiogasolutions.dev.common.Formats;
 import org.tiogasolutions.dev.common.IoUtils;
@@ -19,10 +21,12 @@ import java.io.InputStream;
 
 import static org.tiogasolutions.dev.common.StringUtils.nullToString;
 
+@Component
 public class SmtpEmailPlugin extends PluginSupport {
 
   private SmtpEmailConfigStore _configStore;
 
+  @Autowired
   public SmtpEmailPlugin(ExecutionManager executionManager) {
     super(SmtpEmailPush.PUSH_TYPE, executionManager);
   }
@@ -104,20 +108,19 @@ public class SmtpEmailPlugin extends PluginSupport {
     }
 
     String when = Formats.defaultStamp(new java.util.Date());
-    String msg = String.format("<html><head><title>Some Email</title></head><body style='background-color:red'><div style='background-color:#c0c0ff'><h1>Testing 123</h1>This is a test message from Cosmic Push sent at %s.</div></body>", when);
-    String subject = "SMTP Test message from Cosmic Push";
     SmtpEmailPush push = SmtpEmailPush.newPush(
-        toAddress, fromAddress,
-        subject, msg,
-        null, BeanUtils.toMap("smtp-test:true"));
+      toAddress, fromAddress,
+      "SMTP Test message from Cosmic Push",
+      String.format("<html><head><title>Some Email</title></head><body style='background-color:red'><div style='background-color:#c0c0ff'><h1>Testing 123</h1>This is a test message from Cosmic Push sent at %s.</div></body>", when),
+      null, BeanUtils.toMap("smtp-test:true"));
 
     PushRequest pushRequest = new PushRequest(Push.CURRENT_API_VERSION, domainProfile, push);
     executionManager.context().getPushRequestStore().create(pushRequest);
 
-    new SmtpEmailDelegate(executionManager.context(), pushRequest, push, config).run();
-
-    msg = String.format("Test message sent from %s to %s", fromAddress, toAddress);
-    executionManager.context().setLastMessage(msg);
+    if (new SmtpEmailDelegate(executionManager.context(), pushRequest, push, config).execute(false)) {
+      String msg = String.format("Test message sent from %s to %s\n%s", fromAddress, toAddress, push.getEmailSubject());
+      executionManager.context().setLastMessage(msg);
+    };
   }
 
   @Override
