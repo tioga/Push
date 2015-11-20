@@ -12,6 +12,7 @@ import org.tiogasolutions.push.engine.resources.manage.client.emails.ManageEmail
 import org.tiogasolutions.push.engine.view.Thymeleaf;
 import org.tiogasolutions.push.engine.view.ThymeleafViewFactory;
 import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.accounts.AccountStore;
 import org.tiogasolutions.push.kernel.accounts.DomainStore;
 import org.tiogasolutions.push.kernel.actions.UpdateDomainAction;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
@@ -37,12 +38,17 @@ public class ManageDomainResource {
   private final DomainProfileEntity domainProfile;
   private final PluginManager pluginManager;
   private final ExecutionManager executionManager;
+  private final DomainStore domainStore;
+  private final AccountStore accountStore;
+  private final PushRequestStore pushRequestStore;
 
-  public ManageDomainResource(ExecutionManager executionManager, PluginManager pluginManager, String domainKey) {
+  public ManageDomainResource(ExecutionManager executionManager, DomainStore domainStore, AccountStore accountStore, PushRequestStore pushRequestStore, PluginManager pluginManager, String domainKey) {
     this.pluginManager = pluginManager;
     this.executionManager = executionManager;
+    this.domainStore = domainStore;
+    this.accountStore = accountStore;
+    this.pushRequestStore = pushRequestStore;
 
-    DomainStore domainStore = executionManager.context().getDomainStore();
     this.domainProfile = domainStore.getByDomainKey(domainKey);
 
     if (domainProfile == null) {
@@ -61,7 +67,7 @@ public class ManageDomainResource {
   public Thymeleaf viewDomain() throws Exception {
     String lastMessage = executionManager.context().getSession().getLastMessage();
     executionManager.context().setLastMessage(null);
-    executionManager.context().getAccountStore().update(getAccount());
+    accountStore.update(getAccount());
 
     ManageDomainModel model = new ManageDomainModel(executionManager, domainProfile, pluginManager, lastMessage);
     return new Thymeleaf(executionManager.context().getSession(), ThymeleafViewFactory.MANAGE_API_CLIENT, model);
@@ -82,7 +88,7 @@ public class ManageDomainResource {
   @Path("/requests")
   @Produces(MediaType.TEXT_HTML)
   public Thymeleaf viewEvents() throws Exception {
-    QueryResult<PushRequest> queryResult = executionManager.context().getPushRequestStore().getByClient(domainProfile, 500);
+    QueryResult<PushRequest> queryResult = pushRequestStore.getByClient(domainProfile, 500);
     List<PushRequest> requests = new ArrayList<>(queryResult.getEntityList());
 
     Collections.sort(requests);
@@ -95,17 +101,15 @@ public class ManageDomainResource {
   @POST
   @Path("/requests/delete-all")
   public Response deleteEvents() throws Exception {
-    PushRequestStore requestStore = executionManager.context().getPushRequestStore();
-
-    QueryResult<PushRequest> queryResult = requestStore.getByClient(domainProfile, 500);
+    QueryResult<PushRequest> queryResult = pushRequestStore.getByClient(domainProfile, 500);
     List<PushRequest> requests = new ArrayList<>(queryResult.getEntityList());
 
     for (PushRequest request : requests) {
-      requestStore.delete(request);
+      pushRequestStore.delete(request);
     }
 
     executionManager.context().setLastMessage("All API Requests deleted");
-    executionManager.context().getDomainStore().update(domainProfile);
+    domainStore.update(domainProfile);
 
     URI uri = executionManager.context().getUriInfo().getBaseUriBuilder().path("manage").path("domain").path(domainProfile.getDomainKey()).path("requests").build();
     return Response.seeOther(uri).build();
@@ -113,13 +117,11 @@ public class ManageDomainResource {
 
   @Path("/emails")
   public ManageEmailsResource getManageEmailsResource() throws Exception {
-    return new ManageEmailsResource(executionManager, pluginManager, getAccount(), domainProfile);
+    return new ManageEmailsResource(executionManager, pushRequestStore, pluginManager, getAccount(), domainProfile);
   }
 
   @POST
   public Response updateClient(@FormParam("domainKey") String domainKey, @FormParam("domainPassword") String domainPassword, @FormParam("retentionDays") int retentionDays) throws Exception {
-    DomainStore domainStore = executionManager.context().getDomainStore();
-
     if (domainProfile.getDomainKey().equals(domainKey) == false && domainStore.getByDomainKey(domainKey) != null) {
       // The specified name is not the same as the current value but it is already in use by another account.
       String msg = String.format("The client name %s already exists.", domainKey);
@@ -139,7 +141,7 @@ public class ManageDomainResource {
   @POST
   @Path("/delete")
   public Response deleteClient() throws Exception {
-    executionManager.context().getDomainStore().delete(domainProfile);
+    domainStore.delete(domainProfile);
     return Response.seeOther(new URI("manage/account")).build();
   }
 

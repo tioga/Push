@@ -13,6 +13,7 @@ import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.kernel.execution.ExecutionManager;
 import org.tiogasolutions.push.kernel.plugins.Plugin;
 import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.kernel.system.PluginManager;
 import org.tiogasolutions.push.pub.SesEmailPush;
 import org.tiogasolutions.push.pub.SmtpEmailPush;
@@ -34,20 +35,23 @@ public class ManageEmailsResource {
   private final DomainProfileEntity domainProfile;
   private final PluginManager pluginManager;
   private final ExecutionManager executionManager;
+  private final PushRequestStore pushRequestStore;
 
-  public ManageEmailsResource(ExecutionManager executionManager, PluginManager pluginManager, Account account, DomainProfileEntity domainProfile) {
+
+  public ManageEmailsResource(ExecutionManager executionManager, PushRequestStore pushRequestStore, PluginManager pluginManager, Account account, DomainProfileEntity domainProfile) {
     this.pluginManager = pluginManager;
     this.executionManager = executionManager;
     this.account = account;
     this.domainProfile = domainProfile;
+    this.pushRequestStore = pushRequestStore;
   }
 
   @GET
   @Produces(MediaType.TEXT_HTML)
   public Thymeleaf viewEmailEvents() throws Exception {
     List<PushRequest> requests = new ArrayList<>();
-    requests.addAll(executionManager.context().getPushRequestStore().getByClientAndType(domainProfile, SesEmailPush.PUSH_TYPE));
-    requests.addAll(executionManager.context().getPushRequestStore().getByClientAndType(domainProfile, SmtpEmailPush.PUSH_TYPE));
+    requests.addAll(pushRequestStore.getByClientAndType(domainProfile, SesEmailPush.PUSH_TYPE));
+    requests.addAll(pushRequestStore.getByClientAndType(domainProfile, SmtpEmailPush.PUSH_TYPE));
 
     EmailsModel model = new EmailsModel(account, domainProfile, requests);
     return new Thymeleaf(executionManager.context().getSession(), ThymeleafViewFactory.MANAGE_API_EMAILS, model);
@@ -58,7 +62,7 @@ public class ManageEmailsResource {
   @Produces(MediaType.TEXT_HTML)
   public Thymeleaf viewEmailEvent(@PathParam("pushRequestId") String pushRequestId) throws Exception {
 
-    PushRequest pushRequest = executionManager.context().getPushRequestStore().getByPushRequestId(pushRequestId);
+    PushRequest pushRequest = pushRequestStore.getByPushRequestId(pushRequestId);
     CommonEmail email = pushRequest.getCommonEmail();
 
     EmailModel model = new EmailModel(account, domainProfile, pushRequest, email);
@@ -69,7 +73,7 @@ public class ManageEmailsResource {
   @Path("/{pushRequestId}/retry")
   public Response retryEmailMessage(@Context UriInfo uriInfo, @PathParam("pushRequestId") String pushRequestId) throws Exception {
 
-    PushRequest pushRequest = executionManager.context().getPushRequestStore().getByPushRequestId(pushRequestId);
+    PushRequest pushRequest = pushRequestStore.getByPushRequestId(pushRequestId);
     CommonEmail push = (CommonEmail)pushRequest.getPush();
 
     if (SesEmailPush.PUSH_TYPE.equals(push.getPushType())) {

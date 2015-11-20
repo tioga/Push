@@ -51,10 +51,6 @@ public class PushRequestTest extends AbstractSpringTest {
   private CpObjectMapper objectMapper = new CpObjectMapper();
   private TiogaJacksonTranslator translator = new TiogaJacksonTranslator(objectMapper);
 
-  public PushRequestTest() {
-    super(EngineSpringTestConfig.class);
-  }
-
   @BeforeMethod
   public void beforeMethod() throws Exception {
     ExecutionContext executionContext = executionManager.newContext(null);

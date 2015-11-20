@@ -21,10 +21,6 @@ public class UpdateXmppConfigActionTest extends AbstractSpringTest {
   @Autowired
   TestFixture testFixture;
 
-  public UpdateXmppConfigActionTest() {
-    super(XmppSpringTestConfig.class);
-  }
-
   public void testUpdate() throws Exception {
 
     Account account = testFixture.createAccount();

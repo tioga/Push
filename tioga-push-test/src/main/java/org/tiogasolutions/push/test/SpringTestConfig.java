@@ -3,6 +3,7 @@ package org.tiogasolutions.push.test;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
 import org.tiogasolutions.push.jackson.CpObjectMapper;
 import org.tiogasolutions.push.kernel.config.CouchServersConfig;
@@ -27,6 +28,11 @@ public class SpringTestConfig {
   @Bean
   public SessionStore sessionStore() {
     return new SessionStore(TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS));
+  }
+
+  @Bean
+  public BitlyApis bitlyApis(TiogaJacksonTranslator translator) {
+    return new BitlyApis(translator, "9f5ed9c08c695b4a017bfb432eea58876a5d40cb");
   }
 
   @Bean

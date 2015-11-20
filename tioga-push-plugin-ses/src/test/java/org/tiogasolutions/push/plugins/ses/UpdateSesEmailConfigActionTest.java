@@ -21,10 +21,6 @@ public class UpdateSesEmailConfigActionTest extends AbstractSpringTest {
   @Autowired
   private TestFixture testFixture;
 
-  public UpdateSesEmailConfigActionTest() {
-    super(SesSpringTestConfig.class);
-  }
-
   public void testUpdate() throws Exception {
 
     Account account = testFixture.createAccount();

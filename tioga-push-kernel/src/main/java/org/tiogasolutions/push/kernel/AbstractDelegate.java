@@ -6,15 +6,15 @@
 
 package org.tiogasolutions.push.kernel;
 
-import org.tiogasolutions.push.kernel.execution.ExecutionContext;
-import org.tiogasolutions.push.kernel.requests.PushRequestStore;
-import org.tiogasolutions.push.kernel.requests.PushRequest;
-import org.tiogasolutions.push.jackson.CpObjectMapper;
-import org.tiogasolutions.push.pub.common.RequestStatus;
-import org.tiogasolutions.dev.common.StringUtils;
-import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 import org.glassfish.jersey.uri.internal.JerseyUriBuilder;
+import org.tiogasolutions.dev.common.StringUtils;
+import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
+import org.tiogasolutions.push.jackson.CpObjectMapper;
+import org.tiogasolutions.push.kernel.execution.ExecutionContext;
+import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.kernel.requests.PushRequestStore;
+import org.tiogasolutions.push.pub.common.RequestStatus;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -33,12 +33,11 @@ public abstract class AbstractDelegate implements Runnable {
   protected final PushRequest pushRequest;
   protected final PushRequestStore pushRequestStore;
 
-  protected AbstractDelegate(ExecutionContext executionContext,  PushRequest pushRequest) {
-    this.pushRequest = ExceptionUtils.assertNotNull(pushRequest, "pushRequest");
-
-    this.executionContext = ExceptionUtils.assertNotNull(executionContext, "executionContext");
-    this.objectMapper = ExceptionUtils.assertNotNull(executionContext.getObjectMapper(), "objectMapper");
-    this.pushRequestStore = ExceptionUtils.assertNotNull(executionContext.getPushRequestStore(), "pushRequestStore");
+  protected AbstractDelegate(ExecutionContext executionContext, CpObjectMapper objectMapper, PushRequestStore pushRequestStore, PushRequest pushRequest) {
+    this.pushRequest = pushRequest;
+    this.objectMapper = objectMapper;
+    this.pushRequestStore = pushRequestStore;
+    this.executionContext = executionContext;
   }
 
   @Override

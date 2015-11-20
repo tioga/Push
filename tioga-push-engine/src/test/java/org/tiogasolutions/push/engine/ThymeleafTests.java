@@ -43,10 +43,6 @@ public class ThymeleafTests extends AbstractSpringTest {
   private StringWriter writer;
   private ThymeleafMessageBodyWriter msgBodyWriter;
 
-  public ThymeleafTests() {
-    super(EngineSpringTestConfig.class);
-  }
-
   @BeforeMethod
   public void beforeMethod() throws Exception {
     msgBodyWriter = new ThymeleafMessageBodyWriter() {

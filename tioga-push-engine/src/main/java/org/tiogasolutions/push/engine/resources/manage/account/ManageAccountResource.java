@@ -12,6 +12,8 @@ import org.tiogasolutions.push.engine.jaxrs.security.MngtAuthentication;
 import org.tiogasolutions.push.engine.view.Thymeleaf;
 import org.tiogasolutions.push.engine.view.ThymeleafViewFactory;
 import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.accounts.AccountStore;
+import org.tiogasolutions.push.kernel.accounts.DomainStore;
 import org.tiogasolutions.push.kernel.accounts.actions.ChangePasswordAction;
 import org.tiogasolutions.push.kernel.accounts.actions.UpdateAccountAction;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
@@ -36,17 +38,22 @@ public class ManageAccountResource {
   private final PluginManager pluginManager;
   private final ExecutionManager executionManager;
 
-  public ManageAccountResource(ExecutionManager executionManager, PluginManager pluginManager, SessionStore sessionStore) {
+  private final DomainStore domainStore;
+  private final AccountStore accountStore;
+
+  public ManageAccountResource(ExecutionManager executionManager, DomainStore domainStore, AccountStore accountStore, PluginManager pluginManager, SessionStore sessionStore) {
     this.sessionStore = sessionStore;
     this.pluginManager = pluginManager;
     this.executionManager = executionManager;
+    this.domainStore = domainStore;
+    this.accountStore = accountStore;
   }
 
   @GET
   public Thymeleaf viewAccount() throws IOException {
     ExecutionContext execContext = executionManager.context();
     Account account = execContext.getAccount();
-    List<DomainProfileEntity> domains = execContext.getDomainStore().getDomains(account);
+    List<DomainProfileEntity> domains = domainStore.getDomains(account);
 
     ManageAccountModel model = new ManageAccountModel(executionManager, pluginManager, account, domains);
     return new Thymeleaf(execContext.getSession(), ThymeleafViewFactory.MANAGE_ACCOUNT, model);
@@ -61,7 +68,7 @@ public class ManageAccountResource {
     String oldEmailAddress = account.getEmailAddress();
     if (EqualsUtils.objectsNotEqual(oldEmailAddress, newEmailAddress)) {
       // They are changing the emails address.
-      if (executionManager.context().getAccountStore().getByEmail(newEmailAddress) != null) {
+      if (accountStore.getByEmail(newEmailAddress) != null) {
         String msg = String.format("The email address %s is already in use.", newEmailAddress);
         throw ApiException.conflict(msg);
       }
@@ -69,7 +76,7 @@ public class ManageAccountResource {
 
     UpdateAccountAction action = new UpdateAccountAction(firstName, lastName, newEmailAddress);
     account.apply(action);
-    executionManager.context().getAccountStore().update(account);
+    accountStore.update(account);
 
     if (EqualsUtils.objectsNotEqual(oldEmailAddress, newEmailAddress)) {
       // The email address has changed - we will need to update the session
@@ -87,7 +94,7 @@ public class ManageAccountResource {
 
     ChangePasswordAction action = new ChangePasswordAction(oldPassword, newPassword, confirmed);
     account.apply(action);
-    executionManager.context().getAccountStore().update(account);
+    accountStore.update(account);
 
     executionManager.context().setLastMessage("You password has been updated.");
     return Response.seeOther(new URI("manage/account")).build();

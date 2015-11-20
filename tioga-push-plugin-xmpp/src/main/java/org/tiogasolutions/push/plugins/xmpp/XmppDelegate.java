@@ -16,9 +16,11 @@ import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
+import org.tiogasolutions.push.jackson.CpObjectMapper;
 import org.tiogasolutions.push.kernel.AbstractDelegate;
 import org.tiogasolutions.push.kernel.execution.ExecutionContext;
 import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.pub.XmppPush;
 import org.tiogasolutions.push.pub.common.RequestStatus;
 
@@ -28,11 +30,13 @@ public class XmppDelegate extends AbstractDelegate {
 
   private final XmppPush push;
   private final XmppConfig config;
+  private final BitlyApis bitlyApis;
 
-  public XmppDelegate(ExecutionContext executionContext, PushRequest pushRequest, XmppPush push, XmppConfig config) {
-    super(executionContext, pushRequest);
+  public XmppDelegate(ExecutionContext executionContext, CpObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis, PushRequest pushRequest, XmppPush push, XmppConfig config) {
+    super(executionContext, objectMapper, pushRequestStore, pushRequest);
     this.config = ExceptionUtils.assertNotNull(config, "config");
     this.push = ExceptionUtils.assertNotNull(push, "push");
+    this.bitlyApis = bitlyApis;
   }
 
   @Override
@@ -46,7 +50,6 @@ public class XmppDelegate extends AbstractDelegate {
   public String sendMessage() throws Exception {
 
     String message = push.getMessage();
-    BitlyApis bitlyApis = executionContext.getBean(BitlyApis.class);
     message = bitlyApis.parseAndShorten(message);
 
     if (StringUtils.isNotBlank(config.getRecipientOverride())) {

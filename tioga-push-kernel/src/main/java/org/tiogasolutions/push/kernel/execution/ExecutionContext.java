@@ -1,13 +1,8 @@
 package org.tiogasolutions.push.kernel.execution;
 
 import org.springframework.beans.factory.BeanFactory;
-import org.tiogasolutions.push.jackson.CpObjectMapper;
 import org.tiogasolutions.push.kernel.accounts.Account;
-import org.tiogasolutions.push.kernel.accounts.AccountStore;
-import org.tiogasolutions.push.kernel.accounts.DomainStore;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
-import org.tiogasolutions.push.kernel.plugins.PushProcessor;
-import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.kernel.system.Session;
 
 import javax.ws.rs.core.UriInfo;
@@ -20,10 +15,10 @@ public class ExecutionContext {
 
   private final UriInfo uriInfo;
 
-  private final BeanFactory beanFactory;
+  // private final BeanFactory beanFactory;
 
   public ExecutionContext(BeanFactory beanFactory, UriInfo uriInfo) {
-    this.beanFactory = beanFactory;
+    // this.beanFactory = beanFactory;
     this.uriInfo = uriInfo;
   }
 
@@ -55,29 +50,29 @@ public class ExecutionContext {
     return uriInfo;
   }
 
-  public PushProcessor getPushProcessor() {
-    return beanFactory.getBean(PushProcessor.class);
-  }
-
-  public CpObjectMapper getObjectMapper() {
-    return beanFactory.getBean(CpObjectMapper.class);
-  }
-
-  public DomainStore getDomainStore() {
-    return beanFactory.getBean(DomainStore.class);
-  }
-
-  public AccountStore getAccountStore() {
-    return beanFactory.getBean(AccountStore.class);
-  }
-
-  public PushRequestStore getPushRequestStore() {
-    return beanFactory.getBean(PushRequestStore.class);
-  }
-
-  public <T> T getBean(Class<T> type) {
-    return beanFactory.getBean(type);
-  }
+//  public PushProcessor getPushProcessor() {
+//    return beanFactory.getBean(PushProcessor.class);
+//  }
+//
+//  public CpObjectMapper getObjectMapper() {
+//    return beanFactory.getBean(CpObjectMapper.class);
+//  }
+//
+//  public DomainStore getDomainStore() {
+//    return beanFactory.getBean(DomainStore.class);
+//  }
+//
+//  public AccountStore getAccountStore() {
+//    return beanFactory.getBean(AccountStore.class);
+//  }
+//
+//  public PushRequestStore getPushRequestStore() {
+//    return beanFactory.getBean(PushRequestStore.class);
+//  }
+//
+//  public <T> T getBean(Class<T> type) {
+//    return beanFactory.getBean(type);
+//  }
 
   public void setLastMessage(String message) {
     if (session != null) {

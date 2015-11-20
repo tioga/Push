@@ -7,11 +7,10 @@
 package org.tiogasolutions.push.engine.accounts;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.tiogasolutions.push.engine.EngineSpringTestConfig;
+import org.testng.annotations.Test;
 import org.tiogasolutions.push.kernel.accounts.Account;
 import org.tiogasolutions.push.kernel.accounts.AccountStore;
 import org.tiogasolutions.push.kernel.accounts.actions.CreateAccountAction;
-import org.testng.annotations.Test;
 import org.tiogasolutions.push.test.AbstractSpringTest;
 import org.tiogasolutions.push.test.TestFixture;
 
@@ -22,10 +21,6 @@ public class AccountTest extends AbstractSpringTest {
 
   @Autowired
   private AccountStore accountStore;
-
-  public AccountTest() {
-    super(EngineSpringTestConfig.class);
-  }
 
   public void testCreate() {
 

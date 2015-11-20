@@ -1,16 +1,19 @@
 package org.tiogasolutions.push.engine.view;
 
-import java.io.*;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
-import javax.ws.rs.ext.*;
 import org.tiogasolutions.dev.common.IoUtils;
 
-public class LocalResourceMessageBodyWriter implements MessageBodyWriter<LocalResource> {
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.ext.MessageBodyWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 
-  @Context UriInfo uriInfo;
+public class LocalResourceMessageBodyWriter implements MessageBodyWriter<LocalResource> {
 
   public LocalResourceMessageBodyWriter() {
   }

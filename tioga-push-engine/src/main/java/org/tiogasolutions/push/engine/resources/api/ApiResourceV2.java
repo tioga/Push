@@ -8,6 +8,7 @@ package org.tiogasolutions.push.engine.resources.api;
 import org.tiogasolutions.push.engine.jaxrs.security.ApiAuthentication;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.kernel.execution.ExecutionManager;
+import org.tiogasolutions.push.kernel.plugins.PushProcessor;
 import org.tiogasolutions.push.kernel.requests.PushRequest;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushResponse;
@@ -22,10 +23,12 @@ import javax.ws.rs.core.Response;
 @ApiAuthentication
 public class ApiResourceV2 {
 
+  private final PushProcessor pushProcessor;
   private final ExecutionManager executionManager;
 
-  public ApiResourceV2(ExecutionManager executionManager) throws Exception {
+  public ApiResourceV2(ExecutionManager executionManager, PushProcessor pushProcessor) throws Exception {
     this.executionManager = executionManager;
+    this.pushProcessor = pushProcessor;
   }
 
   @POST
@@ -46,7 +49,7 @@ public class ApiResourceV2 {
 
   private Response postPush(Push push, int apiVersion) throws Exception {
     DomainProfileEntity domain = executionManager.context().getDomain();
-    PushResponse response = executionManager.context().getPushProcessor().execute(apiVersion, domain, push);
+    PushResponse response = pushProcessor.execute(apiVersion, domain, push);
     return Response.ok(response, MediaType.APPLICATION_JSON).build();
   }
 

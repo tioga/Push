@@ -14,7 +14,6 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
@@ -27,8 +26,8 @@ public class PushRequestFilter implements ContainerRequestFilter {
   @Context
   private UriInfo uriInfo;
 
-  @Context
-  private HttpHeaders headers;
+  @Autowired
+  private AccountStore accountStore;
 
   private final SessionStore sessionStore;
   private final ExecutionManager executionManager;
@@ -45,8 +44,6 @@ public class PushRequestFilter implements ContainerRequestFilter {
 
     Session session = sessionStore.getSession(requestContext);
     executionContext.setSession(session);
-
-    AccountStore accountStore = executionContext.getAccountStore();
 
     if (session != null) {
       Account account = accountStore.getByEmail(session.getEmailAddress());

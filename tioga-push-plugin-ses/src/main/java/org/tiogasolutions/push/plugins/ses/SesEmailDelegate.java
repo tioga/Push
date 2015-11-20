@@ -13,9 +13,11 @@ import com.amazonaws.services.simpleemail.model.*;
 import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
+import org.tiogasolutions.push.jackson.CpObjectMapper;
 import org.tiogasolutions.push.kernel.AbstractDelegate;
 import org.tiogasolutions.push.kernel.execution.ExecutionContext;
 import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.pub.SesEmailPush;
 import org.tiogasolutions.push.pub.common.RequestStatus;
 
@@ -23,11 +25,13 @@ public class SesEmailDelegate extends AbstractDelegate {
 
   private final SesEmailPush push;
   private final SesEmailConfig config;
+  private final BitlyApis bitlyApis;
 
-  public SesEmailDelegate(ExecutionContext executionContext, PushRequest pushRequest, SesEmailPush push, SesEmailConfig config) {
-    super(executionContext, pushRequest);
+  public SesEmailDelegate(ExecutionContext executionContext, CpObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis, PushRequest pushRequest, SesEmailPush push, SesEmailConfig config) {
+    super(executionContext, objectMapper, pushRequestStore, pushRequest);
     this.push = ExceptionUtils.assertNotNull(push, "push");
     this.config = ExceptionUtils.assertNotNull(config, "config");
+    this.bitlyApis = bitlyApis;
   }
 
   @Override
@@ -67,7 +71,6 @@ public class SesEmailDelegate extends AbstractDelegate {
     }
 
     String subject = push.getEmailSubject();
-    BitlyApis bitlyApis = executionContext.getBean(BitlyApis.class);
     subject = bitlyApis.parseAndShorten(subject);
     Content subjectContent = new Content().withCharset("UTF-8").withData(subject);
 

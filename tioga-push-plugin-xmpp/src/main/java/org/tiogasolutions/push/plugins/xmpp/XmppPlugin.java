@@ -2,14 +2,17 @@ package org.tiogasolutions.push.plugins.xmpp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.Formats;
 import org.tiogasolutions.dev.common.IoUtils;
+import org.tiogasolutions.push.jackson.CpObjectMapper;
 import org.tiogasolutions.push.kernel.KernelUtils;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.kernel.execution.ExecutionContext;
 import org.tiogasolutions.push.kernel.execution.ExecutionManager;
 import org.tiogasolutions.push.kernel.plugins.PluginSupport;
 import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.pub.XmppPush;
 import org.tiogasolutions.push.pub.common.Push;
 
@@ -22,9 +25,12 @@ import static org.tiogasolutions.dev.common.StringUtils.*;
 @Component
 public class XmppPlugin extends PluginSupport {
 
+  private final BitlyApis bitlyApis;
+
   @Autowired
-  public XmppPlugin(ExecutionManager executionManager) {
-    super(XmppPush.PUSH_TYPE, executionManager);
+  public XmppPlugin(ExecutionManager executionManager, CpObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis) {
+    super(XmppPush.PUSH_TYPE, executionManager, objectMapper, pushRequestStore);
+    this.bitlyApis = bitlyApis;
   }
 
   public XmppConfigStore getConfigStore(ExecutionManager executionManager) {
@@ -40,7 +46,7 @@ public class XmppPlugin extends PluginSupport {
   @Override
   public XmppDelegate newDelegate(DomainProfileEntity domainProfile, PushRequest pushRequest, Push push) {
     XmppConfig config = getConfig(domainProfile);
-    return new XmppDelegate(executionManager.context(), pushRequest, (XmppPush)push, config);
+    return new XmppDelegate(executionManager.context(), objectMapper, pushRequestStore, bitlyApis, pushRequest, (XmppPush)push, config);
   }
 
   @Override
@@ -100,9 +106,9 @@ public class XmppPlugin extends PluginSupport {
       null, "xmpp-test:true");
 
     PushRequest pushRequest = new PushRequest(Push.CURRENT_API_VERSION, domainProfile, push);
-    executionManager.context().getPushRequestStore().create(pushRequest);
+    pushRequestStore.create(pushRequest);
 
-    if (new XmppDelegate(executionManager.context(), pushRequest, push, config).execute(false)) {
+    if (new XmppDelegate(executionManager.context(), objectMapper, pushRequestStore, bitlyApis, pushRequest, push, config).execute(false)) {
       String msg = String.format("Test message sent from %s to %s:\n%s", config.getUsername(), recipient, push.getMessage());
       executionManager.context().setLastMessage(msg);
     }

@@ -15,9 +15,13 @@ import org.tiogasolutions.push.engine.resources.manage.ManageResource;
 import org.tiogasolutions.push.engine.view.Thymeleaf;
 import org.tiogasolutions.push.engine.view.ThymeleafViewFactory;
 import org.tiogasolutions.push.kernel.accounts.Account;
+import org.tiogasolutions.push.kernel.accounts.AccountStore;
+import org.tiogasolutions.push.kernel.accounts.DomainStore;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.kernel.execution.ExecutionManager;
+import org.tiogasolutions.push.kernel.plugins.PushProcessor;
 import org.tiogasolutions.push.kernel.requests.PushRequest;
+import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.kernel.system.PluginManager;
 import org.tiogasolutions.push.kernel.system.Session;
 import org.tiogasolutions.push.kernel.system.SessionStore;
@@ -48,6 +52,18 @@ public class RootResource extends RootResourceSupport {
 
   @Autowired
   private PluginManager pluginManager;
+
+  @Autowired
+  private AccountStore accountStore;
+
+  @Autowired
+  private DomainStore domainStore;
+
+  @Autowired
+  private PushRequestStore pushRequestStore;
+
+  @Autowired
+  private PushProcessor pushProcessor;
 
   public RootResource() {
     log.info("Created ");
@@ -96,7 +112,7 @@ public class RootResource extends RootResourceSupport {
   @Produces(MediaType.TEXT_HTML)
   public Response signIn(@FormParam("username") String username, @FormParam("password") String password, @CookieParam(SessionStore.SESSION_COOKIE_NAME) String sessionId) throws Exception {
 
-    Account account = executionManager.context().getAccountStore().getByEmail(username);
+    Account account = accountStore.getByEmail(username);
 
     if (account == null || EqualsUtils.objectsNotEqual(account.getPassword(), password)) {
       sessionStore.remove(sessionId);
@@ -127,23 +143,23 @@ public class RootResource extends RootResourceSupport {
 
   @Path("/client/api/v2")
   public ApiResourceV2 getApiResourceV2() throws Exception {
-    return new ApiResourceV2(executionManager);
+    return new ApiResourceV2(executionManager, pushProcessor);
   }
 
   @Path("/manage")
   public ManageResource getManageResource() {
-    return new ManageResource(executionManager, sessionStore, pluginManager, uriInfo);
+    return new ManageResource(executionManager, domainStore, accountStore, pushRequestStore, sessionStore, pluginManager, uriInfo);
   }
 
   @GET @Path("/q/{pushRequestId}")
   public Response resolveCallback(@PathParam("pushRequestId") String pushRequestId) throws URISyntaxException {
 
-    PushRequest request = executionManager.context().getPushRequestStore().getByPushRequestId(pushRequestId);
+    PushRequest request = pushRequestStore.getByPushRequestId(pushRequestId);
     if (request == null) {
       throw ApiException.notFound("API request not found for " + pushRequestId);
     }
 
-    DomainProfileEntity domain = executionManager.context().getDomainStore().getByDocumentId(request.getDomainId());
+    DomainProfileEntity domain = domainStore.getByDocumentId(request.getDomainId());
     if (domain == null) {
       throw ApiException.notFound("Domain not found for " + request.getDomainId());
     }
