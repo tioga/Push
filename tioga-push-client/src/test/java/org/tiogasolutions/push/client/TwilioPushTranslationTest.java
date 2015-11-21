@@ -13,7 +13,7 @@ import java.net.InetAddress;
 @Test
 public class TwilioPushTranslationTest {
 
-    private LivePushServerClient gateway = new LivePushServerClient("some-name", "some-password");
+    private LivePushServerClient gateway = new LivePushServerClient("http://someone:password@example.com");
     private JsonTranslator translator = gateway.getClient().getTranslator();
 
     public void translateTwilioPush() throws Exception {

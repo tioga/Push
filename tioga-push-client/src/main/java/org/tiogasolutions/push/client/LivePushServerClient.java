@@ -27,10 +27,10 @@ public class LivePushServerClient implements PushServerClient {
 
   private final SimpleRestClient client;
 
-  public LivePushServerClient(String userName, String password) {
+  public LivePushServerClient(String url) {
     CpObjectMapper objectMapper = new CpObjectMapper();
     TiogaJacksonTranslator translator = new TiogaJacksonTranslator(objectMapper);
-    client = new SimpleRestClient(translator, "http://www.cosmicpush.com/api/v2", userName, password);
+    client = new SimpleRestClient(translator, url);
   }
 
   public LivePushServerClient(String url, String userName, String password) {
