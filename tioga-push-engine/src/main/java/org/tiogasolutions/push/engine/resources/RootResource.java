@@ -8,6 +8,7 @@ package org.tiogasolutions.push.engine.resources;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.tiogasolutions.dev.common.EqualsUtils;
 import org.tiogasolutions.dev.common.exceptions.ApiException;
 import org.tiogasolutions.push.engine.resources.api.ApiResourceV2;
@@ -33,6 +34,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @Path("/")
+@Scope(value="prototype")
 public class RootResource extends RootResourceSupport {
 
   public static final int REASON_CODE_INVALID_USERNAME_OR_PASSWORD = -1;

@@ -1,12 +1,12 @@
 package org.tiogasolutions.push.test;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 
 public class AbstractSpringTest {
 
-  @BeforeMethod
-  public void beforeMethodAutowireTest() throws Exception {
+  @BeforeClass
+  public void beforeClassAutowireTest() throws Exception {
     AnnotationConfigApplicationContext applicationContext;
 
     applicationContext = new AnnotationConfigApplicationContext();

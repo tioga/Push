@@ -25,6 +25,8 @@ import java.util.Collections;
 
 public class MockPushServerClient implements PushServerClient {
 
+  private Push lastPush;
+
   public MockPushServerClient() {
   }
 
@@ -35,10 +37,12 @@ public class MockPushServerClient implements PushServerClient {
 
   @Override
   public PushResponse send(Push push) {
+    this.lastPush = push;
+
     return new PushResponse(
         "mock:"+TimeUuid.randomUUID().toString(),
         "mock:"+TimeUuid.randomUUID().toString(),
-        DateUtils.currentDateTime(),
+        DateUtils.currentLocalDateTime(),
         RequestStatus.pending,
         Collections.<String>emptyList()
     );
@@ -47,5 +51,9 @@ public class MockPushServerClient implements PushServerClient {
   @Override
   public PushResponse push(Push push) {
     return send(push);
+  }
+
+  public Push getLastPush() {
+    return lastPush;
   }
 }
