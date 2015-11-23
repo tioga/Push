@@ -13,9 +13,8 @@ import java.util.Collections;
 public class PushObjectMapper extends TiogaJacksonObjectMapper {
 
   public PushObjectMapper() {
-    super(Arrays.asList(
-                new TiogaJacksonModule(),
-                new CpJacksonModule()),
+    super(Arrays.asList(new TiogaJacksonModule(),
+                        new PushJacksonModule()),
         Collections.<TiogaJacksonInjectable>emptyList());
   }
 

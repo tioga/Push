@@ -7,7 +7,6 @@ project(":tioga-push-client") {
   version = "3.0.5"
 
   dependencies {
-    compile project(":tioga-push-pub")
     compile project(":tioga-push-jackson")
 
     compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:+")

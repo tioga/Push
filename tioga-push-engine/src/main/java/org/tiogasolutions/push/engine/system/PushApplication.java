@@ -44,7 +44,6 @@ public class PushApplication extends Application {
     classes.add(ThymeleafMessageBodyWriter.class);
     classes.add(LocalResourceMessageBodyWriter.class);
     classes.add(RootResource.class);
-    classes.add(PushReaderWriterProvider.class);
     classes.add(PushJaxRsExceptionMapper.class);
 
     // TODO - remove these once these are properly referenced by their plugins
