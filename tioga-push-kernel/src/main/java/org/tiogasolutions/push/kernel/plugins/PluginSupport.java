@@ -1,7 +1,7 @@
 package org.tiogasolutions.push.kernel.plugins;
 
 import org.tiogasolutions.dev.common.IoUtils;
-import org.tiogasolutions.push.jackson.CpObjectMapper;
+import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.kernel.execution.ExecutionManager;
 import org.tiogasolutions.push.kernel.requests.PushRequestStore;
@@ -16,10 +16,10 @@ public abstract class PluginSupport implements Plugin {
   protected final PushType pushType;
 
   protected final ExecutionManager executionManager;
-  protected final CpObjectMapper objectMapper;
+  protected final PushObjectMapper objectMapper;
   protected final PushRequestStore pushRequestStore;
 
-  public PluginSupport(PushType pushType, ExecutionManager executionManager, CpObjectMapper objectMapper, PushRequestStore pushRequestStore) {
+  public PluginSupport(PushType pushType, ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore) {
     this.pushType = pushType;
     this.executionManager = executionManager;
     this.objectMapper = objectMapper;

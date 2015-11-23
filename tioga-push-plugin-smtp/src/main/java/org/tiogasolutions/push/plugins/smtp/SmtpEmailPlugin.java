@@ -7,7 +7,7 @@ import org.tiogasolutions.dev.common.BeanUtils;
 import org.tiogasolutions.dev.common.Formats;
 import org.tiogasolutions.dev.common.IoUtils;
 import org.tiogasolutions.dev.common.StringUtils;
-import org.tiogasolutions.push.jackson.CpObjectMapper;
+import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.KernelUtils;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.kernel.execution.ExecutionContext;
@@ -31,7 +31,7 @@ public class SmtpEmailPlugin extends PluginSupport {
   private final BitlyApis bitlyApis;
 
   @Autowired
-  public SmtpEmailPlugin(ExecutionManager executionManager, CpObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis) {
+  public SmtpEmailPlugin(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis) {
     super(SmtpEmailPush.PUSH_TYPE, executionManager, objectMapper, pushRequestStore);
     this.bitlyApis = bitlyApis;
   }

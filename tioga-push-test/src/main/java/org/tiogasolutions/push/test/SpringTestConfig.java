@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
-import org.tiogasolutions.push.jackson.CpObjectMapper;
+import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.config.CouchServersConfig;
 import org.tiogasolutions.push.kernel.system.SessionStore;
 
@@ -16,12 +16,12 @@ import java.util.concurrent.TimeUnit;
 public class SpringTestConfig {
 
   @Bean
-  public CpObjectMapper cpObjectMapper() {
-    return new CpObjectMapper();
+  public PushObjectMapper cpObjectMapper() {
+    return new PushObjectMapper();
   }
 
   @Bean
-  public TiogaJacksonTranslator tiogaJacksonTranslator(CpObjectMapper objectMapper) {
+  public TiogaJacksonTranslator tiogaJacksonTranslator(PushObjectMapper objectMapper) {
     return new TiogaJacksonTranslator(objectMapper);
   }
 

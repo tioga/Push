@@ -14,7 +14,7 @@ import org.tiogasolutions.dev.common.BeanUtils;
 import org.tiogasolutions.dev.common.ComparisonResults;
 import org.tiogasolutions.dev.common.EqualsUtils;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
-import org.tiogasolutions.push.jackson.CpObjectMapper;
+import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.accounts.Account;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.kernel.execution.ExecutionContext;
@@ -48,7 +48,7 @@ public class PushRequestTest extends AbstractSpringTest {
 
   // The test is really of the object mapper. We will use
   // a translator here just to make the work a little easier.
-  private CpObjectMapper objectMapper = new CpObjectMapper();
+  private PushObjectMapper objectMapper = new PushObjectMapper();
   private TiogaJacksonTranslator translator = new TiogaJacksonTranslator(objectMapper);
 
   @BeforeMethod

@@ -12,7 +12,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
-import org.tiogasolutions.push.jackson.CpObjectMapper;
+import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.AbstractDelegate;
 import org.tiogasolutions.push.kernel.execution.ExecutionContext;
 import org.tiogasolutions.push.kernel.requests.PushRequest;
@@ -29,7 +29,7 @@ public class TwilioDelegate extends AbstractDelegate {
   private final TwilioConfig config;
   private final BitlyApis bitlyApis;
 
-  public TwilioDelegate(ExecutionContext executionContext, CpObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis, PushRequest pushRequest, TwilioSmsPush push, TwilioConfig config) {
+  public TwilioDelegate(ExecutionContext executionContext, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis, PushRequest pushRequest, TwilioSmsPush push, TwilioConfig config) {
     super(executionContext, objectMapper, pushRequestStore, pushRequest);
     this.config = ExceptionUtils.assertNotNull(config, "config");
     this.push = ExceptionUtils.assertNotNull(push, "push");

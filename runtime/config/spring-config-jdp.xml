@@ -18,11 +18,12 @@
   <task:annotation-driven/>
   <context:component-scan base-package="org.tiogasolutions.push"/>
 
+<!--
   <context:property-placeholder properties-ref="envProperties"/>
   <util:properties id="envProperties">
-    <prop key="push.runtime.dir">../runtime</prop>
-    <prop key="system.config.accessControlAllowOrigin">*</prop>
+    <prop key="testing">123</prop>
   </util:properties>
+-->
 
   <bean id="objectMapper" class="org.tiogasolutions.push.jackson.CpObjectMapper"/>
 

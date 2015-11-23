@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.Formats;
 import org.tiogasolutions.dev.common.IoUtils;
-import org.tiogasolutions.push.jackson.CpObjectMapper;
+import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.KernelUtils;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.kernel.execution.ExecutionContext;
@@ -28,7 +28,7 @@ public class XmppPlugin extends PluginSupport {
   private final BitlyApis bitlyApis;
 
   @Autowired
-  public XmppPlugin(ExecutionManager executionManager, CpObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis) {
+  public XmppPlugin(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis) {
     super(XmppPush.PUSH_TYPE, executionManager, objectMapper, pushRequestStore);
     this.bitlyApis = bitlyApis;
   }

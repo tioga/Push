@@ -15,7 +15,7 @@
  */
 package org.tiogasolutions.push.client;
 
-import org.tiogasolutions.push.jackson.CpObjectMapper;
+import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.pub.common.PingPush;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushResponse;
@@ -28,13 +28,13 @@ public class LivePushServerClient implements PushServerClient {
   private final SimpleRestClient client;
 
   public LivePushServerClient(String url) {
-    CpObjectMapper objectMapper = new CpObjectMapper();
+    PushObjectMapper objectMapper = new PushObjectMapper();
     TiogaJacksonTranslator translator = new TiogaJacksonTranslator(objectMapper);
     client = new SimpleRestClient(translator, url);
   }
 
   public LivePushServerClient(String url, String userName, String password) {
-    CpObjectMapper objectMapper = new CpObjectMapper();
+    PushObjectMapper objectMapper = new PushObjectMapper();
     TiogaJacksonTranslator translator = new TiogaJacksonTranslator(objectMapper);
     client = new SimpleRestClient(translator, url, userName, password);
   }

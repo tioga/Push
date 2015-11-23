@@ -10,7 +10,7 @@ import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 import org.glassfish.jersey.uri.internal.JerseyUriBuilder;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
-import org.tiogasolutions.push.jackson.CpObjectMapper;
+import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.execution.ExecutionContext;
 import org.tiogasolutions.push.kernel.requests.PushRequest;
 import org.tiogasolutions.push.kernel.requests.PushRequestStore;
@@ -29,11 +29,11 @@ public abstract class AbstractDelegate implements Runnable {
   protected abstract RequestStatus processRequest() throws Exception;
 
   protected final ExecutionContext executionContext;
-  protected final CpObjectMapper objectMapper;
+  protected final PushObjectMapper objectMapper;
   protected final PushRequest pushRequest;
   protected final PushRequestStore pushRequestStore;
 
-  protected AbstractDelegate(ExecutionContext executionContext, CpObjectMapper objectMapper, PushRequestStore pushRequestStore, PushRequest pushRequest) {
+  protected AbstractDelegate(ExecutionContext executionContext, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, PushRequest pushRequest) {
     this.pushRequest = pushRequest;
     this.objectMapper = objectMapper;
     this.pushRequestStore = pushRequestStore;

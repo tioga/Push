@@ -25,8 +25,6 @@ import java.util.*;
 @Component
 public class PushApplication extends Application {
 
-  public static final int CURRENT_API_VERSION = 2;
-
 //  private static final ThreadLocal<ExecutionContext> executionContext = new ThreadLocal<>();
 //  public static boolean hasExecutionContext() {
 //    return executionContext.get() != null;
@@ -77,8 +75,8 @@ public class PushApplication extends Application {
     classes.add(ThymeleafMessageBodyWriter.class);
     classes.add(LocalResourceMessageBodyWriter.class);
     classes.add(RootResource.class);
-    classes.add(CpReaderWriterProvider.class);
-    classes.add(CpJaxRsExceptionMapper.class);
+    classes.add(PushReaderWriterProvider.class);
+    classes.add(PushJaxRsExceptionMapper.class);
 
     // TODO - remove these once these are properly referenced by their plugins
     PingPush.PUSH_TYPE.getCode();

@@ -13,7 +13,7 @@ import com.amazonaws.services.simpleemail.model.*;
 import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
-import org.tiogasolutions.push.jackson.CpObjectMapper;
+import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.AbstractDelegate;
 import org.tiogasolutions.push.kernel.execution.ExecutionContext;
 import org.tiogasolutions.push.kernel.requests.PushRequest;
@@ -27,7 +27,7 @@ public class SesEmailDelegate extends AbstractDelegate {
   private final SesEmailConfig config;
   private final BitlyApis bitlyApis;
 
-  public SesEmailDelegate(ExecutionContext executionContext, CpObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis, PushRequest pushRequest, SesEmailPush push, SesEmailConfig config) {
+  public SesEmailDelegate(ExecutionContext executionContext, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis, PushRequest pushRequest, SesEmailPush push, SesEmailConfig config) {
     super(executionContext, objectMapper, pushRequestStore, pushRequest);
     this.push = ExceptionUtils.assertNotNull(push, "push");
     this.config = ExceptionUtils.assertNotNull(config, "config");
