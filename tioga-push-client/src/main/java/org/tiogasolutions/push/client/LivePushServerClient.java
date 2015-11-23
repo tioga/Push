@@ -59,9 +59,4 @@ public class LivePushServerClient implements PushServerClient {
     push.validate(new RequestErrors()).assertNoErrors();
     return getClient().post(PushResponse.class, "/pushes", push);
   }
-
-  @Override
-  public PushResponse push(Push push) {
-    return send(push);
-  }
 }

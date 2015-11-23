@@ -48,11 +48,6 @@ public class MockPushServerClient implements PushServerClient {
     );
   }
 
-  @Override
-  public PushResponse push(Push push) {
-    return send(push);
-  }
-
   public Push getLastPush() {
     return lastPush;
   }

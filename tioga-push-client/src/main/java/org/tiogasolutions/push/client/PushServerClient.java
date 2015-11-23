@@ -35,11 +35,4 @@ public interface PushServerClient {
    */
   public PushResponse send(Push push);
 
-  /**
-   * @see #send(Push)
-   * @param push One of many types of Pushes.
-   * @return the response from the push server.
-   */
-  @Deprecated
-  public PushResponse push(Push push);
 }
