@@ -25,7 +25,7 @@
   </util:properties>
 -->
 
-  <bean id="objectMapper" class="org.tiogasolutions.push.jackson.CpObjectMapper"/>
+  <bean id="objectMapper" class="org.tiogasolutions.push.jackson.PushObjectMapper"/>
 
   <bean id="tiogaJacksonTranslator" class="org.tiogasolutions.dev.jackson.TiogaJacksonTranslator">
     <constructor-arg ref="objectMapper"/>
