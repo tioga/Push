@@ -25,29 +25,11 @@ import java.util.*;
 @Component
 public class PushApplication extends Application {
 
-//  private static final ThreadLocal<ExecutionContext> executionContext = new ThreadLocal<>();
-//  public static boolean hasExecutionContext() {
-//    return executionContext.get() != null;
-//  }
-//  public static ExecutionContext getExecutionContext() {
-//    if (executionContext.get() == null) {
-//      executionContext.set(new ExecutionContext());
-//    }
-//    return executionContext.get();
-//  }
-//  public static void removeExecutionContext() {
-//    executionContext.remove();
-//  }
-
   private final Set<Class<?>> classes;
   private final Map<String, Object> properties;
 
-//  private final String mainDbName;
-//  private final String domainDbName;
 
   public PushApplication() throws Exception {
-//    this.mainDbName = "push-master";
-//    this.domainDbName = "push-domain";
 
     // Make sure our logging is working before ANYTHING else.
     LogUtils.initLogback(Level.WARN);
@@ -55,19 +37,6 @@ public class PushApplication extends Application {
     Map<String, Object> properties = new HashMap<>();
     Set<Class<?>> classes = new HashSet<>();
 
-//    CpObjectMapper objectMapper = new CpObjectMapper();
-//    TiogaJacksonTranslator translator = new TiogaJacksonTranslator(objectMapper);
-//    CpCouchServer couchServer = new CpCouchServer();
-//    AppContext appContext = new AppContext(
-//      new SessionStore(TimeUnit.MINUTES.toMillis(60)),
-//      objectMapper,
-//      mainDbName,
-//      new DomainDatabaseConfig(couchServer, domainDbName),
-//      new BitlyApis(translator, bitlyAccessToken));
-//
-//    properties.put(AppContext.class.getName(), appContext);
-
-//    classes.add(CpFilter.class);
     classes.add(PushRequestFilter.class);
     classes.add(ApiAuthenticationFilter.class);
     classes.add(MngtAuthenticationFilter.class);
