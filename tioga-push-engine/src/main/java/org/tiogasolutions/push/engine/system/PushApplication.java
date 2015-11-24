@@ -6,9 +6,7 @@
 
 package org.tiogasolutions.push.engine.system;
 
-import ch.qos.logback.classic.Level;
 import org.springframework.stereotype.Component;
-import org.tiogasolutions.app.common.LogUtils;
 import org.tiogasolutions.push.engine.jaxrs.security.ApiAuthenticationFilter;
 import org.tiogasolutions.push.engine.jaxrs.security.MngtAuthenticationFilter;
 import org.tiogasolutions.push.engine.jaxrs.security.PushRequestFilter;
@@ -25,17 +23,10 @@ import java.util.*;
 @Component
 public class PushApplication extends Application {
 
-  private final Set<Class<?>> classes;
-  private final Map<String, Object> properties;
-
+  private final Set<Class<?>> classes = new HashSet<>();
+  private final Map<String, Object> properties = new HashMap<>();
 
   public PushApplication() throws Exception {
-
-    // Make sure our logging is working before ANYTHING else.
-    LogUtils.initLogback(Level.WARN);
-
-    Map<String, Object> properties = new HashMap<>();
-    Set<Class<?>> classes = new HashSet<>();
 
     classes.add(PushRequestFilter.class);
     classes.add(ApiAuthenticationFilter.class);
@@ -44,14 +35,10 @@ public class PushApplication extends Application {
     classes.add(ThymeleafMessageBodyWriter.class);
     classes.add(LocalResourceMessageBodyWriter.class);
     classes.add(RootResource.class);
-    classes.add(PushJaxRsExceptionMapper.class);
 
     // TODO - remove these once these are properly referenced by their plugins
     PingPush.PUSH_TYPE.getCode();
     new PushType(XmppPush.class, "im", "IM");
-
-    this.classes = Collections.unmodifiableSet(classes);
-    this.properties = Collections.unmodifiableMap(properties);
 
     checkForDuplicates();
 
