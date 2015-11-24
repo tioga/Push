@@ -4,6 +4,7 @@
  * This software may not be used without permission.
  */
 project(":tioga-push-plugin-ses") {
+
   version = tiogaAppVersion
 
   dependencies {

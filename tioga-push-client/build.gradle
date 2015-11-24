@@ -4,7 +4,8 @@
  * This software may not be used without permission.
  */
 project(":tioga-push-client") {
-  version = "3.0.5"
+
+  version = "3.1.0"
 
   dependencies {
     compile project(":tioga-push-jackson")

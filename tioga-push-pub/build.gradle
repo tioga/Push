@@ -4,7 +4,8 @@
  * This software may not be used without permission.
  */
 project(":tioga-push-pub") {
-  version = "2.0.5"
+
+  version = "2.1.0"
 
   dependencies {
   	compile ("org.tiogasolutions.dev:tioga-dev-common:+")
