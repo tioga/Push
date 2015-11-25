@@ -1,18 +1,18 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="Gradle : org.tiogasolutions.push:tioga-push-server-servlet : tioga-push-server-servlet-4.3.1.war (exploded)">
-    <output-path>$PROJECT_DIR$/build/artifacts/tioga-push-server-servlet/exploded/tioga-push-server-servlet-4.3.1.war</output-path>
+  <artifact type="exploded-war" name="Gradle : org.tiogasolutions.push:tioga-push-server-servlet : tioga-push-server-servlet-4.3.3.war (exploded)">
+    <output-path>$PROJECT_DIR$/build/artifacts/tioga-push-server-servlet/exploded/tioga-push-server-servlet-4.3.3.war</output-path>
     <properties id="gradle-properties">
       <options external-project-path="$PROJECT_DIR$" />
     </properties>
     <root id="root">
-      <element id="javaee-facet-resources" facet="tioga-push-server-servlet/web/Web Gradle : tioga-push-server-servlet-4.3.1.war" />
+      <element id="javaee-facet-resources" facet="tioga-push-server-servlet/web/Web Gradle : tioga-push-server-servlet-4.3.3.war" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="tioga-push-server-servlet" />
           <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-server-servlet/build/resources/main" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="org.tiogasolutions.push-tioga-push-engine-4.3.1.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-engine-4.3.3.jar">
             <element id="module-output" name="tioga-push-engine" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine/build/resources/main" />
           </element>
@@ -32,7 +32,7 @@
           <element id="library" level="project" name="Gradle: javax.validation:validation-api:1.1.0.Final" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.5.1" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.5.1" />
-          <element id="archive" name="org.tiogasolutions.push-tioga-push-kernel-4.3.1.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-kernel-4.3.3.jar">
             <element id="module-output" name="tioga-push-kernel" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-kernel/build/resources/main" />
           </element>
@@ -55,7 +55,7 @@
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:aopalliance-repackaged:2.4.0-b10" />
           <element id="library" level="project" name="Gradle: org.javassist:javassist:3.18.1-GA" />
           <element id="library" level="project" name="Gradle: javax.inject:javax.inject:1" />
-          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-ses-4.3.1.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-ses-4.3.3.jar">
             <element id="module-output" name="tioga-push-plugin-ses" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-ses/build/resources/main" />
           </element>
@@ -110,17 +110,17 @@
           <element id="library" level="project" name="Gradle: com.amazonaws:aws-java-sdk-workspaces:1.9.31" />
           <element id="library" level="project" name="Gradle: com.amazonaws:aws-java-sdk-machinelearning:1.9.31" />
           <element id="library" level="project" name="Gradle: com.amazonaws:aws-java-sdk-core:1.9.31" />
-          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-smtp-4.3.1.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-smtp-4.3.3.jar">
             <element id="module-output" name="tioga-push-plugin-smtp" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-smtp/build/resources/main" />
           </element>
           <element id="library" level="project" name="Gradle: javax.mail:mail:1.5.0-b01" />
           <element id="library" level="project" name="Gradle: javax.activation:activation:1.1" />
-          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-xmpp-4.3.1.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-xmpp-4.3.3.jar">
             <element id="module-output" name="tioga-push-plugin-xmpp" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-xmpp/build/resources/main" />
           </element>
-          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-twilio-4.3.1.jar">
+          <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-twilio-4.3.3.jar">
             <element id="module-output" name="tioga-push-plugin-twilio" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-twilio/build/resources/main" />
           </element>
@@ -137,13 +137,13 @@
           <element id="library" level="project" name="Gradle: org.unbescape:unbescape:1.0" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet:2.17" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet-core:2.17" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.dev/tioga-dev-common/5.1.0/76af939fe82b53ce94946337c1cc2bcf68b48051/tioga-dev-common-5.1.0.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.dev/tioga-dev-domain/4.2.0/e4362f077b03734652cc8afd41e2829bc7efc1f8/tioga-dev-domain-4.2.0.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-common/5.1.1/tioga-dev-common-5.1.1.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-domain/4.2.1/tioga-dev-domain-4.2.1.jar" />
           <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.apis/tioga-apis-google/2.3.0/37ecf083a18584ad7ff66bf04a86bef2a6b97051/tioga-apis-google-2.3.0.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs/4.2.3/tioga-lib-jaxrs-4.2.3.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs-jackson/5.2.1/tioga-lib-jaxrs-jackson-5.2.1.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/app/tioga-app-common/2.1.1/tioga-app-common-2.1.1.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.dev/tioga-dev-jackson/4.2.0/dcfdca0cc1f82fdb6a8c3fc01305cd24bc557ba0/tioga-dev-jackson-4.2.0.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs/4.3.0/tioga-lib-jaxrs-4.3.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.lib/tioga-lib-jaxrs-jackson/5.2.1/3ceb0f8969069042cc1a59f9be2f359542fcae7e/tioga-lib-jaxrs-jackson-5.2.1.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.app/tioga-app-common/2.1.1/f069e4d917bb62cbc9ea770e4147426164aaa001/tioga-app-common-2.1.1.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-jackson/4.2.1/tioga-dev-jackson-4.2.1.jar" />
           <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.apis/tioga-apis-bitly/1.2.0/57c8e659c0e9d2a0ecf5527b108d4decaede2528/tioga-apis-bitly-1.2.0.jar" />
           <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.lib/tioga-lib-couchace/5.1.0/adb9f9b1c87fbc09489bd9fd391c8fe78f37009b/tioga-lib-couchace-5.1.0.jar" />
           <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.1.6.RELEASE/15f0b22bf89ed468badbc4eec759af2b916d33e4/spring-context-4.1.6.RELEASE.jar" />
@@ -170,7 +170,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/build/artifacts/tioga-push-server-servlet/exploded/tioga-push-server-servlet-4.3.1.war/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/build/artifacts/tioga-push-server-servlet/exploded/tioga-push-server-servlet-4.3.3.war/META-INF/MANIFEST.MF" />
       </element>
     </root>
   </artifact>

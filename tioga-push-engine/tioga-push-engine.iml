@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":tioga-push-engine" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="org.tiogasolutions.push" external.system.module.version="4.3.1" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":tioga-push-engine" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="org.tiogasolutions.push" external.system.module.version="4.3.3" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/build/classes/main" />
     <output-test url="file://$MODULE_DIR$/build/classes/test" />
@@ -123,24 +123,24 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.glassfish.grizzly:grizzly-framework:2.3.16" level="project" />
     <orderEntry type="module" module-name="tioga-push-test" scope="TEST" />
     <orderEntry type="module-library">
-      <library name="Gradle: org.tiogasolutions.dev:tioga-dev-common:5.1.0">
+      <library name="Gradle: org.tiogasolutions.dev:tioga-dev-common:5.1.1">
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.dev/tioga-dev-common/5.1.0/76af939fe82b53ce94946337c1cc2bcf68b48051/tioga-dev-common-5.1.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-common/5.1.1/tioga-dev-common-5.1.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.dev/tioga-dev-common/5.1.0/f3da0e53308572b4885e4a59693b95d34e30a516/tioga-dev-common-5.1.0-sources.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-common/5.1.1/tioga-dev-common-5.1.1-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Gradle: org.tiogasolutions.dev:tioga-dev-domain:4.2.0">
+      <library name="Gradle: org.tiogasolutions.dev:tioga-dev-domain:4.2.1">
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.dev/tioga-dev-domain/4.2.0/e4362f077b03734652cc8afd41e2829bc7efc1f8/tioga-dev-domain-4.2.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-domain/4.2.1/tioga-dev-domain-4.2.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.dev/tioga-dev-domain/4.2.0/b7c523b77d6cc543b5a1da435e983c9a184ff5b9/tioga-dev-domain-4.2.0-sources.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-domain/4.2.1/tioga-dev-domain-4.2.1-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -156,90 +156,46 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:4.2.3">
+      <library name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:4.3.0">
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs/4.2.3/tioga-lib-jaxrs-4.2.3.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs/4.3.0/tioga-lib-jaxrs-4.3.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs/4.2.3/tioga-lib-jaxrs-4.2.3-sources.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs/4.3.0/tioga-lib-jaxrs-4.3.0-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.2.1">
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs-jackson/5.2.1/tioga-lib-jaxrs-jackson-5.2.1.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.lib/tioga-lib-jaxrs-jackson/5.2.1/3ceb0f8969069042cc1a59f9be2f359542fcae7e/tioga-lib-jaxrs-jackson-5.2.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs-jackson/5.2.1/tioga-lib-jaxrs-jackson-5.2.1-sources.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.lib/tioga-lib-jaxrs-jackson/5.2.1/c87fe4cfa45e3f71dc25a1f84cd897cbf83e6f72/tioga-lib-jaxrs-jackson-5.2.1-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library name="Gradle: org.tiogasolutions.app:tioga-app-common:2.1.1">
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/app/tioga-app-common/2.1.1/tioga-app-common-2.1.1.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.app/tioga-app-common/2.1.1/f069e4d917bb62cbc9ea770e4147426164aaa001/tioga-app-common-2.1.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/app/tioga-app-common/2.1.1/tioga-app-common-2.1.1-sources.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.app/tioga-app-common/2.1.1/5163fcda1f02f0ba45e10e9981cc869bea7142c0/tioga-app-common-2.1.1-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Gradle: org.springframework:spring-aop:4.1.6.RELEASE">
+      <library name="Gradle: org.tiogasolutions.dev:tioga-dev-jackson:4.2.1">
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.1.6.RELEASE/686c13ba57d9423dede9c5d580dcadc5c67a2761/spring-aop-4.1.6.RELEASE.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-jackson/4.2.1/tioga-dev-jackson-4.2.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.1.6.RELEASE/b27f6ddfa82527ab2be92b11d3e1c50b6e7993e9/spring-aop-4.1.6.RELEASE-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: org.springframework:spring-core:4.1.6.RELEASE">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.1.6.RELEASE/e2f486124d5dea2d91a9c2ea7d4456bc343ca2cc/spring-core-4.1.6.RELEASE.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.1.6.RELEASE/a09f8d7c0c2b861f0d9e256de451c78b55aec0cf/spring-core-4.1.6.RELEASE-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: org.springframework:spring-beans:4.1.6.RELEASE">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.1.6.RELEASE/ce2d409d470948f11fad41ffdf37dcff4d28cd7c/spring-beans-4.1.6.RELEASE.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.1.6.RELEASE/708d354f5210f253d345b3cb65013410cc770554/spring-beans-4.1.6.RELEASE-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: org.springframework:spring-context:4.1.6.RELEASE">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.1.6.RELEASE/15f0b22bf89ed468badbc4eec759af2b916d33e4/spring-context-4.1.6.RELEASE.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.1.6.RELEASE/90d95c820dabd0187ff5be4a854b912741e8fd36/spring-context-4.1.6.RELEASE-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: org.tiogasolutions.dev:tioga-dev-jackson:4.2.0">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.dev/tioga-dev-jackson/4.2.0/dcfdca0cc1f82fdb6a8c3fc01305cd24bc557ba0/tioga-dev-jackson-4.2.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.dev/tioga-dev-jackson/4.2.0/29b23cec37dba783b40a14ca1af1e5bed28cbf70/tioga-dev-jackson-4.2.0-sources.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-jackson/4.2.1/tioga-dev-jackson-4.2.1-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -262,6 +218,17 @@
         <JAVADOC />
         <SOURCES>
           <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.lib/tioga-lib-couchace/5.1.0/a3b099690f46516b7466b80953c21bc9cc31e8c1/tioga-lib-couchace-5.1.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: org.springframework:spring-context:4.1.6.RELEASE">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.1.6.RELEASE/15f0b22bf89ed468badbc4eec759af2b916d33e4/spring-context-4.1.6.RELEASE.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.1.6.RELEASE/90d95c820dabd0187ff5be4a854b912741e8fd36/spring-context-4.1.6.RELEASE-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -310,28 +277,6 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Gradle: aopalliance:aopalliance:1.0">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/aopalliance/aopalliance/1.0/235ba8b489512805ac13a8f9ea77a1ca5ebe3e8/aopalliance-1.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/aopalliance/aopalliance/1.0/4a4b6d692e17846a9f3da036438a7ac491d3c814/aopalliance-1.0-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Gradle: org.springframework:spring-expression:4.1.6.RELEASE">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.1.6.RELEASE/8bf70887c2c883a6f6e552dbe46eec35c07adf6a/spring-expression-4.1.6.RELEASE.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.1.6.RELEASE/ee7d75b5f8328cb46f965fd4f07b12691bedea6a/spring-expression-4.1.6.RELEASE-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
       <library name="Gradle: org.tiogasolutions.couchace:tioga-couchace-core:1.6.0">
         <CLASSES>
           <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-core/1.6.0/2e1ad9fb492a349419cacf57a7cb76744c9bf070/tioga-couchace-core-1.6.0.jar!/" />
@@ -376,6 +321,50 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+      <library name="Gradle: org.springframework:spring-aop:4.1.6.RELEASE">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.1.6.RELEASE/686c13ba57d9423dede9c5d580dcadc5c67a2761/spring-aop-4.1.6.RELEASE.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.1.6.RELEASE/b27f6ddfa82527ab2be92b11d3e1c50b6e7993e9/spring-aop-4.1.6.RELEASE-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: org.springframework:spring-beans:4.1.6.RELEASE">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.1.6.RELEASE/ce2d409d470948f11fad41ffdf37dcff4d28cd7c/spring-beans-4.1.6.RELEASE.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.1.6.RELEASE/708d354f5210f253d345b3cb65013410cc770554/spring-beans-4.1.6.RELEASE-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: org.springframework:spring-core:4.1.6.RELEASE">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.1.6.RELEASE/e2f486124d5dea2d91a9c2ea7d4456bc343ca2cc/spring-core-4.1.6.RELEASE.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.1.6.RELEASE/a09f8d7c0c2b861f0d9e256de451c78b55aec0cf/spring-core-4.1.6.RELEASE-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: org.springframework:spring-expression:4.1.6.RELEASE">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.1.6.RELEASE/8bf70887c2c883a6f6e552dbe46eec35c07adf6a/spring-expression-4.1.6.RELEASE.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.1.6.RELEASE/ee7d75b5f8328cb46f965fd4f07b12691bedea6a/spring-expression-4.1.6.RELEASE-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="Gradle: org.igniterealtime.smack:smack-core:4.1.4">
         <CLASSES>
           <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-core/4.1.4/e192acc0380ac43bcf54b3b41e3c160dad8f4023/smack-core-4.1.4.jar!/" />
@@ -405,6 +394,17 @@
         <JAVADOC />
         <SOURCES>
           <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-sasl-javax/4.1.4/cea7a4335f0ad334029814a82c5101b13629db73/smack-sasl-javax-4.1.4-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: aopalliance:aopalliance:1.0">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/aopalliance/aopalliance/1.0/235ba8b489512805ac13a8f9ea77a1ca5ebe3e8/aopalliance-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/aopalliance/aopalliance/1.0/4a4b6d692e17846a9f3da036438a7ac491d3c814/aopalliance-1.0-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

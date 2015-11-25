@@ -39,7 +39,7 @@ subprojects {
   ext {
     // This is the primary version for the app
     // which does not include pub, client, etc.
-    tiogaAppVersion = "4.3.2"
+    tiogaAppVersion = "4.3.3"
 
     pomProjectDescription = "Tioga Solutions"
     pomUrl = 'https://www.tiogasolutions.org'
