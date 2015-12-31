@@ -40,7 +40,7 @@ public class SpringTestConfig {
     CouchServersConfig config = new CouchServersConfig();
 
     config.setMasterUrl("http://localhost:5984");
-    config.setMasterUserName("test-user");
+    config.setMasterUsername("test-user");
     config.setMasterPassword("test-user");
     config.setMasterDatabaseName("test-push");
 

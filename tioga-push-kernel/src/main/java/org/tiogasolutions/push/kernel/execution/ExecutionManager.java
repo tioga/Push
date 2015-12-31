@@ -1,8 +1,6 @@
 package org.tiogasolutions.push.kernel.execution;
 
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tiogasolutions.couchace.core.api.CouchServer;
 import org.tiogasolutions.dev.common.exceptions.ApiException;
@@ -11,14 +9,18 @@ import org.tiogasolutions.push.kernel.config.CouchServersConfig;
 import javax.ws.rs.core.UriInfo;
 
 @Component
-public class ExecutionManager implements BeanFactoryAware {
-
-  private BeanFactory beanFactory;
+public class ExecutionManager {
 
   private final InheritableThreadLocal<ExecutionContext> threadLocal;
 
-  public ExecutionManager() {
-    threadLocal = new InheritableThreadLocal<>();
+  private final CouchServer couchServer;
+  private final CouchServersConfig couchServersConfig;
+
+  @Autowired
+  public ExecutionManager(CouchServersConfig couchServersConfig, CouchServer couchServer) {
+    this.couchServer = couchServer;
+    this.couchServersConfig = couchServersConfig;
+    this.threadLocal = new InheritableThreadLocal<>();
   }
 
   public void removeExecutionContext() {
@@ -26,7 +28,7 @@ public class ExecutionManager implements BeanFactoryAware {
   }
 
   public ExecutionContext newContext(UriInfo uriInfo) {
-    ExecutionContext context = new ExecutionContext(beanFactory, uriInfo);
+    ExecutionContext context = new ExecutionContext(uriInfo);
     assignContext(context);
     return context;
   }
@@ -51,15 +53,10 @@ public class ExecutionManager implements BeanFactoryAware {
   }
 
   public CouchServersConfig getCouchServersConfig() {
-    return beanFactory.getBean(CouchServersConfig.class);
+    return couchServersConfig;
   }
 
   public CouchServer getCouchServer() {
-    return beanFactory.getBean(CouchServer.class);
-  }
-
-  @Override
-  public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-    this.beanFactory = beanFactory;
+    return couchServer;
   }
 }

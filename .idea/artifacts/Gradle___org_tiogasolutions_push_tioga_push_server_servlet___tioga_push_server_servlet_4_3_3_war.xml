@@ -25,6 +25,7 @@
           <element id="library" level="project" name="Gradle: org.slf4j:jul-to-slf4j:1.7.7" />
           <element id="library" level="project" name="Gradle: ch.qos.logback:logback-classic:1.1.3" />
           <element id="library" level="project" name="Gradle: ch.qos.logback:logback-core:1.1.3" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.dev:tioga-dev-common:5.1.1" />
           <element id="archive" name="org.tiogasolutions.push-tioga-push-jackson-4.1.1.jar">
             <element id="module-output" name="tioga-push-jackson" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-jackson/build/resources/main" />
@@ -32,6 +33,8 @@
           <element id="library" level="project" name="Gradle: javax.validation:validation-api:1.1.0.Final" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.5.1" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.5.1" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.dev:tioga-dev-jackson:4.2.1" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.dev:tioga-dev-domain:4.2.1" />
           <element id="archive" name="org.tiogasolutions.push-tioga-push-kernel-4.3.3.jar">
             <element id="module-output" name="tioga-push-kernel" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-kernel/build/resources/main" />
@@ -55,6 +58,20 @@
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:aopalliance-repackaged:2.4.0-b10" />
           <element id="library" level="project" name="Gradle: org.javassist:javassist:3.18.1-GA" />
           <element id="library" level="project" name="Gradle: javax.inject:javax.inject:1" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.apis:tioga-apis-bitly:1.2.0" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.lib:tioga-lib-couchace:5.1.0" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.1.6.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.2.1" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-core:1.6.1" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jackson:1.6.1" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-annotations:1.6.1" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jersey:1.6.1" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-aop:4.1.6.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-beans:4.1.6.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-core:4.1.6.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.1.6.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:4.3.0" />
+          <element id="library" level="project" name="Gradle: aopalliance:aopalliance:1.0" />
           <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-ses-4.3.3.jar">
             <element id="module-output" name="tioga-push-plugin-ses" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-ses/build/resources/main" />
@@ -110,6 +127,7 @@
           <element id="library" level="project" name="Gradle: com.amazonaws:aws-java-sdk-workspaces:1.9.31" />
           <element id="library" level="project" name="Gradle: com.amazonaws:aws-java-sdk-machinelearning:1.9.31" />
           <element id="library" level="project" name="Gradle: com.amazonaws:aws-java-sdk-core:1.9.31" />
+          <element id="library" level="project" name="Gradle: joda-time:joda-time:2.9.1" />
           <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-smtp-4.3.3.jar">
             <element id="module-output" name="tioga-push-plugin-smtp" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-smtp/build/resources/main" />
@@ -120,6 +138,16 @@
             <element id="module-output" name="tioga-push-plugin-xmpp" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-xmpp/build/resources/main" />
           </element>
+          <element id="library" level="project" name="Gradle: org.igniterealtime.smack:smack-java7:4.1.4" />
+          <element id="library" level="project" name="Gradle: org.igniterealtime.smack:smack-tcp:4.1.4" />
+          <element id="library" level="project" name="Gradle: org.igniterealtime.smack:smack-im:4.1.4" />
+          <element id="library" level="project" name="Gradle: org.igniterealtime.smack:smack-extensions:4.1.4" />
+          <element id="library" level="project" name="Gradle: org.igniterealtime.smack:smack-core:4.1.4" />
+          <element id="library" level="project" name="Gradle: org.igniterealtime.smack:smack-resolver-javax:4.1.4" />
+          <element id="library" level="project" name="Gradle: org.igniterealtime.smack:smack-sasl-javax:4.1.4" />
+          <element id="library" level="project" name="Gradle: org.jxmpp:jxmpp-core:0.4.2" />
+          <element id="library" level="project" name="Gradle: xpp3:xpp3:1.1.4c" />
+          <element id="library" level="project" name="Gradle: org.jxmpp:jxmpp-util-cache:0.4.2" />
           <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-twilio-4.3.3.jar">
             <element id="module-output" name="tioga-push-plugin-twilio" />
             <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-twilio/build/resources/main" />
@@ -135,38 +163,10 @@
           <element id="library" level="project" name="Gradle: org.thymeleaf:thymeleaf:2.1.3.RELEASE" />
           <element id="library" level="project" name="Gradle: ognl:ognl:3.0.6" />
           <element id="library" level="project" name="Gradle: org.unbescape:unbescape:1.0" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.apis:tioga-apis-google:2.3.0" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.app:tioga-app-common:2.1.1" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet:2.17" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet-core:2.17" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-common/5.1.1/tioga-dev-common-5.1.1.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-domain/4.2.1/tioga-dev-domain-4.2.1.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.apis/tioga-apis-google/2.3.0/37ecf083a18584ad7ff66bf04a86bef2a6b97051/tioga-apis-google-2.3.0.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs/4.3.0/tioga-lib-jaxrs-4.3.0.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.lib/tioga-lib-jaxrs-jackson/5.2.1/3ceb0f8969069042cc1a59f9be2f359542fcae7e/tioga-lib-jaxrs-jackson-5.2.1.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.app/tioga-app-common/2.1.1/f069e4d917bb62cbc9ea770e4147426164aaa001/tioga-app-common-2.1.1.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-jackson/4.2.1/tioga-dev-jackson-4.2.1.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.apis/tioga-apis-bitly/1.2.0/57c8e659c0e9d2a0ecf5527b108d4decaede2528/tioga-apis-bitly-1.2.0.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.lib/tioga-lib-couchace/5.1.0/adb9f9b1c87fbc09489bd9fd391c8fe78f37009b/tioga-lib-couchace-5.1.0.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.1.6.RELEASE/15f0b22bf89ed468badbc4eec759af2b916d33e4/spring-context-4.1.6.RELEASE.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-java7/4.1.4/7fba593e3e07934ad9024d475dcd35e11115eb43/smack-java7-4.1.4.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-tcp/4.1.4/abe52f8b9e66bd65339106298636c7888f63762e/smack-tcp-4.1.4.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-im/4.1.4/36af87ca593fe82cae6591a4d72a321581130dc4/smack-im-4.1.4.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-extensions/4.1.4/4b9978d465ae26b2c191ebb672089427992e0dc3/smack-extensions-4.1.4.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-core/1.6.0/2e1ad9fb492a349419cacf57a7cb76744c9bf070/tioga-couchace-core-1.6.0.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-jackson/1.6.0/539f99ec473dd3acf3124e1a6e9430634d95a866/tioga-couchace-jackson-1.6.0.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-annotations/1.6.0/ed8a81a6216e94f4c2384553e096e469cd929d79/tioga-couchace-annotations-1.6.0.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-jersey/1.6.0/1bc98a88bed4e561c4867a57608411ec7c6a00b0/tioga-couchace-jersey-1.6.0.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.1.6.RELEASE/686c13ba57d9423dede9c5d580dcadc5c67a2761/spring-aop-4.1.6.RELEASE.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.1.6.RELEASE/ce2d409d470948f11fad41ffdf37dcff4d28cd7c/spring-beans-4.1.6.RELEASE.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.1.6.RELEASE/e2f486124d5dea2d91a9c2ea7d4456bc343ca2cc/spring-core-4.1.6.RELEASE.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.1.6.RELEASE/8bf70887c2c883a6f6e552dbe46eec35c07adf6a/spring-expression-4.1.6.RELEASE.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-core/4.1.4/e192acc0380ac43bcf54b3b41e3c160dad8f4023/smack-core-4.1.4.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-resolver-javax/4.1.4/5d9a625734b2aec31456b6915bfecd38aaf34cef/smack-resolver-javax-4.1.4.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.igniterealtime.smack/smack-sasl-javax/4.1.4/83e08d19db322df3f0fcdfb87618afde3d48dcfe/smack-sasl-javax-4.1.4.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/aopalliance/aopalliance/1.0/235ba8b489512805ac13a8f9ea77a1ca5ebe3e8/aopalliance-1.0.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.9.1/c261495d1e01df849cdb3cbc941564018f0d3539/joda-time-2.9.1.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jxmpp/jxmpp-core/0.4.2/a4c8ce09be6ec90479be74290e381de4288c9569/jxmpp-core-0.4.2.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/xpp3/xpp3/1.1.4c/9b988ea84b9e4e9f1874e390ce099b8ac12cfff5/xpp3-1.1.4c.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jxmpp/jxmpp-util-cache/0.4.2/4aa590f2a44d49444dcd3bb082017bf0b46f2ff7/jxmpp-util-cache-0.4.2.jar" />
         </element>
       </element>
       <element id="directory" name="META-INF">

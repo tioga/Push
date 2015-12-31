@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Push Server" type="Application" factoryName="Application">
+  <configuration default="false" name="Push Server" type="Application" factoryName="Application" singleton="true">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
       <pattern>
         <option name="PATTERN" value="com.cosmicpush.engine.grizzly.*" />
@@ -16,7 +16,22 @@
     <option name="ENV_VARIABLES" />
     <option name="PASS_PARENT_ENVS" value="true" />
     <module name="tioga-push-server-grizzly" />
-    <envs />
+    <envs>
+      <env name="hostName" value="localhost" />
+      <env name="port" value="39009" />
+      <env name="shutdownPort" value="39010" />
+      <env name="context" value="push-server" />
+      <env name="toOpenBrowser" value="true" />
+      <env name="masterUrl" value="http://localhost:5984" />
+      <env name="masterUsername" value="app-user" />
+      <env name="masterPassword" value="app-user" />
+      <env name="masterDatabaseName" value="tioga-push" />
+      <env name="domainUrl" value="http://localhost:5984" />
+      <env name="domainUsername" value="app-user" />
+      <env name="domainPassword" value="app-user" />
+      <env name="domainDatabasePrefix" value="tioga-push-" />
+      <env name="sessionDuration" value="3600000" />
+    </envs>
     <RunnerSettings RunnerId="Debug">
       <option name="DEBUG_PORT" value="" />
       <option name="TRANSPORT" value="0" />

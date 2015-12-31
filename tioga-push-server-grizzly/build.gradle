@@ -3,7 +3,18 @@
  *
  * This software may not be used without permission.
  */
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath group:"org.cloudfoundry", name:"cf-gradle-plugin", version:"1.0.1"
+  }
+}
+
 project(":tioga-push-server-grizzly") {
+
+  apply plugin: 'cloudfoundry'
 
   version = tiogaAppVersion
 
@@ -17,7 +28,7 @@ project(":tioga-push-server-grizzly") {
     compile("org.tiogasolutions.runners:tioga-runners-spring-grizzly:+")
 
     // required by Jersey-Spring's stupid attempt to check for a ServletContext
-	  runtime("javax.servlet:javax.servlet-api:3.1.0")
+	  compile("javax.servlet:javax.servlet-api:3.1.0")
 
     testCompile("org.testng:testng:6.8.21")
   }
@@ -35,17 +46,6 @@ project(":tioga-push-server-grizzly") {
     })
   })
 
-  File serverStartFile = file("$buildDir/scripts/server-start.bat");
-
-  task createStartScript << {
-    serverStartFile.parentFile.mkdirs()
-    FileWriter writer = new FileWriter(serverStartFile);
-    writer.write("@echo off\r\ncls\r\n");
-    writer.write("echo Starting application\r\n");
-    writer.write("%JAVA_HOME%\\bin\\javaw.exe -Dpush.server.context.root=\"/push-server\" -jar ./lib/${project.name}-${project.version}.jar");
-    writer.close()
-  }
-
   apply plugin:'distribution'
 
   artifacts {
@@ -59,20 +59,49 @@ project(":tioga-push-server-grizzly") {
           from(jar)
           from(project.configurations.runtime)
         }
-        from(serverStartFile, createStartScript)
       }
     }
   }
 
   jar {
+    into("libs") {
+      from configurations.runtime
+    }
     manifest {
       attributes(
         "Implementation-Version" : project.version,
-        "Main-Class"             : "org.tiogasolutions.push.server.grizzly.GrizzlyPushServer",
-        "Class-Path"             : configurations.compile.collect { it.getName() }.join(' ')
+        "Main-Class"             : "org.tiogasolutions.push.server.grizzly.PushServer",
+        "Class-Path"             : configurations.compile.collect { "./libs/" + it.getName() }.join(" ")
       )
     }
   }
 
   apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
+
+  cloudfoundry {
+    username = "jacobp@tiogasolutions.org"
+    password = "go3Pivotal!"
+    application = "push-server"
+
+    space = "production"
+    file = file("build/libs/${project.name}-${project.version}.jar")
+
+    env = [
+       "hostName": "0.0.0.0",
+       "port": "8080",
+       "shutdownPort": "8081",
+       "context": "",
+
+       "masterUrl": "https://tioga.cloudant.com",
+       "masterUsername": "tioga",
+       "masterPassword": "4God'sBlessing!",
+       "masterDatabaseName": "push",
+
+       "domainUrl": "https://tioga.cloudant.com",
+       "domainUsername": "tioga",
+       "domainPassword": "4God'sBlessing!",
+       "domainDatabasePrefix": "push-",
+       "sessionDuration": "3600000"
+    ]
+  }
 }

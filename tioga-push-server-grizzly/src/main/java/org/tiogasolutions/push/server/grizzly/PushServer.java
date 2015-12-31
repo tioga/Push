@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.tiogasolutions.app.common.AppPathResolver;
 import org.tiogasolutions.app.common.AppUtils;
 import org.tiogasolutions.push.engine.system.PushApplication;
-import org.tiogasolutions.runners.grizzly.GrizzlyServer;
 import org.tiogasolutions.runners.grizzly.GrizzlyServerConfig;
 import org.tiogasolutions.runners.grizzly.ShutdownUtils;
 import org.tiogasolutions.runners.grizzly.spring.ApplicationResolver;
@@ -42,7 +41,7 @@ public class PushServer {
     Path logbackFile = AppUtils.initLogback(configDir, "push.log.config", "logback.xml");
 
     // Locate the spring file for this app or use DEFAULT_SPRING_FILE from the classpath if one is not found.
-    String springConfigPath = resolver.resolveSpringPath(configDir, null);
+    String springConfigPath = resolver.resolveSpringPath(configDir, "classpath:/tioga-push-server-grizzly/spring-config.xml");
     String activeProfiles = resolver.resolveSpringProfiles(); // defaults to "hosted"
 
     boolean shuttingDown = Arrays.asList(args).contains("-shutdown");

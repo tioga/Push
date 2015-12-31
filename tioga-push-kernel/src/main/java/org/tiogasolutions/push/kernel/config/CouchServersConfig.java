@@ -3,12 +3,12 @@ package org.tiogasolutions.push.kernel.config;
 public class CouchServersConfig {
 
   private String masterUrl;
-  private String masterUserName;
+  private String masterUsername;
   private String masterPassword;
   private String masterDatabaseName;
 
   private String domainUrl;
-  private String domainUserName;
+  private String domainUsername;
   private String domainPassword;
   private String domainDatabasePrefix;
 
@@ -23,12 +23,12 @@ public class CouchServersConfig {
     this.masterUrl = masterUrl;
   }
 
-  public String getMasterUserName() {
-    return masterUserName;
+  public String getMasterUsername() {
+    return masterUsername;
   }
 
-  public void setMasterUserName(String masterUserName) {
-    this.masterUserName = masterUserName;
+  public void setMasterUsername(String masterUserName) {
+    this.masterUsername = masterUserName;
   }
 
   public String getMasterPassword() {
@@ -55,12 +55,12 @@ public class CouchServersConfig {
     this.domainUrl = domainUrl;
   }
 
-  public String getDomainUserName() {
-    return domainUserName;
+  public String getDomainUsername() {
+    return domainUsername;
   }
 
-  public void setDomainUserName(String domainUserName) {
-    this.domainUserName = domainUserName;
+  public void setDomainUserName(String domainUsername) {
+    this.domainUsername = domainUsername;
   }
 
   public String getDomainPassword() {

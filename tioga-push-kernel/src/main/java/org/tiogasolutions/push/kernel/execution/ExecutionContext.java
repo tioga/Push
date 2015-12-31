@@ -1,6 +1,5 @@
 package org.tiogasolutions.push.kernel.execution;
 
-import org.springframework.beans.factory.BeanFactory;
 import org.tiogasolutions.push.kernel.accounts.Account;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.kernel.system.Session;
@@ -15,10 +14,7 @@ public class ExecutionContext {
 
   private final UriInfo uriInfo;
 
-  // private final BeanFactory beanFactory;
-
-  public ExecutionContext(BeanFactory beanFactory, UriInfo uriInfo) {
-    // this.beanFactory = beanFactory;
+  public ExecutionContext(UriInfo uriInfo) {
     this.uriInfo = uriInfo;
   }
 
@@ -49,30 +45,6 @@ public class ExecutionContext {
   public UriInfo getUriInfo() {
     return uriInfo;
   }
-
-//  public PushProcessor getPushProcessor() {
-//    return beanFactory.getBean(PushProcessor.class);
-//  }
-//
-//  public CpObjectMapper getObjectMapper() {
-//    return beanFactory.getBean(CpObjectMapper.class);
-//  }
-//
-//  public DomainStore getDomainStore() {
-//    return beanFactory.getBean(DomainStore.class);
-//  }
-//
-//  public AccountStore getAccountStore() {
-//    return beanFactory.getBean(AccountStore.class);
-//  }
-//
-//  public PushRequestStore getPushRequestStore() {
-//    return beanFactory.getBean(PushRequestStore.class);
-//  }
-//
-//  public <T> T getBean(Class<T> type) {
-//    return beanFactory.getBean(type);
-//  }
 
   public void setLastMessage(String message) {
     if (session != null) {
