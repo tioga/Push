@@ -21,6 +21,7 @@ import org.tiogasolutions.dev.common.json.JsonTranslator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.tiogasolutions.push.pub.SmtpEmailPush;
+import org.tiogasolutions.push.pub.internal.PushUtils;
 
 import java.net.InetAddress;
 
@@ -34,7 +35,7 @@ public class SmtpEmailPushTranslationTest {
     Push oldPush = SmtpEmailPush.newPush("mickey.mouse@disney.com", "donald.duck@disney.com", "This is the subject", "<html><body><h1>Hello World</h1>So, how's it going?</body></html>", "http://callback.com/api.sent", null, "test:true", "type:email");
     String json = translator.toJson(oldPush);
 
-    InetAddress remoteAddress = InetAddress.getLocalHost();
+    InetAddress remoteAddress = PushUtils.getLocalHost();
     String expected = String.format(EXPECTED_JSON, remoteAddress.getCanonicalHostName(), remoteAddress.getHostAddress());
     Assert.assertEquals(json, expected);
 

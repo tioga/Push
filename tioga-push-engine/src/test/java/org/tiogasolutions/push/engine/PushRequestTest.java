@@ -25,6 +25,7 @@ import org.tiogasolutions.push.pub.SesEmailPush;
 import org.tiogasolutions.push.pub.SmtpEmailPush;
 import org.tiogasolutions.push.pub.XmppPush;
 import org.tiogasolutions.push.pub.common.Push;
+import org.tiogasolutions.push.pub.internal.PushUtils;
 import org.tiogasolutions.push.test.AbstractSpringTest;
 import org.tiogasolutions.push.test.TestFixture;
 
@@ -99,7 +100,7 @@ public class PushRequestTest extends AbstractSpringTest {
         "<html><body><h1>Hello World</h1>So, how's it going?</body></html>",
         callbackUrl, "test:true", "type:email");
 
-    InetAddress remoteAddress = InetAddress.getLocalHost();
+    InetAddress remoteAddress = PushUtils.getLocalHost();
     PushRequest oldPushRequest = new PushRequest(Push.CURRENT_API_VERSION, domain, push);
     String json = translator.toJson(oldPushRequest);
 
@@ -154,7 +155,7 @@ public class PushRequestTest extends AbstractSpringTest {
         "<html><body><h1>Hello World</h1>So, how's it going?</body></html>",
         callbackUrl, "test:true", "type:email");
 
-    InetAddress remoteAddress = InetAddress.getLocalHost();
+    InetAddress remoteAddress = PushUtils.getLocalHost();
     PushRequest oldPushRequest = new PushRequest(Push.CURRENT_API_VERSION, domain, push);
     String json = translator.toJson(oldPushRequest);
 
@@ -207,7 +208,7 @@ public class PushRequestTest extends AbstractSpringTest {
       "Just calling to say hello",
       callbackUrl, BeanUtils.toMap("color:green"));
 
-    InetAddress remoteAddress = InetAddress.getLocalHost();
+    InetAddress remoteAddress = PushUtils.getLocalHost();
     PushRequest oldPushRequest = new PushRequest(Push.CURRENT_API_VERSION, domain, push);
     String json = translator.toJson(oldPushRequest);
 

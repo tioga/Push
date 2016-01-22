@@ -23,6 +23,7 @@ import org.tiogasolutions.dev.common.EqualsUtils;
 import org.tiogasolutions.dev.common.json.JsonTranslator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.tiogasolutions.push.pub.internal.PushUtils;
 
 import java.net.InetAddress;
 
@@ -36,7 +37,7 @@ public class PingPushTranslationTest {
     Push oldPush = PingPush.newPush();
     String json = translator.toJson(oldPush);
 
-    InetAddress remoteAddress = InetAddress.getLocalHost();
+    InetAddress remoteAddress = PushUtils.getLocalHost();
     String expected = String.format(EXPECTED_JSON, remoteAddress.getCanonicalHostName(), remoteAddress.getHostAddress());
     Assert.assertEquals(json, expected);
 
