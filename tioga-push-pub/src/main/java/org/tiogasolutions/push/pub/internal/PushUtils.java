@@ -11,6 +11,16 @@ public class PushUtils {
   public static InetAddress getLocalHost() {
     try {
       return InetAddress.getLocalHost();
+
+    } catch (UnknownHostException e) {
+      return getLocalHostByName();
+    }
+  }
+
+  public static InetAddress getLocalHostByName() {
+    try {
+      return InetAddress.getByName("localhost");
+
     } catch (UnknownHostException e) {
       throw new RuntimeException("Exception getting InetAddress for localhost.", e);
     }
