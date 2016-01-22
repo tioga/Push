@@ -22,6 +22,7 @@ import org.tiogasolutions.dev.common.*;
 import org.tiogasolutions.dev.common.json.JsonTranslator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.tiogasolutions.push.pub.internal.PushUtils;
 
 import java.net.InetAddress;
 
@@ -35,7 +36,8 @@ public class JabberPushTranslationTest {
     Push oldPush = XmppPush.newPush("mickey.mouse@disney.com", "Just calling to say hello", "http://example.com/callback");
     String json = translator.toJson(oldPush);
 
-    InetAddress remoteAddress = InetAddress.getLocalHost();
+    InetAddress remoteAddress = PushUtils.getLocalHost();
+
     String expected = String.format(EXPECTED_JSON, remoteAddress.getCanonicalHostName(), remoteAddress.getHostAddress());
     Assert.assertEquals(json, expected);
 
