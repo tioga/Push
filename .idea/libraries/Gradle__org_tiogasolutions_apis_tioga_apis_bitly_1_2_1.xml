@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.tiogasolutions.apis:tioga-apis-bitly:1.2.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.apis/tioga-apis-bitly/1.2.1/6ace897b308dff87d59b3b947eab526bbd85514e/tioga-apis-bitly-1.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.apis/tioga-apis-bitly/1.2.1/7ee5bfc01e6141bcb23282cf22333e541a09b79/tioga-apis-bitly-1.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -2,6 +2,7 @@
   <library name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jersey:1.6.1">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/couchace/tioga-couchace-jersey/1.6.1/tioga-couchace-jersey-1.6.1.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.couchace/tioga-couchace-jersey/1.6.1/b9f46516476ca45ec97f1be5e1818f92b4cd7077/tioga-couchace-jersey-1.6.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

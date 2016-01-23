@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2014 Jacob D. Parr
- *
- * This software may not be used without permission.
- */
 buildscript {
   repositories {
     mavenCentral()
@@ -15,6 +10,7 @@ buildscript {
 project(":tioga-push-server-grizzly") {
 
   apply plugin: 'cloudfoundry'
+  apply plugin: 'distribution'
 
   version = tiogaAppVersion
 
@@ -36,21 +32,25 @@ project(":tioga-push-server-grizzly") {
   configurations.all({
     resolutionStrategy({
       force(
-        "org.slf4j:slf4j-api:1.7.12",
-        "org.javassist:javassist:3.18.1-GA",
-        "commons-logging:commons-logging:1.2",
-        "org.apache.httpcomponents:httpclient:4.3.4",
-        "org.apache.httpcomponents:httpcore:4.3.2",
-        "com.fasterxml.jackson.core:jackson-databind:2.5.1",
+          "commons-codec:commons-codec:1.6",
+          "org.slf4j:slf4j-api:1.7.12",
+          "org.javassist:javassist:3.18.1-GA",
+          "commons-logging:commons-logging:1.2",
+          "org.apache.httpcomponents:httpclient:4.3.4",
+          "org.apache.httpcomponents:httpcore:4.3.2",
+          "com.fasterxml.jackson.core:jackson-databind:2.5.1",
+
+          "org.springframework:spring-web:4.1.6.RELEASE",
+          "org.springframework:spring-aop:4.1.6.RELEASE",
+          "org.springframework:spring-core:4.1.6.RELEASE",
+          "org.springframework:spring-beans:4.1.6.RELEASE",
+          "org.springframework:spring-context:4.1.6.RELEASE",
+          "org.springframework:spring-webmvc:4.1.6.RELEASE",
+          "org.springframework:spring-expression:4.1.6.RELEASE",
       )
     })
   })
 
-  apply plugin:'distribution'
-
-  artifacts {
-    archives distZip
-  }
 
   distributions {
     main {
