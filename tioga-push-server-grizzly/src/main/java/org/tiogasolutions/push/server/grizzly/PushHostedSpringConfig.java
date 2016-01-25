@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.tiogasolutions.apis.bitly.BitlyApis;
+import org.tiogasolutions.dev.common.EnvUtils;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.config.CouchServersConfig;
@@ -25,44 +26,60 @@ import java.util.Arrays;
 @Configuration
 public class PushHostedSpringConfig {
 
-  @Value("#{systemEnvironment.context}")
-  private String context;
+  private String getContext() {
+    return EnvUtils.findProperty("push.context", "");
+  }
 
-  @Value("#{systemEnvironment.port}")
-  private int port = 8080;
+  private int getPort() {
+    String value = EnvUtils.findProperty("push.port", "8080");
+    return Integer.valueOf(value);
+  }
 
-  @Value("#{systemEnvironment.shutdownPort}")
-  private int shutdownPort = 8081;
+  private int getShutdownPort() {
+    String value = EnvUtils.findProperty("push.shutdownPort", "8081");
+    return Integer.valueOf(value);
+  }
 
-  @Value("#{systemEnvironment.hostName}")
-  private String hostName = "0.0.0.0";
+  private String getHostName() {
+    return EnvUtils.findProperty("push.hostName", "0.0.0.0");
+  }
 
-  @Value("#{systemEnvironment.masterUrl}")
-  private String masterUrl;
+  private String getMasterUrl() {
+    return EnvUtils.requireProperty("push.masterUrl");
+  }
 
-  @Value("#{systemEnvironment.masterUsername}")
-  private String masterUsername;
+  private String getMasterUsername() {
+    return EnvUtils.requireProperty("push.masterUsername");
+  }
 
-  @Value("#{systemEnvironment.masterPassword}")
-  private String masterPassword;
+  private String getMasterPassword() {
+    return EnvUtils.requireProperty("push.masterPassword");
+  }
 
-  @Value("#{systemEnvironment.masterDatabaseName}")
-  private String masterDatabaseName;
+  private String getMasterDatabaseName() {
+    return EnvUtils.requireProperty("push.masterDatabaseName");
+  }
 
-  @Value("#{systemEnvironment.domainUrl}")
-  private String domainUrl;
+  private String getDomainUrl() {
+    return EnvUtils.requireProperty("push.domainUrl");
+  }
 
-  @Value("#{systemEnvironment.domainUsername}")
-  private String domainUsername;
+  private String getDomainUsername() {
+    return EnvUtils.requireProperty("push.domainUsername");
+  }
 
-  @Value("#{systemEnvironment.domainPassword}")
-  private String domainPassword;
+  private String getDomainPassword() {
+    return EnvUtils.requireProperty("push.domainPassword");
+  }
 
-  @Value("#{systemEnvironment.domainDatabasePrefix}")
-  private String domainDatabasePrefix;
+  private String getDomainDatabasePrefix() {
+    return EnvUtils.requireProperty("push.domainDatabasePrefix");
+  }
 
-  @Value("#{systemEnvironment.sessionDuration}")
-  private long sessionDuration;
+  private Long getSessionDuration() {
+    String value = EnvUtils.requireProperty("push.sessionDuration");
+    return Long.valueOf(value);
+  }
 
   @Bean
   public PushObjectMapper pushObjectMapper() {
@@ -81,7 +98,7 @@ public class PushHostedSpringConfig {
 
   @Bean
   public SessionStore sessionStore() {
-    return new SessionStore(sessionDuration);
+    return new SessionStore(getSessionDuration());
   }
 
   @Bean
@@ -112,10 +129,10 @@ public class PushHostedSpringConfig {
   @Bean
   public GrizzlyServerConfig grizzlyServerConfig() {
     GrizzlyServerConfig config = new GrizzlyServerConfig();
-    config.setHostName(hostName);
-    config.setPort(port);
-    config.setShutdownPort(shutdownPort);
-    config.setContext(context);
+    config.setHostName(getHostName());
+    config.setPort(getPort());
+    config.setShutdownPort(getShutdownPort());
+    config.setContext(getContext());
     config.setToOpenBrowser(false);
     return config;
   }
@@ -124,15 +141,15 @@ public class PushHostedSpringConfig {
   public CouchServersConfig couchServersConfig() {
     CouchServersConfig config = new CouchServersConfig();
 
-    config.setMasterUrl(masterUrl);
-    config.setMasterUsername(masterUsername);
-    config.setMasterPassword(masterPassword);
-    config.setMasterDatabaseName(masterDatabaseName);
+    config.setMasterUrl(getMasterUrl());
+    config.setMasterUsername(getMasterUsername());
+    config.setMasterPassword(getMasterPassword());
+    config.setMasterDatabaseName(getMasterDatabaseName());
 
-    config.setDomainUrl(domainUrl);
-    config.setDomainUserName(domainUsername);
-    config.setDomainPassword(domainPassword);
-    config.setDomainDatabasePrefix(domainDatabasePrefix);
+    config.setDomainUrl(getDomainUrl());
+    config.setDomainUserName(getDomainUsername());
+    config.setDomainPassword(getDomainPassword());
+    config.setDomainDatabasePrefix(getDomainDatabasePrefix());
 
     return config;
   }

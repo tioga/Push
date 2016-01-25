@@ -1,15 +1,5 @@
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath group:"org.cloudfoundry", name:"cf-gradle-plugin", version:"1.0.1"
-  }
-}
-
 project(":tioga-push-server-grizzly") {
 
-  apply plugin: 'cloudfoundry'
   apply plugin: 'distribution'
 
   version = tiogaAppVersion
@@ -77,33 +67,4 @@ project(":tioga-push-server-grizzly") {
   }
 
   apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
-
-  cloudfoundry {
-    username = "jacobp@tiogasolutions.org"
-    password = "go3Pivotal!"
-
-    memory = 256
-    application = "push-server"
-
-    space = "production"
-    file = file("build/libs/${project.name}-${project.version}.jar")
-
-    env = [
-       "hostName": "0.0.0.0",
-       "port": "8080",
-       "shutdownPort": "8081",
-       "context": "",
-
-       "masterUrl": "https://tioga.cloudant.com",
-       "masterUsername": "tioga",
-       "masterPassword": "4God'sBlessing!",
-       "masterDatabaseName": "push",
-
-       "domainUrl": "https://tioga.cloudant.com",
-       "domainUsername": "tioga",
-       "domainPassword": "4God'sBlessing!",
-       "domainDatabasePrefix": "push-",
-       "sessionDuration": "3600000"
-    ]
-  }
 }

@@ -1,0 +1,27 @@
+---
+applications:
+- name: tioga-push-server
+  memory: 256M
+  timeout: 60
+  buildpack: java_buildpack
+  path: build/libs/tioga-push-server-grizzly-4.3.5.jar
+  host: push
+  domains:
+  - apis.tioga.solutions
+  - tioga.solutions
+
+  env:
+    push.hostName: 0.0.0.0
+    push.port: 8080
+    push.shutdownPort: 8081
+
+    push.masterUrl: https://tioga.cloudant.com
+    push.masterUsername: tioga
+    push.masterPassword: 4God'sBlessing!
+    push.masterDatabaseName: push
+
+    push.domainUrl: https://tioga.cloudant.com
+    push.domainUsername: tioga
+    push.domainPassword: 4God'sBlessing!
+    push.domainDatabasePrefix: push-
+    push.sessionDuration: 3600000
