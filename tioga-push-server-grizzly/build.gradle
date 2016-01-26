@@ -66,5 +66,11 @@ project(":tioga-push-server-grizzly") {
     }
   }
 
+  task pws(type: Copy, dependsOn: assemble) {
+    from "./build/libs/tioga-push-server-grizzly-${project.version}.jar"
+    into "./build/pws/"
+    rename "tioga-push-server-grizzly-${project.version}.jar", "tioga-push-server-grizzly.jar"
+  }
+
   apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 }
