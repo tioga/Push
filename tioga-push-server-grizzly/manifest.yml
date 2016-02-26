@@ -2,7 +2,7 @@
 applications:
 - name: tioga-push-engine
 
-  timeout: 60
+  timeout: 180
   buildpack: java_buildpack
   path: ./build/pws/tioga-push-server-grizzly.jar
 
@@ -11,6 +11,9 @@ applications:
   domain: push.tioga.solutions
 
   env:
+    JBP_CONFIG_ORACLE_JRE: '[jre: {repository_root: "http://tioga.s3-website-us-west-1.amazonaws.com"}]'
+    JBP_CONFIG_COMPONENTS: '[jres: ["JavaBuildpack::Jre::OracleJRE"]]'
+
     push.hostName: 0.0.0.0
     push.port: 8080
     push.shutdownPort: 8081

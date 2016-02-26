@@ -2,7 +2,6 @@ package org.tiogasolutions.push.plugins.smtp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.BeanUtils;
 import org.tiogasolutions.dev.common.Formats;
 import org.tiogasolutions.dev.common.IoUtils;
@@ -28,12 +27,12 @@ import static org.tiogasolutions.dev.common.StringUtils.nullToString;
 public class SmtpEmailPlugin extends PluginSupport {
 
   private SmtpEmailConfigStore _configStore;
-  private final BitlyApis bitlyApis;
+  // private final BitlyApis bitlyApis;
 
   @Autowired
-  public SmtpEmailPlugin(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis) {
+  public SmtpEmailPlugin(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore) {
     super(SmtpEmailPush.PUSH_TYPE, executionManager, objectMapper, pushRequestStore);
-    this.bitlyApis = bitlyApis;
+    // this.bitlyApis = bitlyApis;
   }
 
   public SmtpEmailConfigStore getConfigStore(ExecutionManager executionManager) {
@@ -52,7 +51,7 @@ public class SmtpEmailPlugin extends PluginSupport {
   @Override
   public SmtpEmailDelegate newDelegate(DomainProfileEntity domainProfile, PushRequest pushRequest, Push push) {
     SmtpEmailConfig config = getConfig(domainProfile);
-    return new SmtpEmailDelegate(executionManager.context(), objectMapper, pushRequestStore, bitlyApis, pushRequest, (SmtpEmailPush)push, config);
+    return new SmtpEmailDelegate(executionManager.context(), objectMapper, pushRequestStore, /*bitlyApis,*/ pushRequest, (SmtpEmailPush)push, config);
   }
 
   @Override
@@ -122,7 +121,7 @@ public class SmtpEmailPlugin extends PluginSupport {
     PushRequest pushRequest = new PushRequest(Push.CURRENT_API_VERSION, domainProfile, push);
     pushRequestStore.create(pushRequest);
 
-    if (new SmtpEmailDelegate(executionManager.context(), objectMapper, pushRequestStore, bitlyApis, pushRequest, push, config).execute(false)) {
+    if (new SmtpEmailDelegate(executionManager.context(), objectMapper, pushRequestStore, /*bitlyApis,*/ pushRequest, push, config).execute(false)) {
       String msg = String.format("Test message sent from %s to %s\n%s", fromAddress, toAddress, push.getEmailSubject());
       executionManager.context().setLastMessage(msg);
     };

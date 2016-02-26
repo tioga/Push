@@ -5,7 +5,7 @@
  */
 project(":tioga-push-test") {
 
-  version = "1.2.4"
+  version = "1.2.5"
 
   dependencies {
     compile(project(":tioga-push-kernel"))

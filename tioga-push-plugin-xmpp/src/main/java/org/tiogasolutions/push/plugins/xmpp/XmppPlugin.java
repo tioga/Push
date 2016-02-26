@@ -2,7 +2,6 @@ package org.tiogasolutions.push.plugins.xmpp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.Formats;
 import org.tiogasolutions.dev.common.IoUtils;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
@@ -25,12 +24,12 @@ import static org.tiogasolutions.dev.common.StringUtils.*;
 @Component
 public class XmppPlugin extends PluginSupport {
 
-  private final BitlyApis bitlyApis;
+  // private final BitlyApis bitlyApis;
 
   @Autowired
-  public XmppPlugin(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis) {
+  public XmppPlugin(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore) {
     super(XmppPush.PUSH_TYPE, executionManager, objectMapper, pushRequestStore);
-    this.bitlyApis = bitlyApis;
+    // this.bitlyApis = bitlyApis;
   }
 
   public XmppConfigStore getConfigStore(ExecutionManager executionManager) {
@@ -46,7 +45,7 @@ public class XmppPlugin extends PluginSupport {
   @Override
   public XmppDelegate newDelegate(DomainProfileEntity domainProfile, PushRequest pushRequest, Push push) {
     XmppConfig config = getConfig(domainProfile);
-    return new XmppDelegate(executionManager.context(), objectMapper, pushRequestStore, bitlyApis, pushRequest, (XmppPush)push, config);
+    return new XmppDelegate(executionManager.context(), objectMapper, pushRequestStore, pushRequest, (XmppPush)push, config);
   }
 
   @Override
@@ -108,7 +107,7 @@ public class XmppPlugin extends PluginSupport {
     PushRequest pushRequest = new PushRequest(Push.CURRENT_API_VERSION, domainProfile, push);
     pushRequestStore.create(pushRequest);
 
-    if (new XmppDelegate(executionManager.context(), objectMapper, pushRequestStore, bitlyApis, pushRequest, push, config).execute(false)) {
+    if (new XmppDelegate(executionManager.context(), objectMapper, pushRequestStore, pushRequest, push, config).execute(false)) {
       String msg = String.format("Test message sent from %s to %s:\n%s", config.getUsername(), recipient, push.getMessage());
       executionManager.context().setLastMessage(msg);
     }

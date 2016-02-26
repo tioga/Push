@@ -2,7 +2,6 @@ package org.tiogasolutions.push.plugins.ses;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.BeanUtils;
 import org.tiogasolutions.dev.common.Formats;
 import org.tiogasolutions.dev.common.IoUtils;
@@ -27,12 +26,12 @@ import static org.tiogasolutions.dev.common.StringUtils.nullToString;
 @Component
 public class SesEmailPlugin extends PluginSupport {
 
-  private final BitlyApis bitlyApis;
+  // private final BitlyApis bitlyApis;
 
   @Autowired
-  public SesEmailPlugin(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis) {
+  public SesEmailPlugin(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore) {
     super(SesEmailPush.PUSH_TYPE, executionManager, objectMapper, pushRequestStore);
-    this.bitlyApis = bitlyApis;
+    // this.bitlyApis = bitlyApis;
   }
 
   public SesEmailConfigStore getConfigStore() {
@@ -48,7 +47,7 @@ public class SesEmailPlugin extends PluginSupport {
   @Override
   public SesEmailDelegate newDelegate(DomainProfileEntity domainProfile, PushRequest pushRequest, Push push) {
     SesEmailConfig config = getConfig(domainProfile);
-    return new SesEmailDelegate(executionManager.context(), objectMapper, pushRequestStore, bitlyApis, pushRequest, (SesEmailPush)push, config);
+    return new SesEmailDelegate(executionManager.context(), objectMapper, pushRequestStore, /*bitlyApis,*/ pushRequest, (SesEmailPush)push, config);
   }
 
   @Override
@@ -117,7 +116,7 @@ public class SesEmailPlugin extends PluginSupport {
     PushRequest pushRequest = new PushRequest(Push.CURRENT_API_VERSION, domainProfile, push);
     pushRequestStore.create(pushRequest);
 
-    if (new SesEmailDelegate(executionManager.context(), objectMapper, pushRequestStore, bitlyApis, pushRequest, push, config).execute(false)) {
+    if (new SesEmailDelegate(executionManager.context(), objectMapper, pushRequestStore, /*bitlyApis,*/ pushRequest, push, config).execute(false)) {
       String msg = String.format("Test message sent from %s to %s\n%s", fromAddress, toAddress, push.getEmailSubject());
       executionManager.context().setLastMessage(msg);
     }

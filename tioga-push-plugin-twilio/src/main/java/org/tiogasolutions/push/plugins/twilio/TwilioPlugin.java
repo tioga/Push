@@ -8,7 +8,6 @@ package org.tiogasolutions.push.plugins.twilio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.BeanUtils;
 import org.tiogasolutions.dev.common.Formats;
 import org.tiogasolutions.dev.common.IoUtils;
@@ -32,12 +31,12 @@ import static org.tiogasolutions.dev.common.StringUtils.nullToString;
 @Component
 public class TwilioPlugin extends PluginSupport {
 
-  private final BitlyApis bitlyApis;
+  // private final BitlyApis bitlyApis;
 
   @Autowired
-  public TwilioPlugin(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis) {
+  public TwilioPlugin(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore) {
     super(TwilioSmsPush.PUSH_TYPE, executionManager, objectMapper, pushRequestStore);
-    this.bitlyApis = bitlyApis;
+    // this.bitlyApis = bitlyApis;
   }
 
   public TwilioConfigStore getConfigStore(ExecutionManager executionManager) {
@@ -53,7 +52,7 @@ public class TwilioPlugin extends PluginSupport {
   @Override
   public TwilioDelegate newDelegate(DomainProfileEntity domainProfile, PushRequest pushRequest, Push push) {
     TwilioConfig config = getConfig(domainProfile);
-    return new TwilioDelegate(executionManager.context(), objectMapper, pushRequestStore, bitlyApis, pushRequest, (TwilioSmsPush)push, config);
+    return new TwilioDelegate(executionManager.context(), objectMapper, pushRequestStore, pushRequest, (TwilioSmsPush)push, config);
   }
 
   @Override
@@ -103,7 +102,7 @@ public class TwilioPlugin extends PluginSupport {
     PushRequest pushRequest = new PushRequest(Push.CURRENT_API_VERSION, domainProfile, push);
     pushRequestStore.create(pushRequest);
 
-    if (new TwilioDelegate(executionManager.context(), objectMapper, pushRequestStore, bitlyApis, pushRequest, push, config).execute(false)) {
+    if (new TwilioDelegate(executionManager.context(), objectMapper, pushRequestStore, pushRequest, push, config).execute(false)) {
       String msg = String.format("Test message sent from %s to %s:\n%s", config.getFromPhoneNumber(), config.getRecipient(), push.getMessage());
       executionManager.context().setLastMessage(msg);
     };

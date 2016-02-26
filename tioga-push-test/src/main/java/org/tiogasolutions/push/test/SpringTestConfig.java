@@ -3,8 +3,6 @@ package org.tiogasolutions.push.test;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.tiogasolutions.apis.bitly.BitlyApis;
-import org.tiogasolutions.dev.common.EnvUtils;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.config.CouchServersConfig;
@@ -16,9 +14,9 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class SpringTestConfig {
 
-  private String getBitlyAccessToken() {
-    return EnvUtils.findProperty("tioga.test.bitly.access.token", "no-such-luck");
-  }
+//  private String getBitlyAccessToken() {
+//    return EnvUtils.findProperty("tioga.test.bitly.access.token", "no-such-luck");
+//  }
 
   @Bean
   public PushObjectMapper cpObjectMapper() {
@@ -35,10 +33,10 @@ public class SpringTestConfig {
     return new SessionStore(TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS));
   }
 
-  @Bean
-  public BitlyApis bitlyApis() {
-    return new BitlyApis(getBitlyAccessToken());
-  }
+//  @Bean
+//  public BitlyApis bitlyApis() {
+//    return new BitlyApis(getBitlyAccessToken());
+//  }
 
   @Bean
   public CouchServersConfig couchServersConfig() {

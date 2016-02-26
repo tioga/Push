@@ -3,7 +3,6 @@ package org.tiogasolutions.push.server.grizzly;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.EnvUtils;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
@@ -75,9 +74,9 @@ public class PushHostedSpringConfig {
     return EnvUtils.requireProperty("push.domainDatabasePrefix");
   }
 
-  private String getBitlyAccessToken() {
-    return EnvUtils.requireProperty("tioga.bitly.access.token");
-  }
+//  private String getBitlyAccessToken() {
+//    return EnvUtils.requireProperty("tioga.bitly.access.token");
+//  }
 
   private Long getSessionDuration() {
     String value = EnvUtils.requireProperty("push.sessionDuration");
@@ -94,10 +93,10 @@ public class PushHostedSpringConfig {
     return new TiogaJacksonTranslator(pushObjectMapper);
   }
 
-  @Bean
-  public BitlyApis bitlyApis(TiogaJacksonTranslator tiogaJacksonTranslator) {
-    return new BitlyApis(getBitlyAccessToken());
-  }
+//  @Bean
+//  public BitlyApis bitlyApis(TiogaJacksonTranslator tiogaJacksonTranslator) {
+//    return new BitlyApis(getBitlyAccessToken());
+//  }
 
   @Bean
   public SessionStore sessionStore() {
@@ -120,12 +119,12 @@ public class PushHostedSpringConfig {
   }
 
   @Bean
-  public PluginManager pluginManager(ExecutionManager executionManager, PushRequestStore pushRequestStore, PushObjectMapper pushObjectMapper, BitlyApis bitlyApis) {
+  public PluginManager pluginManager(ExecutionManager executionManager, PushRequestStore pushRequestStore, PushObjectMapper pushObjectMapper) {
     return new PluginManager(Arrays.asList(
-      new XmppPlugin(executionManager, pushObjectMapper, pushRequestStore, bitlyApis),
-      new SesEmailPlugin(executionManager, pushObjectMapper, pushRequestStore, bitlyApis),
-      new SmtpEmailPlugin(executionManager, pushObjectMapper, pushRequestStore, bitlyApis),
-      new TwilioPlugin(executionManager, pushObjectMapper, pushRequestStore, bitlyApis)
+      new XmppPlugin(executionManager, pushObjectMapper, pushRequestStore),
+      new SesEmailPlugin(executionManager, pushObjectMapper, pushRequestStore),
+      new SmtpEmailPlugin(executionManager, pushObjectMapper, pushRequestStore),
+      new TwilioPlugin(executionManager, pushObjectMapper, pushRequestStore)
     ));
   }
 

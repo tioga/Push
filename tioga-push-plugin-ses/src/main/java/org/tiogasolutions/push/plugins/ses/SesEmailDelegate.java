@@ -10,7 +10,6 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient;
 import com.amazonaws.services.simpleemail.model.*;
-import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
@@ -25,13 +24,13 @@ public class SesEmailDelegate extends AbstractDelegate {
 
   private final SesEmailPush push;
   private final SesEmailConfig config;
-  private final BitlyApis bitlyApis;
+  // private final BitlyApis bitlyApis;
 
-  public SesEmailDelegate(ExecutionContext executionContext, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis, PushRequest pushRequest, SesEmailPush push, SesEmailConfig config) {
+  public SesEmailDelegate(ExecutionContext executionContext, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, PushRequest pushRequest, SesEmailPush push, SesEmailConfig config) {
     super(executionContext, objectMapper, pushRequestStore, pushRequest);
     this.push = ExceptionUtils.assertNotNull(push, "push");
     this.config = ExceptionUtils.assertNotNull(config, "config");
-    this.bitlyApis = bitlyApis;
+    // this.bitlyApis = bitlyApis;
   }
 
   @Override
@@ -71,7 +70,7 @@ public class SesEmailDelegate extends AbstractDelegate {
     }
 
     String subject = push.getEmailSubject();
-    subject = bitlyApis.parseAndShorten(subject);
+    // subject = bitlyApis.parseAndShorten(subject);
     Content subjectContent = new Content().withCharset("UTF-8").withData(subject);
 
     sendEmailRequest.setMessage(new Message(subjectContent, body));

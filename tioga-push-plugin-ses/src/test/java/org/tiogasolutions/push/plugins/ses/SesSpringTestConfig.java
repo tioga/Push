@@ -3,7 +3,6 @@ package org.tiogasolutions.push.plugins.ses;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.config.CouchServersConfig;
 import org.tiogasolutions.push.kernel.execution.ExecutionManager;
@@ -46,7 +45,7 @@ public class SesSpringTestConfig {
 
   /** @noinspection SpringJavaAutowiringInspection*/
   @Bean
-  public PluginManager pluginManager(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis) {
-    return new PluginManager(singletonList(new SesEmailPlugin(executionManager, objectMapper, pushRequestStore, bitlyApis)));
+  public PluginManager pluginManager(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore) {
+    return new PluginManager(singletonList(new SesEmailPlugin(executionManager, objectMapper, pushRequestStore)));
   }
 }

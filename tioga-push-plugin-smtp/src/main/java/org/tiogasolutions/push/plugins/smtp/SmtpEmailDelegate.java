@@ -6,7 +6,6 @@
 
 package org.tiogasolutions.push.plugins.smtp;
 
-import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
 import org.tiogasolutions.dev.domain.comm.AuthenticationMethod;
@@ -22,13 +21,13 @@ public class SmtpEmailDelegate extends AbstractDelegate {
 
   private final SmtpEmailPush push;
   private final SmtpEmailConfig config;
-  private final BitlyApis bitlyApis;
+  // private final BitlyApis bitlyApis;
 
-  public SmtpEmailDelegate(ExecutionContext executionContext, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis, PushRequest pushRequest, SmtpEmailPush push, SmtpEmailConfig config) {
+  public SmtpEmailDelegate(ExecutionContext executionContext, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, PushRequest pushRequest, SmtpEmailPush push, SmtpEmailConfig config) {
     super(executionContext, objectMapper, pushRequestStore, pushRequest);
     this.push = ExceptionUtils.assertNotNull(push, "push");
     this.config = ExceptionUtils.assertNotNull(config, "config");
-    this.bitlyApis = bitlyApis;
+    // this.bitlyApis = bitlyApis;
   }
 
   @Override
@@ -69,7 +68,7 @@ public class SmtpEmailDelegate extends AbstractDelegate {
     message.setFrom(push.getFromAddress());
 
     String subject = push.getEmailSubject();
-    subject = bitlyApis.parseAndShorten(subject);
+    // subject = bitlyApis.parseAndShorten(subject);
 
     message.send(subject, null, push.getHtmlContent());
 

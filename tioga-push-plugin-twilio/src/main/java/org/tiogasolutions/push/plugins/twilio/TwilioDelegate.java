@@ -10,7 +10,6 @@ import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.resource.factory.MessageFactory;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.AbstractDelegate;
@@ -27,13 +26,13 @@ public class TwilioDelegate extends AbstractDelegate {
 
   private final TwilioSmsPush push;
   private final TwilioConfig config;
-  private final BitlyApis bitlyApis;
+  // private final BitlyApis bitlyApis;
 
-  public TwilioDelegate(ExecutionContext executionContext, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis, PushRequest pushRequest, TwilioSmsPush push, TwilioConfig config) {
+  public TwilioDelegate(ExecutionContext executionContext, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, PushRequest pushRequest, TwilioSmsPush push, TwilioConfig config) {
     super(executionContext, objectMapper, pushRequestStore, pushRequest);
     this.config = ExceptionUtils.assertNotNull(config, "config");
     this.push = ExceptionUtils.assertNotNull(push, "push");
-    this.bitlyApis = bitlyApis;
+    // this.bitlyApis = bitlyApis;
   }
 
   @Override
@@ -41,7 +40,7 @@ public class TwilioDelegate extends AbstractDelegate {
 
     TwilioRestClient client = new TwilioRestClient(config.getAccountSid(), config.getAuthToken());
 
-    String message = bitlyApis.parseAndShorten(push.getMessage());
+    String message = push.getMessage(); // bitlyApis.parseAndShorten(push.getMessage());
 
     // Build a filter for the MessageList
     List<NameValuePair> params = new ArrayList<NameValuePair>();

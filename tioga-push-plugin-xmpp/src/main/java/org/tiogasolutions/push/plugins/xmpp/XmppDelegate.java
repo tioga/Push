@@ -13,7 +13,6 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
-import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.dev.common.exceptions.ExceptionUtils;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
@@ -30,13 +29,13 @@ public class XmppDelegate extends AbstractDelegate {
 
   private final XmppPush push;
   private final XmppConfig config;
-  private final BitlyApis bitlyApis;
+  // private final BitlyApis bitlyApis;
 
-  public XmppDelegate(ExecutionContext executionContext, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, BitlyApis bitlyApis, PushRequest pushRequest, XmppPush push, XmppConfig config) {
+  public XmppDelegate(ExecutionContext executionContext, PushObjectMapper objectMapper, PushRequestStore pushRequestStore, PushRequest pushRequest, XmppPush push, XmppConfig config) {
     super(executionContext, objectMapper, pushRequestStore, pushRequest);
     this.config = ExceptionUtils.assertNotNull(config, "config");
     this.push = ExceptionUtils.assertNotNull(push, "push");
-    this.bitlyApis = bitlyApis;
+    // this.bitlyApis = bitlyApis;
   }
 
   @Override
@@ -50,7 +49,7 @@ public class XmppDelegate extends AbstractDelegate {
   public String sendMessage() throws Exception {
 
     String message = push.getMessage();
-    message = bitlyApis.parseAndShorten(message);
+    // message = bitlyApis.parseAndShorten(message);
 
     if (StringUtils.isNotBlank(config.getRecipientOverride())) {
       // This is NOT a "production" request.

@@ -2,10 +2,12 @@
   <library name="Gradle: org.tiogasolutions.apis:tioga-apis-bitly:1.2.2">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/apis/tioga-apis-bitly/1.2.2/tioga-apis-bitly-1.2.2.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.apis/tioga-apis-bitly/1.2.2/5c6e0b0ed0e0befe96b33ddaa40891f46122b37f/tioga-apis-bitly-1.2.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/apis/tioga-apis-bitly/1.2.2/tioga-apis-bitly-1.2.2-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.apis/tioga-apis-bitly/1.2.2/1b6a175d4aa07c8b81d9d10995e0d1d64c56ce96/tioga-apis-bitly-1.2.2-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
