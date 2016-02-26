@@ -17,11 +17,9 @@ applications:
 
     push.masterUrl: https://tioga.cloudant.com
     push.masterUsername: tioga
-    push.masterPassword: 4God'sBlessing!
     push.masterDatabaseName: push
 
     push.domainUrl: https://tioga.cloudant.com
     push.domainUsername: tioga
-    push.domainPassword: 4God'sBlessing!
     push.domainDatabasePrefix: push-
     push.sessionDuration: 3600000
