@@ -3,7 +3,6 @@ package org.tiogasolutions.push.test;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.testng.SkipException;
 import org.tiogasolutions.apis.bitly.BitlyApis;
 import org.tiogasolutions.dev.common.EnvUtils;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
@@ -18,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class SpringTestConfig {
 
   private String getBitlyAccessToken() {
-    return EnvUtils.requireProperty("tioga.test.bitly.access.token", SkipException.class);
+    return EnvUtils.findProperty("tioga.test.bitly.access.token", "no-such-luck");
   }
 
   @Bean
