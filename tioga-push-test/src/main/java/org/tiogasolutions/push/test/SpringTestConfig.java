@@ -3,7 +3,9 @@ package org.tiogasolutions.push.test;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.testng.SkipException;
 import org.tiogasolutions.apis.bitly.BitlyApis;
+import org.tiogasolutions.dev.common.EnvUtils;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.config.CouchServersConfig;
@@ -14,6 +16,10 @@ import java.util.concurrent.TimeUnit;
 @Profile("test")
 @Configuration
 public class SpringTestConfig {
+
+  private String getBitlyAccessToken() {
+    return EnvUtils.requireProperty("tioga.test.bitly.access.token", SkipException.class);
+  }
 
   @Bean
   public PushObjectMapper cpObjectMapper() {
@@ -31,8 +37,8 @@ public class SpringTestConfig {
   }
 
   @Bean
-  public BitlyApis bitlyApis(TiogaJacksonTranslator translator) {
-    return new BitlyApis(translator, "9f5ed9c08c695b4a017bfb432eea58876a5d40cb");
+  public BitlyApis bitlyApis() {
+    return new BitlyApis(getBitlyAccessToken());
   }
 
   @Bean

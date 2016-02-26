@@ -1,6 +1,5 @@
 package org.tiogasolutions.push.server.grizzly;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -76,6 +75,10 @@ public class PushHostedSpringConfig {
     return EnvUtils.requireProperty("push.domainDatabasePrefix");
   }
 
+  private String getBitlyAccessToken() {
+    return EnvUtils.requireProperty("tioga.bitly.access.token");
+  }
+
   private Long getSessionDuration() {
     String value = EnvUtils.requireProperty("push.sessionDuration");
     return Long.valueOf(value);
@@ -93,7 +96,7 @@ public class PushHostedSpringConfig {
 
   @Bean
   public BitlyApis bitlyApis(TiogaJacksonTranslator tiogaJacksonTranslator) {
-    return new BitlyApis(tiogaJacksonTranslator, "9f5ed9c08c695b4a017bfb432eea58876a5d40cb");
+    return new BitlyApis(getBitlyAccessToken());
   }
 
   @Bean
