@@ -47,10 +47,11 @@ public class PushServer {
     String action = (shuttingDown ? "Shutting down" : "Starting");
 
     log.info("{} server:\n" +
-      "  *  Runtime Dir:  {}\n" +
-      "  *  Config Dir:   {}\n" +
-      "  *  Logback File: {}\n" +
-      "  *  Spring Path {}:  {}", action, runtimeDir, configDir, logbackFile, asList(activeProfiles), springConfigPath);
+      "  *  Runtime Dir     (push.runtime.dir)     {}\n" +
+      "  *  Config Dir      (push.config.dir)      {}\n" +
+      "  *  Logback File    (push.log.config)      {}\n" +
+      "  *  Spring Path     (push.spring.config)   {}\n" +
+      "  *  Active Profiles (push.active.profiles) {}", action, runtimeDir, configDir, logbackFile, springConfigPath, asList(activeProfiles));
 
     AbstractXmlApplicationContext applicationContext = createXmlConfigApplicationContext(springConfigPath, activeProfiles);
 
