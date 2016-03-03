@@ -5,7 +5,7 @@
  */
 project(":tioga-push-pub") {
 
-  version = "2.1.3"
+  version = tiogaPubVersion
 
   dependencies {
   	compile ("org.tiogasolutions.dev:tioga-dev-common:+")
