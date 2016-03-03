@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":tioga-push-server-servlet" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="org.tiogasolutions.push" external.system.module.version="4.3.7" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":tioga-push-server-servlet" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="org.tiogasolutions.push" external.system.module.version="4.3.8" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
-    <facet type="web" name="Web Gradle : tioga-push-server-servlet-4.3.7.war">
+    <facet type="web" name="Web Gradle : tioga-push-server-servlet-4.3.8.war">
       <configuration>
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
         <sourceRoots>
-          <root url="file://$MODULE_DIR$/src/main/resources" />
           <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -154,12 +154,12 @@
     <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:5.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.dev:tioga-dev-jackson:4.2.3" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.apis:tioga-apis-bitly:1.2.2" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-couchace:5.1.1" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-core:1.6.2" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jackson:1.6.2" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-annotations:1.6.2" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jersey:1.6.2" level="project" />
     <orderEntry type="library" name="Gradle: joda-time:joda-time:2.9.2" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.app:tioga-app-common:2.1.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-couchace:5.1.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.app:tioga-app-common:3.0.0" level="project" />
   </component>
 </module>

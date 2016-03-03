@@ -1,10 +1,12 @@
 package org.tiogasolutions.push.server.grizzly;
 
+import org.glassfish.jersey.server.ResourceConfig;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.tiogasolutions.dev.common.EnvUtils;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
+import org.tiogasolutions.push.engine.system.PushApplication;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.config.CouchServersConfig;
 import org.tiogasolutions.push.kernel.execution.ExecutionManager;
@@ -16,72 +18,18 @@ import org.tiogasolutions.push.plugins.ses.SesEmailPlugin;
 import org.tiogasolutions.push.plugins.smtp.SmtpEmailPlugin;
 import org.tiogasolutions.push.plugins.twilio.TwilioPlugin;
 import org.tiogasolutions.push.plugins.xmpp.XmppPlugin;
+import org.tiogasolutions.runners.grizzly.GrizzlyServer;
 import org.tiogasolutions.runners.grizzly.GrizzlyServerConfig;
 
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+
+import static org.tiogasolutions.dev.common.EnvUtils.findProperty;
+import static org.tiogasolutions.dev.common.EnvUtils.requireProperty;
 
 @Profile("hosted")
 @Configuration
 public class PushHostedSpringConfig {
-
-  private String getContext() {
-    return EnvUtils.findProperty("push.context", "");
-  }
-
-  private int getPort() {
-    String value = EnvUtils.findProperty("push.port", "8080");
-    return Integer.valueOf(value);
-  }
-
-  private int getShutdownPort() {
-    String value = EnvUtils.findProperty("push.shutdownPort", "8081");
-    return Integer.valueOf(value);
-  }
-
-  private String getHostName() {
-    return EnvUtils.findProperty("push.hostName", "0.0.0.0");
-  }
-
-  private String getMasterUrl() {
-    return EnvUtils.requireProperty("push.masterUrl");
-  }
-
-  private String getMasterUsername() {
-    return EnvUtils.requireProperty("push.masterUsername");
-  }
-
-  private String getMasterPassword() {
-    return EnvUtils.requireProperty("push.masterPassword");
-  }
-
-  private String getMasterDatabaseName() {
-    return EnvUtils.requireProperty("push.masterDatabaseName");
-  }
-
-  private String getDomainUrl() {
-    return EnvUtils.requireProperty("push.domainUrl");
-  }
-
-  private String getDomainUsername() {
-    return EnvUtils.requireProperty("push.domainUsername");
-  }
-
-  private String getDomainPassword() {
-    return EnvUtils.requireProperty("push.domainPassword");
-  }
-
-  private String getDomainDatabasePrefix() {
-    return EnvUtils.requireProperty("push.domainDatabasePrefix");
-  }
-
-//  private String getBitlyAccessToken() {
-//    return EnvUtils.requireProperty("tioga.bitly.access.token");
-//  }
-
-  private Long getSessionDuration() {
-    String value = EnvUtils.requireProperty("push.sessionDuration");
-    return Long.valueOf(value);
-  }
 
   @Bean
   public PushObjectMapper pushObjectMapper() {
@@ -93,14 +41,12 @@ public class PushHostedSpringConfig {
     return new TiogaJacksonTranslator(pushObjectMapper);
   }
 
-//  @Bean
-//  public BitlyApis bitlyApis(TiogaJacksonTranslator tiogaJacksonTranslator) {
-//    return new BitlyApis(getBitlyAccessToken());
-//  }
-
   @Bean
   public SessionStore sessionStore() {
-    return new SessionStore(getSessionDuration());
+    String defaultValue = String.valueOf(TimeUnit.MINUTES.toMillis(60));
+    String value = findProperty("push.sessionDuration", defaultValue );
+    long duration = Long.valueOf(value);
+    return new SessionStore(duration);
   }
 
   @Bean
@@ -131,10 +77,10 @@ public class PushHostedSpringConfig {
   @Bean
   public GrizzlyServerConfig grizzlyServerConfig() {
     GrizzlyServerConfig config = new GrizzlyServerConfig();
-    config.setHostName(getHostName());
-    config.setPort(getPort());
-    config.setShutdownPort(getShutdownPort());
-    config.setContext(getContext());
+    config.setHostName(findProperty("push.hostName", "0.0.0.0"));
+    config.setPort(Integer.valueOf(findProperty("push.port", "8080")));
+    config.setShutdownPort(Integer.valueOf(findProperty("push.shutdownPort", "8081")));
+    config.setContext(findProperty("push.context", ""));
     config.setToOpenBrowser(false);
     return config;
   }
@@ -143,16 +89,31 @@ public class PushHostedSpringConfig {
   public CouchServersConfig couchServersConfig() {
     CouchServersConfig config = new CouchServersConfig();
 
-    config.setMasterUrl(getMasterUrl());
-    config.setMasterUsername(getMasterUsername());
-    config.setMasterPassword(getMasterPassword());
-    config.setMasterDatabaseName(getMasterDatabaseName());
+    config.setMasterUrl(requireProperty("push.masterUrl"));
+    config.setMasterUsername(requireProperty("push.masterUsername"));
+    config.setMasterPassword(requireProperty("push.masterPassword"));
+    config.setMasterDatabaseName(requireProperty("push.masterDatabaseName"));
 
-    config.setDomainUrl(getDomainUrl());
-    config.setDomainUserName(getDomainUsername());
-    config.setDomainPassword(getDomainPassword());
-    config.setDomainDatabasePrefix(getDomainDatabasePrefix());
+    config.setDomainUrl(requireProperty("push.domainUrl"));
+    config.setDomainUserName(requireProperty("push.domainUsername"));
+    config.setDomainPassword(requireProperty("push.domainPassword"));
+    config.setDomainDatabasePrefix(requireProperty("push.domainDatabasePrefix"));
 
     return config;
+  }
+
+  @Bean
+  public PushApplication pushApplication() throws Exception {
+    return new PushApplication();
+  }
+
+  @Bean
+  public GrizzlyServer grizzlyServer(GrizzlyServerConfig grizzlyServerConfig, PushApplication application, ApplicationContext applicationContext) {
+
+    ResourceConfig resourceConfig = ResourceConfig.forApplication(application);
+    resourceConfig.property("contextConfig", applicationContext);
+    resourceConfig.packages("org.tiogasolutions.push");
+
+    return new GrizzlyServer(grizzlyServerConfig, resourceConfig);
   }
 }

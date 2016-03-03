@@ -20,17 +20,16 @@
       <env name="hostName" value="localhost" />
       <env name="port" value="39009" />
       <env name="shutdownPort" value="39010" />
-      <env name="context" value="push-server" />
       <env name="toOpenBrowser" value="true" />
-      <env name="masterUrl" value="http://localhost:5984" />
-      <env name="masterUsername" value="app-user" />
-      <env name="masterPassword" value="app-user" />
-      <env name="masterDatabaseName" value="tioga-push" />
-      <env name="domainUrl" value="http://localhost:5984" />
-      <env name="domainUsername" value="app-user" />
-      <env name="domainPassword" value="app-user" />
-      <env name="domainDatabasePrefix" value="tioga-push-" />
-      <env name="sessionDuration" value="3600000" />
+      <env name="push.masterUrl" value="http://localhost:5984" />
+      <env name="push.masterUsername" value="app-user" />
+      <env name="push.masterPassword" value="app-user" />
+      <env name="push.masterDatabaseName" value="tioga-push" />
+      <env name="push.domainUrl" value="http://localhost:5984" />
+      <env name="push.domainUsername" value="app-user" />
+      <env name="push.domainPassword" value="app-user" />
+      <env name="push.domainDatabasePrefix" value="tioga-push-" />
+      <env name="push.hostName" value="localhost" />
     </envs>
     <RunnerSettings RunnerId="Debug">
       <option name="DEBUG_PORT" value="" />
