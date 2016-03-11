@@ -164,9 +164,9 @@
           <element id="library" level="project" name="Gradle: org.unbescape:unbescape:1.0" />
           <element id="library" level="project" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.2.1" />
           <element id="library" level="project" name="Gradle: org.tiogasolutions.apis:tioga-apis-google:2.3.2" />
-          <element id="library" level="project" name="Gradle: org.tiogasolutions.app:tioga-app-common:3.0.0" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet:2.17" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet-core:2.17" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/app/tioga-app-common/3.0.1/tioga-app-common-3.0.1.jar" />
         </element>
       </element>
       <element id="directory" name="META-INF">

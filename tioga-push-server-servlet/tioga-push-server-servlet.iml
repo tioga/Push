@@ -160,6 +160,6 @@
     <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jersey:1.6.2" level="project" />
     <orderEntry type="library" name="Gradle: joda-time:joda-time:2.9.2" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-couchace:5.1.2" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.app:tioga-app-common:3.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.app:tioga-app-common:3.0.1" level="project" />
   </component>
 </module>
