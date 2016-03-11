@@ -7,8 +7,8 @@ applications:
   path: ./build/pws/tioga-push-server-grizzly.jar
 
   memory: 256M
-  host: engine
-  domain: push.tioga.solutions
+  host: push-engine
+  domain: tioga.solutions
 
   env:
     JBP_CONFIG_ORACLE_JRE: '[jre: {repository_root: "http://tioga.s3-website-us-west-1.amazonaws.com"}]'
