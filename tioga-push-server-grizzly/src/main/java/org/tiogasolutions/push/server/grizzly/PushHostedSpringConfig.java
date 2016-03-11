@@ -103,11 +103,6 @@ public class PushHostedSpringConfig {
   }
 
   @Bean
-  public PushApplication pushApplication() throws Exception {
-    return new PushApplication();
-  }
-
-  @Bean
   public GrizzlyServer grizzlyServer(GrizzlyServerConfig grizzlyServerConfig, PushApplication application, ApplicationContext applicationContext) {
 
     ResourceConfig resourceConfig = ResourceConfig.forApplication(application);

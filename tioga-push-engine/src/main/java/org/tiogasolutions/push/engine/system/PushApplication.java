@@ -6,6 +6,7 @@
 
 package org.tiogasolutions.push.engine.system;
 
+import org.springframework.stereotype.Component;
 import org.tiogasolutions.push.engine.jaxrs.security.ApiAuthenticationFilter;
 import org.tiogasolutions.push.engine.jaxrs.security.MngtAuthenticationFilter;
 import org.tiogasolutions.push.engine.jaxrs.security.PushRequestFilter;
@@ -22,6 +23,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+@Component
 public class PushApplication extends Application {
 
   private final Set<Class<?>> classes = new HashSet<>();
