@@ -78,8 +78,8 @@ public class PushHostedSpringConfig {
   public GrizzlyServerConfig grizzlyServerConfig() {
     GrizzlyServerConfig config = new GrizzlyServerConfig();
     config.setHostName(findProperty("push.hostName", "0.0.0.0"));
-    config.setPort(Integer.valueOf(findProperty("push.port", "8080")));
-    config.setShutdownPort(Integer.valueOf(findProperty("push.shutdownPort", "8081")));
+    config.setPort(Integer.valueOf(findProperty("push.port", "39009")));
+    config.setShutdownPort(Integer.valueOf(findProperty("push.shutdownPort", "39010")));
     config.setContext(findProperty("push.context", ""));
     config.setToOpenBrowser(false);
     return config;
