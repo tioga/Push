@@ -9,7 +9,7 @@ project(":tioga-push-kernel") {
 
   dependencies {
 
-    compile project(":tioga-push-jackson")
+    compile project(":tioga-push-client")
 
     compile("org.tiogasolutions.apis:tioga-apis-bitly:+")
     compile("org.tiogasolutions.lib:tioga-lib-couchace:+")

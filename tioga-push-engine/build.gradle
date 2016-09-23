@@ -9,7 +9,7 @@ project(":tioga-push-engine") {
 
   dependencies {
 
-    compile project(":tioga-push-jackson")
+    compile project(":tioga-push-client")
     compile project(":tioga-push-kernel");
     compile project(":tioga-push-plugin-ses")
     compile project(":tioga-push-plugin-smtp")

@@ -5,16 +5,17 @@
  */
 project(":tioga-push-client") {
 
-  version = tiogaPubVersion
+    version = tiogaPubVersion
 
-  dependencies {
-    compile project(":tioga-push-jackson")
+    dependencies {
+        compile("org.tiogasolutions.dev:tioga-dev-common:+")
+        compile("org.tiogasolutions.dev:tioga-dev-jackson:+")
+        compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:+")
+        compile("com.fasterxml.jackson.core:jackson-annotations:2.5.0")
 
-    compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:+")
+        testCompile("org.testng:testng:6.8.21")
+    }
 
-    testCompile("org.testng:testng:6.8.21")
-  }
-
-  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
+    apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 }
 
