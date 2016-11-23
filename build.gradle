@@ -1,50 +1,65 @@
-
 /*
  * Copyright (c) 2014 Jacob D. Parr
  *
  * This software may not be used without permission.
  */
 plugins {
-  id "com.github.ben-manes.versions" version "0.8"
-  id 'org.hidetake.ssh' version '1.1.2'
-  id 'com.kageiit.url-cache' version '1.0.0'
+    id "com.github.ben-manes.versions" version "0.8"
+    id 'org.hidetake.ssh' version '1.1.2'
+    id 'com.kageiit.url-cache' version '1.0.0'
 }
 
 apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-java.gradle"))
 
 subprojects {
 
-  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-versions.gradle"))
-  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-reports.gradle"))
+    apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-versions.gradle"))
+    apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-reports.gradle"))
 
-  group = "org.tiogasolutions.push"
+    group = "org.tiogasolutions.push"
 
-  targetCompatibility = "1.8"
-  sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
+    sourceCompatibility = "1.8"
 
-  repositories {
-    flatDir {
-      dirs '../libs'
+    repositories {
+        flatDir {
+            dirs '../libs'
+        }
     }
-  }
 
-  configurations.all({
-    resolutionStrategy {
-      if (System.getProperty("no-fail-version-conflict") != "true") {
-        failOnVersionConflict()
-      }
+    configurations.all({
+        // noinspection GroovyAssignabilityCheck
+        resolutionStrategy {
+            if (System.getProperty("no-fail-version-conflict") != "true") {
+                failOnVersionConflict()
+            }
+            force(
+                    "org.slf4j:slf4j-api:1.7.20",
+                    "org.javassist:javassist:3.18.1-GA",
+
+                    "org.springframework:spring-aop:4.3.2.RELEASE",
+                    "org.springframework:spring-core:4.3.2.RELEASE",
+                    "org.springframework:spring-beans:4.3.2.RELEASE",
+                    "org.springframework:spring-context:4.3.2.RELEASE",
+
+                    "commons-logging:commons-logging:1.2",
+                    "org.apache.httpcomponents:httpclient:4.3.4",
+                    "org.apache.httpcomponents:httpcore:4.3.2",
+                    "com.fasterxml.jackson.core:jackson-databind:2.5.1"
+
+            )
+        }
+    })
+
+    ext {
+        // This is the primary version for the app
+        // which does not include pub, client, etc.
+        tiogaAppVersion = "4.4.4"
+        tiogaPubVersion = "5.0.4"
+
+        pomProjectDescription = "Tioga Solutions"
+        pomUrl = 'https://www.tiogasolutions.org'
+        pomScmUrl = "https://github.com/tioga"
+        pomScmConnection = "https://github.com/tioga/push-server.git"
     }
-  })
-
-  ext {
-    // This is the primary version for the app
-    // which does not include pub, client, etc.
-    tiogaAppVersion = "4.4.2"
-    tiogaPubVersion = "5.0.4"
-
-    pomProjectDescription = "Tioga Solutions"
-    pomUrl = 'https://www.tiogasolutions.org'
-    pomScmUrl = "https://github.com/tioga"
-    pomScmConnection = "https://github.com/tioga/push-server.git"
-  }
 }

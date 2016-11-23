@@ -31,12 +31,12 @@ public class PushServer {
 
     // Load the resolver which gives us common tools for identifying the
     // runtime & config directories, logback.xml, etc.
-    AppPathResolver resolver = new AppPathResolver("push.");
+    AppPathResolver resolver = new AppPathResolver("push_");
     Path runtimeDir = resolver.resolveRuntimePath();
     Path configDir = resolver.resolveConfigDir(runtimeDir);
 
     // Re-init logback if we can find the logback.xml
-    Path logbackFile = AppUtils.initLogback(configDir, "push.log.config", "logback.xml");
+    Path logbackFile = AppUtils.initLogback(configDir, "push_log_config", "logback.xml");
 
     // Locate the spring file for this app or use DEFAULT_SPRING_FILE from the classpath if one is not found.
     String springConfigPath = resolver.resolveSpringPath(configDir, "classpath:/tioga-push-server-grizzly/spring-config.xml");

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":tioga-push-server-servlet:main" external.linked.project.path="$MODULE_DIR$/../../../tioga-push-server-servlet" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="org.tiogasolutions.push" external.system.module.type="sourceSet" external.system.module.version="4.4.1" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":tioga-push-server-servlet:main" external.linked.project.path="$MODULE_DIR$/../../../tioga-push-server-servlet" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="org.tiogasolutions.push" external.system.module.type="sourceSet" external.system.module.version="4.4.2" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
-    <facet type="web" name="Web Gradle : tioga-push-server-servlet-4.4.1.war">
+    <facet type="web" name="Web Gradle : tioga-push-server-servlet-4.4.2.war">
       <configuration>
         <webroots>
           <root url="file://$MODULE_DIR$/../../../tioga-push-server-servlet/src/main/webapp" relative="/" />
@@ -26,21 +26,21 @@
     <orderEntry type="module" module-name="tioga-push-plugin-smtp_main" />
     <orderEntry type="module" module-name="tioga-push-plugin-xmpp_main" />
     <orderEntry type="module" module-name="tioga-push-plugin-twilio_main" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.dev:tioga-dev-common:5.2.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.dev:tioga-dev-domain:4.2.5" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.apis:tioga-apis-google:2.3.4" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:5.1.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.dev:tioga-dev-common:5.2.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.dev:tioga-dev-domain:4.2.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.apis:tioga-apis-google:2.3.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:5.1.6" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:5.2.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.app:tioga-app-common:3.2.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.app:tioga-app-common:3.2.1" level="project" />
     <orderEntry type="library" name="Gradle: org.thymeleaf.extras:thymeleaf-extras-java8time:2.1.0.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet-core:2.17" level="project" />
     <orderEntry type="library" name="Gradle: org.glassfish.jersey.core:jersey-common:2.17" level="project" />
     <orderEntry type="library" name="Gradle: org.glassfish.jersey.core:jersey-server:2.17" level="project" />
     <orderEntry type="library" name="Gradle: javax.ws.rs:javax.ws.rs-api:2.0.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.dev:tioga-dev-jackson:4.2.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.dev:tioga-dev-jackson:4.2.6" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.5.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.apis:tioga-apis-bitly:1.2.4" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-couchace:5.1.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.apis:tioga-apis-bitly:1.2.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-couchace:5.1.6" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-context:4.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk:1.9.31" level="project" />
     <orderEntry type="library" name="Gradle: javax.mail:mail:1.5.0-b01" level="project" />
@@ -65,10 +65,10 @@
     <orderEntry type="library" name="Gradle: org.glassfish.jersey.core:jersey-client:2.17" level="project" />
     <orderEntry type="library" name="Gradle: org.glassfish.jersey.media:jersey-media-jaxb:2.17" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.5.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-core:1.6.2" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jackson:1.6.2" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-annotations:1.6.2" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jersey:1.6.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-core:1.6.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jackson:1.6.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-annotations:1.6.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jersey:1.6.3" level="project" />
     <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-aop:4.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-beans:4.1.6.RELEASE" level="project" />

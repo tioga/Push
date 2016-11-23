@@ -5,19 +5,20 @@
  */
 project(":tioga-push-kernel") {
 
-  version = tiogaAppVersion
+    version = tiogaAppVersion
 
-  dependencies {
+    dependencies {
 
-    compile project(":tioga-push-client")
+        compile project(":tioga-push-client")
 
-    compile("org.tiogasolutions.apis:tioga-apis-bitly:+")
-    compile("org.tiogasolutions.lib:tioga-lib-couchace:+")
+        compile("org.tiogasolutions.apis:tioga-apis-bitly:+")
+        compile("org.tiogasolutions.lib:tioga-lib-couchace:+")
 
-    compile("org.springframework:spring-context:4.1.6.RELEASE")
+        compile("org.springframework:spring-context")
+        compile("org.aspectj:aspectjweaver:1.8.5")
 
-    testCompile ("org.testng:testng:6.8.21")
-  }
+        testCompile("org.testng:testng:6.8.21")
+    }
 
-  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
+    apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 }

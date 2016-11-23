@@ -5,53 +5,29 @@
  */
 project(":tioga-push-engine") {
 
-  version = tiogaAppVersion
+    version = tiogaAppVersion
 
-  dependencies {
+    dependencies {
+        compile project(":tioga-push-kernel");
+        compile project(":tioga-push-plugin-ses")
+        compile project(":tioga-push-plugin-smtp")
+        compile project(":tioga-push-plugin-xmpp")
+        compile project(":tioga-push-plugin-twilio")
 
-    compile project(":tioga-push-client")
-    compile project(":tioga-push-kernel");
-    compile project(":tioga-push-plugin-ses")
-    compile project(":tioga-push-plugin-smtp")
-    compile project(":tioga-push-plugin-xmpp")
-    compile project(":tioga-push-plugin-twilio")
+        compile("org.tiogasolutions.lib:tioga-lib-thymeleaf:+")
+        compile("org.tiogasolutions.apis:tioga-apis-google:+")
+        compile("org.tiogasolutions.app:tioga-app-common:+")
 
-    compile("org.tiogasolutions.dev:tioga-dev-common:+")
-    compile("org.tiogasolutions.dev:tioga-dev-domain:+")
+        testCompile project(":tioga-push-test")
 
-    compile("org.tiogasolutions.apis:tioga-apis-google:+")
+        // The Engine is not to have actual Jersey dependencies
+        // but they are required here for the unit tests.
+        testCompile("org.glassfish.jersey.ext:jersey-spring3:2.22.2")
 
-    compile("org.tiogasolutions.lib:tioga-lib-jaxrs:+")
-    compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:+")
+        testCompile("org.testng:testng:6.8.21")
+        testCompile("org.glassfish.jersey.test-framework:jersey-test-framework-core:2.22.2")
+        testCompile("org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-grizzly2:2.22.2")
+    }
 
-    compile("org.tiogasolutions.app:tioga-app-common:+")
-
-    compile("org.thymeleaf.extras:thymeleaf-extras-java8time:2.1.0.RELEASE")
-
-    testCompile project(":tioga-push-test")
-    testCompile("org.glassfish.jersey.ext:jersey-spring3:2.17")
-    testCompile("org.springframework:spring-aop:4.1.6.RELEASE") {force = true}
-    testCompile("org.springframework:spring-core:4.1.6.RELEASE") {force = true}
-    testCompile("org.springframework:spring-beans:4.1.6.RELEASE") {force = true}
-    testCompile("org.springframework:spring-context:4.1.6.RELEASE") {force = true}
-
-    testCompile("org.testng:testng:6.8.21")
-    testCompile("org.glassfish.jersey.test-framework:jersey-test-framework-core:2.17")
-    testCompile("org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-grizzly2:2.17")
-  }
-
-  configurations.all({
-    resolutionStrategy({
-      force(
-        "org.slf4j:slf4j-api:1.7.12",
-        "commons-logging:commons-logging:1.2",
-        "org.apache.httpcomponents:httpclient:4.3.4",
-        "org.apache.httpcomponents:httpcore:4.3.2",
-        "com.fasterxml.jackson.core:jackson-databind:2.5.1",
-        "org.javassist:javassist:3.18.1-GA",
-      )
-    })
-  })
-
-  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
+    apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 }

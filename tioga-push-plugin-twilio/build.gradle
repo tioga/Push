@@ -5,25 +5,17 @@
  */
 project(":tioga-push-plugin-twilio") {
 
-  version = tiogaAppVersion
+    version = tiogaAppVersion
 
-  dependencies {
+    dependencies {
 
-    compile project(":tioga-push-kernel")
+        compile project(":tioga-push-kernel")
 
-    compile("com.twilio.sdk:twilio-java-sdk:3.8.0")
-    compile("log4j:log4j:1.2.17")
+        compile("com.twilio.sdk:twilio-java-sdk:3.8.0")
 
-    testCompile("org.testng:testng:6.8.21")
-  }
 
-  configurations.all({
-    resolutionStrategy({
-      force(
-        "commons-logging:commons-logging:1.2",
-      )
-    })
-  })
+        testCompile("org.testng:testng:6.8.21")
+    }
 
-  apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
+    apply(from: urlCache.get("https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle"))
 }
