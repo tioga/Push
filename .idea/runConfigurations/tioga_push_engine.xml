@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="tioga-push-engine" type="TestNG" factoryName="TestNG" singleton="true">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-    <module name="tioga-push-engine" />
+    <module name="tioga-push-engine_test" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
     <option name="ALTERNATIVE_JRE_PATH" />
     <option name="SUITE_NAME" value="$PROJECT_DIR$/tioga-push-engine/src/test/suites/maven-build-suite.xml" />
