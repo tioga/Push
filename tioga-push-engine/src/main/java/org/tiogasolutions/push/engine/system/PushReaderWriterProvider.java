@@ -6,7 +6,7 @@
 package org.tiogasolutions.push.engine.system;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.tiogasolutions.lib.jaxrs.jackson.TiogaReaderWriterProvider;
+import org.tiogasolutions.lib.jaxrs.providers.TiogaReaderWriterProvider;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
 
 import javax.ws.rs.Consumes;

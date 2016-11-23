@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: org.tiogasolutions.apis:tioga-apis-google:2.3.5">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/apis/tioga-apis-google/2.3.5/tioga-apis-google-2.3.5.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.apis/tioga-apis-google/2.3.5/b0dd9a37ac6af906814415bc4480d5a0f313be2b/tioga-apis-google-2.3.5.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/tiogasolutions/apis/tioga-apis-google/2.3.5/tioga-apis-google-2.3.5-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.apis/tioga-apis-google/2.3.5/993592365422ccfcfc639f647380fb0abb429e99/tioga-apis-google-2.3.5-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

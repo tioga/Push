@@ -15,13 +15,14 @@
  */
 package org.tiogasolutions.push.client;
 
+import org.tiogasolutions.lib.jaxrs.client.BasicAuthorization;
+import org.tiogasolutions.lib.jaxrs.client.SimpleRestClient;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.pub.common.PingPush;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushResponse;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
-import org.tiogasolutions.lib.jaxrs.jackson.SimpleRestClient;
 
 public class LivePushServerClient implements PushServerClient {
 
@@ -36,7 +37,7 @@ public class LivePushServerClient implements PushServerClient {
   public LivePushServerClient(String url, String userName, String password) {
     PushObjectMapper objectMapper = new PushObjectMapper();
     TiogaJacksonTranslator translator = new TiogaJacksonTranslator(objectMapper);
-    client = new SimpleRestClient(translator, url, userName, password);
+    client = new SimpleRestClient(translator, url, new BasicAuthorization(userName, password));
   }
 
   public LivePushServerClient(SimpleRestClient client) {

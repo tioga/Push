@@ -8,10 +8,7 @@ project(":tioga-push-client") {
     version = tiogaPubVersion
 
     dependencies {
-        compile("org.tiogasolutions.dev:tioga-dev-jackson:+")
-        compile("org.tiogasolutions.lib:tioga-lib-jaxrs-jackson:+")
-        compile("com.fasterxml.jackson.core:jackson-annotations:2.5.0")
-
+        compile("org.tiogasolutions.lib:tioga-lib-jaxrs:+")
         testCompile("org.testng:testng:6.8.21")
     }
 
