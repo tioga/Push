@@ -2,7 +2,7 @@
   <configuration default="false" name="Push [htmlDependencyReport]" type="GradleRunConfiguration" factoryName="Gradle">
     <ExternalSystemSettings>
       <option name="executionName" />
-      <option name="externalProjectPath" value="$PROJECT_DIR$" />
+      <option name="externalProjectPath" value="$PROJECT_DIR$/tioga-push-server-grizzly" />
       <option name="externalSystemIdString" value="GRADLE" />
       <option name="scriptParameters" value="--quiet" />
       <option name="taskDescriptions">
