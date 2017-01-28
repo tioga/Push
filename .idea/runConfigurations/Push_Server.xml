@@ -15,22 +15,8 @@
     <option name="ENABLE_SWING_INSPECTOR" value="false" />
     <option name="ENV_VARIABLES" />
     <option name="PASS_PARENT_ENVS" value="true" />
-    <module name="tioga-push-server-grizzly" />
-    <envs>
-      <env name="hostName" value="localhost" />
-      <env name="port" value="39009" />
-      <env name="shutdownPort" value="39010" />
-      <env name="toOpenBrowser" value="true" />
-      <env name="push.masterUrl" value="http://localhost:5984" />
-      <env name="push.masterUsername" value="app-user" />
-      <env name="push.masterPassword" value="app-user" />
-      <env name="push.masterDatabaseName" value="tioga-push" />
-      <env name="push.domainUrl" value="http://localhost:5984" />
-      <env name="push.domainUsername" value="app-user" />
-      <env name="push.domainPassword" value="app-user" />
-      <env name="push.domainDatabasePrefix" value="tioga-push-" />
-      <env name="push.hostName" value="localhost" />
-    </envs>
+    <module name="tioga-push-server-grizzly_main" />
+    <envs />
     <RunnerSettings RunnerId="Debug">
       <option name="DEBUG_PORT" value="" />
       <option name="TRANSPORT" value="0" />

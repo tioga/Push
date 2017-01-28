@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Push.iml" filepath="$PROJECT_DIR$/.idea/modules/Push.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/push.iml" filepath="$PROJECT_DIR$/.idea/modules/push.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-push-client/tioga-push-client.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-push-client/tioga-push-client.iml" group="tioga-push-client" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-push-client/tioga-push-client_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-push-client/tioga-push-client_main.iml" group="tioga-push-client" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-push-client/tioga-push-client_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-push-client/tioga-push-client_test.iml" group="tioga-push-client" />

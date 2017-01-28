@@ -2,6 +2,7 @@ package org.tiogasolutions.push.server.grizzly;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,10 +24,6 @@ import org.tiogasolutions.runners.grizzly.GrizzlyServer;
 import org.tiogasolutions.runners.grizzly.GrizzlyServerConfig;
 
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
-
-import static org.tiogasolutions.dev.common.EnvUtils.findProperty;
-import static org.tiogasolutions.dev.common.EnvUtils.requireProperty;
 
 @Profile("hosted")
 @Configuration
@@ -43,11 +40,8 @@ public class PushHostedSpringConfig {
     }
 
     @Bean
-    public SessionStore sessionStore() {
-        String defaultValue = String.valueOf(TimeUnit.MINUTES.toMillis(60));
-        String value = findProperty("push_sessionDuration", defaultValue);
-        long duration = Long.valueOf(value);
-        return new SessionStore(duration);
+    public SessionStore sessionStore(@Value("${push_sessionDuration}") int sessionDuration) {
+        return new SessionStore(sessionDuration);
     }
 
     @Bean
@@ -76,29 +70,44 @@ public class PushHostedSpringConfig {
     }
 
     @Bean
-    public GrizzlyServerConfig grizzlyServerConfig() {
+    public GrizzlyServerConfig grizzlyServerConfig(@Value("${push_hostName}") String hostName,
+                                                   @Value("${push_port}") int port,
+                                                   @Value("${push_shutdownPort}") int shutdownPort,
+                                                   @Value("${push_context}") String context,
+                                                   @Value("${push_toOpenBrowser}") boolean toOpenBrowser) {
+
         GrizzlyServerConfig config = new GrizzlyServerConfig();
-        config.setHostName(findProperty("push_hostName", "0.0.0.0"));
-        config.setPort(Integer.valueOf(findProperty("push_port", "39009")));
-        config.setShutdownPort(Integer.valueOf(findProperty("push_shutdownPort", "39010")));
-        config.setContext(findProperty("push_context", ""));
-        config.setToOpenBrowser(false);
+        config.setHostName(hostName);
+        config.setPort(port);
+        config.setShutdownPort(shutdownPort);
+        config.setContext(context);
+        config.setToOpenBrowser(toOpenBrowser);
+
         return config;
     }
 
     @Bean
-    public CouchServersConfig couchServersConfig() {
+    public CouchServersConfig couchServersConfig(@Value("${push_masterUrl}") String masterUrl,
+                                                 @Value("${push_masterUsername}") String masterUsername,
+                                                 @Value("${push_masterPassword}") String masterPassword,
+                                                 @Value("${push_masterDatabaseName}") String masterDatabaseName,
+
+                                                 @Value("${push_domainUrl}") String domainUrl,
+                                                 @Value("${push_domainUsername}") String domainUsername,
+                                                 @Value("${push_domainPassword}") String domainPassword,
+                                                 @Value("${push_domainDatabasePrefix}") String domainDatabasePrefix) {
+
         CouchServersConfig config = new CouchServersConfig();
 
-        config.setMasterUrl(requireProperty("push_masterUrl"));
-        config.setMasterUsername(requireProperty("push_masterUsername"));
-        config.setMasterPassword(requireProperty("push_masterPassword"));
-        config.setMasterDatabaseName(requireProperty("push_masterDatabaseName"));
+        config.setMasterUrl(masterUrl);
+        config.setMasterUsername(masterUsername);
+        config.setMasterPassword(masterPassword);
+        config.setMasterDatabaseName(masterDatabaseName);
 
-        config.setDomainUrl(requireProperty("push_domainUrl"));
-        config.setDomainUserName(requireProperty("push_domainUsername"));
-        config.setDomainPassword(requireProperty("push_domainPassword"));
-        config.setDomainDatabasePrefix(requireProperty("push_domainDatabasePrefix"));
+        config.setDomainUrl(domainUrl);
+        config.setDomainUserName(domainUsername);
+        config.setDomainPassword(domainPassword);
+        config.setDomainDatabasePrefix(domainDatabasePrefix);
 
         return config;
     }
