@@ -25,7 +25,7 @@ project(":tioga-push-server-grizzly") {
     task awsS3(type: Copy, dependsOn: assemble) {
         from("./build/distributions/${project.name}-${project.version}.zip")
         into("./build/aws/")
-        rename("${project.name}-${project.version}.zip", "${project.name}-${System.getenv('BITBUCKET_COMMIT')}.zip")
+        rename("${project.name}-${project.version}.zip", "${project.name}-${System.getenv('BUILD_VCS_NUMBER')}.zip")
     }
 
     File procfile = file("$buildDir/aws/Procfile")
