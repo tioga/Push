@@ -1,0 +1,26 @@
+image: atlassian/default-image
+
+pipelines:
+  default:
+    - step:
+        script:
+          # Build the engine
+          - chmod a+x gradlew
+          - ./gradlew clean build awsS3
+          #
+          # install AWS's CLI
+          - curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+          - unzip awscli-bundle.zip
+          - ./awscli-bundle/install -b ~/bin/aws
+          - export PATH=~/bin:$PATH
+          - aws --version
+          #
+          # Upload the distribution zip file to Virginia S3 (errors when uploading directly to Oregon's)
+          - aws s3 cp --region us-east-1 ./tioga-push-server-grizzly/build/aws/tioga-push-server-grizzly-$BITBUCKET_COMMIT.zip s3://tioga-distributions-us-east-1/tioga-push-server-grizzly/
+          #
+          # Sync Virginia to Oregon
+          - aws s3 sync --region us-west-2 --delete s3://tioga-distributions-us-east-1 s3://tioga-distributions-us-west-2
+          # Publish the new version to Elastic Beanstalk
+          - aws elasticbeanstalk create-application-version --region us-west-2 --application-name "Tioga" --version-label tioga-push-server-grizzly-$BITBUCKET_COMMIT --source-bundle S3Bucket=tioga-distributions-us-west-2,S3Key=tioga-push-server-grizzly/tioga-push-server-grizzly-$BITBUCKET_COMMIT.zip
+          # Update the EB environment with the newly deployed version
+          - aws elasticbeanstalk update-environment --region us-west-2 --application-name "Tioga" --environment-name push-engine --version-label tioga-push-server-grizzly-$BITBUCKET_COMMIT
