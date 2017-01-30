@@ -83,7 +83,7 @@ public class ThymeleafTests extends AbstractSpringTest {
   }
 
   public void testManageDomain() throws Exception {
-    DomainProfileEntity domainProfile = executionManager.context().getDomain();
+    DomainProfileEntity domainProfile = executionManager.getContext().getDomain();
     ManageDomainModel model = new ManageDomainModel(executionManager, domainProfile, pluginManager, "This was the last message.");
     Thymeleaf leaf = new Thymeleaf(testFactory.createSession(), ThymeleafViewFactory.MANAGE_API_CLIENT, model);
     msgBodyWriter.writeTo(leaf, writer);

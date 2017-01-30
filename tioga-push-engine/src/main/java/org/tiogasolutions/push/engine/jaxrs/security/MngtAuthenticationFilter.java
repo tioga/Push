@@ -54,7 +54,7 @@ public class MngtAuthenticationFilter implements ContainerRequestFilter {
 
       final SecurityContext securityContext = requestContext.getSecurityContext();
       requestContext.setSecurityContext(new MngtSecurityContext(securityContext, account));
-      executionManager.context().setAccount(account);
+      executionManager.getContext().setAccount(account);
 
     } catch (ApiException e) {
       URI uri = requestContext.getUriInfo().getBaseUriBuilder().queryParam("r", RootResource.REASON_CODE_UNAUTHORIZED).build();

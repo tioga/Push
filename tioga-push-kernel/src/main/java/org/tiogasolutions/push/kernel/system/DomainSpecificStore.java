@@ -15,32 +15,32 @@ import java.util.List;
 
 public abstract class DomainSpecificStore<T> extends DefaultCouchStore<T> {
 
-  private final CouchServersConfig config;
-  private final ExecutionManager executionManager;
+    private final CouchServersConfig config;
+    private final ExecutionManager executionManager;
 
-  public DomainSpecificStore(ExecutionManager executionManager, Class<T> entityType) {
-    super(executionManager.getCouchServer(), entityType);
-    this.config = executionManager.getCouchServersConfig();
-    this.executionManager = executionManager;
-  }
-
-  @Override
-  public final String getDatabaseName() {
-    DomainProfileEntity domain = executionManager.context().getDomain();
-    if (domain == null) {
-      throw ApiException.internalServerError("A domain does not exist within the execution context.");
+    public DomainSpecificStore(ExecutionManager executionManager, Class<T> entityType) {
+        super(executionManager.getCouchServer(), entityType);
+        this.config = executionManager.getCouchServersConfig();
+        this.executionManager = executionManager;
     }
-    return config.getDomainDatabasePrefix() + domain.getDomainKey();
-  }
 
-  @Override
-  public final void createDatabase(CouchDatabase database) {
-    CouchUtils.createDatabase(database, new TimeUuidIdGenerator());
+    @Override
+    public final String getDatabaseName() {
+        DomainProfileEntity domain = executionManager.getContext().getDomain();
+        if (domain == null) {
+            throw ApiException.internalServerError("A domain does not exist within the execution getContext.");
+        }
+        return config.getDomainDatabasePrefix() + domain.getDomainKey();
+    }
 
-    List<String> designNames = Arrays.asList(
-      "entity",
-      PushRequestStore.PUSH_REQUEST_DESIGN_NAME);
+    @Override
+    public final void createDatabase(CouchDatabase database) {
+        CouchUtils.createDatabase(database, new TimeUuidIdGenerator());
 
-    CouchUtils.validateDesign(database, designNames, "/push-server-common/design-docs/", "-design.json");
-  }
+        List<String> designNames = Arrays.asList(
+                "entity",
+                PushRequestStore.PUSH_REQUEST_DESIGN_NAME);
+
+        CouchUtils.validateDesign(database, designNames, "/push-server-common/design-docs/", "-design.json");
+    }
 }

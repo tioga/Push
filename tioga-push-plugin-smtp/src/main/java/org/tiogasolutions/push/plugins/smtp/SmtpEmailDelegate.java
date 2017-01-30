@@ -50,19 +50,19 @@ public class SmtpEmailDelegate extends AbstractDelegate {
 
     if (StringUtils.isNotBlank(config.getRecipientOverride())) {
       // This is NOT a "production" request.
-      message = new EmailMessage(config.getServerName(), config.getPortNumber(), config.getRecipientOverride());
+      message = new EmailMessage(config.getServerName(), config.getPort(), config.getRecipientOverride());
       apiMessage = String.format("Request sent to recipient override, %s.", config.getRecipientOverride());
     } else {
       // This IS a "production" request.
-      message = new EmailMessage(config.getServerName(), config.getPortNumber(), push.getToAddress());
+      message = new EmailMessage(config.getServerName(), config.getPort(), push.getToAddress());
     }
 
     if (config.getAuthType().isTls()) {
-      message.setAuthentication(AuthenticationMethod.TLS, config.getUserName(), config.getPassword());
+      message.setAuthentication(AuthenticationMethod.TLS, config.getUsername(), config.getPassword());
     } else if (config.getAuthType().isSsl()) {
-      message.setAuthentication(AuthenticationMethod.SSL, config.getUserName(), config.getPassword());
+      message.setAuthentication(AuthenticationMethod.SSL, config.getUsername(), config.getPassword());
     } else {
-      message.setAuthentication(AuthenticationMethod.NONE, config.getUserName(), config.getPassword());
+      message.setAuthentication(AuthenticationMethod.NONE, config.getUsername(), config.getPassword());
     }
 
     message.setFrom(push.getFromAddress());

@@ -8,7 +8,6 @@ import org.tiogasolutions.push.kernel.config.CouchServersConfig;
 import org.tiogasolutions.push.kernel.execution.ExecutionManager;
 import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.kernel.system.PluginManager;
-import org.tiogasolutions.push.kernel.system.PushCouchServer;
 import org.tiogasolutions.push.plugins.ses.SesEmailPlugin;
 import org.tiogasolutions.push.plugins.smtp.SmtpEmailPlugin;
 import org.tiogasolutions.push.plugins.twilio.TwilioPlugin;
@@ -35,16 +34,6 @@ public class EngineSpringTestConfig {
     config.setDomainDatabasePrefix("test-push-");
 
     return config;
-  }
-
-  @Bean
-  public PushCouchServer pushCouchServer(CouchServersConfig config) {
-    return new PushCouchServer(config);
-  }
-
-  @Bean
-  public ExecutionManager executionManager(CouchServersConfig couchServersConfig, PushCouchServer pushCouchServer) {
-    return new ExecutionManager(couchServersConfig, pushCouchServer);
   }
 
   @Bean

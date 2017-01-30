@@ -33,8 +33,8 @@ public class ManageAccountModel {
       this.domains.add(domainModel);
 
       for (Plugin plugin : pluginManager.getPlugins()) {
-        DomainProfileEntity oldProfile = executionManager.context().getDomain();
-        executionManager.context().setDomain(domainProfile);
+        DomainProfileEntity oldProfile = executionManager.getContext().getDomain();
+        executionManager.getContext().setDomain(domainProfile);
         try {
           PluginConfig config = plugin.getConfig(domainProfile);
           if (config != null) {
@@ -43,7 +43,7 @@ public class ManageAccountModel {
             domainModel.disabledTypes.add(plugin.getPushType());
           }
         } finally {
-          executionManager.context().setDomain(oldProfile);
+          executionManager.getContext().setDomain(oldProfile);
         }
       }
     }

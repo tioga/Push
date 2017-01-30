@@ -25,7 +25,7 @@ public class ManageDomainModel {
 
   public ManageDomainModel(ExecutionManager executionManager, DomainProfileEntity domainProfile, PluginManager pluginManager, String message) throws IOException {
     this.message = message;
-    this.executionContext = executionManager.context();
+    this.executionContext = executionManager.getContext();
 
     for (Plugin plugin : pluginManager.getPlugins()) {
       plugins.add(new PluginModel(domainProfile, plugin));

@@ -96,13 +96,13 @@ public class ManageResource {
       throw ApiException.badRequest(String.format("The domain \"%s\" already exists.", domainKey));
     }
 
-    CreateDomainAction action = new CreateDomainAction(executionManager.context().getAccount(), domainKey, domainPassword);
+    CreateDomainAction action = new CreateDomainAction(executionManager.getContext().getAccount(), domainKey, domainPassword);
 
-    DomainProfileEntity domain = executionManager.context().getAccount().add(action);
+    DomainProfileEntity domain = executionManager.getContext().getAccount().add(action);
     domainStore.create(domain);
-    accountStore.update(executionManager.context().getAccount());
+    accountStore.update(executionManager.getContext().getAccount());
 
-    // Create a context for our new domain.
+    // Create a getContext for our new domain.
     executionManager.newContext(uriInfo).setDomain(domain);
     // Forces creation of domain-specific database.
     pushRequestStore.getDatabase();

@@ -9,7 +9,7 @@ package org.tiogasolutions.push.plugins.smtp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.tiogasolutions.push.kernel.accounts.Account;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
-import org.tiogasolutions.push.kernel.config.SmtpAuthType;
+import org.tiogasolutions.push.pub.domain.SmtpAuthType;
 import org.testng.annotations.Test;
 import org.tiogasolutions.push.test.AbstractSpringTest;
 import org.tiogasolutions.push.test.TestFixture;
@@ -39,10 +39,10 @@ public class UpdateSmtpEmailConfigActionTest extends AbstractSpringTest {
 
     assertEquals(config.getDomainId(), domain.getDomainId());
 
-    assertEquals(config.getUserName(), "mickey.mouse");
+    assertEquals(config.getUsername(), "mickey.mouse");
     assertEquals(config.getPassword(), "IamMickey");
 
-    assertEquals(config.getPortNumber(),  "99");
+    assertEquals(config.getPort(),  "99");
     assertEquals(config.getAuthType(),    SmtpAuthType.ssl);
     assertEquals(config.getServerName(),  "google.com");
 

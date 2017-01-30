@@ -39,7 +39,7 @@ public class UpdateXmppConfigActionTest extends AbstractSpringTest {
     assertEquals(config.getUsername(), "mickey.mouse");
     assertEquals(config.getPassword(), "IamMickey");
 
-    assertEquals(config.getTestAddress(), "test@example.com");
+    assertEquals(config.getTestToAddress(), "test@example.com");
     assertEquals(config.getRecipientOverride(), "override@example.com");
   }
 }

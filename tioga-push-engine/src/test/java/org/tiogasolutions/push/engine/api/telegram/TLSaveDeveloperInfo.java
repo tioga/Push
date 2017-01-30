@@ -29,9 +29,9 @@ public class TLSaveDeveloperInfo /*extends TLMethod*/ {
     this.setCity(city);
   }
 
-  public TLBool deserializeResponse(InputStream stream, TLContext context)
+  public TLBool deserializeResponse(InputStream stream, TLContext getContext)
       throws IOException {
-    TLObject res = StreamingUtils.readTLObject(stream, context);
+    TLObject res = StreamingUtils.readTLObject(stream, getContext);
     if (res == null) {
       throw new IOException("Unable to parse response");
     }
@@ -51,7 +51,7 @@ public class TLSaveDeveloperInfo /*extends TLMethod*/ {
     StreamingUtils.writeTLString(this.getCity(), stream);
   }
 
-  public void deserializeBody(InputStream stream, TLContext context)
+  public void deserializeBody(InputStream stream, TLContext getContext)
       throws IOException {
     this.setName(StreamingUtils.readTLString(stream));
     this.setEmail(StreamingUtils.readTLString(stream));

@@ -35,7 +35,7 @@ public class PushResponseFilter implements ContainerResponseFilter {
     responseContext.getHeaders().add("X-UA-Compatible", "IE=Edge");
     responseContext.getHeaders().add("p3p", "CP=\"Push server does not have a P3P policy. Learn why here: https://www.TiogaSolutions.com/push/static/p3p.html\"");
 
-    Session session = executionManager.context().getSession();
+    Session session = executionManager.getContext().getSession();
     boolean valid = sessionStore.isValid(session);
 
     if (session != null && valid) {

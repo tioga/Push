@@ -8,7 +8,6 @@ import org.tiogasolutions.push.kernel.config.CouchServersConfig;
 import org.tiogasolutions.push.kernel.execution.ExecutionManager;
 import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.kernel.system.PluginManager;
-import org.tiogasolutions.push.kernel.system.PushCouchServer;
 
 import static java.util.Collections.singletonList;
 
@@ -31,16 +30,6 @@ public class TwilioSpringTestConfig {
     config.setDomainDatabasePrefix("test-push-");
 
     return config;
-  }
-
-  @Bean
-  public PushCouchServer pushCouchServer(CouchServersConfig config) {
-    return new PushCouchServer(config);
-  }
-
-  @Bean
-  public ExecutionManager executionManager(CouchServersConfig couchServersConfig, PushCouchServer pushCouchServer) {
-    return new ExecutionManager(couchServersConfig, pushCouchServer);
   }
 
   @Bean

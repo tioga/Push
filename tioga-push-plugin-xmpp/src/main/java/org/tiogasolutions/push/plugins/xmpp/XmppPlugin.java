@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tiogasolutions.dev.common.Formats;
 import org.tiogasolutions.dev.common.IoUtils;
+import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.KernelUtils;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
@@ -45,7 +46,7 @@ public class XmppPlugin extends PluginSupport {
   @Override
   public XmppDelegate newDelegate(DomainProfileEntity domainProfile, PushRequest pushRequest, Push push) {
     XmppConfig config = getConfig(domainProfile);
-    return new XmppDelegate(executionManager.context(), objectMapper, pushRequestStore, pushRequest, (XmppPush)push, config);
+    return new XmppDelegate(executionManager.getContext(), objectMapper, pushRequestStore, pushRequest, (XmppPush)push, config);
   }
 
   @Override
@@ -55,9 +56,9 @@ public class XmppPlugin extends PluginSupport {
 
     if (config != null) {
       getConfigStore(executionManager).delete(config);
-      executionManager.context().setLastMessage("XMPP configuration deleted.");
+      executionManager.getContext().setLastMessage("XMPP configuration deleted.");
     } else {
-      executionManager.context().setLastMessage("XMPP configuration doesn't exist.");
+      executionManager.getContext().setLastMessage("XMPP configuration doesn't exist.");
     }
   }
 
@@ -73,7 +74,7 @@ public class XmppPlugin extends PluginSupport {
     xmppConfig.apply(action);
     getConfigStore(executionManager).update(xmppConfig);
 
-    executionManager.context().setLastMessage("XMPP configuration updated.");
+    executionManager.getContext().setLastMessage("XMPP configuration updated.");
   }
 
   @Override
@@ -82,15 +83,15 @@ public class XmppPlugin extends PluginSupport {
 
     if (config == null) {
       String msg = "The XMPP config has not been specified.";
-      executionManager.context().setLastMessage(msg);
+      executionManager.getContext().setLastMessage(msg);
       return;
     }
 
-    String recipient = config.getTestAddress();
+    String recipient = config.getTestToAddress();
 
     if (isBlank((recipient))) {
       String msg = "Test message cannot be sent with out specifying the test address.";
-      executionManager.context().setLastMessage(msg);
+      executionManager.getContext().setLastMessage(msg);
       return;
     }
 
@@ -107,15 +108,15 @@ public class XmppPlugin extends PluginSupport {
     PushRequest pushRequest = new PushRequest(Push.CURRENT_API_VERSION, domainProfile, push);
     pushRequestStore.create(pushRequest);
 
-    if (new XmppDelegate(executionManager.context(), objectMapper, pushRequestStore, pushRequest, push, config).execute(false)) {
+    if (new XmppDelegate(executionManager.getContext(), objectMapper, pushRequestStore, pushRequest, push, config).execute(false)) {
       String msg = String.format("Test message sent from %s to %s:\n%s", config.getUsername(), recipient, push.getMessage());
-      executionManager.context().setLastMessage(msg);
+      executionManager.getContext().setLastMessage(msg);
     }
   }
 
   @Override
   public String getAdminUi(DomainProfileEntity domainProfile) throws IOException {
-    ExecutionContext context = executionManager.context();
+    ExecutionContext context = executionManager.getContext();
     String contextRoot = KernelUtils.getContextRoot(context.getUriInfo());
 
     XmppConfig config = getConfig(domainProfile);
@@ -136,12 +137,14 @@ public class XmppPlugin extends PluginSupport {
     content = content.replace("${config-port}",               nullToString(config == null ? null : config.getPort()));
     content = content.replace("${config-service-name}",       nullToString(config == null ? null : config.getServiceName()));
 
-    content = content.replace("${config-test-address}",       nullToString(config == null ? null : config.getTestAddress()));
+    content = content.replace("${config-test-address}",       nullToString(config == null ? null : config.getTestToAddress()));
     content = content.replace("${config-recipient-override}", nullToString(config == null ? null : config.getRecipientOverride()));
 
-    if (content.contains("${")) {
-      String msg = "The XMPP admin UI still contains un-parsed elements.";
-      throw new IllegalStateException(msg);
+    int index = content.indexOf("${");
+    if (index >= 0) {
+        String msg = String.format("The XMPP admin UI still contains un-parsed elements: %s",
+                StringUtils.substring(content, index, content.indexOf("}", index)+1));
+        throw new IllegalStateException(msg);
     }
 
     return content;

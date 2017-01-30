@@ -7,7 +7,7 @@
 package org.tiogasolutions.push.plugins.smtp;
 
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
-import org.tiogasolutions.push.kernel.config.SmtpAuthType;
+import org.tiogasolutions.push.pub.domain.SmtpAuthType;
 import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.push.pub.internal.ValidatableAction;

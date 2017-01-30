@@ -14,10 +14,6 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class SpringTestConfig {
 
-//  private String getBitlyAccessToken() {
-//    return EnvUtils.findProperty("tioga.test.bitly.access.token", "no-such-luck");
-//  }
-
   @Bean
   public PushObjectMapper cpObjectMapper() {
     return new PushObjectMapper();
@@ -32,11 +28,6 @@ public class SpringTestConfig {
   public SessionStore sessionStore() {
     return new SessionStore(TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS));
   }
-
-//  @Bean
-//  public BitlyApis bitlyApis() {
-//    return new BitlyApis(getBitlyAccessToken());
-//  }
 
   @Bean
   public CouchServersConfig couchServersConfig() {

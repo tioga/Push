@@ -29,7 +29,7 @@ public class XmppConfig implements PluginConfig, Serializable {
   private String username;
   private String password;
   private String recipientOverride;
-  private String testAddress;
+  private String testToAddress;
 
   private String host;
   private String port;
@@ -48,7 +48,7 @@ public class XmppConfig implements PluginConfig, Serializable {
                     @JsonProperty("port") String port,
                     @JsonProperty("serviceName") String serviceName,
                     @JsonProperty("recipientOverride") String recipientOverride,
-                    @JsonProperty("testAddress") String testAddress) {
+                    @JsonProperty("testToAddress") String testToAddress) {
 
     this.configId = configId;
     this.revision = revision;
@@ -62,8 +62,8 @@ public class XmppConfig implements PluginConfig, Serializable {
     this.port = port;
     this.serviceName = serviceName;
 
+    this.testToAddress = testToAddress;
     this.recipientOverride = recipientOverride;
-    this.testAddress = testAddress;
   }
 
   public XmppConfig apply(UpdateXmppConfigAction action) {
@@ -85,7 +85,7 @@ public class XmppConfig implements PluginConfig, Serializable {
     this.serviceName = action.getServiceName();
 
     this.recipientOverride = action.getRecipientOverride();
-    this.testAddress = action.getTestAddress();
+    this.testToAddress = action.getTestAddress();
 
     return this;
   }
@@ -116,8 +116,8 @@ public class XmppConfig implements PluginConfig, Serializable {
     return recipientOverride;
   }
 
-  public String getTestAddress() {
-    return testAddress;
+  public String getTestToAddress() {
+    return testToAddress;
   }
 
   public String getHost() {

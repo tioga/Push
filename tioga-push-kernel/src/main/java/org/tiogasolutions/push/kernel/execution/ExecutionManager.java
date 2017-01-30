@@ -1,62 +1,79 @@
 package org.tiogasolutions.push.kernel.execution;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.stereotype.Component;
 import org.tiogasolutions.couchace.core.api.CouchServer;
 import org.tiogasolutions.dev.common.exceptions.ApiException;
+import org.tiogasolutions.push.kernel.accounts.DomainStore;
 import org.tiogasolutions.push.kernel.config.CouchServersConfig;
+import org.tiogasolutions.push.kernel.plugins.PushProcessor;
+import org.tiogasolutions.push.kernel.system.PluginManager;
 
 import javax.ws.rs.core.UriInfo;
 
 @Component
-public class ExecutionManager {
+public class ExecutionManager implements BeanFactoryAware {
 
-  private final InheritableThreadLocal<ExecutionContext> threadLocal;
+    private BeanFactory beanFactory;
+    private final InheritableThreadLocal<ExecutionContext> threadLocal;
 
-  private final CouchServer couchServer;
-  private final CouchServersConfig couchServersConfig;
-
-  @Autowired
-  public ExecutionManager(CouchServersConfig couchServersConfig, CouchServer couchServer) {
-    this.couchServer = couchServer;
-    this.couchServersConfig = couchServersConfig;
-    this.threadLocal = new InheritableThreadLocal<>();
-  }
-
-  public void removeExecutionContext() {
-    threadLocal.remove();
-  }
-
-  public ExecutionContext newContext(UriInfo uriInfo) {
-    ExecutionContext context = new ExecutionContext(uriInfo);
-    assignContext(context);
-    return context;
-  }
-
-  public void assignContext(ExecutionContext context) {
-    threadLocal.set(context);
-  }
-
-  public boolean hasContext() {
-    ExecutionContext executionContext = threadLocal.get();
-    return executionContext != null;
-  }
-
-  // TODO - why is this not getContext()?
-  public ExecutionContext context() {
-    ExecutionContext context = threadLocal.get();
-    if (context == null) {
-      throw ApiException.internalServerError("There is no current execution context for this thread.");
-    } else {
-      return context;
+    public ExecutionManager() {
+        this.threadLocal = new InheritableThreadLocal<>();
     }
-  }
 
-  public CouchServersConfig getCouchServersConfig() {
-    return couchServersConfig;
-  }
+    public void removeExecutionContext() {
+        threadLocal.remove();
+    }
 
-  public CouchServer getCouchServer() {
-    return couchServer;
-  }
+    public ExecutionContext newContext(UriInfo uriInfo) {
+        ExecutionContext context = new ExecutionContext(uriInfo, getPushProcessor(), getDomainStore());
+        assignContext(context);
+        return context;
+    }
+
+    public void assignContext(ExecutionContext context) {
+        threadLocal.set(context);
+    }
+
+    public boolean hasContext() {
+        ExecutionContext executionContext = threadLocal.get();
+        return executionContext != null;
+    }
+
+    // TODO - why is this not getContext()?
+    public ExecutionContext getContext() {
+        ExecutionContext context = threadLocal.get();
+        if (context == null) {
+            throw ApiException.internalServerError("There is no current execution getContext for this thread.");
+        } else {
+            return context;
+        }
+    }
+
+    public CouchServersConfig getCouchServersConfig() {
+        return beanFactory.getBean(CouchServersConfig.class);
+    }
+
+    public CouchServer getCouchServer() {
+        return beanFactory.getBean(CouchServer.class);
+    }
+
+    public PushProcessor getPushProcessor() {
+        return beanFactory.getBean(PushProcessor.class);
+    }
+
+    public DomainStore getDomainStore() {
+        return beanFactory.getBean(DomainStore.class);
+    }
+
+    public PluginManager getPluginManager() {
+        return beanFactory.getBean(PluginManager.class);
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
+    }
 }

@@ -52,7 +52,7 @@ public class CpAuthorizer {
   public static final int AUTH_ATTEMPT_COUNT = 5;
   public static final int AUTH_RETRY_COUNT = 5;
 
-  public PlainTcpConnection context;
+  public PlainTcpConnection getContext;
   public TLInitContext initContext;
 
     public CpAuthorizer() {
@@ -68,7 +68,7 @@ public class CpAuthorizer {
         writeLong(requestMessageId, out); // MessageID
         writeInt(data.length, out);
         writeByteArray(data, out);
-        byte[] response = context.executeMethod(out.toByteArray());
+        byte[] response = getContext.executeMethod(out.toByteArray());
         ByteArrayInputStream in = new ByteArrayInputStream(response);
         long authId = readLong(in);
         if (authId != 0) {
@@ -188,7 +188,7 @@ public class CpAuthorizer {
 
                 long serverSalt = readLong(xor(substring(newNonce, 0, 8), substring(serverNonce, 0, 8)), 0);
 
-                return new PqAuth(authKey, serverSalt, context.getSocket());
+                return new PqAuth(authKey, serverSalt, getContext.getSocket());
             } else if (result instanceof DhGenRetry) {
                 byte[] newNonceHash = substring(SHA1(newNonce, new byte[]{2}, authAuxHash), 4, 16);
 
@@ -212,7 +212,7 @@ public class CpAuthorizer {
         for (int i = 0; i < AUTH_ATTEMPT_COUNT; i++) {
             ConnectionType connectionType = rate.tryConnection();
             try {
-                context = new PlainTcpConnection(connectionType.getHost(), connectionType.getPort());
+                getContext = new PlainTcpConnection(connectionType.getHost(), connectionType.getPort());
                 rate.onConnectionSuccess(connectionType.getId());
             } catch (IOException e) {
                 Logger.e(TAG, e);
@@ -226,9 +226,9 @@ public class CpAuthorizer {
             } catch (IOException e) {
                 Logger.e(TAG, e);
             } finally {
-//                if (context != null) {
-//                    context.destroy();
-//                    context = null;
+//                if (getContext != null) {
+//                    getContext.destroy();
+//                    getContext = null;
 //                }
             }
 

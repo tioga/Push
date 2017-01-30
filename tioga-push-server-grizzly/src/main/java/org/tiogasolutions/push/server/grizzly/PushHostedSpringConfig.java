@@ -50,8 +50,8 @@ public class PushHostedSpringConfig {
     }
 
     @Bean
-    public ExecutionManager executionManager(CouchServersConfig couchServersConfig, PushCouchServer pushCouchServer) {
-        return new ExecutionManager(couchServersConfig, pushCouchServer);
+    public ExecutionManager executionManager() {
+        return new ExecutionManager();
     }
 
     @Bean

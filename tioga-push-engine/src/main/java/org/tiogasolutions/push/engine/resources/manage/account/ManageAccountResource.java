@@ -31,6 +31,9 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
+import static org.tiogasolutions.push.kernel.Paths.$password;
+import static org.tiogasolutions.push.kernel.Paths.$update;
+
 @MngtAuthentication
 public class ManageAccountResource {
 
@@ -51,7 +54,7 @@ public class ManageAccountResource {
 
   @GET
   public Thymeleaf viewAccount() throws IOException {
-    ExecutionContext execContext = executionManager.context();
+    ExecutionContext execContext = executionManager.getContext();
     Account account = execContext.getAccount();
     List<DomainProfileEntity> domains = domainStore.getDomains(account);
 
@@ -60,10 +63,10 @@ public class ManageAccountResource {
   }
 
   @POST
-  @Path("/update")
+  @Path($update)
   public Response updateAccount(@FormParam("firstName") String firstName, @FormParam("lastName") String lastName, @FormParam("emailAddress") String newEmailAddress) throws Exception {
 
-    Account account = executionManager.context().getAccount();
+    Account account = executionManager.getContext().getAccount();
 
     String oldEmailAddress = account.getEmailAddress();
     if (EqualsUtils.objectsNotEqual(oldEmailAddress, newEmailAddress)) {
@@ -83,20 +86,20 @@ public class ManageAccountResource {
       sessionStore.newSession(newEmailAddress);
     }
 
-    executionManager.context().setLastMessage("You account details have been updated.");
+    executionManager.getContext().setLastMessage("You account details have been updated.");
     return Response.seeOther(new URI("manage/account")).build();
   }
 
   @POST
-  @Path("/password")
+  @Path($password)
   public Response changePassword(@FormParam("oldPassword") String oldPassword, @FormParam("newPassword") String newPassword, @FormParam("confirmed") String confirmed) throws Exception {
-    Account account = executionManager.context().getAccount();
+    Account account = executionManager.getContext().getAccount();
 
     ChangePasswordAction action = new ChangePasswordAction(oldPassword, newPassword, confirmed);
     account.apply(action);
     accountStore.update(account);
 
-    executionManager.context().setLastMessage("You password has been updated.");
+    executionManager.getContext().setLastMessage("You password has been updated.");
     return Response.seeOther(new URI("manage/account")).build();
   }
 }

@@ -73,7 +73,7 @@ public class ApiAuthenticationFilter implements ContainerRequestFilter {
     final SecurityContext securityContext = requestContext.getSecurityContext();
     requestContext.setSecurityContext(new ApiSecurityContext(securityContext, domainProfile));
 
-    executionManager.context().setDomain(domainProfile);
+    executionManager.getContext().setDomain(domainProfile);
   }
 
   private class ApiSecurityContext implements SecurityContext {

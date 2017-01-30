@@ -28,8 +28,8 @@ public class TwilioConfig implements PluginConfig, Serializable {
 
   private String accountSid;
   private String authToken;
-  private String fromPhoneNumber;
-  private String recipient;
+  private String testFromNumber;
+  private String testToNumber;
 
   public TwilioConfig() {}
 
@@ -39,8 +39,8 @@ public class TwilioConfig implements PluginConfig, Serializable {
                       @JsonProperty("domainId") String domainId,
                       @JsonProperty("accountSid") String accountSid,
                       @JsonProperty("authToken") String authToken,
-                      @JsonProperty("fromPhoneNumber") String fromPhoneNumber,
-                      @JsonProperty("recipient") String recipient) {
+                      @JsonProperty("testFromNumber") String fromPhoneNumber,
+                      @JsonProperty("testToNumber") String testToNumber) {
     this.configId = configId;
     this.revision = revision;
 
@@ -48,8 +48,8 @@ public class TwilioConfig implements PluginConfig, Serializable {
 
     this.accountSid = accountSid;
     this.authToken = authToken;
-    this.fromPhoneNumber = fromPhoneNumber;
-    this.recipient = recipient;
+    this.testFromNumber = fromPhoneNumber;
+    this.testToNumber = testToNumber;
   }
 
   public TwilioConfig apply(UpdateTwilioConfigAction configAction) {
@@ -65,8 +65,8 @@ public class TwilioConfig implements PluginConfig, Serializable {
 
     this.accountSid = configAction.getAccountSid();
     this.authToken = configAction.getAuthToken();
-    this.fromPhoneNumber = configAction.getFromPhoneNumber();
-    this.recipient = configAction.getRecipient();
+    this.testFromNumber = configAction.getFromPhoneNumber();
+    this.testToNumber = configAction.getRecipient();
 
     return this;
   }
@@ -93,11 +93,11 @@ public class TwilioConfig implements PluginConfig, Serializable {
     return authToken;
   }
 
-  public String getFromPhoneNumber() {
-    return fromPhoneNumber;
+  public String getTestFromNumber() {
+    return testFromNumber;
   }
 
-  public String getRecipient() {
-    return recipient;
+  public String getTestToNumber() {
+    return testToNumber;
   }
 }

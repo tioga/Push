@@ -55,22 +55,22 @@ public class ManageDomainResource {
       throw ApiException.notFound(domainKey);
     }
 
-    this.executionManager.context().setDomain(domainProfile);
+    this.executionManager.getContext().setDomain(domainProfile);
   }
 
   private Account getAccount() {
-    return executionManager.context().getAccount();
+    return executionManager.getContext().getAccount();
   }
 
   @GET
   @Produces(MediaType.TEXT_HTML)
   public Thymeleaf viewDomain() throws Exception {
-    String lastMessage = executionManager.context().getSession().getLastMessage();
-    executionManager.context().setLastMessage(null);
+    String lastMessage = executionManager.getContext().getSession().getLastMessage();
+    executionManager.getContext().setLastMessage(null);
     accountStore.update(getAccount());
 
     ManageDomainModel model = new ManageDomainModel(executionManager, domainProfile, pluginManager, lastMessage);
-    return new Thymeleaf(executionManager.context().getSession(), ThymeleafViewFactory.MANAGE_API_CLIENT, model);
+    return new Thymeleaf(executionManager.getContext().getSession(), ThymeleafViewFactory.MANAGE_API_CLIENT, model);
   }
 
   @GET
@@ -95,7 +95,7 @@ public class ManageDomainResource {
     Collections.reverse(requests);
 
     DomainRequestsModel model = new DomainRequestsModel(getAccount(), domainProfile, requests);
-    return new Thymeleaf(executionManager.context().getSession(), ThymeleafViewFactory.MANAGE_API_REQUESTS, model);
+    return new Thymeleaf(executionManager.getContext().getSession(), ThymeleafViewFactory.MANAGE_API_REQUESTS, model);
   }
 
   @POST
@@ -108,10 +108,10 @@ public class ManageDomainResource {
       pushRequestStore.delete(request);
     }
 
-    executionManager.context().setLastMessage("All API Requests deleted");
+    executionManager.getContext().setLastMessage("All API Requests deleted");
     domainStore.update(domainProfile);
 
-    URI uri = executionManager.context().getUriInfo().getBaseUriBuilder().path("manage").path("domain").path(domainProfile.getDomainKey()).path("requests").build();
+    URI uri = executionManager.getContext().getUriInfo().getBaseUriBuilder().path("manage").path("domain").path(domainProfile.getDomainKey()).path("requests").build();
     return Response.seeOther(uri).build();
   }
 
@@ -129,12 +129,12 @@ public class ManageDomainResource {
     }
 
     UpdateDomainAction action = new UpdateDomainAction(domainKey, domainPassword, retentionDays);
-    executionManager.context().setLastMessage("Domain configuration changed.");
+    executionManager.getContext().setLastMessage("Domain configuration changed.");
 
     domainProfile.apply(action);
     domainStore.update(domainProfile);
 
-    URI uri = executionManager.context().getUriInfo().getBaseUriBuilder().path("manage").path("domain").path(domainProfile.getDomainKey()).build();
+    URI uri = executionManager.getContext().getUriInfo().getBaseUriBuilder().path("manage").path("domain").path(domainProfile.getDomainKey()).build();
     return Response.seeOther(uri).build();
   }
 

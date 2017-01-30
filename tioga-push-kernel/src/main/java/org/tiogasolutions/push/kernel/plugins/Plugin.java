@@ -2,7 +2,6 @@ package org.tiogasolutions.push.kernel.plugins;
 
 import org.tiogasolutions.push.kernel.AbstractDelegate;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
-import org.tiogasolutions.push.kernel.execution.ExecutionManager;
 import org.tiogasolutions.push.kernel.requests.PushRequest;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushType;

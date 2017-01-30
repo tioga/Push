@@ -29,8 +29,8 @@ public class TwilioConfigTest {
         assertEquals(twilioConfig.getDomainId(), domainId);
         assertEquals(twilioConfig.getAccountSid(), accountSid);
         assertEquals(twilioConfig.getAuthToken(), authToken);
-        assertEquals(twilioConfig.getFromPhoneNumber(), fromPhoneNumber);
-        assertEquals(twilioConfig.getRecipient(), recipient);
+        assertEquals(twilioConfig.getTestFromNumber(), fromPhoneNumber);
+        assertEquals(twilioConfig.getTestToNumber(), recipient);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class TwilioConfigTest {
         assertEquals(configClone.getDomainId(), domainId);
         assertEquals(configClone.getAccountSid(), accountSid);
         assertEquals(configClone.getAuthToken(), authToken);
-        assertEquals(configClone.getFromPhoneNumber(), fromPhoneNumber);
-        assertEquals(configClone.getRecipient(), recipient);
+        assertEquals(configClone.getTestFromNumber(), fromPhoneNumber);
+        assertEquals(configClone.getTestToNumber(), recipient);
     }
 }

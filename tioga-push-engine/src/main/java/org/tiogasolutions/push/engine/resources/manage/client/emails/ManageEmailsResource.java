@@ -54,7 +54,7 @@ public class ManageEmailsResource {
     requests.addAll(pushRequestStore.getByClientAndType(domainProfile, SmtpEmailPush.PUSH_TYPE));
 
     EmailsModel model = new EmailsModel(account, domainProfile, requests);
-    return new Thymeleaf(executionManager.context().getSession(), ThymeleafViewFactory.MANAGE_API_EMAILS, model);
+    return new Thymeleaf(executionManager.getContext().getSession(), ThymeleafViewFactory.MANAGE_API_EMAILS, model);
   }
 
   @GET
@@ -66,7 +66,7 @@ public class ManageEmailsResource {
     CommonEmail email = pushRequest.getCommonEmail();
 
     EmailModel model = new EmailModel(account, domainProfile, pushRequest, email);
-    return new Thymeleaf(executionManager.context().getSession(), ThymeleafViewFactory.MANAGE_API_EMAIL, model);
+    return new Thymeleaf(executionManager.getContext().getSession(), ThymeleafViewFactory.MANAGE_API_EMAIL, model);
   }
 
   @POST
