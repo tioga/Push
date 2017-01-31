@@ -3,7 +3,7 @@ package org.tiogasolutions.push.pub.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PubTwilioSettings {
+public class PubTwilioConfig {
 
     private final String accountSid;
     private final String authToken;
@@ -12,10 +12,10 @@ public class PubTwilioSettings {
     private final String testToNumber;
 
     @JsonCreator
-    public PubTwilioSettings(@JsonProperty("accountSid") String accountSid,
-                             @JsonProperty("authToken") String authToken,
-                             @JsonProperty("testFromNumber") String testFromNumber,
-                             @JsonProperty("testToNumber") String testToNumber) {
+    public PubTwilioConfig(@JsonProperty("accountSid") String accountSid,
+                           @JsonProperty("authToken") String authToken,
+                           @JsonProperty("testFromNumber") String testFromNumber,
+                           @JsonProperty("testToNumber") String testToNumber) {
 
         this.accountSid = accountSid;
         this.authToken = authToken;

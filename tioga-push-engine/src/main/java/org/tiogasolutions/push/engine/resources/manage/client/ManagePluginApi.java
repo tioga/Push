@@ -16,9 +16,9 @@ import org.tiogasolutions.push.pub.common.PushType;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.Map;
 
 @MngtAuthentication
 public class ManagePluginApi {
@@ -41,9 +41,9 @@ public class ManagePluginApi {
   }
 
   @POST
-  public Response updateConfig(MultivaluedMap<String, String> formParams) throws Exception {
+  public Response updateConfig(Map<String, String> params) throws Exception {
     Plugin plugin = pluginManager.getPlugin(pushType);
-    plugin.updateConfig(domainProfile, formParams);
+    plugin.updateConfig(domainProfile, params);
     return redirect();
   }
 

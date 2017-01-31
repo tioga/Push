@@ -6,8 +6,8 @@ import org.tiogasolutions.push.kernel.requests.PushRequest;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushType;
 
-import javax.ws.rs.core.MultivaluedMap;
 import java.io.IOException;
+import java.util.Map;
 
 public interface Plugin {
 
@@ -21,7 +21,7 @@ public interface Plugin {
   String getAdminUi(DomainProfileEntity domainProfile) throws IOException;
   AbstractDelegate newDelegate(DomainProfileEntity domainProfile, PushRequest pushRequest, Push push);
   void test(DomainProfileEntity domainProfile) throws Exception;
-  void updateConfig(DomainProfileEntity domainProfile, MultivaluedMap<String, String> formParams);
+  void updateConfig(DomainProfileEntity domainProfile, Map<String, String> params);
   void deleteConfig(DomainProfileEntity domainProfile);
 
 }

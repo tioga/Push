@@ -23,31 +23,31 @@ import java.io.IOException;
 @Priority(Priorities.AUTHENTICATION)
 public class PushRequestFilter implements ContainerRequestFilter {
 
-  @Context
-  private UriInfo uriInfo;
+    @Context
+    private UriInfo uriInfo;
 
-  @Autowired
-  private AccountStore accountStore;
+    @Autowired
+    private AccountStore accountStore;
 
-  private final SessionStore sessionStore;
-  private final ExecutionManager executionManager;
+    private final SessionStore sessionStore;
+    private final ExecutionManager executionManager;
 
-  @Autowired
-  public PushRequestFilter(ExecutionManager executionManager, SessionStore sessionStore) {
-    this.sessionStore = sessionStore;
-    this.executionManager = executionManager;
-  }
-
-  @Override
-  public void filter(ContainerRequestContext requestContext) throws IOException {
-    ExecutionContext executionContext = executionManager.newContext(uriInfo);
-
-    Session session = sessionStore.getSession(requestContext);
-    executionContext.setSession(session);
-
-    if (session != null) {
-      Account account = accountStore.getByEmail(session.getEmailAddress());
-      executionContext.setAccount(account);
+    @Autowired
+    public PushRequestFilter(ExecutionManager executionManager, SessionStore sessionStore) {
+        this.sessionStore = sessionStore;
+        this.executionManager = executionManager;
     }
-  }
+
+    @Override
+    public void filter(ContainerRequestContext requestContext) throws IOException {
+        ExecutionContext executionContext = executionManager.newContext(uriInfo);
+
+        Session session = sessionStore.getSession(requestContext);
+        executionContext.setSession(session);
+
+        if (session != null) {
+            Account account = accountStore.getByEmail(session.getEmailAddress());
+            executionContext.setAccount(account);
+        }
+    }
 }

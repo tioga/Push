@@ -11,7 +11,7 @@ import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.push.pub.internal.ValidatableAction;
 import org.tiogasolutions.push.pub.internal.ValidationUtils;
 
-import javax.ws.rs.core.MultivaluedMap;
+import java.util.Map;
 
 public class UpdateXmppConfigAction implements ValidatableAction {
 
@@ -25,19 +25,19 @@ public class UpdateXmppConfigAction implements ValidatableAction {
   private String port;
   private String serviceName;
 
-  public UpdateXmppConfigAction(DomainProfileEntity domain, MultivaluedMap<String, String> formParams) {
+  public UpdateXmppConfigAction(DomainProfileEntity domain, Map<String, String> params) {
 
     this.domain = domain;
 
-    this.username = formParams.getFirst("username");
-    this.password = formParams.getFirst("password");
+    this.username = params.get("username");
+    this.password = params.get("password");
 
-    this.host = formParams.getFirst("host");
-    this.port = formParams.getFirst("port");
-    this.serviceName = formParams.getFirst("serviceName");
+    this.host = params.get("host");
+    this.port = params.get("port");
+    this.serviceName = params.get("serviceName");
 
-    this.testAddress = formParams.getFirst("testAddress");
-    this.recipientOverride = formParams.getFirst("recipientOverride");
+    this.testAddress = params.get("testToAddress");
+    this.recipientOverride = params.get("recipientOverride");
   }
 
   public UpdateXmppConfigAction(DomainProfileEntity domain, String username, String password, String host, String port, String serviceName, String testAddress, String recipientOverride) {

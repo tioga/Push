@@ -23,77 +23,86 @@ import java.security.Principal;
 @Priority(Priorities.AUTHENTICATION + 1)
 public class ApiAuthenticationFilter implements ContainerRequestFilter {
 
-  private final DomainStore domainStore;
-  private final ExecutionManager executionManager;
+    private final DomainStore domainStore;
+    private final ExecutionManager executionManager;
 
-  @Autowired
-  public ApiAuthenticationFilter(ExecutionManager executionManager, DomainStore domainStore) {
-    this.domainStore = domainStore;
-    this.executionManager = executionManager;
-  }
-
-  @Override
-  public void filter(ContainerRequestContext requestContext) throws IOException {
-    String authHeader = requestContext.getHeaderString("Authorization");
-
-    if (authHeader == null) {
-      throw new NotAuthorizedException("API");
-    } else if (authHeader.startsWith("Basic ") == false) {
-      throw new NotAuthorizedException("API");
-    } else {
-      authHeader = authHeader.substring(6);
+    @Autowired
+    public ApiAuthenticationFilter(ExecutionManager executionManager, DomainStore domainStore) {
+        this.domainStore = domainStore;
+        this.executionManager = executionManager;
     }
 
-    byte[] bytes = DatatypeConverter.parseBase64Binary(authHeader);
-    String basicAuth = new String(bytes, StandardCharsets.UTF_8);
+    @Override
+    public void filter(ContainerRequestContext requestContext) throws IOException {
+        String authHeader = requestContext.getHeaderString("Authorization");
 
-    int pos = basicAuth.indexOf(":");
+        if (authHeader == null) {
+            throw new NotAuthorizedException("API");
+        } else if (authHeader.startsWith("Basic ") == false) {
+            throw new NotAuthorizedException("API");
+        } else {
+            authHeader = authHeader.substring(6);
+        }
 
-    String domainKey;
-    String password;
+        byte[] bytes = DatatypeConverter.parseBase64Binary(authHeader);
+        String basicAuth = new String(bytes, StandardCharsets.UTF_8);
 
-    if (pos < 0) {
-      domainKey = basicAuth;
-      password = null;
+        int pos = basicAuth.indexOf(":");
 
-    } else {
-      domainKey = basicAuth.substring(0, pos);
-      password = basicAuth.substring(pos+1);
+        String domainKey;
+        String password;
+
+        if (pos < 0) {
+            domainKey = basicAuth;
+            password = null;
+
+        } else {
+            domainKey = basicAuth.substring(0, pos);
+            password = basicAuth.substring(pos + 1);
+        }
+
+        DomainProfileEntity domainProfile = domainStore.getByDomainKey(domainKey);
+        if (domainProfile == null) {
+            throw new NotAuthorizedException("API");
+        }
+
+        if (EqualsUtils.objectsNotEqual(password, domainProfile.getDomainPassword())) {
+            throw new NotAuthorizedException("API");
+        }
+
+        final SecurityContext securityContext = requestContext.getSecurityContext();
+        requestContext.setSecurityContext(new ApiSecurityContext(securityContext, domainProfile));
+
+        executionManager.getContext().setDomain(domainProfile);
     }
 
-    DomainProfileEntity domainProfile = domainStore.getByDomainKey(domainKey);
-    if (domainProfile == null) {
-      throw new NotAuthorizedException("API");
-    }
+    private class ApiSecurityContext implements SecurityContext {
+        private final boolean secure;
+        private final DomainProfileEntity domain;
 
-    if (EqualsUtils.objectsNotEqual(password, domainProfile.getDomainPassword())) {
-      throw new NotAuthorizedException("API");
-    }
+        public ApiSecurityContext(SecurityContext securityContext, DomainProfileEntity domain) {
+            this.domain = domain;
+            this.secure = securityContext.isSecure();
+        }
 
-    final SecurityContext securityContext = requestContext.getSecurityContext();
-    requestContext.setSecurityContext(new ApiSecurityContext(securityContext, domainProfile));
+        @Override
+        public boolean isUserInRole(String role) {
+            return false;
+        }
 
-    executionManager.getContext().setDomain(domainProfile);
-  }
+        @Override
+        public boolean isSecure() {
+            return secure;
+        }
 
-  private class ApiSecurityContext implements SecurityContext {
-    private final boolean secure;
-    private final DomainProfileEntity domain;
-    public ApiSecurityContext(SecurityContext securityContext, DomainProfileEntity domain) {
-      this.domain = domain;
-      this.secure = securityContext.isSecure();
+        @Override
+        public String getAuthenticationScheme() {
+            return "BASIC_AUTH";
+        }
+
+        @Override
+        public Principal getUserPrincipal() {
+            return domain::getDomainKey;
+        }
     }
-    @Override public boolean isUserInRole(String role) {
-      return false;
-    }
-    @Override public boolean isSecure() {
-      return secure;
-    }
-    @Override public String getAuthenticationScheme() {
-      return "BASIC_AUTH";
-    }
-    @Override public Principal getUserPrincipal() {
-      return domain::getDomainKey;
-    }
-  }
 }

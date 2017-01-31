@@ -17,9 +17,9 @@ import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.pub.SmtpEmailPush;
 import org.tiogasolutions.push.pub.common.Push;
 
-import javax.ws.rs.core.MultivaluedMap;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 import static org.tiogasolutions.dev.common.StringUtils.nullToString;
 
@@ -55,8 +55,8 @@ public class SmtpEmailPlugin extends PluginSupport {
     }
 
     @Override
-    public void updateConfig(DomainProfileEntity domainProfile, MultivaluedMap<String, String> formParams) {
-        UpdateSmtpEmailConfigAction action = new UpdateSmtpEmailConfigAction(domainProfile, formParams);
+    public void updateConfig(DomainProfileEntity domainProfile, Map<String, String> params) {
+        UpdateSmtpEmailConfigAction action = new UpdateSmtpEmailConfigAction(domainProfile, params);
 
         SmtpEmailConfig smtpEmailConfig = getConfig(domainProfile);
         if (smtpEmailConfig == null) {

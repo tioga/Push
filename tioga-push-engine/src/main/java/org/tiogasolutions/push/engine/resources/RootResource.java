@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.tiogasolutions.dev.common.EqualsUtils;
 import org.tiogasolutions.dev.common.exceptions.ApiException;
-import org.tiogasolutions.push.engine.resources.api.ApiResourceV3;
+import org.tiogasolutions.push.engine.resources.api.ApiResource;
 import org.tiogasolutions.push.engine.resources.manage.ManageResource;
 import org.tiogasolutions.push.engine.system.PubUtils;
 import org.tiogasolutions.push.engine.view.Thymeleaf;
@@ -160,8 +160,8 @@ public class RootResource extends RootResourceSupport {
     }
 
     @Path($api_v3)
-    public ApiResourceV3 getApiResourceV2() throws Exception {
-        return new ApiResourceV3(executionManager, newPubUtils());
+    public ApiResource getApiResourceV2() throws Exception {
+        return new ApiResource(executionManager, newPubUtils());
     }
 
     @Path($manage)

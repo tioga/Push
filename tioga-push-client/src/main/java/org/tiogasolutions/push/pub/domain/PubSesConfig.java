@@ -3,7 +3,7 @@ package org.tiogasolutions.push.pub.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PubSesSettings {
+public class PubSesConfig {
 
     private final String accessKeyId;
     private final String secretKey;
@@ -14,13 +14,13 @@ public class PubSesSettings {
     private final String recipientOverride;
 
     @JsonCreator
-    public PubSesSettings(@JsonProperty("accessKeyId") String accessKeyId,
-                          @JsonProperty("secretKey") String secretKey,
-                          @JsonProperty("endpoint") String endpoint,
+    public PubSesConfig(@JsonProperty("accessKeyId") String accessKeyId,
+                        @JsonProperty("secretKey") String secretKey,
+                        @JsonProperty("endpoint") String endpoint,
 
-                          @JsonProperty("testToAddress") String testToAddress,
-                          @JsonProperty("testFromAddress") String testFromAddress,
-                          @JsonProperty("recipientOverride") String recipientOverride) {
+                        @JsonProperty("testToAddress") String testToAddress,
+                        @JsonProperty("testFromAddress") String testFromAddress,
+                        @JsonProperty("recipientOverride") String recipientOverride) {
 
         this.accessKeyId = accessKeyId;
         this.secretKey = secretKey;

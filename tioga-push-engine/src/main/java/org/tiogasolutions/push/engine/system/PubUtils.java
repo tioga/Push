@@ -48,10 +48,10 @@ public class PubUtils {
     }
 
 
-    public PubDomain toPushDomain(HttpStatusCode statusCode, DomainProfileEntity domainProfile, PluginManager pluginManager) {
+    public PubConfig toConfig(HttpStatusCode statusCode, DomainProfileEntity domainProfile, PluginManager pluginManager) {
 
         SesEmailConfig sesEmailConfig = pluginManager.getPlugin(SesEmailPlugin.class).getConfig(domainProfile);
-        PubSesSettings sesSettings = (sesEmailConfig == null) ? null : new PubSesSettings(
+        PubSesConfig sesSettings = (sesEmailConfig == null) ? null : new PubSesConfig(
                 sesEmailConfig.getAccessKeyId(),
                 sesEmailConfig.getSecretKey(),
                 sesEmailConfig.getEndpoint(),
@@ -62,7 +62,7 @@ public class PubUtils {
         );
 
         SmtpEmailConfig smtpEmailConfig = pluginManager.getPlugin(SmtpEmailPlugin.class).getConfig(domainProfile);
-        PubSmtpSettings smtpSettings = (smtpEmailConfig == null) ? null : new PubSmtpSettings(
+        PubSmtpConfig smtpSettings = (smtpEmailConfig == null) ? null : new PubSmtpConfig(
                 smtpEmailConfig.getUsername(),
                 smtpEmailConfig.getPassword(),
 
@@ -76,7 +76,7 @@ public class PubUtils {
         );
 
         TwilioConfig twilioConfig = pluginManager.getPlugin(TwilioPlugin.class).getConfig(domainProfile);
-        PubTwilioSettings twilioSettings = (twilioConfig == null) ? null : new PubTwilioSettings(
+        PubTwilioConfig twilioSettings = (twilioConfig == null) ? null : new PubTwilioConfig(
                 twilioConfig.getAccountSid(),
                 twilioConfig.getAuthToken(),
                 twilioConfig.getTestFromNumber(),
@@ -84,7 +84,7 @@ public class PubUtils {
         );
 
         XmppConfig xmppConfig = pluginManager.getPlugin(XmppPlugin.class).getConfig(domainProfile);
-        PubXmppSettings xmppSettings = (xmppConfig == null) ? null : new PubXmppSettings(
+        PubXmppConfig xmppSettings = (xmppConfig == null) ? null : new PubXmppConfig(
                 xmppConfig.getUsername(),
                 xmppConfig.getPassword(),
                 xmppConfig.getHost(),
@@ -94,7 +94,7 @@ public class PubUtils {
                 xmppConfig.getRecipientOverride()
         );
 
-        return new PubDomain(
+        return new PubConfig(
                 toStatus(statusCode),
                 PubLinks.empty(),
 

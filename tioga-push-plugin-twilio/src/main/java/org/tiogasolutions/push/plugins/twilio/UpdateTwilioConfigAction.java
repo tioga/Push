@@ -5,7 +5,7 @@ import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.push.pub.internal.ValidatableAction;
 import org.tiogasolutions.push.pub.internal.ValidationUtils;
 
-import javax.ws.rs.core.MultivaluedMap;
+import java.util.Map;
 
 public class UpdateTwilioConfigAction implements ValidatableAction {
 
@@ -15,15 +15,15 @@ public class UpdateTwilioConfigAction implements ValidatableAction {
     private final String fromPhoneNumber;
     private final String recipient;
 
-    public UpdateTwilioConfigAction(DomainProfileEntity domain, MultivaluedMap<String, String> formParams) {
+    public UpdateTwilioConfigAction(DomainProfileEntity domain, Map<String, String> params) {
 
         this.domain = domain;
 
-        this.accountSid = formParams.getFirst("accountSid");
-        this.authToken = formParams.getFirst("authToken");
+        this.accountSid = params.get("accountSid");
+        this.authToken = params.get("authToken");
 
-        this.fromPhoneNumber = formParams.getFirst("fromPhoneNumber");
-        this.recipient = formParams.getFirst("recipient");
+        this.fromPhoneNumber = params.get("fromPhoneNumber");
+        this.recipient = params.get("recipient");
     }
 
     public UpdateTwilioConfigAction(DomainProfileEntity domain, String accountSid, String authToken, String fromPhoneNumber, String recipient) {

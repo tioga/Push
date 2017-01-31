@@ -3,7 +3,7 @@ package org.tiogasolutions.push.pub.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PubSmtpSettings {
+public class PubSmtpConfig {
 
     private final String username;
     private final String password;
@@ -17,14 +17,14 @@ public class PubSmtpSettings {
     private final String recipientOverride;
 
     @JsonCreator
-    public PubSmtpSettings(@JsonProperty("username") String username,
-                           @JsonProperty("password") String password,
-                           @JsonProperty("authType") SmtpAuthType authType,
-                           @JsonProperty("port") String port,
-                           @JsonProperty("serverName") String serverName,
-                           @JsonProperty("testToAddress") String testToAddress,
-                           @JsonProperty("testFromAddress") String testFromAddress,
-                           @JsonProperty("recipientOverride") String recipientOverride) {
+    public PubSmtpConfig(@JsonProperty("username") String username,
+                         @JsonProperty("password") String password,
+                         @JsonProperty("authType") SmtpAuthType authType,
+                         @JsonProperty("port") String port,
+                         @JsonProperty("serverName") String serverName,
+                         @JsonProperty("testToAddress") String testToAddress,
+                         @JsonProperty("testFromAddress") String testFromAddress,
+                         @JsonProperty("recipientOverride") String recipientOverride) {
 
         this.username = username;
         this.password = password;

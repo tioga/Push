@@ -6,14 +6,14 @@
 
 package org.tiogasolutions.push.plugins.smtp;
 
+import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.pub.domain.SmtpAuthType;
-import org.tiogasolutions.dev.common.StringUtils;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.push.pub.internal.ValidatableAction;
 import org.tiogasolutions.push.pub.internal.ValidationUtils;
 
-import javax.ws.rs.core.MultivaluedMap;
+import java.util.Map;
 
 public class UpdateSmtpEmailConfigAction implements ValidatableAction {
 
@@ -30,26 +30,26 @@ public class UpdateSmtpEmailConfigAction implements ValidatableAction {
   private String testToAddress;
   private String testFromAddress;
 
-  public UpdateSmtpEmailConfigAction(DomainProfileEntity domain, MultivaluedMap<String, String> formParams) {
+  public UpdateSmtpEmailConfigAction(DomainProfileEntity domain, Map<String, String> params) {
 
     this.domain = domain;
 
-    this.userName = formParams.getFirst("userName");
-    this.password = formParams.getFirst("password");
+    this.userName = params.get("userName");
+    this.password = params.get("password");
 
-    this.authType = (formParams.containsKey("authType") == false) ? null : SmtpAuthType.valueOf(formParams.getFirst("authType"));
-    this.serverName = formParams.getFirst("serverName");
+    this.authType = (params.containsKey("authType") == false) ? null : SmtpAuthType.valueOf(params.get("authType"));
+    this.serverName = params.get("serverName");
 
-    String portNumber = formParams.getFirst("portNumber");
+    String portNumber = params.get("portNumber");
     if (StringUtils.isBlank(portNumber) && authType != null) {
       this.portNumber = authType.getDefaultPort();
     } else {
       this.portNumber = portNumber;
     }
 
-    this.testToAddress = formParams.getFirst("testToAddress");
-    this.testFromAddress = formParams.getFirst("testFromAddress");
-    this.recipientOverride = formParams.getFirst("recipientOverride");
+    this.testToAddress = params.get("testToAddress");
+    this.testFromAddress = params.get("testFromAddress");
+    this.recipientOverride = params.get("recipientOverride");
   }
 
   public UpdateSmtpEmailConfigAction(DomainProfileEntity domain, String userName, String password, SmtpAuthType authType, String serverName, String portNumber, String testToAddress, String testFromAddress, String recipientOverride) {

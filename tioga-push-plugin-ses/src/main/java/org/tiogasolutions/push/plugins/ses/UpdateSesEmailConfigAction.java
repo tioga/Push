@@ -11,7 +11,7 @@ import org.tiogasolutions.push.pub.internal.RequestErrors;
 import org.tiogasolutions.push.pub.internal.ValidatableAction;
 import org.tiogasolutions.push.pub.internal.ValidationUtils;
 
-import javax.ws.rs.core.MultivaluedMap;
+import java.util.Map;
 
 public class UpdateSesEmailConfigAction implements ValidatableAction {
 
@@ -24,17 +24,17 @@ public class UpdateSesEmailConfigAction implements ValidatableAction {
   private String testToAddress;
   private String testFromAddress;
 
-  public UpdateSesEmailConfigAction(DomainProfileEntity domain, MultivaluedMap<String, String> formParams) {
+  public UpdateSesEmailConfigAction(DomainProfileEntity domain, Map<String, String> params) {
 
     this.domain = domain;
 
-    this.accessKeyId = formParams.getFirst("accessKeyId");
-    this.secretKey = formParams.getFirst("secretKey");
-    this.endpoint = formParams.getFirst("endpoint");
+    this.accessKeyId = params.get("accessKeyId");
+    this.secretKey = params.get("secretKey");
+    this.endpoint = params.get("endpoint");
 
-    this.testToAddress = formParams.getFirst("testToAddress");
-    this.testFromAddress = formParams.getFirst("testFromAddress");
-    this.recipientOverride = formParams.getFirst("recipientOverride");
+    this.testToAddress = params.get("testToAddress");
+    this.testFromAddress = params.get("testFromAddress");
+    this.recipientOverride = params.get("recipientOverride");
   }
 
   public UpdateSesEmailConfigAction(DomainProfileEntity domain, String accessKeyId, String secretKey, String endpoint, String testToAddress, String testFromAddress, String recipientOverride) {

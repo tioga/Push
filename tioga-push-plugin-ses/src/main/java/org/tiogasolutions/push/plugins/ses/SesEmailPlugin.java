@@ -17,9 +17,9 @@ import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.pub.SesEmailPush;
 import org.tiogasolutions.push.pub.common.Push;
 
-import javax.ws.rs.core.MultivaluedMap;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 import static org.tiogasolutions.dev.common.StringUtils.nullToString;
 
@@ -63,8 +63,8 @@ public class SesEmailPlugin extends PluginSupport {
     }
 
     @Override
-    public void updateConfig(DomainProfileEntity domainProfile, MultivaluedMap<String, String> formParams) {
-        UpdateSesEmailConfigAction action = new UpdateSesEmailConfigAction(domainProfile, formParams);
+    public void updateConfig(DomainProfileEntity domainProfile, Map<String, String> params) {
+        UpdateSesEmailConfigAction action = new UpdateSesEmailConfigAction(domainProfile, params);
 
         SesEmailConfig sesEmailConfig = getConfig(domainProfile);
         if (sesEmailConfig == null) {

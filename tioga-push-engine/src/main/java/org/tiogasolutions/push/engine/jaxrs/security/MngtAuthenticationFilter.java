@@ -25,62 +25,70 @@ import java.security.Principal;
 @Priority(Priorities.AUTHENTICATION + 1)
 public class MngtAuthenticationFilter implements ContainerRequestFilter {
 
-  private final SessionStore sessionStore;
-  private final AccountStore accountStore;
-  private final ExecutionManager executionManager;
+    private final SessionStore sessionStore;
+    private final AccountStore accountStore;
+    private final ExecutionManager executionManager;
 
-  @Autowired
-  public MngtAuthenticationFilter(ExecutionManager executionManager, SessionStore sessionStore, AccountStore accountStore) {
-    this.sessionStore = sessionStore;
-    this.accountStore = accountStore;
-    this.executionManager = executionManager;
-  }
-
-  @Override
-  public void filter(ContainerRequestContext requestContext) throws IOException {
-
-    try {
-      Session session = sessionStore.getSession(requestContext);
-      if (session == null) {
-        throw ApiException.unauthorized();
-      }
-
-      String emailAddress = session.getEmailAddress();
-      Account account = accountStore.getByEmail(emailAddress);
-
-      if (account == null) {
-        throw ApiException.unauthorized();
-      }
-
-      final SecurityContext securityContext = requestContext.getSecurityContext();
-      requestContext.setSecurityContext(new MngtSecurityContext(securityContext, account));
-      executionManager.getContext().setAccount(account);
-
-    } catch (ApiException e) {
-      URI uri = requestContext.getUriInfo().getBaseUriBuilder().queryParam("r", RootResource.REASON_CODE_UNAUTHORIZED).build();
-      Response response = Response.seeOther(uri).build();
-      requestContext.abortWith(response);
+    @Autowired
+    public MngtAuthenticationFilter(ExecutionManager executionManager, SessionStore sessionStore, AccountStore accountStore) {
+        this.sessionStore = sessionStore;
+        this.accountStore = accountStore;
+        this.executionManager = executionManager;
     }
-  }
 
-  private static class MngtSecurityContext implements SecurityContext {
-    private final boolean secure;
-    private final Account account;
-    public MngtSecurityContext(SecurityContext securityContext, Account account) {
-      this.account = account;
-      this.secure = securityContext.isSecure();
+    @Override
+    public void filter(ContainerRequestContext requestContext) throws IOException {
+        try {
+            Session session = sessionStore.getSession(requestContext);
+            if (session == null) {
+                throw ApiException.unauthorized();
+            }
+
+            String emailAddress = session.getEmailAddress();
+            Account account = accountStore.getByEmail(emailAddress);
+
+            if (account == null) {
+                throw ApiException.unauthorized();
+            }
+
+            final SecurityContext securityContext = requestContext.getSecurityContext();
+            requestContext.setSecurityContext(new MngtSecurityContext(securityContext, account));
+            executionManager.getContext().setAccount(account);
+
+        } catch (ApiException e) {
+            URI uri = requestContext.getUriInfo().getBaseUriBuilder().queryParam("r", RootResource.REASON_CODE_UNAUTHORIZED).build();
+            Response response = Response.seeOther(uri).build();
+            requestContext.abortWith(response);
+        }
     }
-    @Override public boolean isUserInRole(String role) {
-      return false;
+
+    private static class MngtSecurityContext implements SecurityContext {
+        private final boolean secure;
+        private final Account account;
+
+        public MngtSecurityContext(SecurityContext securityContext, Account account) {
+            this.account = account;
+            this.secure = securityContext.isSecure();
+        }
+
+        @Override
+        public boolean isUserInRole(String role) {
+            return false;
+        }
+
+        @Override
+        public boolean isSecure() {
+            return secure;
+        }
+
+        @Override
+        public String getAuthenticationScheme() {
+            return "FORM_AUTH";
+        }
+
+        @Override
+        public Principal getUserPrincipal() {
+            return account::getEmailAddress;
+        }
     }
-    @Override public boolean isSecure() {
-      return secure;
-    }
-    @Override public String getAuthenticationScheme() {
-      return "FORM_AUTH";
-    }
-    @Override public Principal getUserPrincipal() {
-      return account::getEmailAddress;
-    }
-  }
 }

@@ -13,38 +13,44 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.NewCookie;
+import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.util.Collections;
 
+@Provider
 @PreMatching
 @Priority(Priorities.AUTHENTICATION)
 public class PushResponseFilter implements ContainerResponseFilter {
 
-  private final SessionStore sessionStore;
-  private final ExecutionManager executionManager;
+    private final SessionStore sessionStore;
+    private final ExecutionManager executionManager;
 
-  @Autowired
-  public PushResponseFilter(ExecutionManager executionManager, SessionStore sessionStore) {
-    this.sessionStore = sessionStore;
-    this.executionManager = executionManager;
-  }
-
-  @Override
-  public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-    responseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
-    responseContext.getHeaders().add("X-UA-Compatible", "IE=Edge");
-    responseContext.getHeaders().add("p3p", "CP=\"Push server does not have a P3P policy. Learn why here: https://www.TiogaSolutions.com/push/static/p3p.html\"");
-
-    Session session = executionManager.getContext().getSession();
-    boolean valid = sessionStore.isValid(session);
-
-    if (session != null && valid) {
-      session.renew();
-      NewCookie cookie = SessionStore.toCookie(requestContext.getUriInfo(), session);
-      responseContext.getHeaders().put(HttpHeaders.SET_COOKIE, Collections.singletonList(cookie));
+    @Autowired
+    public PushResponseFilter(ExecutionManager executionManager, SessionStore sessionStore) {
+        this.sessionStore = sessionStore;
+        this.executionManager = executionManager;
     }
 
-    // Clear everything when we are all done.
-    executionManager.removeExecutionContext();
-  }
+    @Override
+    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
+        responseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
+        responseContext.getHeaders().add("Access-Control-Allow-Headers", "Accept, Content-Type, Authorization, Access-Control-Allow-Origin");
+        responseContext.getHeaders().add("Access-Control-Allow-Methods", "GET, DELETE, PUT, POST");
+        responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");
+
+        responseContext.getHeaders().add("X-UA-Compatible", "IE=Edge");
+        responseContext.getHeaders().add("p3p", "CP=\"Push server does not have a P3P policy. Learn why here: https://www.TiogaSolutions.com/push/static/p3p.html\"");
+
+        Session session = executionManager.getContext().getSession();
+        boolean valid = sessionStore.isValid(session);
+
+        if (session != null && valid) {
+            session.renew();
+            NewCookie cookie = SessionStore.toCookie(requestContext.getUriInfo(), session);
+            responseContext.getHeaders().put(HttpHeaders.SET_COOKIE, Collections.singletonList(cookie));
+        }
+
+        // Clear everything when we are all done.
+        executionManager.removeExecutionContext();
+    }
 }

@@ -16,9 +16,9 @@ import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.pub.XmppPush;
 import org.tiogasolutions.push.pub.common.Push;
 
-import javax.ws.rs.core.MultivaluedMap;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 import static org.tiogasolutions.dev.common.StringUtils.*;
 
@@ -63,8 +63,8 @@ public class XmppPlugin extends PluginSupport {
   }
 
   @Override
-  public void updateConfig(DomainProfileEntity domainProfile, MultivaluedMap<String, String> formParams) {
-    UpdateXmppConfigAction action = new UpdateXmppConfigAction(domainProfile, formParams);
+  public void updateConfig(DomainProfileEntity domainProfile, Map<String, String> params) {
+    UpdateXmppConfigAction action = new UpdateXmppConfigAction(domainProfile, params);
 
     XmppConfig xmppConfig = getConfig(domainProfile);
     if (xmppConfig == null) {

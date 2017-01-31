@@ -24,6 +24,5 @@
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-classic:1.1.7" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:log4j-over-slf4j:1.7.20" level="project" />
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-core:1.1.7" level="project" />
-    <orderEntry type="library" name="Gradle: org.springframework:spring-context:4.3.2.RELEASE" level="project" />
   </component>
 </module>

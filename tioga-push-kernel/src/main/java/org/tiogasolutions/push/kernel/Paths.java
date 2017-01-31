@@ -9,7 +9,7 @@ public abstract class Paths {
     public static final String $manage = "manage";
     public static final String $healthCheck = "health-check";
 
-    public static final String $client = "client";
+    public static final String $config = "config";
     public static final String $domains = "domains";
 
     public static final String $callback = "callback";

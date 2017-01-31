@@ -3,7 +3,7 @@ package org.tiogasolutions.push.pub.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PubXmppSettings {
+public class PubXmppConfig {
 
     private final String username;
     private final String password;
@@ -16,13 +16,13 @@ public class PubXmppSettings {
     private final String recipientOverride;
 
     @JsonCreator
-    public PubXmppSettings(@JsonProperty("username") String username,
-                           @JsonProperty("password") String password,
-                           @JsonProperty("host") String host,
-                           @JsonProperty("port") String port,
-                           @JsonProperty("service") String serviceName,
-                           @JsonProperty("testToAddress") String testToAddress,
-                           @JsonProperty("recipientOverride") String recipientOverride) {
+    public PubXmppConfig(@JsonProperty("username") String username,
+                         @JsonProperty("password") String password,
+                         @JsonProperty("host") String host,
+                         @JsonProperty("port") String port,
+                         @JsonProperty("service") String serviceName,
+                         @JsonProperty("testToAddress") String testToAddress,
+                         @JsonProperty("recipientOverride") String recipientOverride) {
 
         this.username = username;
         this.password = password;

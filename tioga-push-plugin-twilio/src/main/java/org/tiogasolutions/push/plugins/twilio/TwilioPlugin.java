@@ -23,9 +23,9 @@ import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.pub.TwilioSmsPush;
 import org.tiogasolutions.push.pub.common.Push;
 
-import javax.ws.rs.core.MultivaluedMap;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 import static org.tiogasolutions.dev.common.StringUtils.nullToString;
 
@@ -69,8 +69,8 @@ public class TwilioPlugin extends PluginSupport {
     }
 
     @Override
-    public void updateConfig(DomainProfileEntity domainProfile, MultivaluedMap<String, String> formParams) {
-        UpdateTwilioConfigAction action = new UpdateTwilioConfigAction(domainProfile, formParams);
+    public void updateConfig(DomainProfileEntity domainProfile, Map<String, String> params) {
+        UpdateTwilioConfigAction action = new UpdateTwilioConfigAction(domainProfile, params);
 
         TwilioConfig twilioConfig = getConfig(domainProfile);
         if (twilioConfig == null) {
