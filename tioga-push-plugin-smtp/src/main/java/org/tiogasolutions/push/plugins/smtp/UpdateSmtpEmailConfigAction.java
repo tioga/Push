@@ -19,7 +19,7 @@ public class UpdateSmtpEmailConfigAction implements ValidatableAction {
 
   private final DomainProfileEntity domain;
 
-  private final String userName;
+  private final String username;
   private final String password;
 
   private final SmtpAuthType authType;
@@ -34,7 +34,7 @@ public class UpdateSmtpEmailConfigAction implements ValidatableAction {
 
     this.domain = domain;
 
-    this.userName = params.get("userName");
+    this.username = params.get("username");
     this.password = params.get("password");
 
     this.authType = (params.containsKey("authType") == false) ? null : SmtpAuthType.valueOf(params.get("authType"));
@@ -52,11 +52,11 @@ public class UpdateSmtpEmailConfigAction implements ValidatableAction {
     this.recipientOverride = params.get("recipientOverride");
   }
 
-  public UpdateSmtpEmailConfigAction(DomainProfileEntity domain, String userName, String password, SmtpAuthType authType, String serverName, String portNumber, String testToAddress, String testFromAddress, String recipientOverride) {
+  public UpdateSmtpEmailConfigAction(DomainProfileEntity domain, String username, String password, SmtpAuthType authType, String serverName, String portNumber, String testToAddress, String testFromAddress, String recipientOverride) {
 
     this.domain = domain;
 
-    this.userName = userName;
+    this.username = username;
     this.password = password;
 
     this.authType = authType;
@@ -78,7 +78,7 @@ public class UpdateSmtpEmailConfigAction implements ValidatableAction {
 
     ValidationUtils.requireValue(errors, domain, "The domain must be specified.");
 
-    ValidationUtils.requireValue(errors, userName, "The user's name must be specified.");
+    ValidationUtils.requireValue(errors, username, "The user's name must be specified.");
     ValidationUtils.requireValue(errors, password, "The password must be specified.");
     ValidationUtils.requireValue(errors, authType, "The authentication type must be specified.");
     ValidationUtils.requireValue(errors, serverName, "The server's name must be specified.");
@@ -93,8 +93,8 @@ public class UpdateSmtpEmailConfigAction implements ValidatableAction {
     return domain;
   }
 
-  public String getUserName() {
-    return userName;
+  public String getUsername() {
+    return username;
   }
 
   public String getPassword() {

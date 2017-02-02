@@ -98,7 +98,7 @@ public class TwilioPlugin extends PluginSupport {
         TwilioSmsPush push = TwilioSmsPush.newPush(
                 config.getTestFromNumber(), config.getTestToNumber(),
                 String.format("Twilio test message from Cosmic Push sent at %s.", when),
-                null, BeanUtils.toMap("smtp-test:true"));
+                null, BeanUtils.toMap("twilio-test:true"));
 
         PushRequest pushRequest = new PushRequest(Push.CURRENT_API_VERSION, domainProfile, push);
         pushRequestStore.create(pushRequest);

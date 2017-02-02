@@ -82,7 +82,7 @@ public class SmtpEmailConfig implements PluginConfig, Serializable {
         this.domainId = action.getDomain().getDomainId();
         this.configId = SmtpEmailConfigStore.toDocumentId(action.getDomain());
 
-        this.username = action.getUserName();
+        this.username = action.getUsername();
         this.password = action.getPassword();
 
         this.authType = action.getAuthType();

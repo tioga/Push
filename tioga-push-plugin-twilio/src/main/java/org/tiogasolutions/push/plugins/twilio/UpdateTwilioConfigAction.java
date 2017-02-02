@@ -12,8 +12,8 @@ public class UpdateTwilioConfigAction implements ValidatableAction {
     private final DomainProfileEntity domain;
     private final String accountSid;
     private final String authToken;
-    private final String fromPhoneNumber;
-    private final String recipient;
+    private final String testFromNumber;
+    private final String testToNumber;
 
     public UpdateTwilioConfigAction(DomainProfileEntity domain, Map<String, String> params) {
 
@@ -22,16 +22,16 @@ public class UpdateTwilioConfigAction implements ValidatableAction {
         this.accountSid = params.get("accountSid");
         this.authToken = params.get("authToken");
 
-        this.fromPhoneNumber = params.get("fromPhoneNumber");
-        this.recipient = params.get("recipient");
+        this.testFromNumber = params.get("testFromNumber");
+        this.testToNumber = params.get("testToNumber");
     }
 
-    public UpdateTwilioConfigAction(DomainProfileEntity domain, String accountSid, String authToken, String fromPhoneNumber, String recipient) {
+    public UpdateTwilioConfigAction(DomainProfileEntity domain, String accountSid, String authToken, String testFromNumber, String testToNumber) {
         this.domain = domain;
         this.accountSid = accountSid;
         this.authToken = authToken;
-        this.fromPhoneNumber = fromPhoneNumber;
-        this.recipient = recipient;
+        this.testFromNumber = testFromNumber;
+        this.testToNumber = testToNumber;
     }
 
 
@@ -40,11 +40,10 @@ public class UpdateTwilioConfigAction implements ValidatableAction {
         ValidationUtils.requireValue(errors, accountSid, "The Twilio account SID must be specified.");
         ValidationUtils.requireValue(errors, authToken, "The Twilio Authentication Token must be specified.");
 
-        ValidationUtils.requireValue(errors, fromPhoneNumber, "The Twilio Originating Phone Number must be specified.");
-        ValidationUtils.requireValue(errors, recipient, "The Twilio SMS Recipient must be specified.");
+        ValidationUtils.requireValue(errors, testFromNumber, "The Twilio Originating Phone Number must be specified.");
+        ValidationUtils.requireValue(errors, testToNumber, "The Twilio SMS Recipient must be specified.");
         return errors;
     }
-
 
     public DomainProfileEntity getDomain() {
         return domain;
@@ -58,11 +57,11 @@ public class UpdateTwilioConfigAction implements ValidatableAction {
         return authToken;
     }
 
-    public String getFromPhoneNumber() {
-        return fromPhoneNumber;
+    public String getTestFromNumber() {
+        return testFromNumber;
     }
 
-    public String getRecipient() {
-        return recipient;
+    public String getTestToNumber() {
+        return testToNumber;
     }
 }

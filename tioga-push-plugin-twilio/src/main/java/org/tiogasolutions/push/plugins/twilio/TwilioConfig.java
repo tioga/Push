@@ -65,8 +65,8 @@ public class TwilioConfig implements PluginConfig, Serializable {
 
     this.accountSid = configAction.getAccountSid();
     this.authToken = configAction.getAuthToken();
-    this.testFromNumber = configAction.getFromPhoneNumber();
-    this.testToNumber = configAction.getRecipient();
+    this.testFromNumber = configAction.getTestFromNumber();
+    this.testToNumber = configAction.getTestToNumber();
 
     return this;
   }
