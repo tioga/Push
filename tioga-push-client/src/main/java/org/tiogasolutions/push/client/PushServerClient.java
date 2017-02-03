@@ -15,9 +15,8 @@
  */
 package org.tiogasolutions.push.client;
 
-import org.tiogasolutions.push.pub.common.PushResponse;
 import org.tiogasolutions.push.pub.common.Push;
-import org.tiogasolutions.push.pub.domain.PubConfig;
+import org.tiogasolutions.push.pub.common.PushResponse;
 
 public interface PushServerClient {
 
@@ -35,7 +34,4 @@ public interface PushServerClient {
    * @return the response from the push server.
    */
   public PushResponse send(Push push);
-
-  public PubConfig getSettings();
-
 }

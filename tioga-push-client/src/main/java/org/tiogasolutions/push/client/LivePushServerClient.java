@@ -22,7 +22,6 @@ import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.pub.common.PingPush;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushResponse;
-import org.tiogasolutions.push.pub.domain.PubConfig;
 import org.tiogasolutions.push.pub.internal.RequestErrors;
 
 public class LivePushServerClient implements PushServerClient {
@@ -60,10 +59,5 @@ public class LivePushServerClient implements PushServerClient {
     public PushResponse send(Push push) {
         push.validate(new RequestErrors()).assertNoErrors();
         return getClient().post(PushResponse.class, "/pushes", push);
-    }
-
-    @Override
-    public PubConfig getSettings() {
-        return getClient().get(PubConfig.class, "/settings");
     }
 }

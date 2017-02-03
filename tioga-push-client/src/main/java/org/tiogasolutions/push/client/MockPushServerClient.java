@@ -15,13 +15,11 @@
  */
 package org.tiogasolutions.push.client;
 
-import org.tiogasolutions.dev.common.exceptions.ApiException;
+import org.tiogasolutions.dev.common.DateUtils;
+import org.tiogasolutions.dev.common.id.uuid.TimeUuid;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushResponse;
 import org.tiogasolutions.push.pub.common.RequestStatus;
-import org.tiogasolutions.dev.common.DateUtils;
-import org.tiogasolutions.dev.common.id.uuid.TimeUuid;
-import org.tiogasolutions.push.pub.domain.PubConfig;
 
 import java.util.Collections;
 
@@ -50,8 +48,7 @@ public class MockPushServerClient implements PushServerClient {
     );
   }
 
-  @Override
-  public PubConfig getSettings() {
-    throw ApiException.notImplemented();
+  public Push getLastPush() {
+    return lastPush;
   }
 }
