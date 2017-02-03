@@ -105,7 +105,7 @@ public class PushRequestTest extends AbstractSpringTest {
     String json = translator.toJson(oldPushRequest);
 
     String expected = String.format("{\n" +
-        "  \"apiVersion\" : 2,\n" +
+        "  \"apiVersion\" : 3,\n" +
         "  \"domainId\" : \"%s\",\n" +
         "  \"domainKey\" : \"some-key\",\n" +
         "  \"createdAt\" : \"%s\",\n" +
@@ -160,7 +160,7 @@ public class PushRequestTest extends AbstractSpringTest {
     String json = translator.toJson(oldPushRequest);
 
     String expected = String.format("{\n" +
-        "  \"apiVersion\" : 2,\n" +
+        "  \"apiVersion\" : 3,\n" +
         "  \"domainId\" : \"%s\",\n" +
         "  \"domainKey\" : \"some-key\",\n" +
         "  \"createdAt\" : \"%s\",\n" +
@@ -213,7 +213,7 @@ public class PushRequestTest extends AbstractSpringTest {
     String json = translator.toJson(oldPushRequest);
 
     String expected = String.format("{\n" +
-        "  \"apiVersion\" : 2,\n" +
+        "  \"apiVersion\" : 3,\n" +
         "  \"domainId\" : \"%s\",\n" +
         "  \"domainKey\" : \"some-key\",\n" +
         "  \"createdAt\" : \"%s\",\n" +
