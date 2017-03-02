@@ -25,7 +25,7 @@ public class TwilioSpringTestConfig {
     config.setMasterDatabaseName("test-push");
 
     config.setDomainUrl("http://localhost:5984");
-    config.setDomainUserName("test-user");
+    config.setDomainUsername("test-user");
     config.setDomainPassword("test-user");
     config.setDomainDatabasePrefix("test-push-");
 

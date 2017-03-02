@@ -105,7 +105,7 @@ public class PushHostedSpringConfig {
         config.setMasterDatabaseName(masterDatabaseName);
 
         config.setDomainUrl(domainUrl);
-        config.setDomainUserName(domainUsername);
+        config.setDomainUsername(domainUsername);
         config.setDomainPassword(domainPassword);
         config.setDomainDatabasePrefix(domainDatabasePrefix);
 

@@ -15,34 +15,50 @@ import org.tiogasolutions.push.plugins.xmpp.XmppPlugin;
 
 import java.util.Arrays;
 
+import static org.tiogasolutions.dev.common.StringUtils.isNotBlank;
+
 @Profile("test")
 @Configuration
 public class EngineSpringTestConfig {
 
-  @Bean
-  public CouchServersConfig couchServersConfig() {
-    CouchServersConfig config = new CouchServersConfig();
+    @Bean
+    public CouchServersConfig couchServersConfig() {
+        CouchServersConfig config = new CouchServersConfig();
 
-    config.setMasterUrl("http://localhost:5984");
-    config.setMasterUsername("test-user");
-    config.setMasterPassword("test-user");
-    config.setMasterDatabaseName("test-push");
+        String couchUrl = "http://127.0.0.1:5984";
+        String username = "test-user";
+        String password = "test-user";
 
-    config.setDomainUrl("http://localhost:5984");
-    config.setDomainUserName("test-user");
-    config.setDomainPassword("test-user");
-    config.setDomainDatabasePrefix("test-push-");
+        if (isNotBlank(System.getenv("awsCouchUrl"))) {
+            couchUrl = System.getenv("awsCouchUrl");
+        }
+        if (isNotBlank(System.getenv("awsCouchUsername"))) {
+            username = System.getenv("awsCouchUsername");
+        }
+        if (isNotBlank(System.getenv("awsCouchPassword"))) {
+            password = System.getenv("awsCouchPassword");
+        }
 
-    return config;
-  }
+        config.setMasterUrl(couchUrl);
+        config.setMasterUsername(username);
+        config.setMasterPassword(password);
+        config.setMasterDatabaseName("test-push");
 
-  @Bean
-  public PluginManager pluginManager(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore) {
-    return new PluginManager(Arrays.asList(
-      new XmppPlugin(executionManager, objectMapper, pushRequestStore),
-      new SesEmailPlugin(executionManager, objectMapper, pushRequestStore),
-      new SmtpEmailPlugin(executionManager, objectMapper, pushRequestStore),
-      new TwilioPlugin(executionManager, objectMapper, pushRequestStore)
-    ));
-  }
+        config.setDomainUrl(couchUrl);
+        config.setDomainUsername(username);
+        config.setDomainPassword(password);
+        config.setDomainDatabasePrefix("test-push-");
+
+        return config;
+    }
+
+    @Bean
+    public PluginManager pluginManager(ExecutionManager executionManager, PushObjectMapper objectMapper, PushRequestStore pushRequestStore) {
+        return new PluginManager(Arrays.asList(
+                new XmppPlugin(executionManager, objectMapper, pushRequestStore),
+                new SesEmailPlugin(executionManager, objectMapper, pushRequestStore),
+                new SmtpEmailPlugin(executionManager, objectMapper, pushRequestStore),
+                new TwilioPlugin(executionManager, objectMapper, pushRequestStore)
+        ));
+    }
 }

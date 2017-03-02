@@ -59,7 +59,7 @@ public class CouchServersConfig {
         return domainUsername;
     }
 
-    public void setDomainUserName(String domainUsername) {
+    public void setDomainUsername(String domainUsername) {
         this.domainUsername = domainUsername;
     }
 
