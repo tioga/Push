@@ -10,6 +10,7 @@ import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.kernel.system.PluginManager;
 
 import static java.util.Collections.singletonList;
+import static org.tiogasolutions.dev.common.StringUtils.isNotBlank;
 
 @Profile("test")
 @Configuration
@@ -19,14 +20,28 @@ public class XmppSpringTestConfig {
     public CouchServersConfig couchServersConfig() {
         CouchServersConfig config = new CouchServersConfig();
 
-        config.setMasterUrl("http://localhost:5984");
-        config.setMasterUsername("test-user");
-        config.setMasterPassword("test-user");
+        String couchUrl = "http://127.0.0.1:5984";
+        String username = "test-user";
+        String password = "test-user";
+
+        if (isNotBlank(System.getenv("awsCouchUrl"))) {
+            couchUrl = System.getenv("awsCouchUrl");
+        }
+        if (isNotBlank(System.getenv("awsCouchUsername"))) {
+            username = System.getenv("awsCouchUsername");
+        }
+        if (isNotBlank(System.getenv("awsCouchPassword"))) {
+            password = System.getenv("awsCouchPassword");
+        }
+
+        config.setMasterUrl(couchUrl);
+        config.setMasterUsername(username);
+        config.setMasterPassword(password);
         config.setMasterDatabaseName("test-push");
 
-        config.setDomainUrl("http://localhost:5984");
-        config.setDomainUsername("test-user");
-        config.setDomainPassword("test-user");
+        config.setDomainUrl(couchUrl);
+        config.setDomainUsername(username);
+        config.setDomainPassword(password);
         config.setDomainDatabasePrefix("test-push-");
 
         return config;
