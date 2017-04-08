@@ -1,6 +1,7 @@
 package org.tiogasolutions.push.engine.jaxrs.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.tiogasolutions.push.kernel.config.SystemConfiguration;
 import org.tiogasolutions.push.kernel.execution.ExecutionManager;
 import org.tiogasolutions.push.kernel.system.Session;
 import org.tiogasolutions.push.kernel.system.SessionStore;
@@ -26,6 +27,9 @@ public class PushResponseFilter implements ContainerResponseFilter {
     private final ExecutionManager executionManager;
 
     @Autowired
+    private SystemConfiguration systemConfiguration;
+
+    @Autowired
     public PushResponseFilter(ExecutionManager executionManager, SessionStore sessionStore) {
         this.sessionStore = sessionStore;
         this.executionManager = executionManager;
@@ -37,9 +41,6 @@ public class PushResponseFilter implements ContainerResponseFilter {
         responseContext.getHeaders().add("Access-Control-Allow-Headers", "Accept, Content-Type, Authorization, Access-Control-Allow-Origin");
         responseContext.getHeaders().add("Access-Control-Allow-Methods", "GET, DELETE, PUT, POST");
         responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");
-
-        responseContext.getHeaders().add("X-UA-Compatible", "IE=Edge");
-        responseContext.getHeaders().add("p3p", "CP=\"Push server does not have a P3P policy. Learn why here: https://www.TiogaSolutions.com/push/static/p3p.html\"");
 
         Session session = executionManager.getContext().getSession();
         boolean valid = sessionStore.isValid(session);

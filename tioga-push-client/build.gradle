@@ -8,7 +8,7 @@ project(":tioga-push-client") {
     version = tiogaPubVersion
 
     dependencies {
-        compile("org.tiogasolutions.lib:tioga-lib-pub:+")
+        compile("org.tiogasolutions.lib:tioga-lib-hal:+")
         compile("org.tiogasolutions.lib:tioga-lib-jaxrs:+")
 
         testCompile("org.testng:testng:6.8.21")

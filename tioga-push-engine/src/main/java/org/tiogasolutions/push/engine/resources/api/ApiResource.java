@@ -5,6 +5,10 @@
  */
 package org.tiogasolutions.push.engine.resources.api;
 
+import org.tiogasolutions.dev.common.net.HttpStatusCode;
+import org.tiogasolutions.lib.hal.HalItem;
+import org.tiogasolutions.lib.hal.HalLinks;
+import org.tiogasolutions.lib.hal.HalLinksBuilder;
 import org.tiogasolutions.push.engine.jaxrs.security.ApiAuthentication;
 import org.tiogasolutions.push.engine.system.PubUtils;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
@@ -13,12 +17,10 @@ import org.tiogasolutions.push.kernel.plugins.PushProcessor;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushResponse;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import static org.tiogasolutions.push.kernel.Paths.*;
 
@@ -32,6 +34,18 @@ public class ApiResource {
         this.pubUtils = pubUtils;
         this.executionManager = executionManager;
     }
+
+    @GET
+    public Response getIndex() {
+        UriInfo uriInfo = pubUtils.getUriInfo();
+        HalLinks links = HalLinksBuilder.builder()
+                .create("self", uriInfo.getBaseUriBuilder().path($api_v3).build())
+                .build();
+
+        HalItem item = new HalItem(HttpStatusCode.OK, links);
+        return pubUtils.toResponse(item).build();
+    }
+
 
     @Path($domains)
     public DomainsResourceV3 getDomainResourceV3() {

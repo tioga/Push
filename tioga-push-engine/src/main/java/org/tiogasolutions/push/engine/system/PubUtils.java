@@ -1,10 +1,9 @@
 package org.tiogasolutions.push.engine.system;
 
 import org.tiogasolutions.dev.common.net.HttpStatusCode;
-import org.tiogasolutions.pub.PubItem;
-import org.tiogasolutions.pub.PubLink;
-import org.tiogasolutions.pub.PubLinks;
-import org.tiogasolutions.pub.PubStatus;
+import org.tiogasolutions.lib.hal.HalItem;
+import org.tiogasolutions.lib.hal.HalLink;
+import org.tiogasolutions.lib.hal.HalLinks;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.kernel.system.PluginManager;
 import org.tiogasolutions.push.plugins.ses.SesEmailConfig;
@@ -20,6 +19,7 @@ import org.tiogasolutions.push.pub.domain.*;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.util.Map;
 
 public class PubUtils {
 
@@ -33,18 +33,20 @@ public class PubUtils {
         this.uriInfo = requestContext.getUriInfo();
     }
 
-    public Response.ResponseBuilder toResponse(PubItem pubItem) {
-        Response.ResponseBuilder builder = Response.status(pubItem.get_status().getCode()).entity(pubItem);
+    public UriInfo getUriInfo() {
+        return uriInfo;
+    }
 
-        for (PubLink link : pubItem.get_links().values()) {
-            builder.link(link.getHref(), link.getRel());
+    public Response.ResponseBuilder toResponse(HalItem item) {
+        Response.ResponseBuilder builder = Response.status(item.getHttpStatusCode().getCode()).entity(item);
+
+        for (Map.Entry<String,HalLink> entry : item.get_links().entrySet()) {
+            String rel = entry.getKey();
+            HalLink link = entry.getValue();
+            builder.link(link.getHref(), rel);
         }
 
         return builder;
-    }
-
-    private PubStatus toStatus(HttpStatusCode statusCode) {
-        return statusCode == null ? null : new PubStatus(statusCode);
     }
 
 
@@ -95,8 +97,8 @@ public class PubUtils {
         );
 
         return new PubConfig(
-                toStatus(statusCode),
-                PubLinks.empty(),
+                statusCode,
+                HalLinks.empty(),
 
                 domainProfile.getDomainKey(),
                 domainProfile.getDomainPassword(),

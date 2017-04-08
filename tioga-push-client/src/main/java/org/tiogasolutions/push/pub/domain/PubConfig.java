@@ -1,11 +1,11 @@
 package org.tiogasolutions.push.pub.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.tiogasolutions.pub.PubItem;
-import org.tiogasolutions.pub.PubLinks;
-import org.tiogasolutions.pub.PubStatus;
+import org.tiogasolutions.dev.common.net.HttpStatusCode;
+import org.tiogasolutions.lib.hal.HalItem;
+import org.tiogasolutions.lib.hal.HalLinks;
 
-public class PubConfig extends PubItem {
+public class PubConfig extends HalItem {
 
     private final String domainName;
     private final String domainPassword;
@@ -16,8 +16,9 @@ public class PubConfig extends PubItem {
     private final PubTwilioConfig twilioConfig;
     private final PubXmppConfig xmppConfig;
 
-    public PubConfig(@JsonProperty("_status") PubStatus _status,
-                     @JsonProperty("_links") PubLinks _links,
+
+    public PubConfig(HttpStatusCode httpStatusCode,
+                     @JsonProperty("_links") HalLinks _links,
                      @JsonProperty("domainName") String domainName,
                      @JsonProperty("domainPassword") String domainPassword,
                      @JsonProperty("domainRetention") int domainRetention,
@@ -27,7 +28,7 @@ public class PubConfig extends PubItem {
                      @JsonProperty("twilioConfig") PubTwilioConfig twilioConfig,
                      @JsonProperty("xmppConfig") PubXmppConfig xmppConfig) {
 
-        super(_status, _links);
+        super(httpStatusCode, _links);
 
         this.domainName = domainName;
         this.domainPassword = domainPassword;
@@ -37,6 +38,19 @@ public class PubConfig extends PubItem {
         this.smtpConfig = smtpConfig;
         this.twilioConfig = twilioConfig;
         this.xmppConfig = xmppConfig;
+    }
+
+    private PubConfig(@JsonProperty("_links") HalLinks _links,
+                      @JsonProperty("domainName") String domainName,
+                      @JsonProperty("domainPassword") String domainPassword,
+                      @JsonProperty("domainRetention") int domainRetention,
+
+                      @JsonProperty("sesConfig") PubSesConfig sesConfig,
+                      @JsonProperty("smtpConfig") PubSmtpConfig smtpConfig,
+                      @JsonProperty("twilioConfig") PubTwilioConfig twilioConfig,
+                      @JsonProperty("xmppConfig") PubXmppConfig xmppConfig) {
+
+        this(null, _links, domainName, domainPassword, domainRetention, sesConfig, smtpConfig, twilioConfig, xmppConfig);
     }
 
     public PubSesConfig getSesConfig() {

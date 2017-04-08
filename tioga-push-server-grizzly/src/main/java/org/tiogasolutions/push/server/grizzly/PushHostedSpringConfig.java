@@ -8,9 +8,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.tiogasolutions.dev.jackson.TiogaJacksonTranslator;
+import org.tiogasolutions.notify.notifier.Notifier;
+import org.tiogasolutions.notify.notifier.send.LoggingNotificationSender;
+import org.tiogasolutions.notify.notifier.send.NotificationSender;
+import org.tiogasolutions.notify.sender.couch.CouchNotificationSender;
 import org.tiogasolutions.push.engine.system.PushApplication;
 import org.tiogasolutions.push.jackson.PushObjectMapper;
 import org.tiogasolutions.push.kernel.config.CouchServersConfig;
+import org.tiogasolutions.push.kernel.config.SystemConfiguration;
 import org.tiogasolutions.push.kernel.execution.ExecutionManager;
 import org.tiogasolutions.push.kernel.requests.PushRequestStore;
 import org.tiogasolutions.push.kernel.system.PluginManager;
@@ -23,11 +28,24 @@ import org.tiogasolutions.push.plugins.xmpp.XmppPlugin;
 import org.tiogasolutions.runners.grizzly.GrizzlyServer;
 import org.tiogasolutions.runners.grizzly.GrizzlyServerConfig;
 
+import java.net.UnknownHostException;
 import java.util.Arrays;
 
 @Profile("hosted")
 @Configuration
 public class PushHostedSpringConfig {
+
+    @Bean
+    public Notifier notifier() {
+        // CouchNotificationSender would be the preferred choice, but...
+        LoggingNotificationSender sender = new LoggingNotificationSender();
+        return new Notifier(sender);
+    }
+
+    @Bean(name="org.tiogasolutions.push.kernel.config.SystemConfiguration")
+    public SystemConfiguration systemConfiguration() {
+      return new SystemConfiguration("*");
+    }
 
     @Bean
     public PushObjectMapper pushObjectMapper() {
@@ -121,5 +139,29 @@ public class PushHostedSpringConfig {
         resourceConfig.register(RequestContextFilter.class, 1);
 
         return new GrizzlyServer(grizzlyServerConfig, resourceConfig);
+    }
+
+    @Bean
+    public Notifier notifier(@Value("${notifier_couch_url}") String couchUrl,
+                             @Value("${notifier_couch_database_name}") String databaseName,
+                             @Value("${notifier_couch_username}") String username,
+                             @Value("${notifier_couch_password}") String password,
+                             @Value("${notifier_force_logger}") boolean forceLogger) {
+
+        NotificationSender sender = forceLogger ?
+                new LoggingNotificationSender() :
+                new CouchNotificationSender(couchUrl, databaseName, username,  password);
+
+        return new Notifier(sender).onBegin(builder -> {
+            builder.trait("application", "push-server");
+
+            try {
+                String hostname = java.net.InetAddress.getLocalHost().getHostName();
+                builder.trait("source", System.getProperty("user.name") + "@" + hostname);
+
+            } catch (UnknownHostException ignored) {
+                builder.trait("source", System.getProperty("user.name") + "@" + "UNKNOWN");
+            }
+        });
     }
 }

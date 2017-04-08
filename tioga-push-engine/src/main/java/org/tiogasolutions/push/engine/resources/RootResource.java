@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.tiogasolutions.dev.common.EqualsUtils;
 import org.tiogasolutions.dev.common.exceptions.ApiException;
+import org.tiogasolutions.dev.common.net.HttpStatusCode;
+import org.tiogasolutions.lib.hal.HalItem;
+import org.tiogasolutions.lib.hal.HalLinks;
+import org.tiogasolutions.lib.hal.HalLinksBuilder;
 import org.tiogasolutions.push.engine.resources.api.ApiResource;
 import org.tiogasolutions.push.engine.resources.manage.ManageResource;
 import org.tiogasolutions.push.engine.system.PubUtils;
@@ -80,6 +84,18 @@ public class RootResource extends RootResourceSupport {
     }
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getIndex() throws IOException {
+        HalLinks links = HalLinksBuilder.builder()
+                .create("self", uriInfo.getBaseUriBuilder().build())
+                .create("api", uriInfo.getBaseUriBuilder().path($api_v3).build())
+                .build();
+
+        HalItem item = new HalItem(HttpStatusCode.OK, links);
+        return newPubUtils().toResponse(item).build();
+    }
+
+    @GET
     @Produces(MediaType.TEXT_HTML)
     public Thymeleaf getWelcome(@QueryParam("r") int reasonCode, @QueryParam("username") String username, @QueryParam("password") String password) throws IOException {
 
@@ -128,6 +144,7 @@ public class RootResource extends RootResourceSupport {
     @POST
     @Path($signIn)
     @Produces(MediaType.TEXT_HTML)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response signIn(@FormParam("username") String username, @FormParam("password") String password, @CookieParam(SessionStore.SESSION_COOKIE_NAME) String sessionId) throws Exception {
 
         Account account = accountStore.getByEmail(username);
@@ -186,11 +203,15 @@ public class RootResource extends RootResourceSupport {
         return Response.seeOther(getUriInfo().getBaseUriBuilder().build()).build();
     }
 
-    @GET
-    @Path($healthCheck)
+    @GET @Path("/health-check")
     @Produces(MediaType.TEXT_HTML)
-    public Response healthCheck$GET() {
-        return Response.status(Response.Status.OK).build();
-    }
+    public Response healthCheck$GET() { return Response.status(Response.Status.OK).build(); }
+
+    @GET @Path("/manager/status") public Response managerStatus() throws Exception { return Response.status(404).build(); }
+    @GET @Path("{resource: ([^\\s]+(\\.(?i)(php|PHP))$) }") public Response renderTXTs() throws Exception { return Response.status(404).build(); }
+    @GET @Path("/favicon.ico") public Response favicon_ico() { return Response.status(404).build(); }
+    @GET @Path("/trafficbasedsspsitemap.xml") public Response trafficbasedsspsitemap_xml() { return Response.status(404).build(); }
+    @GET @Path("/apple-touch-icon-precomposed.png") public Response apple_touch_icon_precomposed_png() { return Response.status(404).build(); }
+    @GET @Path("/apple-touch-icon.png") public Response apple_touch_icon_png() { return Response.status(404).build(); }
 }
 
