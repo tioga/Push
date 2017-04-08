@@ -65,7 +65,7 @@ public class PushServer {
             return;
         }
 
-        String logMessage = String.format("%s solutions-server:\n" +
+        String logMessage = String.format("%s push-server:\n" +
                         "  *  Runtime Dir     (solutions.runtime.dir)     %s\n" +
                         "  *  Config Dir      (solutions.config.dir)      %s\n" +
                         "  *  Logback File    (solutions.log.config)      %s\n" +
