@@ -15,4 +15,6 @@ public abstract class Paths {
     public static final String $pushes = "pushes";
     public static final String $update = "update";
     public static final String $password = "password";
+
+    public static final String $health_check = "/health-check";
 }
