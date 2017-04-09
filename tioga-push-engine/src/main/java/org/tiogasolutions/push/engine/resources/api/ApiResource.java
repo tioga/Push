@@ -6,9 +6,6 @@
 package org.tiogasolutions.push.engine.resources.api;
 
 import org.tiogasolutions.dev.common.net.HttpStatusCode;
-import org.tiogasolutions.lib.hal.HalItem;
-import org.tiogasolutions.lib.hal.HalLinks;
-import org.tiogasolutions.lib.hal.HalLinksBuilder;
 import org.tiogasolutions.push.engine.jaxrs.security.ApiAuthentication;
 import org.tiogasolutions.push.engine.system.PubUtils;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
@@ -16,11 +13,11 @@ import org.tiogasolutions.push.kernel.execution.ExecutionManager;
 import org.tiogasolutions.push.kernel.plugins.PushProcessor;
 import org.tiogasolutions.push.pub.common.Push;
 import org.tiogasolutions.push.pub.common.PushResponse;
+import org.tiogasolutions.push.pub.domain.PubDomainProfile;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 import static org.tiogasolutions.push.kernel.Paths.*;
 
@@ -37,21 +34,17 @@ public class ApiResource {
 
     @GET
     public Response getIndex() {
-        UriInfo uriInfo = pubUtils.getUriInfo();
-        HalLinks links = HalLinksBuilder.builder()
-                .create("self", uriInfo.getBaseUriBuilder().path($api_v3).build())
-                .build();
+        DomainProfileEntity domainProfileEntity = executionManager.getContext().getDomain();
 
-        HalItem item = new HalItem(HttpStatusCode.OK, links);
-        return pubUtils.toResponse(item).build();
+        PubDomainProfile pubDomainProfile = pubUtils.fromDomainProfileEntity(HttpStatusCode.OK, domainProfileEntity, false);
+        return pubUtils.toResponse(pubDomainProfile).build();
     }
 
 
-    @Path($domains)
-    public DomainsResourceV3 getDomainResourceV3() {
-        return new DomainsResourceV3(executionManager, pubUtils);
+    @Path($admin)
+    public AdminResource getAdminResource() {
+        return new AdminResource(executionManager, pubUtils);
     }
-
 
     @POST
     @Path($callback)

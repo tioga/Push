@@ -20,7 +20,7 @@
     <orderEntry type="library" name="Gradle: org.testng:testng:6.8.21" level="project" />
     <orderEntry type="module" module-name="tioga-push-client_main" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.apis:tioga-apis-bitly:1.2.5" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-couchace:5.1.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-couchace:5.1.7" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.notify:tioga-notify-sender-couch:5.1.3" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-context:4.3.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.aspectj:aspectjweaver:1.8.5" level="project" />

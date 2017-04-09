@@ -92,7 +92,7 @@ public class ManageResource {
   public Response createDomain(@FormParam("domainKey") String domainKey, @FormParam("domainPassword") String domainPassword) throws Exception {
     domainKey = ExceptionUtils.assertNotNull(domainKey, "domainKey").toLowerCase();
 
-    if (domainStore.getByDomainKey(domainKey) != null) {
+    if (domainStore.getByDomainName(domainKey) != null) {
       throw ApiException.badRequest(String.format("The domain \"%s\" already exists.", domainKey));
     }
 

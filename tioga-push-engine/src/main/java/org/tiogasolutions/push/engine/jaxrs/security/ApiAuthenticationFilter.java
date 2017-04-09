@@ -61,7 +61,7 @@ public class ApiAuthenticationFilter implements ContainerRequestFilter {
             password = basicAuth.substring(pos + 1);
         }
 
-        DomainProfileEntity domainProfile = domainStore.getByDomainKey(domainKey);
+        DomainProfileEntity domainProfile = domainStore.getByDomainName(domainKey);
         if (domainProfile == null) {
             throw new NotAuthorizedException("API");
         }

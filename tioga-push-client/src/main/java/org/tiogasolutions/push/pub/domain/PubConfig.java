@@ -40,19 +40,6 @@ public class PubConfig extends HalItem {
         this.xmppConfig = xmppConfig;
     }
 
-    private PubConfig(@JsonProperty("_links") HalLinks _links,
-                      @JsonProperty("domainName") String domainName,
-                      @JsonProperty("domainPassword") String domainPassword,
-                      @JsonProperty("domainRetention") int domainRetention,
-
-                      @JsonProperty("sesConfig") PubSesConfig sesConfig,
-                      @JsonProperty("smtpConfig") PubSmtpConfig smtpConfig,
-                      @JsonProperty("twilioConfig") PubTwilioConfig twilioConfig,
-                      @JsonProperty("xmppConfig") PubXmppConfig xmppConfig) {
-
-        this(null, _links, domainName, domainPassword, domainRetention, sesConfig, smtpConfig, twilioConfig, xmppConfig);
-    }
-
     public PubSesConfig getSesConfig() {
         return sesConfig;
     }

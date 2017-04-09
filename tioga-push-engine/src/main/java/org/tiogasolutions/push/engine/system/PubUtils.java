@@ -1,9 +1,9 @@
 package org.tiogasolutions.push.engine.system;
 
 import org.tiogasolutions.dev.common.net.HttpStatusCode;
-import org.tiogasolutions.lib.hal.HalItem;
-import org.tiogasolutions.lib.hal.HalLink;
-import org.tiogasolutions.lib.hal.HalLinks;
+import org.tiogasolutions.dev.domain.query.ListQueryResult;
+import org.tiogasolutions.dev.domain.query.QueryResult;
+import org.tiogasolutions.lib.hal.*;
 import org.tiogasolutions.push.kernel.clients.DomainProfileEntity;
 import org.tiogasolutions.push.kernel.system.PluginManager;
 import org.tiogasolutions.push.plugins.ses.SesEmailConfig;
@@ -19,7 +19,13 @@ import org.tiogasolutions.push.pub.domain.*;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import static org.tiogasolutions.push.kernel.Paths.$admin;
+import static org.tiogasolutions.push.kernel.Paths.$api_v3;
+import static org.tiogasolutions.push.kernel.Paths.$domains;
 
 public class PubUtils {
 
@@ -38,7 +44,17 @@ public class PubUtils {
     }
 
     public Response.ResponseBuilder toResponse(HalItem item) {
-        Response.ResponseBuilder builder = Response.status(item.getHttpStatusCode().getCode()).entity(item);
+
+        int statusCode = item.getHttpStatusCode().getCode();
+
+        Response.ResponseBuilder builder = Response
+                .status(statusCode)
+                .entity(item);
+
+        if (statusCode == HttpStatusCode.CREATED.getCode()) {
+            HalLink link = item.get_links().getLink("self");
+            builder.location( link.getHref() );
+        }
 
         for (Map.Entry<String,HalLink> entry : item.get_links().entrySet()) {
             String rel = entry.getKey();
@@ -49,6 +65,46 @@ public class PubUtils {
         return builder;
     }
 
+    public HalItem fromDomainProfileEntities(HttpStatusCode statusCode, List<DomainProfileEntity> domainProfileEntities) {
+
+        HalLinks links = HalLinks.builder()
+                .add("self", newAdminDomainsLink())
+                .build();
+
+        List<HalItem> items = new ArrayList<>();
+        for (DomainProfileEntity domainProfileEntity : domainProfileEntities) {
+            PubDomainProfile pubDomainProfile = fromDomainProfileEntity(null, domainProfileEntity, true);
+            items.add(pubDomainProfile);
+        }
+
+        QueryResult<HalItem> itemResults = ListQueryResult.newComplete(HalItem.class, items);
+
+        return new HalItemWrapper<>(itemResults, statusCode, links);
+    }
+
+    public PubDomainProfile fromDomainProfileEntity(HttpStatusCode statusCode, DomainProfileEntity domainProfile, boolean admin) {
+
+        HalLinksBuilder builder = HalLinks.builder();
+        if (admin) {
+            builder.add("self", newDomainLink(true, domainProfile.getDomainKey()));
+            builder.add("domains", newAdminDomainsLink());
+            builder.add("client", newDomainLink(false, domainProfile.getDomainKey()));
+        } else {
+            builder.add("self", newDomainLink(false, domainProfile.getDomainKey()));
+        }
+        HalLinks links = builder.build();
+
+        return new PubDomainProfile(
+                statusCode,
+                links,
+                domainProfile.getDomainId(),
+                domainProfile.getRevision(),
+                domainProfile.getDomainKey(),
+                DomainStatus.ACTIVE,
+                domainProfile.getDomainKey(),
+                domainProfile.getDomainPassword(),
+                domainProfile.getRetentionDays());
+    }
 
     public PubConfig toConfig(HttpStatusCode statusCode, DomainProfileEntity domainProfile, PluginManager pluginManager) {
 
@@ -108,5 +164,33 @@ public class PubUtils {
                 smtpSettings,
                 twilioSettings,
                 xmppSettings);
+    }
+
+    public HalLink newAdminDomainsLink() {
+        return HalLink.create(uriInfo.getBaseUriBuilder()
+                .path($api_v3)
+                .path($admin)
+                .path($domains)
+                .build());
+    }
+
+    private HalLink newDomainLink(boolean admin, String domainName) {
+        if (admin == false) {
+            return HalLink.create(uriInfo.getBaseUriBuilder().path($api_v3).build());
+        } else {
+            return HalLink.create(uriInfo.getBaseUriBuilder()
+                    .path($api_v3)
+                    .path($admin)
+                    .path($domains)
+                    .path(domainName)
+                    .build());
+        }
+    }
+
+    public HalLink newAdminLink() {
+        return HalLink.create(uriInfo.getBaseUriBuilder()
+                .path($api_v3)
+                .path($admin)
+                .build());
     }
 }

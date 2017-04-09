@@ -177,7 +177,7 @@ public class RootResource extends RootResourceSupport {
     }
 
     @Path($api_v3)
-    public ApiResource getApiResourceV2() throws Exception {
+    public ApiResource getApiResourceV3() throws Exception {
         return new ApiResource(executionManager, newPubUtils());
     }
 
