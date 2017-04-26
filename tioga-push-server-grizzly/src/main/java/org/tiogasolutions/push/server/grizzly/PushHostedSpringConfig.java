@@ -35,13 +35,6 @@ import java.util.Arrays;
 @Configuration
 public class PushHostedSpringConfig {
 
-    @Bean
-    public Notifier notifier() {
-        // CouchNotificationSender would be the preferred choice, but...
-        LoggingNotificationSender sender = new LoggingNotificationSender();
-        return new Notifier(sender);
-    }
-
     @Bean(name="org.tiogasolutions.push.kernel.config.SystemConfiguration")
     public SystemConfiguration systemConfiguration() {
       return new SystemConfiguration("*");
@@ -153,7 +146,7 @@ public class PushHostedSpringConfig {
                 new CouchNotificationSender(couchUrl, databaseName, username,  password);
 
         return new Notifier(sender).onBegin(builder -> {
-            builder.trait("application", "push-server");
+            builder.topic("Push Engine");
 
             try {
                 String hostname = java.net.InetAddress.getLocalHost().getHostName();
