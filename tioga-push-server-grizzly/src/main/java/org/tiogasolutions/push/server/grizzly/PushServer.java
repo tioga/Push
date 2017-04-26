@@ -142,6 +142,8 @@ public class PushServer {
                     .trait("couch-db-master-database-name", couchServersConfig.getMasterDatabaseName())
                     .trait("couch-db-domain-url", couchServersConfig.getDomainUrl())
                     .trait("couch-db-domain-database-prefix", couchServersConfig.getDomainDatabasePrefix())
+                    // logging
+                    .trait("log-level", levelCode)
                     // send it
                     .send().get();
 
