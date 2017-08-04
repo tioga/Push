@@ -18,8 +18,6 @@ import org.tiogasolutions.lib.hal.HalLinksBuilder;
 import org.tiogasolutions.push.engine.resources.api.ApiResource;
 import org.tiogasolutions.push.engine.resources.manage.ManageResource;
 import org.tiogasolutions.push.engine.system.PubUtils;
-import org.tiogasolutions.push.engine.view.Thymeleaf;
-import org.tiogasolutions.push.engine.view.ThymeleafViewFactory;
 import org.tiogasolutions.push.kernel.accounts.Account;
 import org.tiogasolutions.push.kernel.accounts.AccountStore;
 import org.tiogasolutions.push.kernel.accounts.DomainStore;
@@ -36,6 +34,13 @@ import javax.ws.rs.core.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Enumeration;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
 
 import static org.tiogasolutions.push.kernel.Paths.*;
 
@@ -70,8 +75,66 @@ public class RootResource extends RootResourceSupport {
     @Autowired
     private PushRequestStore pushRequestStore;
 
+    // Hammered by AWS for status checks, we don't want to have to re-process this code every few milliseconds.
+    private static final String indexHtml;
+    static {
+        String html = null;
+        String since = ZonedDateTime
+                    .now(ZoneId.of(ZoneId.SHORT_IDS.get("PST")))
+                    .format(DateTimeFormatter.ofPattern("MMM d, yyyy 'at' h:mm:ss a zzz"));
+
+        try {
+            Attributes attributes = getManifest().getMainAttributes();
+            String version = attributes.getValue("Implementation-Version");
+            String build = attributes.getValue("Build-Number");
+            String timestamp = attributes.getValue("Build-Timestamp");
+
+            html = String.format("<html><body><h1>Notify Server</h1>" +
+                    "<div>Build-Number: %s</div>" +
+                    "<div>Build-Timestamp: %s</div>" +
+                    "<div>Implementation-Version: %s</div>" +
+                    "<div>Since: %s</div>" +
+                    "</body></html>", build, timestamp, version, since);
+
+        } catch (Exception e) {
+            html = String.format("<html><body>" +
+                    "<h1>Notify Server</h1>" +
+                    "<div>Since: %s</div>" +
+                    "<div>%s</div>" +
+                    "</body></html>", since, e.getMessage());
+        } finally {
+            indexHtml = html;
+        }
+    }
+
     public RootResource() {
-        log.info("Created ");
+        log.debug("Created");
+    }
+
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public String getIndexHtml() throws IOException {
+        return healthCheck();
+    }
+
+    @GET @Path($health_check)
+    @Produces(MediaType.TEXT_HTML)
+    public String healthCheck() {
+        return indexHtml;
+    }
+
+    private static Manifest getManifest() throws IOException {
+        Enumeration<URL> resources = RootResource.class.getClassLoader().getResources("META-INF/MANIFEST.MF");
+        while (resources.hasMoreElements()) {
+            try {
+                Manifest manifest = new Manifest(resources.nextElement().openStream());
+                String moduleName = manifest.getMainAttributes().getValue("Module-Name");
+                if ("tioga-push-engine".equalsIgnoreCase(moduleName)) {
+                    return manifest;
+                }
+            } catch (IOException ignored) {/*ignored*/}
+        }
+        throw new IOException("Manifest not found.");
     }
 
     public PubUtils newPubUtils() {
@@ -95,21 +158,21 @@ public class RootResource extends RootResourceSupport {
         return newPubUtils().toResponse(item).build();
     }
 
-    @GET
-    @Produces(MediaType.TEXT_HTML)
-    public Thymeleaf getWelcome(@QueryParam("r") int reasonCode, @QueryParam("username") String username, @QueryParam("password") String password) throws IOException {
-
-        String message = "";
-        if (REASON_CODE_INVALID_USERNAME_OR_PASSWORD == reasonCode) {
-            message = "Invalid username or password";
-        } else if (REASON_CODE_UNAUTHORIZED == reasonCode) {
-            message = "Your session has expired";
-        } else if (REASON_SIGNED_OUT == reasonCode) {
-            message = "You have successfully signed out";
-        }
-
-        return new Thymeleaf(executionManager.getContext().getSession(), ThymeleafViewFactory.WELCOME, new WelcomeModel(executionManager.getContext().getAccount(), message, username, password));
-    }
+//    @GET
+//    @Produces(MediaType.TEXT_HTML)
+//    public Thymeleaf getWelcome(@QueryParam("r") int reasonCode, @QueryParam("username") String username, @QueryParam("password") String password) throws IOException {
+//
+//        String message = "";
+//        if (REASON_CODE_INVALID_USERNAME_OR_PASSWORD == reasonCode) {
+//            message = "Invalid username or password";
+//        } else if (REASON_CODE_UNAUTHORIZED == reasonCode) {
+//            message = "Your session has expired";
+//        } else if (REASON_SIGNED_OUT == reasonCode) {
+//            message = "You have successfully signed out";
+//        }
+//
+//        return new Thymeleaf(executionManager.getContext().getSession(), ThymeleafViewFactory.WELCOME, new WelcomeModel(executionManager.getContext().getAccount(), message, username, password));
+//    }
 
     public static class WelcomeModel {
         private final Account account;
@@ -202,10 +265,6 @@ public class RootResource extends RootResourceSupport {
 
         return Response.seeOther(getUriInfo().getBaseUriBuilder().build()).build();
     }
-
-    @GET @Path($health_check)
-    @Produces(MediaType.TEXT_HTML)
-    public Response healthCheck$GET() { return Response.status(Response.Status.OK).build(); }
 
     @GET @Path("/manager/status") public Response managerStatus() throws Exception { return Response.status(404).build(); }
     @GET @Path("{resource: ([^\\s]+(\\.(?i)(php|PHP))$) }") public Response renderTXTs() throws Exception { return Response.status(404).build(); }
