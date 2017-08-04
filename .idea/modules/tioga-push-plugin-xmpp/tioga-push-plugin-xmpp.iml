@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$/../../../tioga-push-plugin-xmpp">
       <excludeFolder url="file://$MODULE_DIR$/../../../tioga-push-plugin-xmpp/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../tioga-push-plugin-xmpp/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../tioga-push-plugin-xmpp/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

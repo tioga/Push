@@ -14,22 +14,23 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="tioga-push-server-servlet_main" />
-          <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-server-servlet/build/resources/main" />
+          <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-server-servlet/out/production/resources" />
         </element>
         <element id="directory" name="lib">
           <element id="archive" name="org.tiogasolutions.push-tioga-push-engine-5.0.2.jar">
             <element id="module-output" name="tioga-push-engine_main" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-engine/out/production/resources" />
           </element>
           <element id="archive" name="org.tiogasolutions.push-tioga-push-kernel-5.0.2.jar">
             <element id="module-output" name="tioga-push-kernel_main" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-kernel/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-kernel/out/production/resources" />
           </element>
           <element id="archive" name="org.tiogasolutions.push-tioga-push-client-6.0.1.jar">
             <element id="module-output" name="tioga-push-client_main" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-client/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-client/out/production/resources" />
           </element>
           <element id="library" level="project" name="Gradle: javax.ws.rs:javax.ws.rs-api:2.0.1" />
+          <element id="library" level="project" name="Gradle: org.tiogasolutions.dev:tioga-dev-domain:4.2.9" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.5.1" />
           <element id="library" level="project" name="Gradle: javax.validation:validation-api:1.1.0.Final" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.5.0" />
@@ -72,7 +73,7 @@
           <element id="library" level="project" name="Gradle: javax.inject:javax.inject:1" />
           <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-ses-5.0.2.jar">
             <element id="module-output" name="tioga-push-plugin-ses_main" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-ses/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-ses/out/production/resources" />
           </element>
           <element id="library" level="project" name="Gradle: com.amazonaws:aws-java-sdk:1.9.31" />
           <element id="library" level="project" name="Gradle: com.amazonaws:aws-java-sdk-support:1.9.31" />
@@ -128,13 +129,13 @@
           <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.6" />
           <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-smtp-5.0.2.jar">
             <element id="module-output" name="tioga-push-plugin-smtp_main" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-smtp/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-smtp/out/production/resources" />
           </element>
           <element id="library" level="project" name="Gradle: javax.mail:mail:1.5.0-b01" />
           <element id="library" level="project" name="Gradle: javax.activation:activation:1.1" />
           <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-xmpp-5.0.2.jar">
             <element id="module-output" name="tioga-push-plugin-xmpp_main" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-xmpp/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-xmpp/out/production/resources" />
           </element>
           <element id="library" level="project" name="Gradle: org.igniterealtime.smack:smack-java7:4.1.4" />
           <element id="library" level="project" name="Gradle: org.igniterealtime.smack:smack-tcp:4.1.4" />
@@ -148,7 +149,7 @@
           <element id="library" level="project" name="Gradle: org.jxmpp:jxmpp-util-cache:0.4.2" />
           <element id="archive" name="org.tiogasolutions.push-tioga-push-plugin-twilio-5.0.2.jar">
             <element id="module-output" name="tioga-push-plugin-twilio_main" />
-            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-twilio/build/resources/main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/tioga-push-plugin-twilio/out/production/resources" />
           </element>
           <element id="library" level="project" name="Gradle: com.twilio.sdk:twilio-java-sdk:3.8.0" />
           <element id="library" level="project" name="Gradle: org.apache.commons:commons-lang3:3.3.2" />
@@ -162,14 +163,13 @@
           <element id="library" level="project" name="Gradle: org.unbescape:unbescape:1.0" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet:2.22.2" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet-core:2.22.2" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-thymeleaf/1.1.6/tioga-lib-thymeleaf-1.1.6.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/app/tioga-app-common/3.2.3/tioga-app-common-3.2.3.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-couchace/5.1.8/tioga-lib-couchace-5.1.8.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-common/5.2.6/tioga-dev-common-5.2.6.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-jaxrs/6.0.3/tioga-lib-jaxrs-6.0.3.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/lib/tioga-lib-hal/1.0.3/tioga-lib-hal-1.0.3.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-jackson/4.2.9/tioga-dev-jackson-4.2.9.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/tiogasolutions/dev/tioga-dev-domain/4.2.9/tioga-dev-domain-4.2.9.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.lib/tioga-lib-thymeleaf/1.1.6/a899abfff77441439c8d6b8f40d9940672e02229/tioga-lib-thymeleaf-1.1.6.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.app/tioga-app-common/3.2.3/bdf0c4531c5cae4ef9e4808f3441041450baf7c7/tioga-app-common-3.2.3.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.lib/tioga-lib-couchace/5.1.8/366fe85973fd5223f51f54690aa934a27259a7d8/tioga-lib-couchace-5.1.8.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.dev/tioga-dev-common/5.2.6/a99993c491404362d85ae5d6b8e79872d35798e2/tioga-dev-common-5.2.6.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.lib/tioga-lib-jaxrs/6.0.3/d6a14574c3a16d3447d6198c5ad34c64e2966dbe/tioga-lib-jaxrs-6.0.3.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.lib/tioga-lib-hal/1.0.3/ff4e6a83059decb61712d62d19a8796372f23fda/tioga-lib-hal-1.0.3.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.tiogasolutions.dev/tioga-dev-jackson/4.2.9/aebe94fde50745872ca83da6fe5ceb42c84af0ca/tioga-dev-jackson-4.2.9.jar" />
         </element>
       </element>
     </root>

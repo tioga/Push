@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id=":tioga-push-server-servlet:main" external.linked.project.path="$MODULE_DIR$/../../../tioga-push-server-servlet" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="org.tiogasolutions.push" external.system.module.type="sourceSet" external.system.module.version="5.0.2" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
     <facet type="web" name="Web Gradle : tioga-push-server-servlet-5.0.2.war">
       <configuration>
         <webroots>
-          <root url="file://$MODULE_DIR$/../../../tioga-push-server-servlet/src/main/webapp" relative="/" />
+          <root url="file://D:\dvlp\tioga\push\tioga-push-server-servlet\src\main\webapp" relative="/" />
         </webroots>
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/../../../tioga-push-server-servlet/build/classes/main" />
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output url="file://$MODULE_DIR$/../../../tioga-push-server-servlet/out/production/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../tioga-push-server-servlet/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../../tioga-push-server-servlet/src/main/java" isTestSource="false" />

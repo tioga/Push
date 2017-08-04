@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$/../../../tioga-push-kernel">
       <excludeFolder url="file://$MODULE_DIR$/../../../tioga-push-kernel/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../tioga-push-kernel/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../tioga-push-kernel/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

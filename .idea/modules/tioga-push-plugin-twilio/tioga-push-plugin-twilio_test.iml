@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id=":tioga-push-plugin-twilio:test" external.linked.project.path="$MODULE_DIR$/../../../tioga-push-plugin-twilio" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="org.tiogasolutions.push" external.system.module.type="sourceSet" external.system.module.version="5.0.2" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
-    <output-test url="file://$MODULE_DIR$/../../../tioga-push-plugin-twilio/build/classes/test" />
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output-test url="file://$MODULE_DIR$/../../../tioga-push-plugin-twilio/out/test/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../tioga-push-plugin-twilio/src/test">
       <sourceFolder url="file://$MODULE_DIR$/../../../tioga-push-plugin-twilio/src/test/java" isTestSource="true" />
@@ -50,8 +55,8 @@
     <orderEntry type="library" name="Gradle: org.glassfish.jersey.core:jersey-server:2.22.2" level="project" />
     <orderEntry type="library" name="Gradle: org.glassfish.jersey.media:jersey-media-multipart:2.22.2" level="project" />
     <orderEntry type="library" name="Gradle: org.glassfish.jersey.core:jersey-common:2.22.2" level="project" />
-    <orderEntry type="library" name="Gradle: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.dev:tioga-dev-common:5.2.6" level="project" />
+    <orderEntry type="library" name="Gradle: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.5.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.5.1" level="project" />
     <orderEntry type="library" name="Gradle: org.glassfish.hk2:hk2-api:2.4.0-b34" level="project" />

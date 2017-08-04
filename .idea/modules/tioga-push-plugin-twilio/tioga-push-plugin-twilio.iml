@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$/../../../tioga-push-plugin-twilio">
       <excludeFolder url="file://$MODULE_DIR$/../../../tioga-push-plugin-twilio/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../tioga-push-plugin-twilio/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../tioga-push-plugin-twilio/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
