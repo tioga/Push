@@ -7,38 +7,38 @@ phases:
 
   post_build:
     commands:
-      - if [ -d "./tioga-push-client/build/reports" ];                then aws s3 sync ./tioga-push-client/build/reports                s3://static.tiogasolutions.org/push/tioga-push-client/reports --delete; fi
-      - if [ -d "./tioga-push-client/build/docs" ];                   then aws s3 sync ./tioga-push-client/build/docs                   s3://static.tiogasolutions.org/push/tioga-push-client/docs --delete; fi
+      - if [ -d "./tioga-push-client/build/reports" ];                then aws s3 sync ./tioga-push-client/build/reports                s3://static.tiogasolutions.org/push/tioga-push-client/reports --delete --quiet; fi
+      - if [ -d "./tioga-push-client/build/docs" ];                   then aws s3 sync ./tioga-push-client/build/docs                   s3://static.tiogasolutions.org/push/tioga-push-client/docs --delete --quiet; fi
       -
-      - if [ -d "./tioga-push-engine/build/reports" ];                then aws s3 sync ./tioga-push-engine/build/reports                s3://static.tiogasolutions.org/push/tioga-push-engine/reports --delete; fi
-      - if [ -d "./tioga-push-engine/build/docs" ];                   then aws s3 sync ./tioga-push-engine/build/docs                   s3://static.tiogasolutions.org/push/tioga-push-engine/docs --delete; fi
+      - if [ -d "./tioga-push-engine/build/reports" ];                then aws s3 sync ./tioga-push-engine/build/reports                s3://static.tiogasolutions.org/push/tioga-push-engine/reports --delete --quiet; fi
+      - if [ -d "./tioga-push-engine/build/docs" ];                   then aws s3 sync ./tioga-push-engine/build/docs                   s3://static.tiogasolutions.org/push/tioga-push-engine/docs --delete --quiet; fi
       -
-      - if [ -d "./tioga-push-kernel/build/reports" ];                then aws s3 sync ./tioga-push-kernel/build/reports                s3://static.tiogasolutions.org/push/tioga-push-kernel/reports --delete; fi
-      - if [ -d "./tioga-push-kernel/build/docs" ];                   then aws s3 sync ./tioga-push-kernel/build/docs                   s3://static.tiogasolutions.org/push/tioga-push-kernel/docs --delete; fi
+      - if [ -d "./tioga-push-kernel/build/reports" ];                then aws s3 sync ./tioga-push-kernel/build/reports                s3://static.tiogasolutions.org/push/tioga-push-kernel/reports --delete --quiet; fi
+      - if [ -d "./tioga-push-kernel/build/docs" ];                   then aws s3 sync ./tioga-push-kernel/build/docs                   s3://static.tiogasolutions.org/push/tioga-push-kernel/docs --delete --quiet; fi
       -
-      - if [ -d "./tioga-push-plugin-ses/build/reports" ];            then aws s3 sync ./tioga-push-plugin-ses/build/reports            s3://static.tiogasolutions.org/push/tioga-push-plugin-ses/reports --delete; fi
-      - if [ -d "./tioga-push-plugin-ses/build/docs" ];               then aws s3 sync ./tioga-push-plugin-ses/build/docs               s3://static.tiogasolutions.org/push/tioga-push-plugin-ses/docs --delete; fi
+      - if [ -d "./tioga-push-plugin-ses/build/reports" ];            then aws s3 sync ./tioga-push-plugin-ses/build/reports            s3://static.tiogasolutions.org/push/tioga-push-plugin-ses/reports --delete --quiet; fi
+      - if [ -d "./tioga-push-plugin-ses/build/docs" ];               then aws s3 sync ./tioga-push-plugin-ses/build/docs               s3://static.tiogasolutions.org/push/tioga-push-plugin-ses/docs --delete --quiet; fi
       -
-      - if [ -d "./tioga-push-plugin-smtp/build/reports" ];           then aws s3 sync ./tioga-push-plugin-smtp/build/reports           s3://static.tiogasolutions.org/push/tioga-push-plugin-smtp/reports --delete; fi
-      - if [ -d "./tioga-push-plugin-smtp/build/docs" ];              then aws s3 sync ./tioga-push-plugin-smtp/build/docs              s3://static.tiogasolutions.org/push/tioga-push-plugin-smtp/docs --delete; fi
+      - if [ -d "./tioga-push-plugin-smtp/build/reports" ];           then aws s3 sync ./tioga-push-plugin-smtp/build/reports           s3://static.tiogasolutions.org/push/tioga-push-plugin-smtp/reports --delete --quiet; fi
+      - if [ -d "./tioga-push-plugin-smtp/build/docs" ];              then aws s3 sync ./tioga-push-plugin-smtp/build/docs              s3://static.tiogasolutions.org/push/tioga-push-plugin-smtp/docs --delete --quiet; fi
       -
-      - if [ -d "./tioga-push-plugin-twilio/build/reports" ];         then aws s3 sync ./tioga-push-plugin-twilio/build/reports         s3://static.tiogasolutions.org/push/tioga-push-plugin-twilio/reports --delete; fi
-      - if [ -d "./tioga-push-plugin-twilio/build/docs" ];            then aws s3 sync ./tioga-push-plugin-twilio/build/docs            s3://static.tiogasolutions.org/push/tioga-push-plugin-twilio/docs --delete; fi
+      - if [ -d "./tioga-push-plugin-twilio/build/reports" ];         then aws s3 sync ./tioga-push-plugin-twilio/build/reports         s3://static.tiogasolutions.org/push/tioga-push-plugin-twilio/reports --delete --quiet; fi
+      - if [ -d "./tioga-push-plugin-twilio/build/docs" ];            then aws s3 sync ./tioga-push-plugin-twilio/build/docs            s3://static.tiogasolutions.org/push/tioga-push-plugin-twilio/docs --delete --quiet; fi
       -
-      - if [ -d "./tioga-push-plugin-xmpp/build/reports" ];           then aws s3 sync ./tioga-push-plugin-xmpp/build/reports           s3://static.tiogasolutions.org/push/tioga-push-plugin-xmpp/reports --delete; fi
-      - if [ -d "./tioga-push-plugin-xmpp/build/docs" ];              then aws s3 sync ./tioga-push-plugin-xmpp/build/docs              s3://static.tiogasolutions.org/push/tioga-push-plugin-xmpp/docs --delete; fi
+      - if [ -d "./tioga-push-plugin-xmpp/build/reports" ];           then aws s3 sync ./tioga-push-plugin-xmpp/build/reports           s3://static.tiogasolutions.org/push/tioga-push-plugin-xmpp/reports --delete --quiet; fi
+      - if [ -d "./tioga-push-plugin-xmpp/build/docs" ];              then aws s3 sync ./tioga-push-plugin-xmpp/build/docs              s3://static.tiogasolutions.org/push/tioga-push-plugin-xmpp/docs --delete --quiet; fi
       -
-      - if [ -d "./tioga-push-server-grizzly/build/reports" ];        then aws s3 sync ./tioga-push-server-grizzly/build/reports        s3://static.tiogasolutions.org/push/tioga-push-server-grizzly/reports --delete; fi
-      - if [ -d "./tioga-push-server-grizzly/build/docs" ];           then aws s3 sync ./tioga-push-server-grizzly/build/docs           s3://static.tiogasolutions.org/push/tioga-push-server-grizzly/docs --delete; fi
+      - if [ -d "./tioga-push-server-grizzly/build/reports" ];        then aws s3 sync ./tioga-push-server-grizzly/build/reports        s3://static.tiogasolutions.org/push/tioga-push-server-grizzly/reports --delete --quiet; fi
+      - if [ -d "./tioga-push-server-grizzly/build/docs" ];           then aws s3 sync ./tioga-push-server-grizzly/build/docs           s3://static.tiogasolutions.org/push/tioga-push-server-grizzly/docs --delete --quiet; fi
       -
-      - if [ -d "./tioga-push-server-servlet/build/reports" ];        then aws s3 sync ./tioga-push-server-servlet/build/reports        s3://static.tiogasolutions.org/push/tioga-push-server-servlet/reports --delete; fi
-      - if [ -d "./tioga-push-server-servlet/build/docs" ];           then aws s3 sync ./tioga-push-server-servlet/build/docs           s3://static.tiogasolutions.org/push/tioga-push-server-servlet/docs --delete; fi
+      - if [ -d "./tioga-push-server-servlet/build/reports" ];        then aws s3 sync ./tioga-push-server-servlet/build/reports        s3://static.tiogasolutions.org/push/tioga-push-server-servlet/reports --delete --quiet; fi
+      - if [ -d "./tioga-push-server-servlet/build/docs" ];           then aws s3 sync ./tioga-push-server-servlet/build/docs           s3://static.tiogasolutions.org/push/tioga-push-server-servlet/docs --delete --quiet; fi
       -
-      - if [ -d "./tioga-push-test/build/reports" ];                  then aws s3 sync ./tioga-push-test/build/reports                  s3://static.tiogasolutions.org/push/tioga-push-test/reports --delete; fi
-      - if [ -d "./tioga-push-test/build/docs" ];                     then aws s3 sync ./tioga-push-test/build/docs                     s3://static.tiogasolutions.org/push/tioga-push-test/docs --delete; fi
+      - if [ -d "./tioga-push-test/build/reports" ];                  then aws s3 sync ./tioga-push-test/build/reports                  s3://static.tiogasolutions.org/push/tioga-push-test/reports --delete --quiet; fi
+      - if [ -d "./tioga-push-test/build/docs" ];                     then aws s3 sync ./tioga-push-test/build/docs                     s3://static.tiogasolutions.org/push/tioga-push-test/docs --delete --quiet; fi
       -
-      - if [ -d "./tioga-push-v2-integration-tests/build/reports" ];  then aws s3 sync ./tioga-push-v2-integration-tests/build/reports  s3://static.tiogasolutions.org/push/tioga-push-v2-integration-tests/reports --delete; fi
-      - if [ -d "./tioga-push-v2-integration-tests/build/docs" ];     then aws s3 sync ./tioga-push-v2-integration-tests/build/docs     s3://static.tiogasolutions.org/push/tioga-push-v2-integration-tests/docs --delete; fi
+      - if [ -d "./tioga-push-v2-integration-tests/build/reports" ];  then aws s3 sync ./tioga-push-v2-integration-tests/build/reports  s3://static.tiogasolutions.org/push/tioga-push-v2-integration-tests/reports --delete --quiet; fi
+      - if [ -d "./tioga-push-v2-integration-tests/build/docs" ];     then aws s3 sync ./tioga-push-v2-integration-tests/build/docs     s3://static.tiogasolutions.org/push/tioga-push-v2-integration-tests/docs --delete --quiet; fi
       -
 
 artifacts:
