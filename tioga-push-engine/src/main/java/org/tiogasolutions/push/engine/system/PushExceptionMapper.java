@@ -25,7 +25,7 @@ public class PushExceptionMapper extends TiogaJaxRsExceptionMapper {
 //                .exception(throwable)
 //                .trait("action", "Unhandled 4xx")
 //                .trait("http-status-code", statusCode)
-//                .trait("http-uri", getUriInfo().getRequestUri())
+//                .trait("http-uri", cleanUrl(getUriInfo().getRequestUri()))
 //                .send();
     }
 
@@ -38,7 +38,7 @@ public class PushExceptionMapper extends TiogaJaxRsExceptionMapper {
                 .exception(throwable)
                 .trait("action", "Unhandled 5xx")
                 .trait("http-status-code", statusCode)
-                .trait("http-uri", getUriInfo().getRequestUri())
+                .trait("http-uri", cleanUrl(getUriInfo().getRequestUri()))
                 .send();
     }
 }
