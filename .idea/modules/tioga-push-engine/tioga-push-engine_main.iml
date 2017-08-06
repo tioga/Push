@@ -41,7 +41,7 @@
     <orderEntry type="library" name="Gradle: org.javassist:javassist:3.18.1-GA" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.20" level="project" />
     <orderEntry type="library" name="Gradle: org.thymeleaf.extras:thymeleaf-extras-java8time:2.1.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:6.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:6.0.4" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-hal:1.0.3" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.dev:tioga-dev-jackson:4.2.9" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jackson:1.6.3" level="project" />

@@ -23,7 +23,7 @@
     <orderEntry type="library" name="Gradle: org.aspectj:aspectjweaver:1.8.5" level="project" />
     <orderEntry type="library" name="Gradle: org.testng:testng:6.8.21" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-hal:1.0.3" level="project" />
-    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:6.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.tiogasolutions.lib:tioga-lib-jaxrs:6.0.4" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.dev:tioga-dev-jackson:4.2.9" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jackson:1.6.3" level="project" />
     <orderEntry type="library" name="Gradle: org.tiogasolutions.couchace:tioga-couchace-jersey:1.6.3" level="project" />
